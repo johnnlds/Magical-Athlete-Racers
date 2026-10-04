@@ -36,137 +36,188 @@ const athletes = [
     { name: "Third Wheel", category: "Position", power: "Roll Through", ability: "Before my main move, I can warp to any space containing exactly 2 racers.", image: "images/IMG_3338.png" },
     { name: "Twin", category: "Special", power: "Double Dip", ability: "Before my race, I can choose a racer who won a previous race and race using their powers.", image: "images/IMG_3339.png" }
 ];
+
 /*
 =========================================================
 INTERACTIONS
+
 Each relationship is entered ONLY ONCE.
+
 The display code automatically shows the relationship
 on BOTH characters' profiles.
+
 Example:
 Huge Baby | Baba Yaga
+
 does NOT also need:
 Baba Yaga | Huge Baby
 =========================================================
 */
+
 const interactionData = `
+
 Alchemist|Coach|If Alchemist rolls 1 or 2 and uses Transmute ‘N’ Scoot, Coach’s +1 applies to the 4-space main move, so Alchemist moves 5.
 Alchemist|Gunk|If Alchemist rolls 1 or 2 and uses Transmute ‘N’ Scoot to move 4, Gunk reduces Alchemist’s movement to 3. The die result remains 1 or 2.
 Alchemist|Inchworm|If Alchemist rolls 1, Inchworm makes Alchemist skip the main move. Alchemist therefore cannot use Transmute ‘N’ Scoot to move 4.
 Alchemist|Skipper|If Alchemist rolls 1 and uses Transmute ‘N’ Scoot to move 4, Skipper still triggers because Alchemist rolled a 1. Skipper takes the next turn after Alchemist’s turn.
+
 Baba Yaga|Duelist|If Duelist shares Baba Yaga’s space, they can duel, but Duelist still trips from Baba Yaga.
 Baba Yaga|Huge Baby|The two cannot share a space, so Huge Baby cannot be tripped.
 Baba Yaga|Hypnotist|Hypnotist can warp Baba Yaga onto Hypnotist’s space, but Hypnotist trips.
 Baba Yaga|Party Animal|If Party Animal moves racers simultaneously onto Baba Yaga’s space, Baba Yaga does not trip them.
+
 Banana|Centaur|If Centaur passes Banana, Centaur’s Hoofwhack moves Banana back 2, and Banana then trips Centaur for passing Banana.
 Banana|Leaptoad|Leaptoad skips over Banana’s occupied space, but that still counts as passing Banana. Banana therefore trips Leaptoad after its movement.
+
 Blimp|Coach|If Blimp shares Coach’s space, Coach’s +1 applies to Blimp’s main move in addition to Blimp’s +3 or -1.
 Blimp|Gunk|Gunk’s -1 applies to Blimp’s main move. Before the second corner, Blimp’s +3 and Gunk’s -1 result in +2; on or after the second corner, Blimp’s -1 and Gunk’s -1 result in -2.
+
 Coach|Gunk|If Coach is on Gunk’s board, Gunk’s -1 applies to Coach’s main move while Coach’s +1 applies to Coach’s own main move. The two modifiers cancel, leaving Coach’s normal die result.
 Coach|Legs|Legs’ JOG counts as a main move, so Coach’s +1 applies. Legs moves 6 instead of 5.
+
 Copy Cat|Gunk|If Copy Cat is copying Gunk, everyone else has -2 to their move, Gunk has -1, and Copy Cat has -1.
 Copy Cat|Hare|If Copy Cat is copying Hare, Copy Cat gets Hare’s +2 movement ability. If the lead changes, Copy Cat immediately changes to the new leader’s power.
 Copy Cat|Huge Baby|If Copy Cat is copying Huge Baby, Huge Baby’s power takes priority.
 Copy Cat|Lead Racer|Copy Cat continuously copies the racer currently in the lead, not just at the beginning of its turn. If the lead changes, Copy Cat’s power changes immediately.
+
 Dicemonger|Inchworm|If a racer rolls 1 and rerolls using Dicemonger’s ability, the original 1 is treated as if it never happened.
 Dicemonger|Magician|Magician’s own rerolls do not make Dicemonger move. Dicemonger only moves when another racer uses Dicemonger’s reroll.
 Dicemonger|Scoocher|Whenever another racer uses Dicemonger’s reroll, Dicemonger moves 1 and Scoocher also moves 1 because a reroll occurred.
 Dicemonger|Skipper|If a racer rolls 1 and rerolls using Dicemonger’s ability, the original 1 is treated as if it never happened.
+
 Duelist|Huge Baby|Duelist cannot share Huge Baby’s space, so they cannot duel.
 Duelist|M.O.U.T.H.|If Duelist duels M.O.U.T.H. and M.O.U.T.H. wins, M.O.U.T.H. moves 2. If that movement ends with exactly one other racer on its space, M.O.U.T.H. eliminates that racer. If M.O.U.T.H. lands on Duelist’s space, they do not duel and Duelist is eaten.
 Duelist|Stickler|If Duelist wins a duel near the finish and the 2-space movement would overshoot the finish, Stickler prevents Duelist from crossing. Duelist does not move.
+
 Gunk|Heckler|If Gunk reduces a racer’s main move so they finish their turn within 1 space of where they started, Heckler triggers and moves 2.
 Gunk|Lackey|Gunk changes movement, not the die result. A racer who rolls 6 still rolled a 6, so Lackey still moves 2 before that racer.
 Gunk|Legs|Gunk reduces Legs’ 5-space JOG to 4. JOG still counts as Legs’ main move.
 Gunk|Scoocher|Scoocher moves 1 for each -1 that Gunk applies to another racer’s main move.
+
 Huge Baby|M.O.U.T.H.|Huge Baby cannot be eaten by M.O.U.T.H.
 Huge Baby|Party Animal|If Huge Baby is moved onto Party Animal’s space by Party Animal’s power, everyone on that space is moved back 1.
 Huge Baby|Scoocher|If Scoocher’s power moves Scoocher onto Huge Baby’s space, Huge Baby places Scoocher one space behind.
 Huge Baby|Suckerfish|Suckerfish cannot follow Huge Baby.
+
 Inchworm|Magician|Magician can reroll a 1 before Inchworm’s trigger resolves. If the reroll is not 1, Inchworm does not trigger.
 Inchworm|Skipper|When another racer rolls 1, Inchworm makes that racer skip the main move and moves 1. Skipper then takes the next turn. Both abilities trigger.
+
 Leaptoad|Scoocher|Scoocher moves 1 for every occupied space Leaptoad skips. If Leaptoad skips two occupied spaces, Scoocher moves twice.
+
 Magician|Scoocher|Every Magician reroll triggers Scoocher, so Scoocher moves 1 for each reroll, even if the reroll is not ultimately used.
+
 Party Animal|Baba Yaga|If Party Animal moves racers simultaneously onto Baba Yaga’s space, Baba Yaga does not trip them because they arrived simultaneously.
 Party Animal|M.O.U.T.H.|When Party Animal moves M.O.U.T.H. simultaneously onto another racer, M.O.U.T.H. does not eliminate that racer from the simultaneous arrival.
 Party Animal|Romantic|When Party Animal moves racers simultaneously toward Party Animal, Romantic does not trigger from those simultaneous arrivals.
+
 Rocket Scientist|Coach|If Rocket Scientist shares Coach’s space, Coach’s +1 applies to Rocket Scientist’s main move, including a doubled main move.
 Rocket Scientist|Gunk|Gunk reduces Rocket Scientist’s resulting main-move distance by 1. If Rocket Scientist doubles a roll, Gunk reduces the doubled movement by 1.
 Rocket Scientist|Inchworm|If Rocket Scientist rolls 1 and doubles it to 2, Inchworm still triggers because the die roll was 1. Rocket Scientist skips the main move; its doubling does not prevent Inchworm.
 Rocket Scientist|Skipper|If Rocket Scientist rolls 1 and doubles it to 2, Skipper still triggers because the die roll was 1.
+
 Romantic|Suckerfish|If Suckerfish follows Romantic’s movement and arrives simultaneously, Romantic does not trigger from Suckerfish’s arrival.
+
 Scoocher|Suckerfish|If Scoocher moves while sharing a space with Suckerfish, Suckerfish can follow Scoocher to the new space. Suckerfish’s movement can then trigger Scoocher again, so this chain can continue.
+
 Stickler|Hare|Hare’s +2 can make it overshoot the finish. If Hare would overshoot, Stickler prevents the movement and Hare does not cross.
 Stickler|Scoocher|Scoocher’s 1-space movement is also subject to Stickler. If that movement would overshoot the finish, Scoocher does not cross.
+
 General|Simultaneous Arrival|Stopping-on-a-space powers do not trigger from simultaneous arrival under the August 2026 rule.
+
 Third Wheel|Baba Yaga|If Third Wheel warps onto a space containing Baba Yaga, Baba Yaga’s ability trips Third Wheel.
+
 `.trim();
+
+
 /*
 =========================================================
 PARSE INTERACTIONS
 =========================================================
 */
+
 const rawInteractions = interactionData
     .split("\n")
     .map(line => line.trim())
     .filter(Boolean)
     .map(line => {
         const parts = line.split("|");
+
         return {
             character: parts[0].trim(),
             with: parts[1].trim(),
             details: parts.slice(2).join("|").trim()
         };
     });
+
+
 /*
 =========================================================
 REMOVE DUPLICATE RELATIONSHIPS
+
 This treats:
 A|B
 and
 B|A
+
 as the SAME relationship.
+
 Therefore an interaction is displayed only once on
 each character's profile.
 =========================================================
 */
+
 const uniqueInteractions = [];
 const interactionKeys = new Set();
+
 rawInteractions.forEach(interaction => {
     const names = [
         interaction.character,
         interaction.with
     ].sort((a, b) => a.localeCompare(b));
+
     const key = `${names[0]}|${names[1]}`;
+
     if (!interactionKeys.has(key)) {
         interactionKeys.add(key);
         uniqueInteractions.push(interaction);
     }
 });
+
+
 /*
 =========================================================
 CHARACTER LOOKUP
 =========================================================
 */
+
 function getAthlete(name) {
     return athletes.find(athlete => athlete.name === name);
 }
+
+
 function getInteractions(characterName) {
     return uniqueInteractions.filter(interaction =>
         interaction.character === characterName ||
         interaction.with === characterName
     );
 }
+
+
 function getOtherCharacter(interaction, characterName) {
     if (interaction.character === characterName) {
         return interaction.with;
     }
+
     return interaction.character;
 }
+
+
 /*
 =========================================================
 HTML SAFETY
 =========================================================
 */
+
 function escapeHTML(value) {
     return String(value)
         .replace(/&/g, "&amp;")
@@ -175,38 +226,53 @@ function escapeHTML(value) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
+
+
 /*
 =========================================================
 PAGE ELEMENTS
 =========================================================
 */
+
 const athleteGrid = document.getElementById("athlete-grid");
 const searchInput = document.getElementById("search");
 const resultCount = document.getElementById("result-count");
+
 const modal = document.getElementById("modal");
 const modalContent = document.getElementById("modal-content");
 const modalClose = document.getElementById("modal-close");
 const modalBackdrop = document.querySelector(".modal-backdrop");
+
 const filterButtons = document.querySelectorAll(".filter");
+
 let currentFilter = "all";
+
+
 /*
 =========================================================
 RENDER CHARACTER CARDS
 =========================================================
 */
+
 function renderAthletes() {
+
     const searchTerm = searchInput
         ? searchInput.value.trim().toLowerCase()
         : "";
+
     const filteredAthletes = athletes.filter(athlete => {
+
         const matchesFilter =
             currentFilter === "all" ||
             athlete.category.toLowerCase() === currentFilter;
+
         /*
         IMPORTANT:
         Search ONLY searches character information.
+
         Interactions are intentionally NOT included.
         */
+
         const searchableText = [
             athlete.name,
             athlete.category,
@@ -215,26 +281,36 @@ function renderAthletes() {
         ]
             .join(" ")
             .toLowerCase();
+
         const matchesSearch =
             searchTerm === "" ||
             searchableText.includes(searchTerm);
+
         return matchesFilter && matchesSearch;
     });
+
+
     if (resultCount) {
         resultCount.textContent =
             filteredAthletes.length === 1
                 ? "1 racer"
                 : `${filteredAthletes.length} racers`;
     }
+
+
     if (filteredAthletes.length === 0) {
+
         athleteGrid.innerHTML = `
             <div class="no-results">
                 <h2>No racers found</h2>
                 <p>Try a different search or filter.</p>
             </div>
         `;
+
         return;
     }
+
+
     athleteGrid.innerHTML = filteredAthletes
         .map(athlete => `
             <article
@@ -244,43 +320,63 @@ function renderAthletes() {
                 data-name="${escapeHTML(athlete.name)}"
                 aria-label="View ${escapeHTML(athlete.name)}"
             >
+
                 <img
                     class="athlete-image"
                     src="${escapeHTML(athlete.image)}"
                     alt="${escapeHTML(athlete.name)}"
                     loading="lazy"
                 >
+
                 <h2 class="card-name">
                     ${escapeHTML(athlete.name)}
                 </h2>
+
                 <p class="card-power">
                     ${escapeHTML(athlete.power)}
                 </p>
+
             </article>
         `)
         .join("");
+
+
     document.querySelectorAll(".athlete-card").forEach(card => {
+
         card.addEventListener("click", () => {
             openModal(card.dataset.name);
         });
+
+
         card.addEventListener("keydown", event => {
+
             if (event.key === "Enter" || event.key === " ") {
+
                 event.preventDefault();
+
                 openModal(card.dataset.name);
             }
+
         });
+
     });
 }
+
+
 /*
 =========================================================
 MAKE CHARACTER NAMES CLICKABLE
 =========================================================
 */
+
 function makeCharacterLink(name) {
+
     const athlete = getAthlete(name);
+
     if (!athlete) {
         return escapeHTML(name);
     }
+
     return `
         <button
             type="button"
@@ -291,16 +387,23 @@ function makeCharacterLink(name) {
         </button>
     `;
 }
+
+
 /*
 =========================================================
 OPEN CHARACTER PROFILE
 =========================================================
 */
+
 function openModal(characterName) {
+
     const athlete = getAthlete(characterName);
+
     if (!athlete) {
         return;
     }
+
+
     const interactions = getInteractions(characterName)
         .filter(interaction => {
             /*
@@ -311,32 +414,45 @@ function openModal(characterName) {
                    interaction.with !== "General";
         })
         .sort((a, b) => {
+
             const otherA =
                 getOtherCharacter(a, characterName);
+
             const otherB =
                 getOtherCharacter(b, characterName);
+
             return otherA.localeCompare(otherB);
         });
+
+
     const interactionHTML = interactions.length > 0
         ? `
             <div class="interaction-list">
+
                 ${interactions.map(interaction => {
+
                     const otherCharacter =
                         getOtherCharacter(
                             interaction,
                             characterName
                         );
+
                     return `
                         <article class="interaction">
+
                             <div class="interaction-with">
                                 ${makeCharacterLink(otherCharacter)}
                             </div>
+
                             <div class="interaction-details">
                                 ${escapeHTML(interaction.details)}
                             </div>
+
                         </article>
                     `;
+
                 }).join("")}
+
             </div>
         `
         : `
@@ -344,154 +460,238 @@ function openModal(characterName) {
                 No character-specific interactions are currently listed.
             </p>
         `;
+
+
     modalContent.innerHTML = `
+
         <div class="modal-profile">
+
             <div class="modal-profile-fixed">
+
                 <img
                     class="modal-athlete-image"
                     src="${escapeHTML(athlete.image)}"
                     alt="${escapeHTML(athlete.name)}"
                 >
+
                 <div class="modal-heading">
+
                     <h2
                         id="modal-title"
                         class="modal-title"
                     >
                         ${escapeHTML(athlete.name)}
                     </h2>
+
                     <p class="modal-power-name">
                         ${escapeHTML(athlete.power)}
                     </p>
+
                     <div class="official-text ability-text">
                         ${escapeHTML(athlete.ability)}
                     </div>
+
                 </div>
+
             </div>
+
+
             <section class="info-section">
+
                 <h3>
                     Character Interactions
                 </h3>
+
                 ${interactionHTML}
+
             </section>
+
+
             <section class="info-section general-rules-section">
+
                 <h3>
                     General Rule
                 </h3>
+
                 <div class="interaction">
+
                     <div class="interaction-with">
                         Simultaneous Arrival
                     </div>
+
                     <div class="interaction-details">
                         Stopping-on-a-space powers do not trigger from simultaneous arrival under the August 2026 rule.
                     </div>
+
                 </div>
+
             </section>
+
         </div>
     `;
+
+
     /*
     Make character names inside the interaction list clickable.
     */
+
     document
         .querySelectorAll(".interaction-character-link")
         .forEach(link => {
+
             link.addEventListener("click", event => {
+
                 event.preventDefault();
                 event.stopPropagation();
+
                 openModal(link.dataset.character);
+
             });
+
         });
+
+
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
+
     document.body.classList.add("modal-open");
+
+
     if (modalClose) {
         modalClose.focus();
     }
 }
+
+
 /*
 =========================================================
 CLOSE MODAL
 =========================================================
 */
+
 function closeModal() {
+
     modal.classList.remove("open");
+
     modal.setAttribute("aria-hidden", "true");
+
     document.body.classList.remove("modal-open");
 }
+
+
 /*
 =========================================================
 SEARCH
 =========================================================
 */
+
 if (searchInput) {
     searchInput.addEventListener("input", renderAthletes);
 }
+
+
 /*
 =========================================================
 FILTERS
 =========================================================
 */
+
 filterButtons.forEach(button => {
+
     button.addEventListener("click", () => {
+
         filterButtons.forEach(filter => {
             filter.classList.remove("active");
         });
+
+
         button.classList.add("active");
+
+
         currentFilter =
             button.dataset.filter;
+
+
         renderAthletes();
+
     });
+
 });
+
+
 /*
 =========================================================
 MODAL CLOSE BUTTON
 =========================================================
 */
+
 if (modalClose) {
     modalClose.addEventListener(
         "click",
         closeModal
     );
 }
+
+
 /*
 =========================================================
 CLICK BACKDROP TO CLOSE
 =========================================================
 */
+
 if (modalBackdrop) {
+
     modalBackdrop.addEventListener(
         "click",
         closeModal
     );
+
 }
+
+
 /*
 =========================================================
 ESCAPE KEY
 =========================================================
 */
+
 document.addEventListener("keydown", event => {
+
     if (
         event.key === "Escape" &&
         modal.classList.contains("open")
     ) {
+
         closeModal();
+
     }
+
 });
+
+
 /*
 =========================================================
 PREVENT DIALOG CLICKS FROM CLOSING MODAL
 =========================================================
 */
+
 const modalDialog =
     document.querySelector(".modal-dialog");
+
 if (modalDialog) {
+
     modalDialog.addEventListener(
         "click",
         event => event.stopPropagation()
     );
+
 }
+
+
 /*
 =========================================================
 INITIAL RENDER
 =========================================================
 */
+
 renderAthletes();
