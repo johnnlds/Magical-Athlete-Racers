@@ -1,931 +1,615 @@
 :root {
-    --background: #0f1117;
-    --background-light: #171a23;
-    --card: #1b1f2a;
-    --card-hover: #242936;
-    --border: #303644;
+  --red: #c62828;
+  --red-dark: #9f1f1f;
+  --red-light: #fbe9e9;
 
-    --text: #f5f7fa;
-    --muted: #aab1c0;
+  --black: #171717;
+  --dark-gray: #333333;
+  --gray: #666666;
+  --light-gray: #e7e7e7;
+  --background: #f7f7f7;
+  --white: #ffffff;
 
-    --accent: #8b5cf6;
-    --accent-light: #a78bfa;
-
-    --max-width: 1200px;
+  --shadow: 0 4px 18px rgba(0, 0, 0, 0.10);
+  --shadow-large: 0 18px 60px rgba(0, 0, 0, 0.22);
 }
 
-
-/* =========================
-   GLOBAL
-   ========================= */
+/* ----------------------------- */
+/* RESET */
+/* ----------------------------- */
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    background: var(--background);
-    color: var(--text);
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-    line-height: 1.5;
+  margin: 0;
+  background: var(--background);
+  color: var(--black);
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
 }
 
-body.modal-open {
-    overflow: hidden;
-}
-
-button,
-input {
-    font: inherit;
-}
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-
-/* =========================
-   HEADER
-   ========================= */
+/* ----------------------------- */
+/* HEADER */
+/* ----------------------------- */
 
 .site-header {
-    background:
-        radial-gradient(
-            circle at top right,
-            rgba(139, 92, 246, 0.25),
-            transparent 40%
-        ),
-        linear-gradient(
-            135deg,
-            #11131b,
-            #171a25
-        );
-
-    border-bottom: 1px solid var(--border);
-
-    padding: 60px 20px 55px;
+  background: var(--white);
+  border-bottom: 4px solid var(--red);
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
-.header-content {
-    max-width: var(--max-width);
-    margin: 0 auto;
+.header-inner {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 28px 24px 24px;
 }
 
-.eyebrow {
-    margin: 0 0 8px;
-
-    color: var(--accent-light);
-
-    font-size: 0.8rem;
-    font-weight: 800;
-
-    letter-spacing: 0.18em;
+.site-header h1 {
+  margin: 0;
+  color: var(--red);
+  font-size: clamp(2.1rem, 5vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
 }
 
-h1 {
-    margin: 0;
-
-    font-size: clamp(2.2rem, 6vw, 4rem);
-    line-height: 1.05;
-
-    letter-spacing: -0.04em;
+.site-header p {
+  margin: 7px 0 22px;
+  color: var(--dark-gray);
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-.subtitle {
-    max-width: 650px;
+/* ----------------------------- */
+/* SEARCH */
+/* ----------------------------- */
 
-    margin: 18px 0 0;
-
-    color: var(--muted);
-
-    font-size: 1.05rem;
+.search-container {
+  width: 100%;
 }
 
+#searchInput {
+  width: 100%;
+  padding: 14px 17px;
 
-/* =========================
-   MAIN CONTAINER
-   ========================= */
+  border: 2px solid var(--light-gray);
+  border-radius: 10px;
 
-.container {
-    width: min(
-        calc(100% - 32px),
-        var(--max-width)
-    );
+  background: var(--white);
+  color: var(--black);
 
-    margin: 0 auto;
+  font-size: 1rem;
+  outline: none;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
+#searchInput:focus {
+  border-color: var(--red);
 
-/* =========================
-   SEARCH
-   ========================= */
-
-.search-section {
-    padding: 30px 0 18px;
+  box-shadow:
+    0 0 0 3px rgba(198, 40, 40, 0.12);
 }
 
-#search {
-    width: 100%;
-
-    padding: 16px 18px;
-
-    border: 1px solid var(--border);
-    border-radius: 12px;
-
-    background: var(--background-light);
-    color: var(--text);
-
-    font-size: 1rem;
-
-    outline: none;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+#searchInput::placeholder {
+  color: #999;
 }
 
-#search::placeholder {
-    color: #747c8c;
+/* ----------------------------- */
+/* MAIN */
+/* ----------------------------- */
+
+main {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 35px 24px 80px;
 }
 
-#search:focus {
-    border-color: var(--accent);
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 15px;
 
-    box-shadow:
-        0 0 0 3px
-        rgba(139, 92, 246, 0.18);
+  margin-bottom: 20px;
 }
 
-.search-info {
-    margin-top: 10px;
-
-    color: var(--muted);
-
-    font-size: 0.9rem;
+.section-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
 }
 
-
-/* =========================
-   FILTERS
-   ========================= */
-
-.filter-section {
-    display: flex;
-    flex-wrap: wrap;
-
-    gap: 8px;
-
-    padding-bottom: 28px;
+#characterCount {
+  color: var(--gray);
+  font-size: 0.95rem;
 }
 
-.filter {
-    padding: 9px 15px;
+/* ----------------------------- */
+/* CHARACTER GRID */
+/* ----------------------------- */
 
-    border: 1px solid var(--border);
-    border-radius: 999px;
+.character-grid {
+  display: grid;
 
-    background: transparent;
+  grid-template-columns:
+    repeat(auto-fill, minmax(190px, 1fr));
 
-    color: var(--muted);
-
-    font-size: 0.9rem;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.15s ease;
+  gap: 18px;
 }
 
-.filter:hover {
-    border-color: var(--accent-light);
-    color: var(--text);
+/* ----------------------------- */
+/* CHARACTER CARD */
+/* ----------------------------- */
+
+.character-card {
+  background: var(--white);
+  border: 1px solid var(--light-gray);
+  border-radius: 14px;
+
+  overflow: hidden;
+  cursor: pointer;
+
+  box-shadow: var(--shadow);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
 }
 
-.filter:active {
-    transform: scale(0.97);
+.character-card:hover {
+  transform: translateY(-4px);
+
+  border-color: var(--red);
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.14);
 }
 
-.filter.active {
-    background: var(--accent);
-    border-color: var(--accent);
-
-    color: white;
+.character-card:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
 }
 
+.character-card-image {
+  width: 100%;
+  height: 205px;
 
-/* =========================
-   ATHLETE GRID
-   ========================= */
+  object-fit: cover;
+  object-position: center;
 
-.athlete-grid {
-    display: grid;
+  display: block;
 
-    grid-template-columns:
-        repeat(
-            auto-fill,
-            minmax(240px, 1fr)
-        );
-
-    gap: 16px;
-
-    padding-bottom: 60px;
+  background: #eeeeee;
 }
 
+.character-card-name {
+  margin: 0;
+  padding: 15px 14px 17px;
 
-/* =========================
-   ATHLETE CARDS
-   ========================= */
+  color: var(--black);
 
-.athlete-card {
-    display: flex;
-    flex-direction: column;
+  font-size: 1.05rem;
+  font-weight: 800;
 
-    min-width: 0;
-
-    padding: 16px;
-
-    border: 1px solid var(--border);
-    border-radius: 18px;
-
-    background:
-        linear-gradient(
-            145deg,
-            var(--card),
-            #171a22
-        );
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
-
-    outline: none;
+  text-align: center;
 }
 
-.athlete-card:hover {
-    transform: translateY(-4px);
-
-    background: var(--card-hover);
-
-    border-color:
-        rgba(167, 139, 250, 0.55);
-
-    box-shadow:
-        0 12px 35px
-        rgba(0, 0, 0, 0.25);
-}
-
-.athlete-card:focus-visible {
-    border-color: var(--accent);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(139, 92, 246, 0.25);
-}
-
-
-/* =========================
-   CHARACTER ARTWORK
-   ========================= */
-
-.athlete-image {
-    display: block;
-
-    width: 100%;
-    height: 190px;
-
-    margin-bottom: 16px;
-
-    border-radius: 14px;
-
-    object-fit: contain;
-
-    background: #11131b;
-
-    transition:
-        transform 0.25s ease;
-}
-
-.athlete-card:hover .athlete-image {
-    transform: scale(1.02);
-}
-
-
-/* =========================
-   CARD TEXT
-   ========================= */
-
-.card-name {
-    margin: 0 0 5px;
-
-    color: var(--text);
-
-    font-size: 1.2rem;
-    font-weight: 800;
-
-    line-height: 1.2;
-}
-
-.card-power {
-    margin: 0;
-
-    color: var(--accent-light);
-
-    font-size: 0.88rem;
-    font-weight: 700;
-
-    line-height: 1.35;
-}
-
-
-/* =========================
-   NO RESULTS
-   ========================= */
+/* ----------------------------- */
+/* NO RESULTS */
+/* ----------------------------- */
 
 .no-results {
-    grid-column: 1 / -1;
+  padding: 60px 20px;
 
-    padding: 60px 20px;
+  text-align: center;
 
-    text-align: center;
-
-    border: 1px dashed var(--border);
-    border-radius: 16px;
-
-    color: var(--muted);
+  color: var(--gray);
+  font-size: 1.1rem;
 }
 
-.no-results h2 {
-    margin: 0 0 8px;
-
-    color: var(--text);
-
-    font-size: 1.4rem;
+.hidden {
+  display: none !important;
 }
 
-.no-results p {
-    margin: 0;
-}
-
-
-/* =========================
-   MODAL
-   ========================= */
+/* ----------------------------- */
+/* MODAL */
+/* ----------------------------- */
 
 .modal {
-    position: fixed;
+  position: fixed;
+  inset: 0;
 
-    inset: 0;
+  z-index: 100;
 
-    z-index: 1000;
+  display: none;
 
-    display: none;
-
-    padding: 20px;
-
-    overflow-y: auto;
+  padding: 20px;
 }
 
 .modal.open {
-    display: flex;
-
-    align-items: flex-start;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.modal-overlay {
+  position: absolute;
+  inset: 0;
 
-/* =========================
-   MODAL BACKDROP
-   ========================= */
-
-.modal-backdrop {
-    position: fixed;
-
-    inset: 0;
-
-    background:
-        rgba(0, 0, 0, 0.76);
-
-    backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.72);
 }
 
+/* ----------------------------- */
+/* PROFILE MODAL */
+/* ----------------------------- */
 
-/* =========================
-   MODAL DIALOG
-   ========================= */
+.profile-modal {
+  position: relative;
+  z-index: 2;
 
-.modal-dialog {
-    position: relative;
+  width: min(1150px, 100%);
+  height: min(90vh, 850px);
 
-    z-index: 2;
+  background: var(--white);
 
-    width: min(
-        900px,
-        100%
-    );
+  border-radius: 18px;
 
-    margin: 30px auto;
+  overflow: hidden;
 
-    padding: 28px;
-
-    border: 1px solid var(--border);
-    border-radius: 22px;
-
-    background: #151821;
-
-    box-shadow:
-        0 30px 80px
-        rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-large);
 }
 
+/* ----------------------------- */
+/* CLOSE BUTTON */
+/* ----------------------------- */
 
-/* =========================
-   MODAL CLOSE BUTTON
-   ========================= */
+.close-button {
+  position: absolute;
 
-.modal-close {
-    position: absolute;
+  top: 15px;
+  right: 15px;
 
-    top: 14px;
-    right: 16px;
+  z-index: 10;
 
-    width: 40px;
-    height: 40px;
+  width: 42px;
+  height: 42px;
 
-    border: 0;
-    border-radius: 50%;
+  border: none;
+  border-radius: 50%;
 
-    background:
-        rgba(255, 255, 255, 0.06);
+  background: var(--white);
+  color: var(--black);
 
-    color: var(--muted);
+  font-size: 28px;
+  line-height: 1;
 
-    font-size: 1.6rem;
-    line-height: 1;
+  cursor: pointer;
 
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.18);
 }
 
-.modal-close:hover {
-    background:
-        rgba(255, 255, 255, 0.12);
-
-    color: white;
+.close-button:hover {
+  background: var(--red);
+  color: var(--white);
 }
 
-.modal-close:focus-visible {
-    outline: 2px solid var(--accent-light);
-    outline-offset: 2px;
+/* ----------------------------- */
+/* PROFILE LAYOUT */
+/* ----------------------------- */
+
+.profile-layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(280px, 360px)
+    minmax(0, 1fr);
+
+  height: 100%;
 }
 
+/* ----------------------------- */
+/* PROFILE SIDEBAR */
+/* ----------------------------- */
 
-/* =========================
-   MODAL HEADER
-   ========================= */
+.profile-sidebar {
+  position: sticky;
+  top: 0;
 
-.modal-header {
-    display: flex;
+  height: 100%;
 
-    align-items: center;
+  padding: 30px;
 
-    gap: 24px;
+  overflow-y: auto;
 
-    padding-right: 50px;
+  background: var(--white);
 
-    margin-bottom: 30px;
+  border-right: 1px solid var(--light-gray);
 }
 
+.profile-image-container {
+  width: 100%;
 
-/* =========================
-   MODAL CHARACTER IMAGE
-   ========================= */
+  aspect-ratio: 1 / 1;
 
-.modal-athlete-image {
-    flex: 0 0 auto;
+  margin-bottom: 20px;
 
-    display: block;
+  border-radius: 14px;
 
-    width: 180px;
-    height: 220px;
+  overflow: hidden;
 
-    border-radius: 18px;
-
-    object-fit: contain;
-
-    background: #11131b;
-
-    border: 1px solid var(--border);
+  background: #eeeeee;
 }
 
+.profile-image {
+  width: 100%;
+  height: 100%;
 
-/* =========================
-   MODAL CHARACTER INFO
-   ========================= */
+  display: block;
 
-.modal-heading {
-    min-width: 0;
+  object-fit: cover;
+  object-position: center;
 }
 
-.modal-category {
-    margin: 0 0 7px;
+#profileName {
+  margin: 0 0 20px;
 
-    color: #747c8c;
+  color: var(--red);
 
-    font-size: 0.75rem;
-    font-weight: 800;
+  font-size: 2rem;
+  font-weight: 900;
 
-    text-transform: uppercase;
-
-    letter-spacing: 0.1em;
+  line-height: 1.05;
 }
 
-.modal-title {
-    margin: 0 0 5px;
+/* ----------------------------- */
+/* ABILITY */
+/* ----------------------------- */
 
-    color: var(--text);
+.ability-box {
+  padding: 18px;
 
-    font-size:
-        clamp(
-            1.7rem,
-            5vw,
-            2.5rem
-        );
+  background: var(--red-light);
 
-    line-height: 1.05;
+  border-left: 5px solid var(--red);
 
-    letter-spacing: -0.03em;
+  border-radius: 8px;
 }
 
-.modal-power-name {
-    margin: 0;
+.ability-label {
+  margin-bottom: 7px;
 
-    color: var(--accent-light);
+  color: var(--red);
 
-    font-size: 1rem;
-    font-weight: 700;
+  font-size: 0.75rem;
+  font-weight: 900;
+
+  letter-spacing: 1px;
 }
 
+.ability-name {
+  margin-bottom: 8px;
 
-/* =========================
-   INFORMATION SECTIONS
-   ========================= */
+  color: var(--black);
 
-.info-section {
-    margin-top: 28px;
+  font-size: 1.15rem;
+  font-weight: 900;
 }
-
-.info-section h3 {
-    margin: 0 0 11px;
-
-    color: var(--text);
-
-    font-size: 1.08rem;
-    font-weight: 800;
-}
-
-
-/* =========================
-   ABILITY
-   ========================= */
 
 .ability-text {
-    padding: 16px 18px;
+  color: var(--dark-gray);
 
-    border-left: 3px solid var(--accent);
+  font-size: 1rem;
+  font-weight: 700;
 
-    border-radius:
-        0 10px 10px 0;
-
-    background:
-        rgba(139, 92, 246, 0.08);
-
-    color: #dfe2e8;
-
-    font-size: 0.96rem;
-
-    line-height: 1.6;
+  line-height: 1.55;
 }
 
+/* ----------------------------- */
+/* INTERACTIONS */
+/* ----------------------------- */
 
-/* =========================
-   INTERACTIONS
-   ========================= */
+.profile-interactions {
+  min-width: 0;
 
-.interaction-heading {
-    display: flex;
+  height: 100%;
 
-    align-items: baseline;
+  overflow-y: auto;
 
-    justify-content: space-between;
-
-    gap: 10px;
+  padding: 30px;
 }
 
-.interaction-summary {
-    margin: 0 0 16px;
+.interactions-header {
+  margin-bottom: 18px;
 
-    color: var(--muted);
+  padding-bottom: 15px;
 
-    font-size: 0.9rem;
+  border-bottom: 2px solid var(--light-gray);
 }
 
-.interaction-list {
-    display: flex;
+.interactions-header h3 {
+  margin: 0 0 4px;
 
-    flex-direction: column;
-
-    gap: 10px;
+  font-size: 1.5rem;
 }
 
-.interaction {
-    padding: 16px;
+.interactions-header p {
+  margin: 0;
 
-    border: 1px solid var(--border);
+  color: var(--gray);
 
-    border-radius: 13px;
-
-    background:
-        rgba(255, 255, 255, 0.025);
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease;
+  font-size: 0.9rem;
 }
 
-.interaction:hover {
-    background:
-        rgba(255, 255, 255, 0.045);
+/* ----------------------------- */
+/* INTERACTION CARD */
+/* ----------------------------- */
 
-    border-color:
-        rgba(167, 139, 250, 0.35);
+.interaction-card {
+  margin-bottom: 12px;
+
+  padding: 17px;
+
+  background: var(--white);
+
+  border: 1px solid var(--light-gray);
+  border-radius: 10px;
+
+  box-shadow:
+    0 2px 7px rgba(0, 0, 0, 0.04);
 }
 
-
-/* The other character's name */
-
-.interaction-with {
-    margin-bottom: 6px;
-
-    color: var(--accent-light);
-
-    font-size: 0.98rem;
-    font-weight: 800;
-
-    line-height: 1.3;
+.interaction-card:hover {
+  border-color: #cccccc;
 }
 
+.interaction-character {
+  margin-bottom: 8px;
 
-/* The actual interaction explanation */
+  color: var(--red);
 
-.interaction-details {
-    color: #c2c7d1;
-
-    font-size: 0.9rem;
-
-    line-height: 1.55;
+  font-size: 1.05rem;
+  font-weight: 900;
 }
 
+.character-link {
+  color: var(--red);
 
-/* =========================
-   FOOTER
-   ========================= */
+  text-decoration: none;
 
-.site-footer {
-    padding: 35px 20px 50px;
-
-    border-top: 1px solid var(--border);
-
-    text-align: center;
-
-    color: var(--muted);
-
-    font-size: 0.85rem;
+  cursor: pointer;
 }
 
+.character-link:hover {
+  text-decoration: underline;
+}
 
-/* =========================
-   TABLET
-   ========================= */
+.interaction-text {
+  color: var(--dark-gray);
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  line-height: 1.55;
+}
+
+/* ----------------------------- */
+/* EMPTY INTERACTIONS */
+/* ----------------------------- */
+
+.no-interactions {
+  padding: 40px 10px;
+
+  color: var(--gray);
+
+  text-align: center;
+}
+
+/* ----------------------------- */
+/* MOBILE */
+/* ----------------------------- */
 
 @media (max-width: 800px) {
 
-    .athlete-grid {
-        grid-template-columns:
-            repeat(
-                3,
-                minmax(0, 1fr)
-            );
-    }
+  .profile-modal {
+    height: 94vh;
+  }
 
-    .athlete-image {
-        height: 170px;
-    }
+  .profile-layout {
+    grid-template-columns: 1fr;
 
-    .modal-athlete-image {
-        width: 155px;
-        height: 195px;
-    }
+    overflow-y: auto;
+  }
+
+  .profile-sidebar {
+    position: relative;
+
+    height: auto;
+
+    overflow: visible;
+
+    border-right: none;
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  .profile-image-container {
+    width: min(280px, 100%);
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .profile-sidebar #profileName {
+    text-align: center;
+  }
+
+  .ability-box {
+    text-align: left;
+  }
+
+  .profile-interactions {
+    height: auto;
+
+    overflow: visible;
+  }
 }
 
-
-/* =========================
-   MOBILE
-   ========================= */
-
-@media (max-width: 650px) {
-
-    .site-header {
-        padding: 42px 18px 40px;
-    }
-
-    .container {
-        width:
-            min(
-                calc(100% - 24px),
-                var(--max-width)
-            );
-    }
-
-
-    .athlete-grid {
-        grid-template-columns:
-            repeat(
-                2,
-                minmax(0, 1fr)
-            );
-
-        gap: 10px;
-    }
-
-
-    .athlete-card {
-        padding: 12px;
-
-        border-radius: 14px;
-    }
-
-
-    .athlete-image {
-        height: 135px;
-
-        margin-bottom: 12px;
-
-        border-radius: 11px;
-    }
-
-
-    .card-name {
-        font-size: 0.98rem;
-    }
-
-
-    .card-power {
-        font-size: 0.76rem;
-    }
-
-
-    .filter-section {
-        gap: 6px;
-    }
-
-
-    .filter {
-        padding: 8px 12px;
-
-        font-size: 0.8rem;
-    }
-
-
-    .modal {
-        padding: 10px;
-    }
-
-
-    .modal-dialog {
-        margin: 10px auto;
-
-        padding: 20px;
-
-        border-radius: 17px;
-    }
-
-
-    .modal-header {
-        flex-direction: column;
-
-        align-items: center;
-
-        gap: 15px;
-
-        padding-right: 35px;
-
-        text-align: center;
-    }
-
-
-    .modal-athlete-image {
-        width: min(
-            100%,
-            230px
-        );
-
-        height: 240px;
-
-        border-radius: 16px;
-    }
-
-
-    .modal-heading {
-        width: 100%;
-    }
-
-
-    .modal-title {
-        font-size: 1.65rem;
-    }
-
-
-    .modal-power-name {
-        font-size: 0.9rem;
-    }
-
-
-    .ability-text {
-        font-size: 0.9rem;
-
-        padding: 14px 15px;
-    }
-
-
-    .interaction {
-        padding: 14px;
-    }
-
-
-    .interaction-with {
-        font-size: 0.92rem;
-    }
-
-
-    .interaction-details {
-        font-size: 0.84rem;
-    }
-}
-
-
-/* =========================
-   VERY SMALL PHONES
-   ========================= */
-
-@media (max-width: 380px) {
-
-    .athlete-grid {
-        grid-template-columns: 1fr;
-    }
-
-
-    .athlete-image {
-        height: 220px;
-    }
-
-
-    .card-name {
-        font-size: 1.05rem;
-    }
-
-
-    .card-power {
-        font-size: 0.8rem;
-    }
+@media (max-width: 500px) {
+
+  .header-inner {
+    padding: 22px 16px 18px;
+  }
+
+  main {
+    padding: 25px 16px 60px;
+  }
+
+  .character-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+
+  .character-card-image {
+    height: 170px;
+  }
+
+  .character-card-name {
+    font-size: 0.95rem;
+    padding: 12px 8px 14px;
+  }
+
+  .modal {
+    padding: 0;
+  }
+
+  .profile-modal {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .profile-sidebar,
+  .profile-interactions {
+    padding: 22px 18px;
+  }
 }
