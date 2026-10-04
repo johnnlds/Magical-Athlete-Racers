@@ -1,233 +1,223 @@
 // ============================================================
 // MAGICAL ATHLETE — CHARACTER PROFILES
 // ============================================================
-// 36 racers
-// Character-only search
-// Clickable racer names in interactions
-// Full interaction list supplied by John
-// ============================================================
-
-
-// ============================================================
-// RACERS
-// ============================================================
 
 const athletes = [
   {
     name: "Alchemist",
-    power: "Transmute ‘N’ Scoot",
-    ability: "When I roll a 1 or 2 for my main move, I can move 4 instead.",
-    image: "images/alchemist.png"
+    image: "images/alchemist.png",
+    ability: "Transmute ‘N’ Scoot",
+    abilityText: "When I roll a 1 or 2 for my main move, I can move 4 instead."
   },
   {
     name: "Baba Yaga",
-    power: "Leg It",
-    ability: "Trip any racer that stops on my space, or when I stop on theirs.",
-    image: "images/baba-yaga.png"
+    image: "images/baba-yaga.png",
+    ability: "Leg It",
+    abilityText: "Trip any racer that stops on my space, or when I stop on theirs."
   },
   {
     name: "Banana",
-    power: "The Slip",
-    ability: "I trip any racer that passes me.",
-    image: "images/banana.png"
+    image: "images/banana.png",
+    ability: "The Slip",
+    abilityText: "I trip any racer that passes me."
   },
   {
     name: "Blimp",
-    power: "Blow It",
-    ability: "When I start my turn before the second corner of the track, I get +3 to my main move. On or after that corner, I get -1.",
-    image: "images/blimp.png"
+    image: "images/blimp.png",
+    ability: "Blow It",
+    abilityText: "When I start my turn before the second corner of the track, I get +3 to my main move. On or after that corner, I get -1."
   },
   {
     name: "Centaur",
-    power: "Hoofwhack",
-    ability: "When I pass a racer, they move -2. They cannot be moved farther back than Start.",
-    image: "images/centaur.png"
+    image: "images/centaur.png",
+    ability: "Hoofwhack",
+    abilityText: "When I pass a racer, they move -2. They cannot be moved farther back than Start."
   },
   {
     name: "Cheerleader",
-    power: "Rah Rah",
-    ability: "Before my main move, I can make the racer(s) in last place move 2. If I do, I move 1.",
-    image: "images/cheerleader.png"
+    image: "images/cheerleader.png",
+    ability: "Rah Rah",
+    abilityText: "Before my main move, I can make the racer(s) in last place move 2. If I do, I move 1."
   },
   {
     name: "Coach",
-    power: "Good Hustle",
-    ability: "Everyone on my space gets +1 to their main move, including me.",
-    image: "images/coach.png"
+    image: "images/coach.png",
+    ability: "Good Hustle",
+    abilityText: "Everyone on my space gets +1 to their main move, including me."
   },
   {
     name: "Copycat",
-    power: "Copy That",
-    ability: "I have the power of the racer currently in the lead. If there's a tie, I pick.",
-    image: "images/copycat.png"
+    image: "images/copycat.png",
+    ability: "Copy That",
+    abilityText: "I have the power of the racer currently in the lead. If there's a tie, I pick."
   },
   {
     name: "Dicemonger",
-    power: "Dicey Deals",
-    ability: "Anyone can reroll their main move once per turn. When another racer rerolls, I move 1.",
-    image: "images/dicemonger.png"
+    image: "images/dicemonger.png",
+    ability: "Dicey Deals",
+    abilityText: "Anyone can reroll their main move once per turn. When another racer rerolls, I move 1."
   },
   {
     name: "Duelist",
-    power: "Duel!",
-    ability: "Whenever a racer shares my space, I can shout DUEL! We roll our dice and whoever rolls highest moves 2. I win ties.",
-    image: "images/duelist.png"
+    image: "images/duelist.png",
+    ability: "Duel!",
+    abilityText: "Whenever a racer shares my space, I can shout DUEL! We roll our dice and whoever rolls highest moves 2. I win ties."
   },
   {
     name: "Egg",
-    power: "Scramble",
-    ability: "Before my race, draw 3 new racers from the deck and pick one. I have its powers.",
-    image: "images/egg.png"
+    image: "images/egg.png",
+    ability: "Scramble",
+    abilityText: "Before my race, draw 3 new racers from the deck and pick one. I have its powers."
   },
   {
     name: "Flip Flop",
-    power: "Flop Flip",
-    ability: "I can skip rolling for my main move and swap spaces with another racer instead.",
-    image: "images/flip-flop.png"
+    image: "images/flip-flop.png",
+    ability: "Flop Flip",
+    abilityText: "I can skip rolling for my main move and swap spaces with another racer instead."
   },
   {
     name: "Genius",
-    power: "Think Good",
-    ability: "I can predict what number I’ll roll for my main move. If I’m right, I take another turn after this one.",
-    image: "images/genius.png"
+    image: "images/genius.png",
+    ability: "Think Good",
+    abilityText: "I can predict what number I’ll roll for my main move. If I’m right, I take another turn after this one."
   },
   {
     name: "Gunk",
-    power: "Goop ‘Em",
-    ability: "Other racers get -1 to their main move.",
-    image: "images/gunk.png"
+    image: "images/gunk.png",
+    ability: "Goop ‘Em",
+    abilityText: "Other racers get -1 to their main move."
   },
   {
     name: "Hare",
-    power: "Hubris",
-    ability: "I get +2 to my main move. If I start my turn alone in the lead, I skip my main move.",
-    image: "images/hare.png"
+    image: "images/hare.png",
+    ability: "Hubris",
+    abilityText: "I get +2 to my main move. If I start my turn alone in the lead, I skip my main move."
   },
   {
     name: "Heckler",
-    power: "Schadenfreude",
-    ability: "When a racer ends their turn within 1 space of where they started, I move 2.",
-    image: "images/heckler.png"
+    image: "images/heckler.png",
+    ability: "Schadenfreude",
+    abilityText: "When a racer ends their turn within 1 space of where they started, I move 2."
   },
   {
     name: "Huge Baby",
-    power: "Really Huge",
-    ability: "No one can ever be on my space except at Start. If someone would land there, put them on the space behind me instead.",
-    image: "images/huge-baby.png"
+    image: "images/huge-baby.png",
+    ability: "Really Huge",
+    abilityText: "No one can ever be on my space except at Start. If someone would land there, put them on the space behind me instead."
   },
   {
     name: "Hypnotist",
-    power: "Hssssst",
-    ability: "Before my main move, I can warp another racer to my space.",
-    image: "images/hypnotist.png"
+    image: "images/hypnotist.png",
+    ability: "Hssssst",
+    abilityText: "Before my main move, I can warp another racer to my space."
   },
   {
     name: "Inchworm",
-    power: "Wriggle",
-    ability: "When another racer rolls a 1 for their main move, they skip that move and I move 1.",
-    image: "images/inchworm.png"
+    image: "images/inchworm.png",
+    ability: "Wriggle",
+    abilityText: "When another racer rolls a 1 for their main move, they skip that move and I move 1."
   },
   {
     name: "Lackey",
-    power: "Very Good Sire",
-    ability: "When another racer rolls a 6, I move 2 before they move.",
-    image: "images/lackey.png"
+    image: "images/lackey.png",
+    ability: "Very Good Sire",
+    abilityText: "When another racer rolls a 6, I move 2 before they move."
   },
   {
     name: "Leaptoad",
-    power: "Jumpfrog",
-    ability: "While moving, I skip spaces occupied by other racers.",
-    image: "images/leaptoad.png"
+    image: "images/leaptoad.png",
+    ability: "Jumpfrog",
+    abilityText: "While moving, I skip spaces occupied by other racers."
   },
   {
     name: "Legs",
-    power: "Jog",
-    ability: "I can skip rolling and move 5 instead.",
-    image: "images/legs.png"
+    image: "images/legs.png",
+    ability: "Jog",
+    abilityText: "I can skip rolling and move 5 instead."
   },
   {
     name: "Lovable Loser",
-    power: "D’Aww",
-    ability: "Before my main move, I get a 1-point chip if I’m alone in last place.",
-    image: "images/lovable-loser.png"
+    image: "images/lovable-loser.png",
+    ability: "D’Aww",
+    abilityText: "Before my main move, I get a 1-point chip if I’m alone in last place."
   },
   {
     name: "Magician",
-    power: "Poof",
-    ability: "I can reroll my main move up to two times. I must use the final roll.",
-    image: "images/magician.png"
+    image: "images/magician.png",
+    ability: "Poof",
+    abilityText: "I can reroll my main move up to two times. I must use the final roll."
   },
   {
     name: "Mastermind",
-    power: "Know-It-All",
-    ability: "At the start of my first turn, I predict which racer will win. If correct, the race immediately ends and I finish 2nd.",
-    image: "images/mastermind.png"
+    image: "images/mastermind.png",
+    ability: "Know-It-All",
+    abilityText: "At the start of my first turn, I predict which racer will win. If correct, the race immediately ends and I finish 2nd."
   },
   {
     name: "M.O.U.T.H.",
-    power: "Chomp",
-    ability: "When I stop on a space with exactly one other racer, that racer is eliminated.",
-    image: "images/m-o-u-t-h.png"
+    image: "images/mouth.png",
+    ability: "Chomp",
+    abilityText: "When I stop on a space with exactly one other racer, that racer is eliminated."
   },
   {
     name: "Party Animal",
-    power: "Animal Magnetism",
-    ability: "Before my main move, all racers move 1 space towards me. Each other racer on my space gives me +1 to my main move.",
-    image: "images/party-animal.png"
+    image: "images/party-animal.png",
+    ability: "Animal Magnetism",
+    abilityText: "Before my main move, all racers move 1 space towards me. Each other racer on my space gives me +1 to my main move."
   },
   {
     name: "Rocket Scientist",
-    power: "Kablooey",
-    ability: "When I roll for my main move, I can have double that number. If I do, I trip.",
-    image: "images/rocket-scientist.png"
+    image: "images/rocket-scientist.png",
+    ability: "Kablooey",
+    abilityText: "When I roll for my main move, I can have double that number. If I do, I trip."
   },
   {
     name: "Romantic",
-    power: "Ah, Love!",
-    ability: "When anyone stops on a space with exactly one other racer, I move 2.",
-    image: "images/romantic.png"
+    image: "images/romantic.png",
+    ability: "Ah, Love!",
+    abilityText: "When anyone stops on a space with exactly one other racer, I move 2."
   },
   {
     name: "Scoocher",
-    power: "Scooch Scooch",
-    ability: "When another racer’s power happens, I move 1.",
-    image: "images/scoocher.png"
+    image: "images/scoocher.png",
+    ability: "Scooch Scooch",
+    abilityText: "When another racer’s power happens, I move 1."
   },
   {
     name: "Sisyphus",
-    power: "Keep Rollin'",
-    ability: "Before my race, I take 4 point chips. When I roll a 6 for my main move, instead of moving, I warp to the Start and lose 1 point chip.",
-    image: "images/sisyphus.png"
+    image: "images/sisyphus.png",
+    ability: "Keep Rollin'",
+    abilityText: "Before my race, I take 4 point chips. When I roll a 6 for my main move, instead of moving, I warp to the Start and lose 1 point chip."
   },
   {
     name: "Skipper",
-    power: "Salty Dog",
-    ability: "When anyone rolls a 1 for their main move, I go next in turn order.",
-    image: "images/skipper.png"
+    image: "images/skipper.png",
+    ability: "Salty Dog",
+    abilityText: "When anyone rolls a 1 for their main move, I go next in turn order."
   },
   {
     name: "Stickler",
-    power: "Actually…",
-    ability: "I must land exactly on the Finish to win.",
-    image: "images/stickler.png"
+    image: "images/stickler.png",
+    ability: "Actually…",
+    abilityText: "I must land exactly on the Finish to win."
   },
   {
     name: "Suckerfish",
-    power: "Sucker!",
-    ability: "When another racer moves, I can move with them.",
-    image: "images/suckerfish.png"
+    image: "images/suckerfish.png",
+    ability: "Sucker!",
+    abilityText: "When another racer moves, I can move with them."
   },
   {
     name: "Third Wheel",
-    power: "Roll Through",
-    ability: "Before my main move, I can warp to a space with exactly two other racers.",
-    image: "images/third-wheel.png"
+    image: "images/third-wheel.png",
+    ability: "Roll Through",
+    abilityText: "Before my main move, I can warp to a space with exactly two other racers."
   },
   {
     name: "Twin",
-    power: "Double Dip",
-    ability: "I have the power of my twin. If my twin is eliminated, I lose this power.",
-    image: "images/twin.png"
+    image: "images/twin.png",
+    ability: "Double Dip",
+    abilityText: "I have the power of my twin. If my twin is eliminated, I lose this power."
   }
 ];
 
@@ -235,343 +225,315 @@ const athletes = [
 // ============================================================
 // INTERACTIONS
 // ============================================================
-// Each row is displayed on the profile of the first racer.
-// The second racer is clickable when that name is an actual racer.
-// ============================================================
 
 const interactionData = [
 
   {
     a: "Alchemist",
     b: "Coach",
-    details: "If Alchemist rolls 1 or 2 and uses Transmute ‘N’ Scoot, Coach’s +1 applies to the 4-space main move, so Alchemist moves 5."
+    text: "If Alchemist rolls 1 or 2 and uses Transmute ‘N’ Scoot, Coach’s +1 applies to the 4-space main move, so Alchemist moves 5."
   },
   {
     a: "Alchemist",
     b: "Gunk",
-    details: "If Alchemist rolls 1 or 2 and uses Transmute ‘N’ Scoot to move 4, Gunk reduces Alchemist’s movement to 3. The die result remains 1 or 2."
+    text: "If Alchemist rolls 1 or 2 and uses Transmute ‘N’ Scoot to move 4, Gunk reduces Alchemist’s movement to 3. The die result remains 1 or 2."
   },
   {
     a: "Alchemist",
     b: "Inchworm",
-    details: "If Alchemist rolls 1, Inchworm makes Alchemist skip the main move. Alchemist therefore cannot use Transmute ‘N’ Scoot to move 4."
+    text: "If Alchemist rolls 1, Inchworm makes Alchemist skip the main move. Alchemist therefore cannot use Transmute ‘N’ Scoot to move 4."
   },
   {
     a: "Alchemist",
     b: "Skipper",
-    details: "If Alchemist rolls 1 and uses Transmute ‘N’ Scoot to move 4, Skipper still triggers because Alchemist rolled a 1. Skipper takes the next turn after Alchemist’s turn."
+    text: "If Alchemist rolls 1 and uses Transmute ‘N’ Scoot to move 4, Skipper still triggers because Alchemist rolled a 1. Skipper takes the next turn after Alchemist’s turn."
   },
 
   {
     a: "Baba Yaga",
     b: "Duelist",
-    details: "If Duelist shares Baba Yaga’s space, they can duel, but Duelist still trips from Baba Yaga."
+    text: "If Duelist shares Baba Yaga’s space, they can duel, but Duelist still trips from Baba Yaga."
   },
   {
     a: "Baba Yaga",
     b: "Huge Baby",
-    details: "The two cannot share a space, so Huge Baby cannot be tripped."
+    text: "The two cannot share a space, so Huge Baby cannot be tripped."
   },
   {
     a: "Baba Yaga",
     b: "Hypnotist",
-    details: "Hypnotist can warp Baba Yaga onto Hypnotist’s space, but Hypnotist trips."
+    text: "Hypnotist can warp Baba Yaga onto Hypnotist’s space, but Hypnotist trips."
   },
   {
     a: "Baba Yaga",
     b: "Party Animal",
-    details: "If Party Animal moves racers simultaneously onto Baba Yaga’s space, Baba Yaga does not trip them."
+    text: "If Party Animal moves racers simultaneously onto Baba Yaga’s space, Baba Yaga does not trip them."
   },
 
   {
     a: "Banana",
     b: "Centaur",
-    details: "If Centaur passes Banana, Centaur’s Hoofwhack moves Banana back 2, and Banana then trips Centaur for passing Banana."
+    text: "If Centaur passes Banana, Centaur’s Hoofwhack moves Banana back 2, and Banana then trips Centaur for passing Banana."
   },
   {
     a: "Banana",
     b: "Leaptoad",
-    details: "Leaptoad skips over Banana’s occupied space, but that still counts as passing Banana. Banana therefore trips Leaptoad after its movement."
+    text: "Leaptoad skips over Banana’s occupied space, but that still counts as passing Banana. Banana therefore trips Leaptoad after its movement."
   },
 
   {
     a: "Blimp",
     b: "Coach",
-    details: "If Blimp shares Coach’s space, Coach’s +1 applies to Blimp’s main move in addition to Blimp’s +3 or -1."
+    text: "If Blimp shares Coach’s space, Coach’s +1 applies to Blimp’s main move in addition to Blimp’s +3 or -1."
   },
   {
     a: "Blimp",
     b: "Gunk",
-    details: "Gunk’s -1 applies to Blimp’s main move. Before the second corner, Blimp’s +3 and Gunk’s -1 result in +2; on or after the second corner, Blimp’s -1 and Gunk’s -1 result in -2."
+    text: "Gunk’s -1 applies to Blimp’s main move. Before the second corner, Blimp’s +3 and Gunk’s -1 result in +2; on or after the second corner, Blimp’s -1 and Gunk’s -1 result in -2."
   },
 
   {
     a: "Coach",
     b: "Gunk",
-    details: "If Coach is on Gunk’s board, Gunk’s -1 applies to Coach’s main move while Coach’s +1 applies to Coach’s own main move. The two modifiers cancel, leaving Coach’s normal die result."
+    text: "If Coach is on Gunk’s board, Gunk’s -1 applies to Coach’s main move while Coach’s +1 applies to Coach’s own main move. The two modifiers cancel, leaving Coach’s normal die result."
   },
   {
     a: "Coach",
     b: "Legs",
-    details: "Legs’ JOG counts as a main move, so Coach’s +1 applies. Legs moves 6 instead of 5."
+    text: "Legs’ JOG counts as a main move, so Coach’s +1 applies. Legs moves 6 instead of 5."
   },
 
   {
     a: "Copycat",
     b: "Gunk",
-    details: "If Copycat is copying Gunk, everyone else has -2 to their move, Gunk has -1, and Copycat has -1."
+    text: "If Copycat is copying Gunk, everyone else has -2 to their move, Gunk has -1, and Copycat has -1."
   },
   {
     a: "Copycat",
     b: "Hare",
-    details: "If Copycat is copying Hare, Copycat gets Hare’s +2 movement ability. If the lead changes, Copycat immediately changes to the new leader’s power."
+    text: "If Copycat is copying Hare, Copycat gets Hare’s +2 movement ability. If the lead changes, Copycat immediately changes to the new leader’s power."
   },
   {
     a: "Copycat",
     b: "Huge Baby",
-    details: "If Copycat is copying Huge Baby, Huge Baby’s power takes priority."
+    text: "If Copycat is copying Huge Baby, Huge Baby’s power takes priority."
   },
   {
     a: "Copycat",
     b: "Lead Racer",
-    details: "Copycat continuously copies the racer currently in the lead, not just at the beginning of its turn. If the lead changes, Copycat’s power changes immediately."
+    text: "Copycat continuously copies the racer currently in the lead, not just at the beginning of its turn. If the lead changes, Copycat’s power changes immediately."
   },
 
   {
     a: "Dicemonger",
     b: "Inchworm",
-    details: "If a racer rolls 1 and rerolls using Dicemonger’s ability, the original 1 is treated as if it never happened."
+    text: "If a racer rolls 1 and rerolls using Dicemonger’s ability, the original 1 is treated as if it never happened."
   },
   {
     a: "Dicemonger",
     b: "Magician",
-    details: "Magician’s own rerolls do not make Dicemonger move. Dicemonger only moves when another racer uses Dicemonger’s reroll."
+    text: "Magician’s own rerolls do not make Dicemonger move. Dicemonger only moves when another racer rerolls."
   },
   {
     a: "Dicemonger",
     b: "Scoocher",
-    details: "Whenever another racer uses Dicemonger’s reroll, Dicemonger moves 1 and Scoocher also moves 1 because a reroll occurred."
+    text: "Whenever another racer uses Dicemonger’s reroll, Dicemonger moves 1 and Scoocher also moves 1 because a reroll occurred."
   },
   {
     a: "Dicemonger",
     b: "Skipper",
-    details: "If a racer rolls 1 and rerolls using Dicemonger’s ability, the original 1 is treated as if it never happened."
+    text: "If a racer rolls 1 and rerolls using Dicemonger’s ability, the original 1 is treated as if it never happened."
   },
 
   {
     a: "Duelist",
     b: "Huge Baby",
-    details: "Duelist cannot share Huge Baby’s space, so they cannot duel."
+    text: "Duelist cannot share Huge Baby’s space, so they cannot duel."
   },
   {
     a: "Duelist",
     b: "M.O.U.T.H.",
-    details: "If Duelist duels M.O.U.T.H. and M.O.U.T.H. wins, M.O.U.T.H. moves 2. If that movement ends with exactly one other racer on its space, M.O.U.T.H. eliminates that racer. If M.O.U.T.H. lands on Duelist’s space, they do not duel and Duelist is eaten."
+    text: "If Duelist duels M.O.U.T.H. and M.O.U.T.H. wins, M.O.U.T.H. moves 2. If that movement ends with exactly one other racer on its space, M.O.U.T.H. eliminates that racer. If M.O.U.T.H. lands on Duelist’s space, they do not duel and Duelist is eaten."
   },
   {
     a: "Duelist",
     b: "Stickler",
-    details: "If Duelist wins a duel near the finish and the 2-space movement would overshoot the finish, Stickler prevents Duelist from crossing. Duelist does not move."
+    text: "If Duelist wins a duel near the finish and the 2-space movement would overshoot the finish, Stickler prevents Duelist from crossing. Duelist does not move."
   },
 
   {
     a: "Gunk",
     b: "Heckler",
-    details: "If Gunk reduces a racer’s main move so they finish their turn within 1 space of where they started, Heckler triggers and moves 2."
+    text: "If Gunk reduces a racer’s main move so they finish their turn within 1 space of where they started, Heckler triggers and moves 2."
   },
   {
     a: "Gunk",
     b: "Lackey",
-    details: "Gunk changes movement, not the die result. A racer who rolls 6 still rolled a 6, so Lackey still moves 2 before that racer."
+    text: "Gunk changes movement, not the die result. A racer who rolls 6 still rolled a 6, so Lackey still moves 2 before that racer."
   },
   {
     a: "Gunk",
     b: "Legs",
-    details: "Gunk reduces Legs’ 5-space JOG to 4. JOG still counts as Legs’ main move."
+    text: "Gunk reduces Legs’ 5-space JOG to 4. JOG still counts as Legs’ main move."
   },
   {
     a: "Gunk",
     b: "Scoocher",
-    details: "Scoocher moves 1 for each -1 that Gunk applies to another racer’s main move."
+    text: "Scoocher moves 1 for each -1 that Gunk applies to another racer’s main move."
   },
 
   {
     a: "Huge Baby",
     b: "M.O.U.T.H.",
-    details: "Huge Baby cannot be eaten by M.O.U.T.H."
+    text: "Huge Baby cannot be eaten by M.O.U.T.H."
   },
   {
     a: "Huge Baby",
     b: "Party Animal",
-    details: "If Huge Baby is moved onto Party Animal’s space by Party Animal’s power, everyone on that space is moved back 1."
+    text: "If Huge Baby is moved onto Party Animal’s space by Party Animal’s power, everyone on that space is moved back 1."
   },
   {
     a: "Huge Baby",
     b: "Scoocher",
-    details: "If Scoocher’s power moves Scoocher onto Huge Baby’s space, Huge Baby places Scoocher one space behind."
+    text: "If Scoocher’s power moves Scoocher onto Huge Baby’s space, Huge Baby places Scoocher one space behind."
   },
   {
     a: "Huge Baby",
     b: "Suckerfish",
-    details: "Suckerfish cannot follow Huge Baby."
+    text: "Suckerfish cannot follow Huge Baby."
   },
 
   {
     a: "Inchworm",
     b: "Magician",
-    details: "Magician can reroll a 1 before Inchworm’s trigger resolves. If the reroll is not 1, Inchworm does not trigger."
+    text: "Magician can reroll a 1 before Inchworm’s trigger resolves. If the reroll is not 1, Inchworm does not trigger."
   },
   {
     a: "Inchworm",
     b: "Skipper",
-    details: "When another racer rolls 1, Inchworm makes that racer skip the main move and moves 1. Skipper then takes the next turn. Both abilities trigger."
+    text: "When another racer rolls 1, Inchworm makes that racer skip the main move and moves 1. Skipper then takes the next turn. Both abilities trigger."
   },
 
   {
     a: "Leaptoad",
     b: "Scoocher",
-    details: "Scoocher moves 1 for every occupied space Leaptoad skips. If Leaptoad skips two occupied spaces, Scoocher moves twice."
+    text: "Scoocher moves 1 for every occupied space Leaptoad skips. If Leaptoad skips two occupied spaces, Scoocher moves twice."
   },
 
   {
     a: "Magician",
     b: "Scoocher",
-    details: "Every Magician reroll triggers Scoocher, so Scoocher moves 1 for each reroll, even if the reroll is not ultimately used."
+    text: "Every Magician reroll triggers Scoocher, so Scoocher moves 1 for each reroll, even if the reroll is not ultimately used."
   },
 
   {
     a: "Party Animal",
     b: "Baba Yaga",
-    details: "If Party Animal moves racers simultaneously onto Baba Yaga’s space, Baba Yaga does not trip them because they arrived simultaneously."
+    text: "If Party Animal moves racers simultaneously onto Baba Yaga’s space, Baba Yaga does not trip them because they arrived simultaneously."
   },
   {
     a: "Party Animal",
     b: "M.O.U.T.H.",
-    details: "When Party Animal moves M.O.U.T.H. simultaneously onto another racer, M.O.U.T.H. does not eliminate that racer from the simultaneous arrival."
+    text: "When Party Animal moves M.O.U.T.H. simultaneously onto another racer, M.O.U.T.H. does not eliminate that racer from the simultaneous arrival."
   },
   {
     a: "Party Animal",
     b: "Romantic",
-    details: "When Party Animal moves racers simultaneously toward Party Animal, Romantic does not trigger from those simultaneous arrivals."
+    text: "When Party Animal moves racers simultaneously toward Party Animal, Romantic does not trigger from those simultaneous arrivals."
   },
 
   {
     a: "Rocket Scientist",
     b: "Coach",
-    details: "If Rocket Scientist shares Coach’s space, Coach’s +1 applies to Rocket Scientist’s main move, including a doubled main move."
+    text: "If Rocket Scientist shares Coach’s space, Coach’s +1 applies to Rocket Scientist’s main move, including a doubled main move."
   },
   {
     a: "Rocket Scientist",
     b: "Gunk",
-    details: "Gunk reduces Rocket Scientist’s resulting main-move distance by 1. If Rocket Scientist doubles a roll, Gunk reduces the doubled movement by 1."
+    text: "Gunk reduces Rocket Scientist’s resulting main-move distance by 1. If Rocket Scientist doubles a roll, Gunk reduces the doubled movement by 1."
   },
   {
     a: "Rocket Scientist",
     b: "Inchworm",
-    details: "If Rocket Scientist rolls 1 and doubles it to 2, Inchworm still triggers because the die roll was 1. Rocket Scientist skips the main move; its doubling does not prevent Inchworm."
+    text: "If Rocket Scientist rolls 1 and doubles it to 2, Inchworm still triggers because the die roll was 1. Rocket Scientist skips the main move; its doubling does not prevent Inchworm."
   },
   {
     a: "Rocket Scientist",
     b: "Skipper",
-    details: "If Rocket Scientist rolls 1 and doubles it to 2, Skipper still triggers because the die roll was 1."
+    text: "If Rocket Scientist rolls 1 and doubles it to 2, Skipper still triggers because the die roll was 1."
   },
 
   {
     a: "Romantic",
     b: "Suckerfish",
-    details: "If Suckerfish follows Romantic’s movement and arrives simultaneously, Romantic does not trigger from Suckerfish’s arrival."
+    text: "If Suckerfish follows Romantic’s movement and arrives simultaneously, Romantic does not trigger from Suckerfish’s arrival."
   },
 
   {
     a: "Scoocher",
     b: "Suckerfish",
-    details: "If Scoocher moves while sharing a space with Suckerfish, Suckerfish can follow Scoocher to the new space. Suckerfish’s movement can then trigger Scoocher again, so this chain can continue."
+    text: "If Scoocher moves while sharing a space with Suckerfish, Suckerfish can follow Scoocher to the new space. Suckerfish’s movement can then trigger Scoocher again, so this chain can continue."
   },
 
   {
     a: "Stickler",
     b: "Hare",
-    details: "Hare’s +2 can make it overshoot the finish. If Hare would overshoot, Stickler prevents the movement and Hare does not cross."
+    text: "Hare’s +2 can make it overshoot the finish. If Hare would overshoot, Stickler prevents the movement and Hare does not cross."
   },
   {
     a: "Stickler",
     b: "Scoocher",
-    details: "Scoocher’s 1-space movement is also subject to Stickler. If that movement would overshoot the finish, Scoocher does not cross."
+    text: "Scoocher’s 1-space movement is also subject to Stickler. If that movement would overshoot the finish, Scoocher does not cross."
   },
 
   {
     a: "General",
     b: "Simultaneous Arrival",
-    details: "Stopping-on-a-space powers do not trigger from simultaneous arrival under the August 2026 rule."
+    text: "Stopping-on-a-space powers do not trigger from simultaneous arrival under the August 2026 rule."
   },
 
   {
     a: "Third Wheel",
     b: "Baba Yaga",
-    details: "If Third Wheel warps onto a space containing Baba Yaga, Baba Yaga’s ability trips Third Wheel."
+    text: "If Third Wheel warps onto a space containing Baba Yaga, Baba Yaga’s ability trips Third Wheel."
   }
 
 ];
 
 
 // ============================================================
-// LOOKUPS
+// CHARACTER LOOKUP
 // ============================================================
 
-const characterMap = new Map(
-  athletes.map(racer => [racer.name, racer])
-);
+const characterMap = {};
 
-const characterNames = athletes.map(
-  racer => racer.name
-);
+athletes.forEach((athlete) => {
+  characterMap[athlete.name] = athlete;
+});
 
 
 // ============================================================
 // DOM ELEMENTS
 // ============================================================
 
-const searchInput =
-  document.getElementById("searchInput");
+const characterGrid = document.getElementById("characterGrid");
+const characterCount = document.getElementById("characterCount");
+const noResults = document.getElementById("noResults");
 
-const characterCount =
-  document.getElementById("characterCount");
+const searchInput = document.getElementById("searchInput");
 
-const characterGrid =
-  document.getElementById("characterGrid");
+const profileModal = document.getElementById("profileModal");
+const modalOverlay = document.getElementById("modalOverlay");
+const closeModalButton = document.getElementById("closeModal");
 
-const noResults =
-  document.getElementById("noResults");
+const profileImage = document.getElementById("profileImage");
+const profileName = document.getElementById("profileName");
+const profileAbilityName = document.getElementById("profileAbilityName");
+const profileAbilityText = document.getElementById("profileAbilityText");
 
-const profileModal =
-  document.getElementById("profileModal");
-
-const modalOverlay =
-  document.getElementById("modalOverlay");
-
-const closeModalButton =
-  document.getElementById("closeModal");
-
-const profileImage =
-  document.getElementById("profileImage");
-
-const profileName =
-  document.getElementById("profileName");
-
-const profileAbilityName =
-  document.getElementById("profileAbilityName");
-
-const profileAbilityText =
-  document.getElementById("profileAbilityText");
-
-const interactionCount =
-  document.getElementById("interactionCount");
-
-const interactionList =
-  document.getElementById("interactionList");
-
-const noInteractions =
-  document.getElementById("noInteractions");
+const interactionList = document.getElementById("interactionList");
+const interactionCount = document.getElementById("interactionCount");
+const noInteractions = document.getElementById("noInteractions");
 
 
 // ============================================================
@@ -579,135 +541,84 @@ const noInteractions =
 // ============================================================
 
 function escapeHtml(value) {
-  return String(value ?? "").replace(
-    /[&<>"']/g,
-    character => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    })[character]
-  );
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 
 // ============================================================
-// CHARACTER NAME LINKING
-// ============================================================
-// Converts racer names appearing inside interaction text
-// into clickable buttons.
-//
-// Only actual racers become profile links.
-// "Lead Racer" and "Simultaneous Arrival" remain plain text.
+// MAKE CHARACTER NAMES CLICKABLE
 // ============================================================
 
-function linkCharacterNames(text) {
-  let html = escapeHtml(text);
+function linkCharacterNames(text, currentCharacter) {
+  let result = escapeHtml(text);
 
-  const orderedNames = [...characterNames]
+  const names = athletes
+    .map((athlete) => athlete.name)
     .sort((a, b) => b.length - a.length);
 
-  const replacements = [];
+  names.forEach((name) => {
 
-  orderedNames.forEach(name => {
+    if (name === currentCharacter) {
+      return;
+    }
 
-    const token =
-      `___CHARACTER_${replacements.length}___`;
+    const escapedName = escapeHtml(name);
 
-    const escapedName =
-      name.replace(
-        /[.*+?^${}()|[\]\\]/g,
-        "\\$&"
-      );
-
-    const regex = new RegExp(
-      `(?<![\\w-])${escapedName}(?![\\w-])`,
+    const pattern = new RegExp(
+      `(?<![\\w.-])${escapedName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![\\w.-])`,
       "g"
     );
 
-    if (regex.test(html)) {
-      html = html.replace(regex, token);
-
-      replacements.push({
-        token,
-        name
-      });
-    }
-  });
-
-  replacements.forEach(item => {
-
-    html = html.replaceAll(
-      item.token,
-      `<button
-        type="button"
-        class="character-link"
-        data-character="${escapeHtml(item.name)}"
-      >${escapeHtml(item.name)}</button>`
+    result = result.replace(
+      pattern,
+      `<button class="character-link" type="button" data-character="${escapeHtml(name)}">${escapedName}</button>`
     );
-
   });
 
-  return html;
+  return result;
 }
 
 
 // ============================================================
-// GET INTERACTIONS FOR A RACER
+// GET INTERACTIONS FOR A CHARACTER
 // ============================================================
 
 function getInteractions(name) {
-
-  return interactionData.filter(
-    interaction => interaction.a === name
-  );
-
+  return interactionData.filter((interaction) => {
+    return interaction.a === name;
+  });
 }
 
 
 // ============================================================
-// RENDER CHARACTER GRID
+// RENDER CHARACTER CARDS
 // ============================================================
 
-function renderCharacters() {
+function renderCharacters(searchTerm = "") {
 
-  // IMPORTANT:
-  // Search is based ONLY on character names.
-  // Interaction text is NOT searched.
+  if (!characterGrid) {
+    console.error("characterGrid was not found.");
+    return;
+  }
 
-  const query =
-    searchInput.value
-      .trim()
-      .toLowerCase();
+  const search = searchTerm.trim().toLowerCase();
 
-  const visibleCharacters =
-    athletes.filter(racer =>
-      racer.name
-        .toLowerCase()
-        .includes(query)
-    );
-
-  characterCount.textContent =
-    query
-      ? `${visibleCharacters.length} of ${athletes.length} racers`
-      : `${athletes.length} racers`;
+  const filtered = athletes.filter((athlete) => {
+    return athlete.name.toLowerCase().includes(search);
+  });
 
   characterGrid.innerHTML = "";
 
-  noResults.classList.toggle(
-    "hidden",
-    visibleCharacters.length !== 0
-  );
+  filtered.forEach((athlete) => {
 
+    const card = document.createElement("article");
 
-  visibleCharacters.forEach(racer => {
-
-    const card =
-      document.createElement("article");
-
-    card.className =
-      "character-card";
+    card.className = "character-card";
 
     card.tabIndex = 0;
 
@@ -718,269 +629,172 @@ function renderCharacters() {
 
     card.setAttribute(
       "aria-label",
-      `Open ${racer.name} profile`
+      `Open ${athlete.name} profile`
     );
 
+    card.innerHTML = `
+      <img
+        class="character-card-image"
+        src="${athlete.image}"
+        alt="${escapeHtml(athlete.name)}"
+        loading="lazy"
+      >
 
-    const image =
-      document.createElement("img");
+      <h3 class="character-card-name">
+        ${escapeHtml(athlete.name)}
+      </h3>
+    `;
 
-    image.className =
-      "character-card-image";
+    card.addEventListener("click", () => {
+      openProfile(athlete.name);
+    });
 
-    image.src =
-      racer.image;
+    card.addEventListener("keydown", (event) => {
 
-    image.alt =
-      racer.name;
-
-    image.loading =
-      "lazy";
-
-
-    image.onerror = () => {
-
-      image.style.display =
-        "none";
-
-      card.classList.add(
-        "image-missing"
-      );
-
-    };
-
-
-    const name =
-      document.createElement("h3");
-
-    name.className =
-      "character-card-name";
-
-    name.textContent =
-      racer.name;
-
-
-    card.appendChild(image);
-    card.appendChild(name);
-
-
-    card.addEventListener(
-      "click",
-      () => openProfile(racer.name)
-    );
-
-
-    card.addEventListener(
-      "keydown",
-      event => {
-
-        if (
-          event.key === "Enter" ||
-          event.key === " "
-        ) {
-
-          event.preventDefault();
-
-          openProfile(racer.name);
-
-        }
-
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openProfile(athlete.name);
       }
-    );
 
+    });
 
     characterGrid.appendChild(card);
-
   });
 
+  if (characterCount) {
+    characterCount.textContent =
+      `${filtered.length} racer${filtered.length === 1 ? "" : "s"}`;
+  }
+
+  if (noResults) {
+    noResults.classList.toggle(
+      "hidden",
+      filtered.length !== 0
+    );
+  }
 }
 
 
 // ============================================================
-// OPEN CHARACTER PROFILE
+// OPEN PROFILE
 // ============================================================
 
 function openProfile(name) {
 
-  const racer =
-    characterMap.get(name);
+  const athlete = characterMap[name];
 
-  if (!racer) {
+  if (!athlete) {
+    console.error(`Character not found: ${name}`);
     return;
   }
 
+  profileImage.src = athlete.image;
+  profileImage.alt = athlete.name;
 
-  // Character information
+  profileName.textContent = athlete.name;
 
-  profileImage.src =
-    racer.image;
+  profileAbilityName.textContent = athlete.ability;
 
-  profileImage.alt =
-    racer.name;
-
-  profileImage.style.display =
-    "";
+  profileAbilityText.textContent = athlete.abilityText;
 
 
-  profileImage.onerror = () => {
+  const interactions = getInteractions(name);
 
-    profileImage.style.display =
-      "none";
+  interactionList.innerHTML = "";
 
-  };
+  if (interactionCount) {
+    interactionCount.textContent =
+      `${interactions.length} interaction${interactions.length === 1 ? "" : "s"}`;
+  }
 
+  if (interactions.length === 0) {
 
-  profileName.textContent =
-    racer.name;
+    noInteractions.classList.remove("hidden");
 
-  profileAbilityName.textContent =
-    racer.power;
+  } else {
 
-  profileAbilityText.textContent =
-    racer.ability;
+    noInteractions.classList.add("hidden");
 
+    interactions.forEach((interaction) => {
 
-  // Get this racer's interactions
+      const card = document.createElement("article");
 
-  const interactions =
-    getInteractions(name);
+      card.className = "interaction-card";
 
+      const otherCharacter =
+        interaction.b === "Lead Racer" ||
+        interaction.b === "Simultaneous Arrival"
+          ? interaction.b
+          : characterMap[interaction.b]
+            ? interaction.b
+            : interaction.b;
 
-  interactionCount.textContent =
-    `${interactions.length} interaction${
-      interactions.length === 1
-        ? ""
-        : "s"
-    }`;
+      let characterHeader;
 
+      if (characterMap[otherCharacter]) {
 
-  interactionList.innerHTML =
-    "";
+        characterHeader = `
+          <button
+            class="character-link interaction-character"
+            type="button"
+            data-character="${escapeHtml(otherCharacter)}"
+          >
+            ${escapeHtml(otherCharacter)}
+          </button>
+        `;
 
+      } else {
 
-  noInteractions.classList.toggle(
-    "hidden",
-    interactions.length !== 0
-  );
+        characterHeader = `
+          <div class="interaction-character">
+            ${escapeHtml(otherCharacter)}
+          </div>
+        `;
 
+      }
 
-  // Build interaction cards
+      card.innerHTML = `
+        ${characterHeader}
 
-  interactions.forEach(interaction => {
-
-    const card =
-      document.createElement("article");
-
-    card.className =
-      "interaction-card";
-
-
-    // Other racer / interaction target
-
-    const otherCharacter =
-      document.createElement("div");
-
-    otherCharacter.className =
-      "interaction-character";
-
-
-    if (
-      characterMap.has(interaction.b)
-    ) {
-
-      otherCharacter.innerHTML = `
-        <button
-          type="button"
-          class="character-link"
-          data-character="${escapeHtml(interaction.b)}"
-        >
-          ${escapeHtml(interaction.b)}
-        </button>
+        <div class="interaction-text">
+          ${linkCharacterNames(interaction.text, name)}
+        </div>
       `;
 
-    } else {
-
-      otherCharacter.textContent =
-        interaction.b;
-
-    }
+      interactionList.appendChild(card);
+    });
+  }
 
 
-    // Interaction details
-
-    const details =
-      document.createElement("div");
-
-    details.className =
-      "interaction-text";
-
-    details.innerHTML =
-      linkCharacterNames(
-        interaction.details
-      );
-
-
-    card.appendChild(
-      otherCharacter
-    );
-
-    card.appendChild(
-      details
-    );
-
-
-    interactionList.appendChild(
-      card
-    );
-
-  });
-
-
-  // Open modal
-
-  profileModal.classList.add(
-    "open"
-  );
+  profileModal.classList.add("open");
 
   profileModal.setAttribute(
     "aria-hidden",
     "false"
   );
 
-
-  // Prevent background scrolling
-
-  document.body.style.overflow =
-    "hidden";
-
-
-  // Start interactions at top
+  document.body.style.overflow = "hidden";
 
   if (interactionList) {
     interactionList.scrollTop = 0;
   }
-
 }
 
 
 // ============================================================
-// CLOSE CHARACTER PROFILE
+// CLOSE PROFILE
 // ============================================================
 
 function closeProfile() {
 
-  profileModal.classList.remove(
-    "open"
-  );
+  profileModal.classList.remove("open");
 
   profileModal.setAttribute(
     "aria-hidden",
     "true"
   );
 
-  document.body.style.overflow =
-    "";
-
+  document.body.style.overflow = "";
 }
 
 
@@ -990,10 +804,11 @@ function closeProfile() {
 
 if (searchInput) {
 
-  searchInput.addEventListener(
-    "input",
-    renderCharacters
-  );
+  searchInput.addEventListener("input", (event) => {
+
+    renderCharacters(event.target.value);
+
+  });
 
 }
 
@@ -1013,7 +828,7 @@ if (closeModalButton) {
 
 
 // ============================================================
-// CLICK OUTSIDE MODAL
+// CLICK OUTSIDE PROFILE
 // ============================================================
 
 if (modalOverlay) {
@@ -1027,71 +842,54 @@ if (modalOverlay) {
 
 
 // ============================================================
-// CLICKABLE CHARACTER NAMES
-// ============================================================
-// This is event delegation, so it works for dynamically-created
-// interaction cards as well.
+// CLICK CHARACTER NAME INSIDE INTERACTIONS
 // ============================================================
 
-document.addEventListener(
-  "click",
-  event => {
+document.addEventListener("click", (event) => {
 
-    const characterLink =
-      event.target.closest(
-        ".character-link"
-      );
+  const button =
+    event.target.closest(".character-link");
 
-    if (!characterLink) {
-      return;
-    }
+  if (!button) {
+    return;
+  }
 
+  const character =
+    button.dataset.character;
 
-    event.preventDefault();
+  if (character && characterMap[character]) {
 
-    event.stopPropagation();
-
-
-    const name =
-      characterLink.dataset.character;
-
-
-    if (
-      name &&
-      characterMap.has(name)
-    ) {
-
-      openProfile(name);
-
-    }
+    openProfile(character);
 
   }
-);
+
+});
 
 
 // ============================================================
-// ESCAPE KEY CLOSES PROFILE
+// ESCAPE KEY
 // ============================================================
 
-document.addEventListener(
-  "keydown",
-  event => {
+document.addEventListener("keydown", (event) => {
 
-    if (
-      event.key === "Escape" &&
-      profileModal.classList.contains("open")
-    ) {
+  if (
+    event.key === "Escape" &&
+    profileModal.classList.contains("open")
+  ) {
 
-      closeProfile();
-
-    }
+    closeProfile();
 
   }
-);
+
+});
 
 
 // ============================================================
-// INITIAL PAGE LOAD
+// INITIAL RENDER
 // ============================================================
 
 renderCharacters();
+
+console.log(
+  `Magical Athlete loaded: ${athletes.length} characters, ${interactionData.length} interactions.`
+);
