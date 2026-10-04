@@ -1,8 +1,3 @@
-/* =========================================
-   MAGICAL ATHLETE RACERS
-   Main Stylesheet
-========================================= */
-
 :root {
     --background: #0f1117;
     --background-light: #171a23;
@@ -16,19 +11,13 @@
     --accent: #8b5cf6;
     --accent-light: #a78bfa;
 
-    --green: #4ade80;
-    --yellow: #facc15;
-    --orange: #fb923c;
-    --red: #f87171;
-    --blue: #60a5fa;
-
     --max-width: 1200px;
 }
 
 
-/* =========================================
-   RESET
-========================================= */
+/* =========================
+   GLOBAL
+   ========================= */
 
 * {
     box-sizing: border-box;
@@ -50,14 +39,17 @@ body {
         Helvetica,
         Arial,
         sans-serif;
-
     line-height: 1.5;
 }
 
+body.modal-open {
+    overflow: hidden;
+}
 
-/* =========================================
-   ACCESSIBILITY
-========================================= */
+button,
+input {
+    font: inherit;
+}
 
 .sr-only {
     position: absolute;
@@ -72,9 +64,9 @@ body {
 }
 
 
-/* =========================================
+/* =========================
    HEADER
-========================================= */
+   ========================= */
 
 .site-header {
     background:
@@ -90,6 +82,7 @@ body {
         );
 
     border-bottom: 1px solid var(--border);
+
     padding: 60px 20px 55px;
 }
 
@@ -105,6 +98,7 @@ body {
 
     font-size: 0.8rem;
     font-weight: 800;
+
     letter-spacing: 0.18em;
 }
 
@@ -113,6 +107,7 @@ h1 {
 
     font-size: clamp(2.2rem, 6vw, 4rem);
     line-height: 1.05;
+
     letter-spacing: -0.04em;
 }
 
@@ -127,9 +122,9 @@ h1 {
 }
 
 
-/* =========================================
+/* =========================
    MAIN CONTAINER
-========================================= */
+   ========================= */
 
 .container {
     width: min(
@@ -141,9 +136,9 @@ h1 {
 }
 
 
-/* =========================================
+/* =========================
    SEARCH
-========================================= */
+   ========================= */
 
 .search-section {
     padding: 30px 0 18px;
@@ -177,7 +172,8 @@ h1 {
     border-color: var(--accent);
 
     box-shadow:
-        0 0 0 3px rgba(139, 92, 246, 0.18);
+        0 0 0 3px
+        rgba(139, 92, 246, 0.18);
 }
 
 .search-info {
@@ -189,13 +185,14 @@ h1 {
 }
 
 
-/* =========================================
+/* =========================
    FILTERS
-========================================= */
+   ========================= */
 
 .filter-section {
     display: flex;
     flex-wrap: wrap;
+
     gap: 8px;
 
     padding-bottom: 28px;
@@ -208,6 +205,7 @@ h1 {
     border-radius: 999px;
 
     background: transparent;
+
     color: var(--muted);
 
     font-size: 0.9rem;
@@ -218,7 +216,8 @@ h1 {
     transition:
         background 0.2s ease,
         color 0.2s ease,
-        border-color 0.2s ease;
+        border-color 0.2s ease,
+        transform 0.15s ease;
 }
 
 .filter:hover {
@@ -226,16 +225,21 @@ h1 {
     color: var(--text);
 }
 
+.filter:active {
+    transform: scale(0.97);
+}
+
 .filter.active {
     background: var(--accent);
     border-color: var(--accent);
+
     color: white;
 }
 
 
-/* =========================================
+/* =========================
    ATHLETE GRID
-========================================= */
+   ========================= */
 
 .athlete-grid {
     display: grid;
@@ -252,19 +256,17 @@ h1 {
 }
 
 
-/* =========================================
-   ATHLETE CARD
-========================================= */
+/* =========================
+   ATHLETE CARDS
+   ========================= */
 
 .athlete-card {
-    position: relative;
-
     display: flex;
     flex-direction: column;
 
-    min-height: 250px;
+    min-width: 0;
 
-    padding: 22px;
+    padding: 16px;
 
     border: 1px solid var(--border);
     border-radius: 18px;
@@ -283,6 +285,8 @@ h1 {
         border-color 0.2s ease,
         background 0.2s ease,
         box-shadow 0.2s ease;
+
+    outline: none;
 }
 
 .athlete-card:hover {
@@ -290,111 +294,80 @@ h1 {
 
     background: var(--card-hover);
 
-    border-color: rgba(167, 139, 250, 0.55);
+    border-color:
+        rgba(167, 139, 250, 0.55);
 
     box-shadow:
-        0 12px 35px rgba(0, 0, 0, 0.25);
+        0 12px 35px
+        rgba(0, 0, 0, 0.25);
 }
 
-.card-number {
-    position: absolute;
-
-    top: 15px;
-    right: 17px;
-
-    color: #656d7c;
-
-    font-size: 0.75rem;
-    font-weight: 800;
-}
-
-.avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 62px;
-    height: 62px;
-
-    margin-bottom: 18px;
-
-    border-radius: 16px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--accent),
-            #5b21b6
-        );
-
-    color: white;
-
-    font-size: 1.35rem;
-    font-weight: 900;
+.athlete-card:focus-visible {
+    border-color: var(--accent);
 
     box-shadow:
-        0 8px 20px rgba(91, 33, 182, 0.25);
+        0 0 0 3px
+        rgba(139, 92, 246, 0.25);
 }
+
+
+/* =========================
+   CHARACTER ARTWORK
+   ========================= */
+
+.athlete-image {
+    display: block;
+
+    width: 100%;
+    height: 190px;
+
+    margin-bottom: 16px;
+
+    border-radius: 14px;
+
+    object-fit: contain;
+
+    background: #11131b;
+
+    transition:
+        transform 0.25s ease;
+}
+
+.athlete-card:hover .athlete-image {
+    transform: scale(1.02);
+}
+
+
+/* =========================
+   CARD TEXT
+   ========================= */
 
 .card-name {
     margin: 0 0 5px;
 
-    font-size: 1.25rem;
+    color: var(--text);
+
+    font-size: 1.2rem;
     font-weight: 800;
+
+    line-height: 1.2;
 }
 
 .card-power {
-    margin: 0 0 10px;
+    margin: 0;
 
     color: var(--accent-light);
 
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 700;
-}
 
-.card-description {
-    margin: 0;
-
-    color: var(--muted);
-
-    font-size: 0.9rem;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-
-    overflow: hidden;
-}
-
-.type {
-    display: inline-flex;
-
-    align-self: flex-start;
-
-    margin-top: auto;
-    padding-top: 16px;
-
-    color: #858d9d;
-
-    font-size: 0.72rem;
-    font-weight: 800;
-
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
-
-.interaction-count {
-    margin-top: 7px;
-
-    color: #727a89;
-
-    font-size: 0.78rem;
+    line-height: 1.35;
 }
 
 
-/* =========================================
+/* =========================
    NO RESULTS
-========================================= */
+   ========================= */
 
 .no-results {
     grid-column: 1 / -1;
@@ -409,10 +382,22 @@ h1 {
     color: var(--muted);
 }
 
+.no-results h2 {
+    margin: 0 0 8px;
 
-/* =========================================
+    color: var(--text);
+
+    font-size: 1.4rem;
+}
+
+.no-results p {
+    margin: 0;
+}
+
+
+/* =========================
    MODAL
-========================================= */
+   ========================= */
 
 .modal {
     position: fixed;
@@ -435,18 +420,30 @@ h1 {
     justify-content: center;
 }
 
+
+/* =========================
+   MODAL BACKDROP
+   ========================= */
+
 .modal-backdrop {
     position: fixed;
 
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.72);
+    background:
+        rgba(0, 0, 0, 0.76);
 
     backdrop-filter: blur(5px);
 }
 
+
+/* =========================
+   MODAL DIALOG
+   ========================= */
+
 .modal-dialog {
     position: relative;
+
     z-index: 2;
 
     width: min(
@@ -464,8 +461,14 @@ h1 {
     background: #151821;
 
     box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.5);
+        0 30px 80px
+        rgba(0, 0, 0, 0.5);
 }
+
+
+/* =========================
+   MODAL CLOSE BUTTON
+   ========================= */
 
 .modal-close {
     position: absolute;
@@ -479,7 +482,8 @@ h1 {
     border: 0;
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.06);
+    background:
+        rgba(255, 255, 255, 0.06);
 
     color: var(--muted);
 
@@ -494,64 +498,93 @@ h1 {
 }
 
 .modal-close:hover {
-    background: rgba(255, 255, 255, 0.12);
+    background:
+        rgba(255, 255, 255, 0.12);
+
     color: white;
 }
 
+.modal-close:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 2px;
+}
 
-/* =========================================
+
+/* =========================
    MODAL HEADER
-========================================= */
+   ========================= */
 
 .modal-header {
     display: flex;
 
     align-items: center;
 
-    gap: 18px;
+    gap: 24px;
 
-    padding-right: 45px;
+    padding-right: 50px;
 
-    margin-bottom: 28px;
+    margin-bottom: 30px;
 }
 
-.modal-avatar {
+
+/* =========================
+   MODAL CHARACTER IMAGE
+   ========================= */
+
+.modal-athlete-image {
     flex: 0 0 auto;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
 
-    width: 78px;
-    height: 78px;
+    width: 180px;
+    height: 220px;
 
-    border-radius: 20px;
+    border-radius: 18px;
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--accent),
-            #5b21b6
-        );
+    object-fit: contain;
 
-    color: white;
+    background: #11131b;
 
-    font-size: 1.6rem;
-    font-weight: 900;
+    border: 1px solid var(--border);
 }
 
-.modal-number {
+
+/* =========================
+   MODAL CHARACTER INFO
+   ========================= */
+
+.modal-heading {
+    min-width: 0;
+}
+
+.modal-category {
+    margin: 0 0 7px;
+
     color: #747c8c;
 
     font-size: 0.75rem;
     font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.1em;
 }
 
 .modal-title {
-    margin: 2px 0 3px;
+    margin: 0 0 5px;
 
-    font-size: clamp(1.7rem, 5vw, 2.4rem);
+    color: var(--text);
+
+    font-size:
+        clamp(
+            1.7rem,
+            5vw,
+            2.5rem
+        );
+
     line-height: 1.05;
+
+    letter-spacing: -0.03em;
 }
 
 .modal-power-name {
@@ -559,47 +592,61 @@ h1 {
 
     color: var(--accent-light);
 
+    font-size: 1rem;
     font-weight: 700;
 }
 
 
-/* =========================================
+/* =========================
    INFORMATION SECTIONS
-========================================= */
+   ========================= */
 
 .info-section {
-    margin-top: 25px;
+    margin-top: 28px;
 }
 
 .info-section h3 {
-    margin: 0 0 10px;
+    margin: 0 0 11px;
 
-    font-size: 1.05rem;
+    color: var(--text);
+
+    font-size: 1.08rem;
+    font-weight: 800;
 }
 
-.official-text {
-    padding: 15px 17px;
+
+/* =========================
+   ABILITY
+   ========================= */
+
+.ability-text {
+    padding: 16px 18px;
 
     border-left: 3px solid var(--accent);
 
-    border-radius: 0 10px 10px 0;
+    border-radius:
+        0 10px 10px 0;
 
-    background: rgba(139, 92, 246, 0.08);
+    background:
+        rgba(139, 92, 246, 0.08);
 
     color: #dfe2e8;
 
-    font-size: 0.95rem;
+    font-size: 0.96rem;
+
+    line-height: 1.6;
 }
 
 
-/* =========================================
+/* =========================
    INTERACTIONS
-========================================= */
+   ========================= */
 
 .interaction-heading {
     display: flex;
 
     align-items: baseline;
+
     justify-content: space-between;
 
     gap: 10px;
@@ -615,9 +662,10 @@ h1 {
 
 .interaction-list {
     display: flex;
+
     flex-direction: column;
 
-    gap: 12px;
+    gap: 10px;
 }
 
 .interaction {
@@ -627,84 +675,51 @@ h1 {
 
     border-radius: 13px;
 
-    background: rgba(255, 255, 255, 0.025);
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
 }
 
-.interaction-top {
-    display: flex;
+.interaction:hover {
+    background:
+        rgba(255, 255, 255, 0.045);
 
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 12px;
-
-    margin-bottom: 7px;
+    border-color:
+        rgba(167, 139, 250, 0.35);
 }
+
+
+/* The other character's name */
 
 .interaction-with {
-    font-weight: 800;
-}
-
-.interaction-status {
-    flex-shrink: 0;
-
-    padding: 4px 8px;
-
-    border-radius: 999px;
-
-    background: rgba(255, 255, 255, 0.07);
-
-    color: #b8bfcb;
-
-    font-size: 0.68rem;
-    font-weight: 800;
-
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
-
-.interaction-topic {
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 
     color: var(--accent-light);
 
-    font-size: 0.83rem;
-    font-weight: 700;
+    font-size: 0.98rem;
+    font-weight: 800;
+
+    line-height: 1.3;
 }
+
+
+/* The actual interaction explanation */
 
 .interaction-details {
     color: #c2c7d1;
 
-    font-size: 0.88rem;
-}
+    font-size: 0.9rem;
 
-.interaction-warning {
-    margin-top: 8px;
-
-    color: var(--yellow);
-
-    font-size: 0.8rem;
+    line-height: 1.55;
 }
 
 
-/* Status variations */
-
-.interaction.official {
-    border-left: 3px solid var(--green);
-}
-
-.interaction.verification {
-    border-left: 3px solid var(--yellow);
-}
-
-.interaction.derived {
-    border-left: 3px solid var(--blue);
-}
-
-
-/* =========================================
+/* =========================
    FOOTER
-========================================= */
+   ========================= */
 
 .site-footer {
     padding: 35px 20px 50px;
@@ -718,34 +733,50 @@ h1 {
     font-size: 0.85rem;
 }
 
-.footer-small {
-    margin-top: 5px;
 
-    color: #666e7d;
+/* =========================
+   TABLET
+   ========================= */
 
-    font-size: 0.75rem;
+@media (max-width: 800px) {
+
+    .athlete-grid {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+    }
+
+    .athlete-image {
+        height: 170px;
+    }
+
+    .modal-athlete-image {
+        width: 155px;
+        height: 195px;
+    }
 }
 
 
-/* =========================================
+/* =========================
    MOBILE
-========================================= */
+   ========================= */
 
 @media (max-width: 650px) {
 
     .site-header {
-        padding:
-            42px
-            18px
-            40px;
+        padding: 42px 18px 40px;
     }
 
     .container {
-        width: min(
-            calc(100% - 24px),
-            var(--max-width)
-        );
+        width:
+            min(
+                calc(100% - 24px),
+                var(--max-width)
+            );
     }
+
 
     .athlete-grid {
         grid-template-columns:
@@ -757,48 +788,49 @@ h1 {
         gap: 10px;
     }
 
-    .athlete-card {
-        min-height: 220px;
 
-        padding: 16px;
+    .athlete-card {
+        padding: 12px;
 
         border-radius: 14px;
     }
 
-    .avatar {
-        width: 50px;
-        height: 50px;
 
-        margin-bottom: 13px;
+    .athlete-image {
+        height: 135px;
 
-        border-radius: 13px;
+        margin-bottom: 12px;
 
-        font-size: 1rem;
+        border-radius: 11px;
     }
+
 
     .card-name {
-        font-size: 1rem;
+        font-size: 0.98rem;
     }
+
 
     .card-power {
-        font-size: 0.78rem;
+        font-size: 0.76rem;
     }
 
-    .card-description {
-        font-size: 0.78rem;
+
+    .filter-section {
+        gap: 6px;
     }
 
-    .type {
-        font-size: 0.62rem;
+
+    .filter {
+        padding: 8px 12px;
+
+        font-size: 0.8rem;
     }
 
-    .interaction-count {
-        font-size: 0.68rem;
-    }
 
     .modal {
         padding: 10px;
     }
+
 
     .modal-dialog {
         margin: 10px auto;
@@ -808,39 +840,73 @@ h1 {
         border-radius: 17px;
     }
 
+
     .modal-header {
-        align-items: flex-start;
+        flex-direction: column;
 
-        gap: 13px;
+        align-items: center;
+
+        gap: 15px;
+
+        padding-right: 35px;
+
+        text-align: center;
     }
 
-    .modal-avatar {
-        width: 60px;
-        height: 60px;
 
-        border-radius: 15px;
+    .modal-athlete-image {
+        width: min(
+            100%,
+            230px
+        );
 
-        font-size: 1.2rem;
+        height: 240px;
+
+        border-radius: 16px;
     }
+
+
+    .modal-heading {
+        width: 100%;
+    }
+
 
     .modal-title {
-        font-size: 1.55rem;
+        font-size: 1.65rem;
     }
 
-    .interaction-top {
-        align-items: flex-start;
-        flex-direction: column;
+
+    .modal-power-name {
+        font-size: 0.9rem;
     }
 
-    .interaction-status {
-        align-self: flex-start;
+
+    .ability-text {
+        font-size: 0.9rem;
+
+        padding: 14px 15px;
+    }
+
+
+    .interaction {
+        padding: 14px;
+    }
+
+
+    .interaction-with {
+        font-size: 0.92rem;
+    }
+
+
+    .interaction-details {
+        font-size: 0.84rem;
     }
 }
 
 
-/* =========================================
+/* =========================
    VERY SMALL PHONES
-========================================= */
+   ========================= */
 
 @media (max-width: 380px) {
 
@@ -848,7 +914,18 @@ h1 {
         grid-template-columns: 1fr;
     }
 
-    .athlete-card {
-        min-height: auto;
+
+    .athlete-image {
+        height: 220px;
+    }
+
+
+    .card-name {
+        font-size: 1.05rem;
+    }
+
+
+    .card-power {
+        font-size: 0.8rem;
     }
 }
