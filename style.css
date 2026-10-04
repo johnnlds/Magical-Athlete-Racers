@@ -14,9 +14,10 @@
   --shadow-large: 0 18px 60px rgba(0, 0, 0, 0.22);
 }
 
-/* ----------------------------- */
-/* RESET */
-/* ----------------------------- */
+
+/* =========================================
+   GLOBAL
+========================================= */
 
 * {
   box-sizing: border-box;
@@ -30,6 +31,7 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--black);
+
   font-family:
     Inter,
     -apple-system,
@@ -41,43 +43,53 @@ body {
     sans-serif;
 }
 
-/* ----------------------------- */
-/* HEADER */
-/* ----------------------------- */
+
+/* =========================================
+   HEADER
+========================================= */
 
 .site-header {
   background: var(--white);
   border-bottom: 4px solid var(--red);
+
   position: sticky;
   top: 0;
+
   z-index: 50;
 }
 
 .header-inner {
   max-width: 1250px;
   margin: 0 auto;
+
   padding: 28px 24px 24px;
 }
 
 .site-header h1 {
   margin: 0;
+
   color: var(--red);
+
   font-size: clamp(2.1rem, 5vw, 4rem);
   font-weight: 900;
+
   letter-spacing: -2px;
   line-height: 1;
 }
 
 .site-header p {
   margin: 7px 0 22px;
+
   color: var(--dark-gray);
+
   font-size: 1.1rem;
   font-weight: 600;
 }
 
-/* ----------------------------- */
-/* SEARCH */
-/* ----------------------------- */
+
+/* =========================================
+   SEARCH
+========================================= */
 
 .search-container {
   width: 100%;
@@ -85,6 +97,7 @@ body {
 
 #searchInput {
   width: 100%;
+
   padding: 14px 17px;
 
   border: 2px solid var(--light-gray);
@@ -94,6 +107,7 @@ body {
   color: var(--black);
 
   font-size: 1rem;
+
   outline: none;
 
   transition:
@@ -112,20 +126,30 @@ body {
   color: #999;
 }
 
-/* ----------------------------- */
-/* MAIN */
-/* ----------------------------- */
+
+/* =========================================
+   MAIN
+========================================= */
 
 main {
   max-width: 1250px;
+
   margin: 0 auto;
+
   padding: 35px 24px 80px;
 }
 
+
+/* =========================================
+   RACERS HEADER
+========================================= */
+
 .section-header {
   display: flex;
+
   align-items: baseline;
   justify-content: space-between;
+
   gap: 15px;
 
   margin-bottom: 20px;
@@ -133,37 +157,41 @@ main {
 
 .section-header h2 {
   margin: 0;
+
   font-size: 1.8rem;
 }
 
 #characterCount {
   color: var(--gray);
+
   font-size: 0.95rem;
 }
 
-/* ----------------------------- */
-/* CHARACTER GRID */
-/* ----------------------------- */
+
+/* =========================================
+   CHARACTER GRID
+========================================= */
 
 .character-grid {
   display: grid;
 
   grid-template-columns:
-    repeat(auto-fill, minmax(190px, 1fr));
+    repeat(
+      auto-fill,
+      minmax(190px, 1fr)
+    );
 
   gap: 18px;
 }
 
-/* ----------------------------- */
-/* CHARACTER CARD */
-/* ----------------------------- */
-
 .character-card {
   background: var(--white);
+
   border: 1px solid var(--light-gray);
   border-radius: 14px;
 
   overflow: hidden;
+
   cursor: pointer;
 
   box-shadow: var(--shadow);
@@ -202,6 +230,7 @@ main {
 
 .character-card-name {
   margin: 0;
+
   padding: 15px 14px 17px;
 
   color: var(--black);
@@ -212,9 +241,10 @@ main {
   text-align: center;
 }
 
-/* ----------------------------- */
-/* NO RESULTS */
-/* ----------------------------- */
+
+/* =========================================
+   NO RESULTS
+========================================= */
 
 .no-results {
   padding: 60px 20px;
@@ -222,6 +252,7 @@ main {
   text-align: center;
 
   color: var(--gray);
+
   font-size: 1.1rem;
 }
 
@@ -229,12 +260,14 @@ main {
   display: none !important;
 }
 
-/* ----------------------------- */
-/* MODAL */
-/* ----------------------------- */
+
+/* =========================================
+   MODAL
+========================================= */
 
 .modal {
   position: fixed;
+
   inset: 0;
 
   z-index: 100;
@@ -246,26 +279,26 @@ main {
 
 .modal.open {
   display: flex;
+
   align-items: center;
   justify-content: center;
 }
 
 .modal-overlay {
   position: absolute;
+
   inset: 0;
 
   background: rgba(0, 0, 0, 0.72);
 }
 
-/* ----------------------------- */
-/* PROFILE MODAL */
-/* ----------------------------- */
-
 .profile-modal {
   position: relative;
+
   z-index: 2;
 
   width: min(1150px, 100%);
+
   height: min(90vh, 850px);
 
   background: var(--white);
@@ -277,9 +310,10 @@ main {
   box-shadow: var(--shadow-large);
 }
 
-/* ----------------------------- */
-/* CLOSE BUTTON */
-/* ----------------------------- */
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
 
 .close-button {
   position: absolute;
@@ -293,9 +327,11 @@ main {
   height: 42px;
 
   border: none;
+
   border-radius: 50%;
 
   background: var(--white);
+
   color: var(--black);
 
   font-size: 28px;
@@ -309,12 +345,14 @@ main {
 
 .close-button:hover {
   background: var(--red);
+
   color: var(--white);
 }
 
-/* ----------------------------- */
-/* PROFILE LAYOUT */
-/* ----------------------------- */
+
+/* =========================================
+   PROFILE LAYOUT
+========================================= */
 
 .profile-layout {
   display: grid;
@@ -326,12 +364,14 @@ main {
   height: 100%;
 }
 
-/* ----------------------------- */
-/* PROFILE SIDEBAR */
-/* ----------------------------- */
+
+/* =========================================
+   PROFILE SIDEBAR
+========================================= */
 
 .profile-sidebar {
   position: sticky;
+
   top: 0;
 
   height: 100%;
@@ -344,6 +384,11 @@ main {
 
   border-right: 1px solid var(--light-gray);
 }
+
+
+/* =========================================
+   PROFILE IMAGE
+========================================= */
 
 .profile-image-container {
   width: 100%;
@@ -369,6 +414,11 @@ main {
   object-position: center;
 }
 
+
+/* =========================================
+   PROFILE NAME
+========================================= */
+
 #profileName {
   margin: 0 0 20px;
 
@@ -380,9 +430,10 @@ main {
   line-height: 1.05;
 }
 
-/* ----------------------------- */
-/* ABILITY */
-/* ----------------------------- */
+
+/* =========================================
+   ABILITY BOX
+========================================= */
 
 .ability-box {
   padding: 18px;
@@ -405,27 +456,52 @@ main {
   letter-spacing: 1px;
 }
 
+
+/* =========================================
+   UPDATED ABILITY NAME FONT
+========================================= */
+
 .ability-name {
   margin-bottom: 8px;
 
   color: var(--black);
 
-  font-size: 1.15rem;
-  font-weight: 900;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.25rem;
+
+  font-weight: 700;
+
+  line-height: 1.25;
 }
+
+
+/* =========================================
+   UPDATED ABILITY DESCRIPTION FONT
+========================================= */
 
 .ability-text {
   color: var(--dark-gray);
 
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 1rem;
-  font-weight: 700;
+
+  font-weight: 400;
 
   line-height: 1.55;
 }
 
-/* ----------------------------- */
-/* INTERACTIONS */
-/* ----------------------------- */
+
+/* =========================================
+   INTERACTIONS
+========================================= */
 
 .profile-interactions {
   min-width: 0;
@@ -459,9 +535,10 @@ main {
   font-size: 0.9rem;
 }
 
-/* ----------------------------- */
-/* INTERACTION CARD */
-/* ----------------------------- */
+
+/* =========================================
+   INTERACTION CARD
+========================================= */
 
 .interaction-card {
   margin-bottom: 12px;
@@ -471,6 +548,7 @@ main {
   background: var(--white);
 
   border: 1px solid var(--light-gray);
+
   border-radius: 10px;
 
   box-shadow:
@@ -481,14 +559,28 @@ main {
   border-color: #cccccc;
 }
 
+
+/* =========================================
+   INTERACTED CHARACTER NAME
+========================================= */
+
 .interaction-character {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 
   color: var(--red);
 
-  font-size: 1.05rem;
+  font-size: 1.2rem;
+
   font-weight: 900;
+
+  line-height: 1.2;
 }
+
+
+/* =========================================
+   CLICKABLE CHARACTER NAME
+   NO BUBBLE
+========================================= */
 
 .character-link {
   color: var(--red);
@@ -496,24 +588,57 @@ main {
   text-decoration: none;
 
   cursor: pointer;
+
+  background: transparent;
+
+  border: none;
+
+  padding: 0;
+
+  margin: 0;
+
+  font: inherit;
+
+  font-size: 1.2rem;
+
+  font-weight: 900;
+
+  line-height: 1.2;
+
+  display: inline;
 }
 
 .character-link:hover {
   text-decoration: underline;
 }
 
+.character-link:focus-visible {
+  outline: 2px solid var(--red);
+
+  outline-offset: 2px;
+
+  border-radius: 2px;
+}
+
+
+/* =========================================
+   INTERACTION TEXT
+========================================= */
+
 .interaction-text {
   color: var(--dark-gray);
 
   font-size: 1rem;
+
   font-weight: 600;
 
   line-height: 1.55;
 }
 
-/* ----------------------------- */
-/* EMPTY INTERACTIONS */
-/* ----------------------------- */
+
+/* =========================================
+   NO INTERACTIONS
+========================================= */
 
 .no-interactions {
   padding: 40px 10px;
@@ -523,9 +648,10 @@ main {
   text-align: center;
 }
 
-/* ----------------------------- */
-/* MOBILE */
-/* ----------------------------- */
+
+/* =========================================
+   TABLET / MOBILE
+========================================= */
 
 @media (max-width: 800px) {
 
@@ -533,44 +659,126 @@ main {
     height: 94vh;
   }
 
-  .profile-layout {
-    grid-template-columns: 1fr;
+  /*
+    The profile is now split into:
+    1. Fixed character area
+    2. Scrollable interactions area
+  */
 
-    overflow-y: auto;
+  .profile-layout {
+    display: flex;
+
+    flex-direction: column;
+
+    height: 100%;
+
+    overflow: hidden;
   }
+
+
+  /* =======================================
+     FIXED CHARACTER AREA
+  ======================================= */
 
   .profile-sidebar {
     position: relative;
 
+    flex: 0 0 auto;
+
     height: auto;
 
-    overflow: visible;
+    max-height: 48%;
+
+    overflow: hidden;
+
+    padding: 20px 18px 16px;
+
+    background: var(--white);
 
     border-right: none;
+
     border-bottom: 1px solid var(--light-gray);
+
+    z-index: 5;
   }
+
 
   .profile-image-container {
-    width: min(280px, 100%);
+    width: min(180px, 55vw);
 
-    margin-left: auto;
-    margin-right: auto;
+    aspect-ratio: 1 / 1;
+
+    margin:
+      0
+      auto
+      10px;
   }
+
 
   .profile-sidebar #profileName {
+    margin: 0 0 12px;
+
     text-align: center;
+
+    font-size: 1.7rem;
   }
 
+
+  /* =======================================
+     MOBILE ABILITY
+  ======================================= */
+
   .ability-box {
+    padding: 12px 14px;
+
     text-align: left;
   }
 
+  .ability-label {
+    margin-bottom: 4px;
+  }
+
+  .ability-name {
+    margin-bottom: 4px;
+
+    font-size: 1rem;
+  }
+
+  .ability-text {
+    font-size: 0.9rem;
+
+    line-height: 1.35;
+  }
+
+
+  /* =======================================
+     ONLY INTERACTIONS SCROLL
+  ======================================= */
+
   .profile-interactions {
+    flex: 1 1 auto;
+
+    min-height: 0;
+
     height: auto;
 
-    overflow: visible;
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+
+    padding: 18px;
+  }
+
+
+  .interactions-header {
+    margin-bottom: 14px;
   }
 }
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
 
 @media (max-width: 500px) {
 
@@ -578,13 +786,22 @@ main {
     padding: 22px 16px 18px;
   }
 
+
   main {
     padding: 25px 16px 60px;
   }
 
+
+  /* =======================================
+     CHARACTER GRID
+  ======================================= */
+
   .character-grid {
     grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
 
     gap: 12px;
   }
@@ -595,8 +812,17 @@ main {
 
   .character-card-name {
     font-size: 0.95rem;
-    padding: 12px 8px 14px;
+
+    padding:
+      12px
+      8px
+      14px;
   }
+
+
+  /* =======================================
+     FULL SCREEN PROFILE
+  ======================================= */
 
   .modal {
     padding: 0;
@@ -604,12 +830,68 @@ main {
 
   .profile-modal {
     width: 100%;
+
     height: 100%;
+
     border-radius: 0;
   }
 
-  .profile-sidebar,
+
+  /* =======================================
+     FIXED CHARACTER AREA
+  ======================================= */
+
+  .profile-sidebar {
+    padding:
+      18px
+      16px
+      14px;
+  }
+
+
+  .profile-image-container {
+    width: 150px;
+
+    margin-bottom: 8px;
+  }
+
+
+  .profile-sidebar #profileName {
+    font-size: 1.5rem;
+
+    margin-bottom: 10px;
+  }
+
+
+  /* =======================================
+     ABILITY
+  ======================================= */
+
+  .ability-box {
+    padding:
+      10px
+      12px;
+  }
+
+  .ability-text {
+    font-size: 0.85rem;
+  }
+
+
+  /* =======================================
+     INTERACTIONS
+  ======================================= */
+
   .profile-interactions {
-    padding: 22px 18px;
+    padding: 16px;
+  }
+
+
+  .interaction-character {
+    font-size: 1.2rem;
+  }
+
+  .character-link {
+    font-size: 1.2rem;
   }
 }
