@@ -1,2187 +1,794 @@
-/* =========================================================
-   MAGICAL ATHLETE RACERS
-   Character + Interaction Database
-========================================================= */
-
-
-/* =========================================================
-   ATHLETES
-========================================================= */
-
 const athletes = [
-
     {
         name: "Alchemist",
-        category: "movement",
-        power: "Alchemical Movement",
-        description: "A die result can be replaced with a different movement value.",
-        official: "After rolling, the Alchemist can replace certain movement results with 4 spaces."
+        category: "Dice",
+        power: "Transmute ‘N’ Scoot",
+        ability: "When I roll a 1 or 2 for my main move, I can move 4 instead.",
+        image: "images/IMG_3304.png"
     },
-
     {
         name: "Baba Yaga",
-        category: "position",
-        power: "Trip",
-        description: "Interacts with racers that share or move onto her space.",
-        official: "Baba Yaga's ability can cause another racer to be tripped when they occupy her space."
+        category: "Position",
+        power: "Leg It",
+        ability: "Trip any racer that stops on my space, or when I stop on theirs.",
+        image: "images/IMG_3305.png"
     },
-
     {
         name: "Banana",
-        category: "position",
-        power: "Slip",
-        description: "Racers passing the Banana can be affected by its ability.",
-        official: "Banana interacts with racers that pass through or stop in the relevant space."
+        category: "Position",
+        power: "The Slip",
+        ability: "I trip any racer that passes me.",
+        image: "images/IMG_3306.png"
     },
-
     {
         name: "Blimp",
-        category: "movement",
-        power: "Slow and Steady",
-        description: "The Blimp's movement can be modified by other racers.",
-        official: "Blimp's movement is subject to effects that modify the amount of movement."
+        category: "Movement",
+        power: "Blow It",
+        ability: "If I start my turn before the second corner, I get +3 to my main move. On or after the second corner, I get −1.",
+        image: "images/IMG_3307.png"
     },
-
     {
         name: "Centaur",
-        category: "movement",
+        category: "Movement",
         power: "Hoofwhack",
-        description: "The Centaur can affect racers through movement and passing.",
-        official: "Centaur's movement ability can interact with racers it passes or affects."
+        ability: "When I pass a racer, they move −2. They cannot be moved farther back than Start.",
+        image: "images/IMG_3308.png"
     },
-
     {
         name: "Cheerleader",
-        category: "position",
-        power: "Last Place",
-        description: "Moves the current last-place racer.",
-        official: "The Cheerleader moves the racer currently in last place two spaces."
+        category: "Movement",
+        power: "Rah Rah",
+        ability: "Before my main move, I can make the racer(s) in last place move 2. If I do, I move 1.",
+        image: "images/IMG_3309.png"
     },
-
     {
         name: "Coach",
-        category: "movement",
-        power: "Training",
-        description: "Can modify another racer's movement.",
-        official: "Coach can increase a main movement value, including movement that is itself being modified."
+        category: "Movement",
+        power: "Good Hustle",
+        ability: "Everyone on my space gets +1 to their main move, including me.",
+        image: "images/IMG_3310.png"
     },
-
     {
-        name: "Copycat",
-        category: "special",
-        power: "Copy",
-        description: "Can acquire the ability of the racer currently leading.",
-        official: "Copycat copies the power of the lead racer when its ability calls for it."
+        name: "Copy Cat",
+        category: "Special",
+        power: "Copy That",
+        ability: "I have the power of the racer currently in the lead. If there’s a tie, I choose which racer to copy.",
+        image: "images/IMG_3311.png"
     },
-
     {
         name: "Dicemonger",
-        category: "dice",
-        power: "Reroll",
-        description: "Can change another racer's die result.",
-        official: "Dicemonger can provide a reroll that changes the die result before relevant effects resolve."
+        category: "Dice",
+        power: "Dicey Deals",
+        ability: "Anyone can reroll their main move once per turn. When another racer rerolls, I move 1.",
+        image: "images/IMG_3312.png"
     },
-
     {
         name: "Duelist",
-        category: "position",
-        power: "Duel",
-        description: "Challenges another racer when sharing a space.",
-        official: "Duelist can duel another racer occupying the same space."
+        category: "Position",
+        power: "Duel!",
+        ability: "Whenever a racer shares my space, I can shout DUEL! We roll; whoever rolls highest moves 2. I win ties.",
+        image: "images/IMG_3313.png"
     },
-
     {
         name: "Egg",
-        category: "special",
-        power: "Borrow",
-        description: "Can borrow or use another character's ability.",
-        official: "Egg can use selected character powers according to its ability."
+        category: "Special",
+        power: "Scramble",
+        ability: "Before my race, draw 3 new racers and choose one. I have that racer’s powers.",
+        image: "images/IMG_3314.png"
     },
-
     {
         name: "Flip Flop",
-        category: "position",
-        power: "Swap",
-        description: "Changes positions with another racer.",
-        official: "Flip Flop swaps positions. The swap is treated as a warp rather than ordinary passing movement."
+        category: "Movement",
+        power: "Flop Flip",
+        ability: "I can skip rolling for my main move and swap spaces with another racer.",
+        image: "images/IMG_3315.png"
     },
-
     {
         name: "Genius",
-        category: "dice",
-        power: "Prediction",
-        description: "Predicts a die result and interacts with effects that change the die.",
-        official: "Genius predicts the die result before the roll and can be affected when the eventual result changes."
+        category: "Dice",
+        power: "Think Good",
+        ability: "I predict what number I’ll roll. If I’m correct, I get another turn immediately after this one.",
+        image: "images/IMG_3316.png"
     },
-
     {
         name: "Gunk",
-        category: "movement",
-        power: "Slow",
-        description: "Reduces another racer's main movement.",
-        official: "Gunk reduces the affected racer's main movement by 1."
+        category: "Movement",
+        power: "Goop ’Em",
+        ability: "Other racers get −1 to their main move.",
+        image: "images/IMG_3317.png"
     },
-
     {
         name: "Hare",
-        category: "movement",
-        power: "Fast",
-        description: "Increases or modifies movement.",
-        official: "Hare's ability modifies movement and can interact with other movement modifiers."
+        category: "Movement",
+        power: "Hubris",
+        ability: "I get +2 to my main move. If I start my turn alone in the lead, I skip my main move.",
+        image: "images/IMG_3318.png"
     },
-
     {
         name: "Heckler",
-        category: "special",
-        power: "Trip",
-        description: "Can deliberately trip another racer.",
-        official: "Heckler can cause a racer to be tripped and interacts with recovery and turn timing."
+        category: "Movement",
+        power: "Schadenfreude",
+        ability: "When a racer ends their turn within 1 space of where they started, I move 2.",
+        image: "images/IMG_3319.png"
     },
-
     {
         name: "Huge Baby",
-        category: "position",
-        power: "No Sharing",
-        description: "Restricts normal sharing of its space.",
-        official: "Other racers generally cannot share Huge Baby's space normally."
+        category: "Position",
+        power: "Really Huge",
+        ability: "No one can ever be on my space except at Start. If someone would land there, put them on the space behind me instead.",
+        image: "images/IMG_3320.png"
     },
-
     {
         name: "Hypnotist",
-        category: "position",
-        power: "Warp",
-        description: "Warps another racer to a different position.",
-        official: "Hypnotist can warp a racer to its space, creating special interactions with position-based powers."
+        category: "Position",
+        power: "Hssssst",
+        ability: "Before my main move, I can warp another racer to my space.",
+        image: "images/IMG_3321.png"
     },
-
     {
         name: "Inchworm",
-        category: "dice",
+        category: "Dice",
         power: "Wriggle",
-        description: "Responds to particular die results before normal movement.",
-        official: "Inchworm's ability is based on the die result rather than simply the final number of spaces moved."
+        ability: "When another racer rolls a 1 for their main move, they skip that move and I move 1.",
+        image: "images/IMG_3322.png"
     },
-
     {
         name: "Lackey",
-        category: "dice",
-        power: "Six",
-        description: "Responds to a rolled 6.",
-        official: "Lackey's ability checks the die result, so changing the movement afterward does not change the original result."
+        category: "Dice",
+        power: "Very Good Sire",
+        ability: "When another racer rolls a 6, I move 2 before they move.",
+        image: "images/IMG_3323.png"
     },
-
     {
         name: "Leaptoad",
-        category: "movement",
-        power: "Leap",
-        description: "Can skip over occupied spaces.",
-        official: "Leaptoad can skip occupied spaces, affecting passing and other space-based interactions."
+        category: "Movement",
+        power: "Jumpfrog",
+        ability: "While moving, I skip spaces occupied by other racers.",
+        image: "images/IMG_3324.png"
     },
-
     {
         name: "Legs",
-        category: "movement",
+        category: "Movement",
         power: "Jog",
-        description: "Uses a special fixed movement value instead of a normal die roll.",
-        official: "Legs moves using Jog, a five-space main movement."
+        ability: "I can skip rolling and move 5 instead.",
+        image: "images/IMG_3325.png"
     },
-
     {
         name: "Lovable Loser",
-        category: "position",
-        power: "Last Place",
-        description: "Interacts with the racer currently in last place.",
-        official: "Lovable Loser's ability depends on race position, particularly last place."
+        category: "Position",
+        power: "D’Aww",
+        ability: "Before my main move, I get a 1-point chip if I’m alone in last place.",
+        image: "images/IMG_3326.png"
     },
-
-    {
-        name: "Magician",
-        category: "dice",
-        power: "Reroll",
-        description: "Can reroll its die and change the eventual result.",
-        official: "Magician can reroll its die. Its own rerolls are not treated as Dicemonger's reroll service."
-    },
-
-    {
-        name: "Mastermind",
-        category: "special",
-        power: "Prediction",
-        description: "Uses an ability before the race begins.",
-        official: "Mastermind's pre-race effect is distinct from powers that activate during the race."
-    },
-
     {
         name: "M.O.U.T.H.",
-        category: "position",
+        category: "Position",
         power: "Chomp",
-        description: "Can affect racers within its relevant range.",
-        official: "M.O.U.T.H. can Chomp another racer when the appropriate movement and positioning conditions are met."
+        ability: "When I stop on a space with exactly one other racer, that racer is eliminated.",
+        image: "images/IMG_3327.png"
     },
-
+    {
+        name: "Magician",
+        category: "Dice",
+        power: "Poof",
+        ability: "I can reroll my main move up to two times. I must use the final roll.",
+        image: "images/IMG_3328.png"
+    },
+    {
+        name: "Mastermind",
+        category: "Special",
+        power: "Know-It-All",
+        ability: "At the start of my first turn, I predict which racer will win. If correct, the race immediately ends and I finish 2nd.",
+        image: "images/IMG_3329.png"
+    },
     {
         name: "Party Animal",
-        category: "position",
-        power: "Party",
-        description: "Interacts with racers arriving in or occupying its space.",
-        official: "Party Animal has special timing interactions with simultaneous movement."
+        category: "Position",
+        power: "Animal Magnetism",
+        ability: "Before my main move, all racers move 1 space toward me. Each other racer on my space gives me +1 to my main move.",
+        image: "images/IMG_3330.png"
     },
-
     {
         name: "Rocket Scientist",
-        category: "movement",
+        category: "Dice",
         power: "Kablooey",
-        description: "Can dramatically modify the movement generated by a die roll.",
-        official: "Rocket Scientist can double its eventual main movement and interact with movement, trip, and die-result effects."
+        ability: "After rolling, I can double my roll. If I do, I trip.",
+        image: "images/IMG_3331.png"
     },
-
     {
         name: "Romantic",
-        category: "position",
-        power: "Romance",
-        description: "Interacts with racers stopping or arriving on its space.",
-        official: "Romantic's stopping effect is subject to the August 2026 simultaneous-arrival ruling."
+        category: "Position",
+        power: "Ah, Love!",
+        ability: "Whenever anyone stops on a space with exactly one other racer, I move 2.",
+        image: "images/IMG_3332.png"
     },
-
-    {
-        name: "Scoocher",
-        category: "special",
-        power: "Scooch",
-        description: "Responds when other racers activate their powers.",
-        official: "Scoocher can activate when qualifying racer powers trigger."
-    },
-
     {
         name: "Sisyphus",
-        category: "dice",
-        power: "Six",
-        description: "Has a special response to rolling a 6.",
-        official: "Sisyphus's ability is based on the die result and can override ordinary movement."
+        category: "Dice",
+        power: "Keep Rollin’",
+        ability: "Before my race, I take 4 point chips. Whenever I roll a 6, I warp to Start instead of moving and lose 1 point chip.",
+        image: "images/IMG_3333.png"
     },
-
     {
         name: "Skipper",
-        category: "dice",
-        power: "Extra Turn",
-        description: "Responds to particular die results and can affect turn order.",
-        official: "Skipper's ability interacts with a roll of 1 and can produce an additional turn."
+        category: "Dice",
+        power: "Salty Dog",
+        ability: "Whenever anyone rolls a 1, I go next in turn order.",
+        image: "images/IMG_3334.png"
     },
-
+    {
+        name: "Scoocher",
+        category: "Special",
+        power: "Scooch Scooch",
+        ability: "Whenever another racer’s power happens, I move 1.",
+        image: "images/IMG_3335.png"
+    },
     {
         name: "Stickler",
-        category: "special",
-        power: "Exact Finish",
-        description: "Requires movement to satisfy exact finishing conditions.",
-        official: "Stickler's effect means relevant movement and forced movement still have to respect the exact-finish requirement."
+        category: "Movement",
+        power: "Actually…",
+        ability: "Other racers can only cross the finish line if they move the exact number of spaces needed. If they overshoot, they don’t move.",
+        image: "images/IMG_3336.png"
     },
-
     {
         name: "Suckerfish",
-        category: "position",
-        power: "Follow",
-        description: "Moves in relation to another racer.",
-        official: "Suckerfish can follow another racer's movement and therefore interacts with many movement and positioning effects."
+        category: "Movement",
+        power: "Sucker!",
+        ability: "When a racer on my space moves, I can move with them to their new space.",
+        image: "images/IMG_3337.png"
     },
-
     {
         name: "Third Wheel",
-        category: "position",
+        category: "Position",
         power: "Roll Through",
-        description: "Warps into situations involving other racers.",
-        official: "Third Wheel's ability changes positioning and can create new interactions between racers."
+        ability: "Before my main move, I can warp to any space containing exactly 2 racers.",
+        image: "images/IMG_3338.png"
     },
-
     {
         name: "Twin",
-        category: "special",
-        power: "Twin Power",
-        description: "Can borrow or use another racer's power.",
-        official: "Twin can use selected character powers according to its ability."
+        category: "Special",
+        power: "Double Dip",
+        ability: "Before my race, I can choose a racer who won a previous race and race using their powers.",
+        image: "images/IMG_3339.png"
     }
-
 ];
 
 
-/* =========================================================
-   INTERACTION DATABASE
-=========================================================
-
-   Each interaction has:
-
-   character
-   with
-   topic
-   details
-   status
-
-========================================================= */
-
-const interactionData = [
-
-    /* -------------------------
-       ALCHEMIST
-    ------------------------- */
-
-    ["Alchemist", "Gunk", "Main move modification",
-        "Gunk reduces Alchemist's replacement 4-space main move by 1.",
-        "Rules-derived"],
-
-    ["Alchemist", "Coach", "Main move modification",
-        "Coach can increase the Alchemist's replacement main move.",
-        "Rules-derived"],
-
-    ["Alchemist", "Inchworm", "Die result vs movement",
-        "Alchemist can roll 1 and replace the resulting movement with 4. Inchworm cares about the die roll rather than the resulting movement.",
-        "Rules-derived"],
-
-    ["Alchemist", "Lackey", "Rolled 6",
-        "A rolled 6 can still happen; Alchemist's replacement only applies to the specified results.",
-        "Rules-derived"],
-
-    ["Alchemist", "Skipper", "Rolled 1",
-        "A rolled 1 can trigger Skipper even if Alchemist replaces the resulting movement.",
-        "Rules-derived"],
-
-    ["Alchemist", "Sisyphus", "Rolled 6",
-        "Sisyphus interacts with the die result rather than simply the eventual movement.",
-        "Rules-derived"],
-
-    ["Alchemist", "Magician", "Reroll",
-        "A Magician reroll can prevent an initial 1 or 2 from being the final result that activates Alchemist.",
-        "Rules-derived"],
-
-    ["Alchemist", "Dicemonger", "Reroll",
-        "Dicemonger can change the die result before Alchemist's replacement effect resolves.",
-        "Rules-derived"],
-
-    ["Alchemist", "Rocket Scientist", "Movement doubling",
-        "Rocket Scientist can double the eventual main movement, creating an interaction with Alchemist's replacement movement.",
-        "Rules-derived"],
-
-    ["Alchemist", "Banana", "Passing",
-        "Normal movement and passing rules apply.",
-        "Rules-derived"],
-
-    ["Alchemist", "Centaur", "Passing",
-        "Normal passing rules apply.",
-        "Rules-derived"],
-
-    ["Alchemist", "Baba Yaga", "Stopping",
-        "Alchemist can stop on Baba Yaga's space and trigger applicable stopping effects.",
-        "Rules-derived"],
-
-    ["Alchemist", "Huge Baby", "Sharing space",
-        "Huge Baby prevents normal sharing of its space.",
-        "Rules-derived"],
-
-    ["Alchemist", "M.O.U.T.H.", "Chomp",
-        "Stopping or entering the relevant space can create a Chomp interaction.",
-        "Rules-derived"],
-
-    ["Alchemist", "Romantic", "Stopping",
-        "Stopping on the relevant space can interact with Romantic.",
-        "Rules-derived"],
-
-    ["Alchemist", "Stickler", "Exact finish",
-        "Alchemist's modified movement still has to respect Stickler's exact-finish requirement.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       BABA YAGA
-    ------------------------- */
-
-    ["Baba Yaga", "Duelist", "Duel and trip",
-        "A Duelist duel can occur while sharing Baba Yaga's space, and Duelist can still be tripped.",
-        "Official / Designer ruling"],
-
-    ["Baba Yaga", "Hypnotist", "Warp and trip",
-        "Hypnotist can warp Baba Yaga to its space; the applicable trip effect still applies.",
-        "Official / Designer ruling"],
-
-    ["Baba Yaga", "Huge Baby", "Sharing",
-        "Huge Baby prevents normal sharing of its space.",
-        "Rules-derived"],
-
-    ["Baba Yaga", "M.O.U.T.H.", "Trip and Chomp",
-        "Sharing and stopping can create both a trip and a Chomp timing interaction.",
-        "Rules-derived"],
-
-    ["Baba Yaga", "Romantic", "Stopping",
-        "Normal stopping rules apply when a racer ends movement with Baba Yaga.",
-        "Rules-derived"],
-
-    ["Baba Yaga", "Suckerfish", "Movement and trip",
-        "Suckerfish movement can cause a racer to interact with Baba Yaga's trip effect.",
-        "Rules-derived"],
-
-    ["Baba Yaga", "Party Animal", "Simultaneous movement",
-        "The interaction depends on the timing of simultaneous movement.",
-        "Needs verification"],
-
-    ["Baba Yaga", "Cheerleader", "Simultaneous movement",
-        "The interaction depends on simultaneous movement timing.",
-        "Needs verification"],
-
-    ["Baba Yaga", "Scoocher", "Trip",
-        "Baba Yaga's trip is a power and therefore can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Baba Yaga", "Heckler", "Trip and recovery",
-        "Baba Yaga's trip interacts with Heckler's trip and recovery timing.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       BANANA
-    ------------------------- */
-
-    ["Banana", "Centaur", "Passing and trip",
-        "Passing between the racers can interact with their respective movement abilities.",
-        "Rules-derived"],
-
-    ["Banana", "Huge Baby", "Sharing",
-        "Huge Baby's space restriction applies to Banana.",
-        "Designer ruling"],
-
-    ["Banana", "M.O.U.T.H.", "Passing and stopping",
-        "Banana's position can affect whether M.O.U.T.H. has a Chomp opportunity.",
-        "Rules-derived"],
-
-    ["Banana", "Flip Flop", "Swap",
-        "Flip Flop's swap is a warp rather than ordinary passing.",
-        "Rules-derived"],
-
-    ["Banana", "Hypnotist", "Warp",
-        "Hypnotist's warp is not treated as normal passing movement.",
-        "Rules-derived"],
-
-    ["Banana", "Suckerfish", "Movement chain",
-        "Suckerfish can create a movement chain involving Banana's position.",
-        "Rules-derived"],
-
-    ["Banana", "Romantic", "Trip and stopping",
-        "Banana's movement can create a stopping interaction with Romantic.",
-        "Rules-derived"],
-
-    ["Banana", "Scoocher", "Trip",
-        "Banana's qualifying trip ability can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Banana", "Heckler", "Trip and recovery",
-        "Banana's trip interacts with Heckler's recovery timing.",
-        "Rules-derived"],
-
-    ["Banana", "Copycat", "Copy",
-        "Copycat can copy Banana when Banana is leading.",
-        "Rules-derived"],
-
-    ["Banana", "Leaptoad", "Passing",
-        "Leaptoad's ability to skip occupied spaces changes whether Banana is passed.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       BLIMP
-    ------------------------- */
-
-    ["Blimp", "Gunk", "Movement modification",
-        "Gunk reduces Blimp's main movement.",
-        "Rules-derived"],
-
-    ["Blimp", "Coach", "Movement modification",
-        "Coach can increase Blimp's main movement.",
-        "Rules-derived"],
-
-    ["Blimp", "Hare", "Movement modification",
-        "Hare can modify Blimp's movement.",
-        "Rules-derived"],
-
-    ["Blimp", "Rocket Scientist", "Movement doubling",
-        "Rocket Scientist can double Blimp's movement and its associated trip effect.",
-        "Rules-derived"],
-
-    ["Blimp", "Alchemist", "Replacement movement",
-        "Alchemist's replacement movement can interact with Blimp's movement.",
-        "Rules-derived"],
-
-    ["Blimp", "Lackey", "Rolled 6",
-        "Movement changes do not change the underlying rolled 6.",
-        "Rules-derived"],
-
-    ["Blimp", "Inchworm", "Rolled 1",
-        "Movement changes do not change the underlying die result.",
-        "Rules-derived"],
-
-    ["Blimp", "Skipper", "Rolled 1",
-        "Movement changes do not change the underlying die result.",
-        "Rules-derived"],
-
-    ["Blimp", "Sisyphus", "Rolled 6",
-        "Movement changes do not change the underlying die result.",
-        "Rules-derived"],
-
-    ["Blimp", "Magician", "Reroll",
-        "Magician's reroll can change the die result before movement effects resolve.",
-        "Rules-derived"],
-
-    ["Blimp", "Dicemonger", "Reroll",
-        "Dicemonger can change the die result before movement resolves.",
-        "Rules-derived"],
-
-    ["Blimp", "Banana", "Passing",
-        "Normal passing rules apply.",
-        "Rules-derived"],
-
-    ["Blimp", "Centaur", "Passing",
-        "Normal passing rules apply.",
-        "Rules-derived"],
-
-    ["Blimp", "Stickler", "Exact finish",
-        "Blimp's final movement must respect Stickler's exact-finish requirement.",
-        "Rules-derived"],
-
-    ["Blimp", "Scoocher", "Power activation",
-        "A qualifying Blimp power activation can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       CENTAUR
-    ------------------------- */
-
-    ["Centaur", "Banana", "Passing and trip",
-        "Centaur and Banana can interact when one racer passes the other.",
-        "Rules-derived"],
-
-    ["Centaur", "Huge Baby", "Forced movement",
-        "Centaur's forced movement must respect Huge Baby's space restriction.",
-        "Rules-derived"],
-
-    ["Centaur", "M.O.U.T.H.", "Backward movement",
-        "Backward movement changes the range relevant to M.O.U.T.H.'s ability.",
-        "Rules-derived"],
-
-    ["Centaur", "Baba Yaga", "Passing and stopping",
-        "Centaur's movement can interact with Baba Yaga when passing or stopping.",
-        "Rules-derived"],
-
-    ["Centaur", "Suckerfish", "Movement chain",
-        "Suckerfish can create a movement chain involving Centaur.",
-        "Rules-derived"],
-
-    ["Centaur", "Romantic", "Stopping",
-        "Stopping on the relevant space can interact with Romantic.",
-        "Rules-derived"],
-
-    ["Centaur", "Stickler", "Exact finish",
-        "Backward or forced movement does not circumvent Stickler's exact-finish requirement.",
-        "Rules-derived"],
-
-    ["Centaur", "Scoocher", "Hoofwhack",
-        "Centaur's Hoofwhack is a power activation that can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       CHEERLEADER
-    ------------------------- */
-
-    ["Cheerleader", "Last-place racers", "Last place",
-        "Cheerleader moves the current last-place racer two spaces.",
-        "Official rule"],
-
-    ["Cheerleader", "Huge Baby", "Simultaneous movement",
-        "Cheerleader's displacement can interact with Huge Baby's space restriction.",
-        "Rules-derived"],
-
-    ["Cheerleader", "Baba Yaga", "Simultaneous movement",
-        "The timing of simultaneous movement affects whether Baba Yaga's effect applies.",
-        "Needs verification"],
-
-    ["Cheerleader", "Romantic", "Simultaneous arrival",
-        "The August 2026 rule addresses simultaneous arrival and Romantic's trigger.",
-        "Official August 2026 rule"],
-
-    ["Cheerleader", "M.O.U.T.H.", "Simultaneous arrival",
-        "The August 2026 rule addresses simultaneous arrival and M.O.U.T.H.'s trigger.",
-        "Official August 2026 rule"],
-
-    ["Cheerleader", "Suckerfish", "Forced movement",
-        "Moving the last-place racer can affect Suckerfish's movement relationship.",
-        "Rules-derived"],
-
-    ["Cheerleader", "Flip Flop", "Position",
-        "Moving the last-place racer can change positions involved in Flip Flop.",
-        "Rules-derived"],
-
-    ["Cheerleader", "Lovable Loser", "Last place",
-        "Both abilities depend on the current last-place position.",
-        "Rules-derived"],
-
-    ["Cheerleader", "Scoocher", "Power trigger",
-        "Cheerleader's ability is a power activation and can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       COACH
-    ------------------------- */
-
-    ["Coach", "Gunk", "Movement modification",
-        "Coach's +1 and Gunk's -1 interact directly.",
-        "Official"],
-
-    ["Coach", "Legs", "Jog",
-        "Coach can modify Legs' five-space Jog.",
-        "Official"],
-
-    ["Coach", "Alchemist", "Movement modification",
-        "Coach can increase Alchemist's replacement movement.",
-        "Rules-derived"],
-
-    ["Coach", "Hare", "Movement modification",
-        "Coach and Hare can both modify movement.",
-        "Rules-derived"],
-
-    ["Coach", "Rocket Scientist", "Movement modification",
-        "Coach can modify the movement value that Rocket Scientist uses.",
-        "Rules-derived"],
-
-    ["Coach", "Blimp", "Movement modification",
-        "Coach can increase Blimp's movement.",
-        "Rules-derived"],
-
-    ["Coach", "Lackey", "Die result",
-        "Coach changes movement, not the underlying die result.",
-        "Rules-derived"],
-
-    ["Coach", "Inchworm", "Die result",
-        "Coach changes movement, not the underlying die result.",
-        "Rules-derived"],
-
-    ["Coach", "Skipper", "Die result",
-        "Coach changes movement, not the underlying die result.",
-        "Rules-derived"],
-
-    ["Coach", "Sisyphus", "Die result",
-        "Coach changes movement, not the underlying die result.",
-        "Rules-derived"],
-
-    ["Coach", "Scoocher", "Power activation",
-        "Coach's qualifying ability activation can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       COPYCAT
-    ------------------------- */
-
-    ["Copycat", "Huge Baby", "Copied power priority",
-        "A copied lead-racer power can take priority over Huge Baby in the relevant interaction.",
-        "Official"],
-
-    ["Copycat", "M.O.U.T.H.", "Copy Chomp",
-        "Copycat can copy M.O.U.T.H.'s Chomp when M.O.U.T.H. is leading.",
-        "Rules-derived"],
-
-    ["Copycat", "Gunk", "Copy Slow",
-        "Copycat can acquire Gunk's power when Gunk leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Hare", "Copy Hare",
-        "Copycat can acquire Hare's power when Hare leads.",
-        "Designer discussion"],
-
-    ["Copycat", "Suckerfish", "Copy Follow",
-        "Copycat can acquire Suckerfish's power when Suckerfish leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Scoocher", "Copy power",
-        "Copycat can acquire Scoocher's power when appropriate.",
-        "Rules-derived"],
-
-    ["Copycat", "Romantic", "Copy Romance",
-        "Copycat can acquire Romantic's power when Romantic leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Alchemist", "Copy Alchemist",
-        "Copycat can copy Alchemist's power when Alchemist leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Baba Yaga", "Copy Baba Yaga",
-        "Copycat can copy Baba Yaga's power when Baba Yaga leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Banana", "Copy Banana",
-        "Copycat can copy Banana's power when Banana leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Cheerleader", "Copy Cheerleader",
-        "Copycat can copy Cheerleader's power when Cheerleader leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Coach", "Copy Coach",
-        "Copycat can copy Coach's power when Coach leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Duelist", "Copy Duelist",
-        "Copycat can copy Duelist's power when Duelist leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Hypnotist", "Copy Hypnotist",
-        "Copycat can copy Hypnotist's power when Hypnotist leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Inchworm", "Copy Inchworm",
-        "Copycat can copy Inchworm's power when Inchworm leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Lackey", "Copy Lackey",
-        "Copycat can copy Lackey's power when Lackey leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Leaptoad", "Copy Leaptoad",
-        "Copycat can copy Leaptoad's power when Leaptoad leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Legs", "Copy Legs",
-        "Copycat can copy Legs' power when Legs leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Lovable Loser", "Copy Lovable Loser",
-        "Copycat can copy Lovable Loser's power when Lovable Loser leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Magician", "Copy Magician",
-        "Copycat can copy Magician's power when Magician leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Party Animal", "Copy Party Animal",
-        "Copycat can copy Party Animal's power when Party Animal leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Rocket Scientist", "Copy Rocket Scientist",
-        "Copycat can copy Rocket Scientist's power when Rocket Scientist leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Skipper", "Copy Skipper",
-        "Copycat can copy Skipper's power when Skipper leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Stickler", "Copy Stickler",
-        "Copycat can copy Stickler's power when Stickler leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Third Wheel", "Copy Third Wheel",
-        "Copycat can copy Third Wheel's power when Third Wheel leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Twin", "Copy Twin",
-        "Copycat can copy Twin's power when Twin leads.",
-        "Rules-derived"],
-
-    ["Copycat", "Egg", "Copy Egg",
-        "Copycat can copy Egg's active power.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       DICEMONGER
-    ------------------------- */
-
-    ["Dicemonger", "Magician", "Reroll service",
-        "Magician's own rerolls do not count as Dicemonger's reroll service.",
-        "Designer ruling"],
-
-    ["Dicemonger", "Genius", "Prediction",
-        "A Dicemonger reroll can invalidate Genius's predicted result.",
-        "Rules-derived"],
-
-    ["Dicemonger", "Inchworm", "Roll 1",
-        "A reroll changing a 1 can prevent Inchworm's trigger.",
-        "Rules-derived"],
-
-    ["Dicemonger", "Lackey", "Roll 6",
-        "A reroll changing a 6 can prevent Lackey's trigger.",
-        "Rules-derived"],
-
-    ["Dicemonger", "Skipper", "Roll 1",
-        "A reroll changing a 1 can prevent Skipper's trigger.",
-        "Rules-derived"],
-
-    ["Dicemonger", "Sisyphus", "Roll 6",
-        "A reroll changing a 6 can prevent Sisyphus's trigger.",
-        "Rules-derived"],
-
-    ["Dicemonger", "Rocket Scientist", "Final die",
-        "The final die result determines the movement used by Rocket Scientist.",
-        "Rules-derived"],
-
-    ["Dicemonger", "Scoocher", "Reroll",
-        "A qualifying Dicemonger reroll can trigger Scoocher.",
-        "Official"],
-
-
-    /* -------------------------
-       DUELIST
-    ------------------------- */
-
-    ["Duelist", "Baba Yaga", "Duel and trip",
-        "Duelist can duel while sharing Baba Yaga's space and still be tripped.",
-        "Official / Designer ruling"],
-
-    ["Duelist", "M.O.U.T.H.", "Duel",
-        "Duelist can duel M.O.U.T.H.; placement and timing are unusual.",
-        "Designer discussion"],
-
-    ["Duelist", "Huge Baby", "Sharing",
-        "Huge Baby prevents ordinary sharing.",
-        "Rules-derived"],
-
-    ["Duelist", "Romantic", "Shared space",
-        "Duelist's shared-space situation can interact with Romantic.",
-        "Rules-derived"],
-
-    ["Duelist", "Suckerfish", "Position",
-        "Duelist's position can affect Suckerfish.",
-        "Rules-derived"],
-
-    ["Duelist", "Scoocher", "Duel power",
-        "Duel is a power activation and can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Duelist", "Stickler", "Exact finish",
-        "Duelist's movement must respect Stickler's exact-finish rule.",
-        "Official"],
-
-    ["Duelist", "Banana", "Passing",
-        "Duelist and Banana can interact through movement and passing.",
-        "Rules-derived"],
-
-    ["Duelist", "Centaur", "Passing",
-        "Duelist and Centaur can interact through movement and passing.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       EGG
-    ------------------------- */
-
-    ["Egg", "Copycat", "Power copying",
-        "Egg can interact with Copycat's power-copying effect.",
-        "Rules-derived"],
-
-    ["Egg", "Twin", "Borrowed powers",
-        "Egg and Twin can both involve borrowed character powers.",
-        "Rules-derived"],
-
-    ["Egg", "Scoocher", "Selected power",
-        "A selected Egg power can trigger Scoocher when the copied power qualifies.",
-        "Rules-derived"],
-
-    ["Egg", "Gunk", "Conditional copying",
-        "Egg can use Gunk's power when its copying condition is met.",
-        "Rules-derived"],
-
-    ["Egg", "Coach", "Conditional copying",
-        "Egg can use Coach's power when its copying condition is met.",
-        "Rules-derived"],
-
-    ["Egg", "Baba Yaga", "Conditional copying",
-        "Egg can use Baba Yaga's power when its copying condition is met.",
-        "Rules-derived"],
-
-    ["Egg", "M.O.U.T.H.", "Conditional copying",
-        "Egg can use M.O.U.T.H.'s power when its copying condition is met.",
-        "Rules-derived"],
-
-    ["Egg", "Huge Baby", "Conditional copying",
-        "Egg can use Huge Baby's power when its copying condition is met.",
-        "Rules-derived"],
-
-    ["Egg", "Romantic", "Conditional copying",
-        "Egg can use Romantic's power when its copying condition is met.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       FLIP FLOP
-    ------------------------- */
-
-    ["Flip Flop", "Hypnotist", "Warp and position",
-        "Hypnotist's warp and Flip Flop's position swap interact as positional effects.",
-        "Designer discussion"],
-
-    ["Flip Flop", "Banana", "Swap vs passing",
-        "Flip Flop's swap is a warp, not ordinary passing.",
-        "Rules-derived"],
-
-    ["Flip Flop", "Huge Baby", "Space restriction",
-        "Flip Flop cannot create an illegal shared space with Huge Baby.",
-        "Rules-derived"],
-
-    ["Flip Flop", "M.O.U.T.H.", "Chomp",
-        "The resulting positions can change M.O.U.T.H.'s Chomp opportunity.",
-        "Rules-derived"],
-
-    ["Flip Flop", "Romantic", "Warp",
-        "The swap does not count as ordinary movement for Romantic's stopping effect.",
-        "Official August 2026 rule"],
-
-    ["Flip Flop", "Duelist", "Duel",
-        "A swap can create a shared-space situation that causes a duel.",
-        "Rules-derived"],
-
-    ["Flip Flop", "Suckerfish", "Position",
-        "The swap changes the position relevant to Suckerfish.",
-        "Rules-derived"],
-
-    ["Flip Flop", "Stickler", "Finish",
-        "A warp does not count as ordinary movement toward the finish.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       GENIUS
-    ------------------------- */
-
-    ["Genius", "Magician", "Reroll prediction",
-        "Magician's reroll can change the result predicted by Genius.",
-        "Rules-derived"],
-
-    ["Genius", "Dicemonger", "Reroll prediction",
-        "Dicemonger's reroll can change the predicted result.",
-        "Rules-derived"],
-
-    ["Genius", "Gunk", "Movement vs die",
-        "Gunk changes movement but does not change the predicted die result.",
-        "Rules-derived"],
-
-    ["Genius", "Coach", "Movement vs die",
-        "Coach changes movement but does not change the predicted die result.",
-        "Rules-derived"],
-
-    ["Genius", "Hare", "Movement vs die",
-        "Hare changes movement but does not change the predicted die result.",
-        "Rules-derived"],
-
-    ["Genius", "Blimp", "Movement vs die",
-        "Blimp's movement changes do not change the die result.",
-        "Rules-derived"],
-
-    ["Genius", "Rocket Scientist", "Predicted die",
-        "Genius predicts the die while Rocket Scientist can modify the resulting movement.",
-        "Rules-derived"],
-
-    ["Genius", "Lackey", "Rolled 6",
-        "A predicted 6 interacts with Lackey's six-based ability.",
-        "Rules-derived"],
-
-    ["Genius", "Inchworm", "Rolled 1",
-        "A predicted 1 interacts with Inchworm's one-based ability.",
-        "Rules-derived"],
-
-    ["Genius", "Skipper", "Rolled 1",
-        "A predicted 1 interacts with Skipper's one-based ability.",
-        "Rules-derived"],
-
-    ["Genius", "Sisyphus", "Rolled 6",
-        "A predicted 6 interacts with Sisyphus's six-based ability.",
-        "Rules-derived"],
-
-    ["Genius", "Scoocher", "Ability",
-        "Genius's ability can trigger Scoocher where the timing qualifies.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       GUNK
-    ------------------------- */
-
-    ["Gunk", "Coach", "Direct modification",
-        "Coach's +1 and Gunk's -1 directly modify the same movement.",
-        "Official"],
-
-    ["Gunk", "Legs", "Jog",
-        "Gunk reduces Legs' five-space Jog to four.",
-        "Official"],
-
-    ["Gunk", "Alchemist", "Movement replacement",
-        "Gunk can reduce Alchemist's replacement movement.",
-        "Rules-derived"],
-
-    ["Gunk", "Hare", "Movement modification",
-        "Gunk and Hare can modify the same movement value.",
-        "Rules-derived"],
-
-    ["Gunk", "Rocket Scientist", "Movement modification",
-        "Gunk can modify the movement value before Rocket Scientist's doubling.",
-        "Rules-derived"],
-
-    ["Gunk", "Blimp", "Movement modification",
-        "Gunk reduces Blimp's movement.",
-        "Rules-derived"],
-
-    ["Gunk", "Scoocher", "Repeated activation",
-        "Scoocher can move once for each qualifying -1 affecting the main move.",
-        "Official"],
-
-    ["Gunk", "M.O.U.T.H.", "Range",
-        "Reducing movement can change whether a racer reaches M.O.U.T.H.'s relevant range.",
-        "Rules-derived"],
-
-    ["Gunk", "Huge Baby", "Displacement",
-        "Gunk can participate in movement sequences involving Huge Baby and Scoocher.",
-        "Official"],
-
-    ["Gunk", "Lackey", "Die result",
-        "Gunk does not change the underlying die result.",
-        "Official"],
-
-    ["Gunk", "Inchworm", "Die result",
-        "Gunk changes movement but not the underlying die result.",
-        "Official"],
-
-
-    /* -------------------------
-       HARE
-    ------------------------- */
-
-    ["Hare", "Gunk", "Movement modification",
-        "Hare and Gunk can modify the same movement.",
-        "Rules-derived"],
-
-    ["Hare", "Coach", "Movement modification",
-        "Hare and Coach can modify movement.",
-        "Rules-derived"],
-
-    ["Hare", "Blimp", "Movement modification",
-        "Hare can modify Blimp's movement.",
-        "Rules-derived"],
-
-    ["Hare", "Rocket Scientist", "Movement modification",
-        "Hare can modify the movement value that Rocket Scientist uses.",
-        "Rules-derived"],
-
-    ["Hare", "Magician", "Reroll",
-        "A Magician reroll can change the die result before Hare's movement effect resolves.",
-        "Rules-derived"],
-
-    ["Hare", "Dicemonger", "Reroll",
-        "Dicemonger can change the die result before Hare's movement effect resolves.",
-        "Rules-derived"],
-
-    ["Hare", "Genius", "Die result",
-        "Genius's prediction concerns the die result while Hare affects movement.",
-        "Rules-derived"],
-
-    ["Hare", "Banana", "Passing",
-        "Hare's movement can cause normal passing interactions with Banana.",
-        "Rules-derived"],
-
-    ["Hare", "Centaur", "Passing",
-        "Hare's movement can cause normal passing interactions with Centaur.",
-        "Rules-derived"],
-
-    ["Hare", "Stickler", "Exact finish",
-        "Hare's movement must respect Stickler's exact-finish requirement.",
-        "Rules-derived"],
-
-    ["Hare", "Scoocher", "Power activation",
-        "Hare's ability can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       HECKLER
-    ------------------------- */
-
-    ["Heckler", "Banana", "Trip and recovery",
-        "Banana's trip interacts with Heckler's recovery timing.",
-        "Rules-derived"],
-
-    ["Heckler", "Baba Yaga", "Trip and recovery",
-        "Baba Yaga's trip interacts with Heckler's recovery timing.",
-        "Rules-derived"],
-
-    ["Heckler", "Rocket Scientist", "Trip",
-        "Rocket Scientist can deliberately cause a trip that interacts with Heckler.",
-        "Rules-derived"],
-
-    ["Heckler", "Party Animal", "Trip",
-        "Party Animal can create a deliberate trip interaction.",
-        "Rules-derived"],
-
-    ["Heckler", "Scoocher", "Power",
-        "Heckler's qualifying power activation can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Heckler", "Skipper", "Turn order",
-        "Trip and recovery can affect Skipper's turn timing.",
-        "Rules-derived"],
-
-    ["Heckler", "Inchworm", "Recovery timing",
-        "Trip and recovery timing can interact with Inchworm's response.",
-        "Rules-derived"],
-
-    ["Heckler", "Stickler", "Exact finish",
-        "Any movement following the interaction must respect Stickler.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       HUGE BABY
-    ------------------------- */
-
-    ["Huge Baby", "M.O.U.T.H.", "No sharing",
-        "Huge Baby cannot share its space, preventing a normal Chomp situation.",
-        "Official"],
-
-    ["Huge Baby", "Baba Yaga", "Sharing",
-        "Huge Baby prevents ordinary sharing.",
-        "Rules-derived"],
-
-    ["Huge Baby", "Duelist", "Sharing",
-        "Huge Baby prevents ordinary sharing required for a normal duel.",
-        "Rules-derived"],
-
-    ["Huge Baby", "Romantic", "Shared space",
-        "Huge Baby prevents the normal shared-space condition.",
-        "Rules-derived"],
-
-    ["Huge Baby", "Suckerfish", "Shared space",
-        "Huge Baby prevents normal shared-space interactions.",
-        "Rules-derived"],
-
-    ["Huge Baby", "Third Wheel", "Sharing",
-        "Third Wheel cannot create an illegal shared space with Huge Baby.",
-        "Rules-derived"],
-
-    ["Huge Baby", "Party Animal", "Position",
-        "Party Animal has a specific interaction with Huge Baby.",
-        "Official"],
-
-    ["Huge Baby", "Banana", "Space restriction",
-        "Huge Baby's space restriction applies to Banana.",
-        "Designer ruling"],
-
-    ["Huge Baby", "Copycat", "Copied power",
-        "A copied lead-racer power can take priority over Huge Baby in the specified interaction.",
-        "Official"],
-
-    ["Huge Baby", "Hypnotist", "Displacement",
-        "Hypnotist cannot create an illegal shared space and instead displaces as required.",
-        "Rules-derived"],
-
-    ["Huge Baby", "Scoocher", "Loop",
-        "The Huge Baby/Scoocher interaction can create an infinite loop; resolve it once and stop.",
-        "Official"],
-
-    ["Huge Baby", "Leaptoad", "Skipping",
-        "Leaptoad can skip over Huge Baby's occupied space.",
-        "Rules-derived"],
-
-    ["Huge Baby", "Cheerleader", "Displacement",
-        "Cheerleader's displacement can interact with Huge Baby's space restriction.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       HYPNOTIST
-    ------------------------- */
-
-    ["Hypnotist", "Baba Yaga", "Warp and trip",
-        "Warping Baba Yaga to Hypnotist's space can still produce the applicable trip.",
-        "Official / Designer ruling"],
-
-    ["Hypnotist", "Huge Baby", "Displacement",
-        "Hypnotist cannot create illegal sharing with Huge Baby.",
-        "Rules-derived"],
-
-    ["Hypnotist", "Flip Flop", "Position",
-        "Hypnotist's warp interacts with Flip Flop's positional ability.",
-        "Designer discussion"],
-
-    ["Hypnotist", "Romantic", "Warp",
-        "Warping into a space is not ordinary movement for Romantic's stopping effect.",
-        "Official August 2026 rule"],
-
-    ["Hypnotist", "M.O.U.T.H.", "Chomp range",
-        "Hypnotist can warp a racer into M.O.U.T.H.'s relevant range.",
-        "Rules-derived"],
-
-    ["Hypnotist", "Duelist", "Duel",
-        "Warping can create a shared-space situation that produces a duel.",
-        "Rules-derived"],
-
-    ["Hypnotist", "Suckerfish", "Position",
-        "Warping changes the position relevant to Suckerfish.",
-        "Rules-derived"],
-
-    ["Hypnotist", "Third Wheel", "Target",
-        "Warping changes the pair of racers relevant to Third Wheel.",
-        "Rules-derived"],
-
-    ["Hypnotist", "Scoocher", "Power trigger",
-        "Hypnotist's warp is a power activation that can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       INCHWORM
-    ------------------------- */
-
-    ["Inchworm", "Magician", "Reroll 1",
-        "A Magician reroll changing a 1 can prevent Inchworm's trigger.",
-        "Rules-derived"],
-
-    ["Inchworm", "Dicemonger", "Reroll 1",
-        "A Dicemonger reroll changing a 1 can prevent Inchworm's trigger.",
-        "Rules-derived"],
-
-    ["Inchworm", "Alchemist", "Roll vs movement",
-        "Inchworm cares about the die roll rather than the movement that Alchemist ultimately uses.",
-        "Rules-derived"],
-
-    ["Inchworm", "Skipper", "Roll 1",
-        "When a 1 is rolled, Inchworm wriggles first and Skipper takes its subsequent turn.",
-        "Official"],
-
-    ["Inchworm", "Sisyphus", "1 vs 6",
-        "Inchworm responds to 1 while Sisyphus responds to 6.",
-        "Rules-derived"],
-
-    ["Inchworm", "Gunk", "Die unchanged",
-        "Gunk changes movement but not the die result.",
-        "Official"],
-
-    ["Inchworm", "Coach", "Movement changed",
-        "Coach changes movement but not the die result.",
-        "Rules-derived"],
-
-    ["Inchworm", "Rocket Scientist", "Roll 1",
-        "A roll of 1 can trigger Inchworm even when Rocket Scientist later modifies movement.",
-        "Rules-derived"],
-
-    ["Inchworm", "Scoocher", "Power",
-        "Inchworm's qualifying ability can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       LACKEY
-    ------------------------- */
-
-    ["Lackey", "Gunk", "Rolled 6",
-        "Gunk does not change a rolled 6.",
-        "Official"],
-
-    ["Lackey", "Magician", "Reroll 6",
-        "A Magician reroll changing a 6 can prevent Lackey's trigger.",
-        "Rules-derived"],
-
-    ["Lackey", "Dicemonger", "Reroll 6",
-        "A Dicemonger reroll changing a 6 can prevent Lackey's trigger.",
-        "Rules-derived"],
-
-    ["Lackey", "Genius", "Prediction",
-        "Genius can predict a 6, interacting with Lackey's six-based effect.",
-        "Rules-derived"],
-
-    ["Lackey", "Sisyphus", "Rolled 6",
-        "Both respond to a 6 but have different effects.",
-        "Rules-derived"],
-
-    ["Lackey", "Coach", "Movement vs die",
-        "Coach modifies movement rather than the die result.",
-        "Rules-derived"],
-
-    ["Lackey", "Rocket Scientist", "Movement",
-        "Rocket Scientist doubles movement after the relevant die result.",
-        "Rules-derived"],
-
-    ["Lackey", "Scoocher", "Power",
-        "Lackey's qualifying ability can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       LEAPTOAD
-    ------------------------- */
-
-    ["Leaptoad", "Banana", "Passing",
-        "Skipping occupied spaces changes whether Banana is passed.",
-        "Rules-derived"],
-
-    ["Leaptoad", "Centaur", "Passing",
-        "Skipping occupied spaces changes passing interactions with Centaur.",
-        "Rules-derived"],
-
-    ["Leaptoad", "M.O.U.T.H.", "Jumping",
-        "Leaptoad can jump over spaces relevant to M.O.U.T.H.",
-        "Rules-derived"],
-
-    ["Leaptoad", "Huge Baby", "Jumping",
-        "Leaptoad can jump over Huge Baby's occupied space.",
-        "Rules-derived"],
-
-    ["Leaptoad", "Romantic", "Simultaneous arrival",
-        "The updated simultaneous-arrival rules determine Romantic's interaction.",
-        "Official August 2026 rule"],
-
-    ["Leaptoad", "Suckerfish", "Skipped positions",
-        "Skipping spaces changes the positions relevant to Suckerfish.",
-        "Rules-derived"],
-
-    ["Leaptoad", "Scoocher", "Occupied spaces",
-        "Scoocher can move once for each occupied space skipped.",
-        "Official"],
-
-    ["Leaptoad", "Stickler", "Exact finish",
-        "Leaptoad still has to satisfy Stickler's exact-finish requirement.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       LEGS
-    ------------------------- */
-
-    ["Legs", "Gunk", "Jog",
-        "Gunk reduces Legs' five-space Jog to four.",
-        "Official"],
-
-    ["Legs", "Coach", "Jog",
-        "Coach increases Legs' Jog.",
-        "Official"],
-
-    ["Legs", "Inchworm", "No die roll",
-        "Jog does not involve a normal die roll, so Inchworm does not trigger from a roll.",
-        "Rules-derived"],
-
-    ["Legs", "Lackey", "No die roll",
-        "Jog does not involve a normal die roll, so Lackey does not trigger from a 6.",
-        "Rules-derived"],
-
-    ["Legs", "Sisyphus", "No die roll",
-        "Jog does not involve a normal die roll, so Sisyphus does not trigger from a 6.",
-        "Rules-derived"],
-
-    ["Legs", "Skipper", "No die roll",
-        "Jog does not involve a normal die roll, so Skipper does not trigger from a 1.",
-        "Rules-derived"],
-
-    ["Legs", "Rocket Scientist", "Jog",
-        "The interaction between Rocket Scientist and Legs' fixed movement needs verification.",
-        "Needs verification"],
-
-    ["Legs", "Stickler", "Exact finish",
-        "Jog must satisfy Stickler's exact-finish requirement.",
-        "Rules-derived"],
-
-    ["Legs", "Banana", "Passing",
-        "Jog can cause normal passing interactions.",
-        "Rules-derived"],
-
-    ["Legs", "Centaur", "Passing",
-        "Jog can cause normal passing interactions.",
-        "Rules-derived"],
-
-    ["Legs", "Scoocher", "Jog power",
-        "Jog is a power activation that can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       LOVABLE LOSER
-    ------------------------- */
-
-    ["Lovable Loser", "Cheerleader", "Last place",
-        "Both abilities interact with the current last-place racer.",
-        "Rules-derived"],
-
-    ["Lovable Loser", "Flip Flop", "Position",
-        "Changing position can change who qualifies for Lovable Loser's effect.",
-        "Rules-derived"],
-
-    ["Lovable Loser", "Hare", "Lead vs last",
-        "Hare and Lovable Loser care about opposite ends of the race.",
-        "Rules-derived"],
-
-    ["Lovable Loser", "M.O.U.T.H.", "Last place",
-        "Last-place positioning can affect M.O.U.T.H.'s vulnerability.",
-        "Rules-derived"],
-
-    ["Lovable Loser", "Huge Baby", "Displacement",
-        "Huge Baby can change who is in last place through displacement.",
-        "Rules-derived"],
-
-    ["Lovable Loser", "Party Animal", "Last place",
-        "Party Animal's movement can change the last-place racer.",
-        "Rules-derived"],
-
-    ["Lovable Loser", "Scoocher", "Power",
-        "Lovable Loser's ability is a power and can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       MAGICIAN
-    ------------------------- */
-
-    ["Magician", "Dicemonger", "Reroll service",
-        "Magician's own rerolls do not count as Dicemonger's reroll service.",
-        "Designer ruling"],
-
-    ["Magician", "Inchworm", "Reroll 1",
-        "A reroll can prevent Inchworm from responding to an initial 1.",
-        "Rules-derived"],
-
-    ["Magician", "Genius", "Prediction",
-        "A reroll can change the result Genius predicted.",
-        "Rules-derived"],
-
-    ["Magician", "Lackey", "Reroll 6",
-        "A reroll can prevent Lackey's response to a 6.",
-        "Rules-derived"],
-
-    ["Magician", "Skipper", "Reroll 1",
-        "A reroll can prevent Skipper's response to a 1.",
-        "Rules-derived"],
-
-    ["Magician", "Sisyphus", "Reroll 6",
-        "A reroll can prevent Sisyphus's response to a 6.",
-        "Rules-derived"],
-
-    ["Magician", "Rocket Scientist", "Final die",
-        "Rocket Scientist uses the final relevant die result.",
-        "Rules-derived"],
-
-    ["Magician", "Stickler", "Reroll and finish",
-        "The eventual movement after rerolling still has to satisfy Stickler.",
-        "Rules-derived"],
-
-    ["Magician", "Scoocher", "Reroll",
-        "Scoocher moves on each qualifying reroll even if the rerolled result is ultimately unused.",
-        "Official"],
-
-
-    /* -------------------------
-       MASTERMIND
-    ------------------------- */
-
-    ["Mastermind", "Copycat", "Pre-race prediction",
-        "Copycat does not copy Mastermind's before-race prediction.",
-        "Official"],
-
-    ["Mastermind", "Egg", "Pre-race power",
-        "Egg's borrowed power must be distinguished from Mastermind's pre-race effect.",
-        "Rules-derived"],
-
-    ["Mastermind", "Twin", "Pre-race power",
-        "Twin's borrowed power must be distinguished from Mastermind's pre-race effect.",
-        "Rules-derived"],
-
-    ["Mastermind", "M.O.U.T.H.", "Elimination",
-        "Mastermind can interact with race-ending or elimination effects.",
-        "Rules-derived"],
-
-    ["Mastermind", "Sisyphus", "Pre-race effect",
-        "Mastermind's pre-race effect interacts with Sisyphus's own pre-race considerations.",
-        "Rules-derived"],
-
-    ["Mastermind", "Scoocher", "Race ending",
-        "Once the race ends, further interactions stop.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       M.O.U.T.H.
-    ------------------------- */
-
-    ["M.O.U.T.H.", "Huge Baby", "No shared space",
-        "Huge Baby cannot share space, preventing normal Chomp.",
-        "Official"],
-
-    ["M.O.U.T.H.", "Duelist", "Duel",
-        "Duelist can duel M.O.U.T.H.; placement is unusual.",
-        "Designer discussion"],
-
-    ["M.O.U.T.H.", "Gunk", "Movement reduction",
-        "Gunk can slow movement and change whether a racer reaches Chomp range.",
-        "Rules-derived"],
-
-    ["M.O.U.T.H.", "Copycat", "Copy Chomp",
-        "Copycat can copy Chomp when M.O.U.T.H. is leading.",
-        "Rules-derived"],
-
-    ["M.O.U.T.H.", "Baba Yaga", "Trip overlap",
-        "Baba Yaga's trip can overlap with M.O.U.T.H.'s Chomp timing.",
-        "Rules-derived"],
-
-    ["M.O.U.T.H.", "Banana", "Position",
-        "Banana's position affects whether M.O.U.T.H. can reach the relevant racer.",
-        "Rules-derived"],
-
-    ["M.O.U.T.H.", "Hypnotist", "Warp",
-        "Hypnotist can warp a racer into M.O.U.T.H.'s Chomp range.",
-        "Rules-derived"],
-
-    ["M.O.U.T.H.", "Flip Flop", "Warp",
-        "Flip Flop's swap can change Chomp opportunities.",
-        "Rules-derived"],
-
-    ["M.O.U.T.H.", "Romantic", "Simultaneous arrival",
-        "Simultaneous arrival does not trigger Chomp under the August 2026 rule.",
-        "Official August 2026 rule"],
-
-    ["M.O.U.T.H.", "Suckerfish", "Movement",
-        "Suckerfish movement can move a racer into or out of Chomp range.",
-        "Rules-derived"],
-
-    ["M.O.U.T.H.", "Third Wheel", "Warp",
-        "Third Wheel can warp into a pair involving M.O.U.T.H.",
-        "Rules-derived"],
-
-    ["M.O.U.T.H.", "Party Animal", "Simultaneous movement",
-        "Simultaneous movement no longer triggers Chomp under the August 2026 rule.",
-        "Official August 2026 rule"],
-
-    ["M.O.U.T.H.", "Stickler", "Finish",
-        "Chomp-related movement still interacts with exact-finish requirements.",
-        "Rules-derived"],
-
-    ["M.O.U.T.H.", "Scoocher", "Chomp",
-        "Chomp is a power activation and can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       PARTY ANIMAL
-    ------------------------- */
-
-    ["Party Animal", "Huge Baby", "Space interaction",
-        "Party Animal has a specific interaction with Huge Baby.",
-        "Official"],
-
-    ["Party Animal", "Romantic", "Simultaneous movement",
-        "Simultaneous movement no longer triggers Romantic under the August 2026 rule.",
-        "Official August 2026 rule"],
-
-    ["Party Animal", "M.O.U.T.H.", "Simultaneous movement",
-        "Simultaneous movement no longer triggers Chomp under the August 2026 rule.",
-        "Official August 2026 rule"],
-
-    ["Party Animal", "Baba Yaga", "Timing",
-        "The exact timing of the simultaneous movement interaction needs verification.",
-        "Needs verification"],
-
-    ["Party Animal", "Banana", "Movement",
-        "Party Animal's movement can interact with Banana.",
-        "Rules-derived"],
-
-    ["Party Animal", "Centaur", "Movement",
-        "Party Animal's movement can interact with Centaur.",
-        "Rules-derived"],
-
-    ["Party Animal", "Coach", "Movement modification",
-        "Coach can modify Party Animal's movement where applicable.",
-        "Rules-derived"],
-
-    ["Party Animal", "Gunk", "Movement modification",
-        "Gunk can reduce Party Animal's movement where applicable.",
-        "Rules-derived"],
-
-    ["Party Animal", "Rocket Scientist", "Movement",
-        "Rocket Scientist can interact with Party Animal's movement.",
-        "Rules-derived"],
-
-    ["Party Animal", "Heckler", "Trip",
-        "Party Animal can create a deliberate trip interaction with Heckler.",
-        "Rules-derived"],
-
-    ["Party Animal", "Scoocher", "Power",
-        "Party Animal's qualifying power activation can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Party Animal", "Suckerfish", "Movement chain",
-        "The interaction involves complicated simultaneous movement timing.",
-        "Needs verification"],
-
-    ["Party Animal", "Stickler", "Exact finish",
-        "Party Animal's movement must respect Stickler's exact-finish requirement.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       ROCKET SCIENTIST
-    ------------------------- */
-
-    ["Rocket Scientist", "Gunk", "Movement modification",
-        "Gunk modifies the movement amount that Rocket Scientist doubles.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Coach", "Movement modification",
-        "Coach modifies the movement amount that Rocket Scientist doubles.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Hare", "Movement modification",
-        "Hare modifies the movement amount that Rocket Scientist doubles.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Blimp", "Movement modification",
-        "Blimp's movement can be doubled by Rocket Scientist.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Alchemist", "Replacement movement",
-        "The precise order of Alchemist's replacement and Rocket Scientist's doubling needs verification.",
-        "Needs verification"],
-
-    ["Rocket Scientist", "Legs", "Jog",
-        "The interaction between Rocket Scientist and Legs' fixed Jog movement needs verification.",
-        "Needs verification"],
-
-    ["Rocket Scientist", "Heckler", "Trip",
-        "Rocket Scientist can deliberately trip a racer.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Inchworm", "Roll 1",
-        "A roll of 1 can trigger Inchworm before Rocket Scientist's movement modification.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Lackey", "Roll 6",
-        "A roll of 6 can trigger Lackey while Rocket Scientist later modifies movement.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Skipper", "Roll 1",
-        "A roll of 1 can trigger Skipper while Rocket Scientist later modifies movement.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Sisyphus", "Roll 6",
-        "A roll of 6 can trigger Sisyphus instead of ordinary movement.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Genius", "Prediction",
-        "Genius predicts the die while Rocket Scientist modifies the resulting movement.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Magician", "Final die",
-        "The final die result determines the movement used by Rocket Scientist.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Dicemonger", "Final die",
-        "Dicemonger's reroll can change the final die result.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Banana", "Passing",
-        "Rocket Scientist's movement can create normal passing interactions.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Centaur", "Passing",
-        "Rocket Scientist's movement can create normal passing interactions.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "M.O.U.T.H.", "Stopping",
-        "Rocket Scientist's final movement can interact with M.O.U.T.H.'s position.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Baba Yaga", "Stopping",
-        "Rocket Scientist's final movement can interact with Baba Yaga.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Huge Baby", "Space",
-        "Rocket Scientist's movement must respect Huge Baby's space restriction.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Romantic", "Stopping",
-        "Rocket Scientist's final movement can interact with Romantic.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Scoocher", "Kablooey",
-        "Rocket Scientist's Kablooey power can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Rocket Scientist", "Stickler", "Exact finish",
-        "Rocket Scientist's doubled movement must still satisfy Stickler's exact-finish requirement.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       ROMANTIC
-    ------------------------- */
-
-    ["Romantic", "Suckerfish", "Simultaneous arrival",
-        "The previous Suckerfish/Romantic combo is shut down by the August 2026 simultaneous-arrival rule.",
-        "Official August 2026 rule"],
-
-    ["Romantic", "Party Animal", "Simultaneous movement",
-        "Simultaneous movement no longer triggers Romantic.",
-        "Official August 2026 rule"],
-
-    ["Romantic", "Leaptoad", "Simultaneous arrival",
-        "The updated simultaneous-arrival rules determine whether Romantic triggers.",
-        "Official August 2026 rule"],
-
-    ["Romantic", "Hypnotist", "Warp",
-        "Hypnotist's warp is not ordinary movement into the space.",
-        "Official August 2026 rule"],
-
-    ["Romantic", "M.O.U.T.H.", "Simultaneous arrival",
-        "Simultaneous arrival does not trigger the relevant stopping effect.",
-        "Official August 2026 rule"],
-
-    ["Romantic", "Huge Baby", "Shared space",
-        "Huge Baby prevents the normal shared-space condition.",
-        "Rules-derived"],
-
-    ["Romantic", "Baba Yaga", "Stopping",
-        "Baba Yaga's stopping interaction can interact with Romantic.",
-        "Rules-derived"],
-
-    ["Romantic", "Banana", "Stopping",
-        "Banana's movement can create a Romantic stopping interaction.",
-        "Rules-derived"],
-
-    ["Romantic", "Duelist", "Shared space",
-        "Duelist's shared-space situation can interact with Romantic.",
-        "Rules-derived"],
-
-    ["Romantic", "Scoocher", "Power",
-        "Romantic's qualifying power activation can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       SCOOCHER
-    ------------------------- */
-
-    ["Scoocher", "Gunk", "Minus movement",
-        "Scoocher can move once for each qualifying -1 affecting the main move.",
-        "Official"],
-
-    ["Scoocher", "Dicemonger", "Reroll",
-        "A qualifying Dicemonger reroll can trigger Scoocher.",
-        "Official"],
-
-    ["Scoocher", "Leaptoad", "Occupied spaces",
-        "Scoocher can move once per occupied space skipped by Leaptoad.",
-        "Official"],
-
-    ["Scoocher", "Magician", "Reroll",
-        "Scoocher moves on each qualifying Magician reroll.",
-        "Official"],
-
-    ["Scoocher", "Suckerfish", "Follow",
-        "The Suckerfish/Scoocher interaction remains valid after the August 2026 ruling.",
-        "Official / Designer ruling"],
-
-    ["Scoocher", "Huge Baby", "Loop",
-        "The interaction can create an infinite loop; resolve it once and stop.",
-        "Official"],
-
-    ["Scoocher", "Romantic", "Power",
-        "Romantic's qualifying power activation can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Scoocher", "Party Animal", "Power",
-        "Party Animal's qualifying power activation can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Scoocher", "Duelist", "Duel",
-        "Duelist's duel is a power activation and can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Scoocher", "Banana", "Trip",
-        "Banana's qualifying trip can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Scoocher", "Baba Yaga", "Trip",
-        "Baba Yaga's trip is a power and can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Scoocher", "Centaur", "Hoofwhack",
-        "Centaur's Hoofwhack can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Scoocher", "Coach", "Power",
-        "Coach's qualifying power activation can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Scoocher", "Alchemist", "Power",
-        "Alchemist's qualifying power activation can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Scoocher", "Rocket Scientist", "Kablooey",
-        "Rocket Scientist's Kablooey can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Scoocher", "M.O.U.T.H.", "Chomp",
-        "M.O.U.T.H.'s Chomp is a power and can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Scoocher", "Heckler", "Trip",
-        "Heckler's qualifying trip power can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Scoocher", "Hypnotist", "Warp",
-        "Hypnotist's qualifying power activation can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Scoocher", "Third Wheel", "Roll Through",
-        "Third Wheel's Roll Through is a power and can trigger Scoocher.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       SISYPHUS
-    ------------------------- */
-
-    ["Sisyphus", "Magician", "Reroll 6",
-        "A Magician reroll changing a 6 can prevent Sisyphus's trigger.",
-        "Rules-derived"],
-
-    ["Sisyphus", "Dicemonger", "Reroll 6",
-        "A Dicemonger reroll changing a 6 can prevent Sisyphus's trigger.",
-        "Rules-derived"],
-
-    ["Sisyphus", "Genius", "Prediction",
-        "Genius's predicted 6 can interact with Sisyphus's six-based effect.",
-        "Rules-derived"],
-
-    ["Sisyphus", "Lackey", "Rolled 6",
-        "Both respond to a 6 but have different effects.",
-        "Rules-derived"],
-
-    ["Sisyphus", "Skipper", "Die result",
-        "Sisyphus responds to 6 while Skipper responds to 1.",
-        "Rules-derived"],
-
-    ["Sisyphus", "Inchworm", "Die result",
-        "Sisyphus responds to 6 while Inchworm responds to 1.",
-        "Rules-derived"],
-
-    ["Sisyphus", "Gunk", "Movement",
-        "Gunk changes movement but does not change the underlying die result.",
-        "Rules-derived"],
-
-    ["Sisyphus", "Coach", "Movement",
-        "Coach changes movement but does not change the underlying die result.",
-        "Rules-derived"],
-
-    ["Sisyphus", "Rocket Scientist", "Rolled 6",
-        "When a 6 is rolled, Sisyphus's warp replaces ordinary movement.",
-        "Rules-derived"],
-
-    ["Sisyphus", "Stickler", "Warp",
-        "Warping to Start is not ordinary movement toward the finish.",
-        "Rules-derived"],
-
-    ["Sisyphus", "Scoocher", "Power",
-        "Sisyphus's qualifying ability can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Sisyphus", "Mastermind", "Pre-race",
-        "Sisyphus's pre-race effects can interact with Mastermind's pre-race effect.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       SKIPPER
-    ------------------------- */
-
-    ["Skipper", "Inchworm", "Roll 1",
-        "On a roll of 1, Inchworm acts first and Skipper acts next.",
-        "Official"],
-
-    ["Skipper", "Magician", "Reroll 1",
-        "A Magician reroll changing a 1 can prevent Skipper's trigger.",
-        "Rules-derived"],
-
-    ["Skipper", "Dicemonger", "Reroll 1",
-        "A Dicemonger reroll changing a 1 can prevent Skipper's trigger.",
-        "Rules-derived"],
-
-    ["Skipper", "Genius", "Prediction",
-        "Genius can predict a 1, interacting with Skipper's ability.",
-        "Rules-derived"],
-
-    ["Skipper", "Gunk", "Die unchanged",
-        "Gunk changes movement but does not change the die result.",
-        "Official"],
-
-    ["Skipper", "Coach", "Movement",
-        "Coach changes movement but not the die result.",
-        "Rules-derived"],
-
-    ["Skipper", "Alchemist", "Roll 1",
-        "A roll of 1 still triggers Skipper even when Alchemist replaces the movement.",
-        "Rules-derived"],
-
-    ["Skipper", "Rocket Scientist", "Movement",
-        "Rocket Scientist modifies movement after the relevant die result.",
-        "Rules-derived"],
-
-    ["Skipper", "Scoocher", "Extra turn",
-        "Skipper's qualifying extra-turn ability can trigger Scoocher according to timing.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       STICKLER
-    ------------------------- */
-
-    ["Stickler", "Duelist", "Exact finish",
-        "Duelist's movement must respect Stickler's exact-finish requirement.",
-        "Official"],
-
-    ["Stickler", "Legs", "Exact finish",
-        "Legs' Jog must respect Stickler's exact-finish requirement.",
-        "Rules-derived"],
-
-    ["Stickler", "Rocket Scientist", "Exact finish",
-        "Rocket Scientist's doubled movement must respect exact finish.",
-        "Rules-derived"],
-
-    ["Stickler", "Hare", "Exact finish",
-        "Hare's movement must respect exact finish.",
-        "Rules-derived"],
-
-    ["Stickler", "Alchemist", "Exact finish",
-        "Alchemist's replacement movement must respect exact finish.",
-        "Rules-derived"],
-
-    ["Stickler", "Coach", "Exact finish",
-        "Coach-modified movement must respect exact finish.",
-        "Rules-derived"],
-
-    ["Stickler", "Gunk", "Exact finish",
-        "Gunk-modified movement must respect exact finish.",
-        "Rules-derived"],
-
-    ["Stickler", "Blimp", "Exact finish",
-        "Blimp's movement must respect exact finish.",
-        "Rules-derived"],
-
-    ["Stickler", "Suckerfish", "Exact finish",
-        "Suckerfish's forced movement must respect exact finish.",
-        "Rules-derived"],
-
-    ["Stickler", "Centaur", "Exact finish",
-        "Centaur's backward or forced movement does not circumvent exact finish.",
-        "Rules-derived"],
-
-    ["Stickler", "Banana", "Exact finish",
-        "Banana-related movement must respect exact finish.",
-        "Rules-derived"],
-
-    ["Stickler", "Baba Yaga", "Exact finish",
-        "Baba Yaga-related movement must respect exact finish.",
-        "Rules-derived"],
-
-    ["Stickler", "Huge Baby", "Exact finish",
-        "Movement involving Huge Baby must still respect exact finish.",
-        "Rules-derived"],
-
-    ["Stickler", "Party Animal", "Exact finish",
-        "Party Animal's movement must respect exact finish.",
-        "Rules-derived"],
-
-    ["Stickler", "Scoocher", "Exact finish",
-        "Scoocher's movement must respect exact finish.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       SUCKERFISH
-    ------------------------- */
-
-    ["Suckerfish", "Romantic", "Simultaneous arrival",
-        "The previous combo is shut down by the August 2026 simultaneous-arrival rule.",
-        "Official August 2026 rule"],
-
-    ["Suckerfish", "Scoocher", "Follow",
-        "The Suckerfish/Scoocher interaction remains valid after the August 2026 rule.",
-        "Official / Designer ruling"],
-
-    ["Suckerfish", "Huge Baby", "Position",
-        "Huge Baby's space restriction affects Suckerfish's positioning.",
-        "Rules-derived"],
-
-    ["Suckerfish", "Baba Yaga", "Trip",
-        "Suckerfish movement can create a Baba Yaga trip interaction.",
-        "Rules-derived"],
-
-    ["Suckerfish", "Banana", "Movement",
-        "Suckerfish's movement can interact with Banana's position.",
-        "Rules-derived"],
-
-    ["Suckerfish", "M.O.U.T.H.", "Range",
-        "Suckerfish can move a racer into or out of M.O.U.T.H.'s range.",
-        "Rules-derived"],
-
-    ["Suckerfish", "Stickler", "Exact finish",
-        "Suckerfish's movement must respect exact finish.",
-        "Rules-derived"],
-
-    ["Suckerfish", "Duelist", "Position",
-        "Suckerfish's movement can change a Duelist interaction.",
-        "Rules-derived"],
-
-    ["Suckerfish", "Leaptoad", "Skipped spaces",
-        "Leaptoad's skipped spaces can affect Suckerfish's movement relationship.",
-        "Rules-derived"],
-
-    ["Suckerfish", "Hypnotist", "Warp",
-        "Hypnotist's warp changes Suckerfish's relevant position.",
-        "Rules-derived"],
-
-    ["Suckerfish", "Third Wheel", "Pair",
-        "Third Wheel's warp can change Suckerfish's target or pair.",
-        "Rules-derived"],
-
-    ["Suckerfish", "Party Animal", "Simultaneous movement",
-        "The interaction involves simultaneous movement and needs verification.",
-        "Needs verification"],
-
-    ["Suckerfish", "Centaur", "Forced movement",
-        "The interaction involving Centaur forcing movement of the followed racer needs verification.",
-        "Needs verification"],
-
-
-    /* -------------------------
-       THIRD WHEEL
-    ------------------------- */
-
-    ["Third Wheel", "Romantic", "Warp into pair",
-        "Third Wheel can warp into a pair; updated simultaneous-arrival rules determine Romantic's trigger.",
-        "Official August 2026 rule"],
-
-    ["Third Wheel", "M.O.U.T.H.", "Warp into pair",
-        "Third Wheel can warp into a pair involving M.O.U.T.H.",
-        "Rules-derived"],
-
-    ["Third Wheel", "Huge Baby", "Sharing",
-        "Third Wheel cannot create an illegal shared space with Huge Baby.",
-        "Rules-derived"],
-
-    ["Third Wheel", "Duelist", "Duel",
-        "Third Wheel can create a shared-space situation that causes a duel.",
-        "Rules-derived"],
-
-    ["Third Wheel", "Baba Yaga", "Trip",
-        "Warping onto Baba Yaga can trigger the applicable trip.",
-        "Rules-derived"],
-
-    ["Third Wheel", "Banana", "Warp",
-        "Third Wheel's warp is not ordinary passing.",
-        "Rules-derived"],
-
-    ["Third Wheel", "Suckerfish", "Target",
-        "Third Wheel can change the pair or target relevant to Suckerfish.",
-        "Rules-derived"],
-
-    ["Third Wheel", "Scoocher", "Roll Through",
-        "Roll Through is a power and can trigger Scoocher.",
-        "Rules-derived"],
-
-    ["Third Wheel", "Stickler", "Exact finish",
-        "Subsequent movement must respect Stickler's exact-finish requirement.",
-        "Rules-derived"],
-
-
-    /* -------------------------
-       TWIN
-    ------------------------- */
-
-    ["Twin", "Copycat", "Copy",
-        "Copycat can copy Twin's active power.",
-        "Rules-derived"],
-
-    ["Twin", "Egg", "Borrowed powers",
-        "Twin and Egg can both involve borrowed character powers.",
-        "Rules-derived"],
-
-    ["Twin", "Scoocher", "Borrowed power",
-        "A borrowed Twin power can trigger Scoocher if that power qualifies.",
-        "Rules-derived"],
-
-    ["Twin", "Gunk", "Conditional copying",
-        "Twin can use Gunk's power when the relevant condition is met.",
-        "Rules-derived"],
-
-    ["Twin", "Coach", "Conditional copying",
-        "Twin can use Coach's power when the relevant condition is met.",
-        "Rules-derived"],
-
-    ["Twin", "Blimp", "Conditional copying",
-        "Twin can use Blimp's power when the relevant condition is met.",
-        "Rules-derived"],
-
-    ["Twin", "M.O.U.T.H.", "Conditional copying",
-        "Twin can use M.O.U.T.H.'s power when the relevant condition is met.",
-        "Rules-derived"],
-
-    ["Twin", "Huge Baby", "Conditional copying",
-        "Twin can use Huge Baby's power when the relevant condition is met.",
-        "Rules-derived"],
-
-    ["Twin", "Baba Yaga", "Conditional copying",
-        "Twin can use Baba Yaga's power when the relevant condition is met.",
-        "Rules-derived"],
-
-    ["Twin", "Romantic", "Conditional copying",
-        "Twin can use Romantic's power when the relevant condition is met.",
-        "Rules-derived"],
-
-    ["Twin", "Mastermind", "Pre-race power",
-        "The distinction between Twin borrowing Mastermind's pre-race power and ordinary active powers needs verification.",
-        "Needs verification"],
-
-    ["Twin", "Sisyphus", "Pre-race power",
-        "The interaction between Twin's borrowed power and Sisyphus's pre-race effects needs verification.",
-        "Needs verification"]
-
-];
-
-
-/* =========================================================
-   PREPARE INTERACTIONS
-========================================================= */
-
-const interactions = interactionData.map(row => ({
-    character: row[0],
-    with: row[1],
-    topic: row[2],
-    details: row[3],
-    status: row[4]
-}));
-
-
-/* =========================================================
-   DOM ELEMENTS
-========================================================= */
-
-const athleteGrid = document.getElementById("athlete-grid");
-const searchInput = document.getElementById("search");
-const resultCount = document.getElementById("result-count");
-
-const modal = document.getElementById("modal");
-const modalContent = document.getElementById("modal-content");
-const modalClose = document.getElementById("modal-close");
-
-const filterButtons = document.querySelectorAll(".filter");
-
-
-/* =========================================================
-   STATE
-========================================================= */
-
-let activeFilter = "all";
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
+/*
+    INTERACTIONS
+
+    Each relationship is stored only once.
+
+    Example:
+        Huge Baby|Baba Yaga|...
+
+    is one interaction relationship.
+
+    The display system automatically shows that relationship
+    on BOTH characters' pages without storing a duplicate
+    Baba Yaga|Huge Baby entry.
+*/
+
+const interactionData = `
+Alchemist|Gunk|Gunk reduces Alchemist's replacement 4-space main move by 1.
+Alchemist|Coach|Coach can increase Alchemist's replacement main move.
+Alchemist|Inchworm|Alchemist can roll a 1 and replace the resulting movement with 4; Inchworm cares about the die roll rather than the resulting movement.
+Alchemist|Lackey|Alchemist can roll a 6 normally; replacing movement only occurs on 1/2.
+Alchemist|Skipper|A rolled 1 can trigger Skipper even if Alchemist replaces the resulting movement.
+Alchemist|Sisyphus|A rolled 6 interacts with Sisyphus based on the die result rather than movement.
+Alchemist|Magician|Magician can reroll the die and potentially prevent an initial 1/2 from becoming an Alchemist activation.
+Alchemist|Dicemonger|Dicemonger can change the die result before Alchemist's replacement ability resolves.
+Alchemist|Rocket Scientist|Rocket Scientist can double the eventual main movement and then trip.
+Alchemist|Banana|Alchemist's movement can cause normal passing interactions with Banana.
+Alchemist|Centaur|Alchemist's movement can cause normal passing interactions with Centaur.
+Alchemist|Baba Yaga|Alchemist can end its movement on Baba Yaga's space and trigger relevant stopping effects.
+Alchemist|Huge Baby|Huge Baby prevents normal sharing of a space.
+Alchemist|M.O.U.T.H.|Alchemist can potentially stop in M.O.U.T.H.'s range.
+Alchemist|Romantic|Stopping on Romantic can trigger its space-based ability when conditions are met.
+Alchemist|Stickler|Replacement movement must still obey exact-finish requirements.
+
+Baba Yaga|Duelist|They can duel while sharing Baba Yaga's space, but Duelist still gets tripped.
+Baba Yaga|Hypnotist|Hypnotist can warp Baba Yaga onto its space, but Baba Yaga's trip effect still applies.
+Baba Yaga|Huge Baby|Huge Baby prevents normal sharing of a space.
+Baba Yaga|M.O.U.T.H.|Sharing or stopping can create both Baba Yaga's trip and M.O.U.T.H.'s Chomp timing question.
+Baba Yaga|Romantic|Normal stopping-on-space interaction applies when conditions are met.
+Baba Yaga|Suckerfish|Suckerfish movement can interact with Baba Yaga's trip effect.
+Baba Yaga|Party Animal|Party Animal's simultaneous movement creates an important timing question with Baba Yaga.
+Baba Yaga|Cheerleader|Cheerleader can move racers simultaneously into Baba Yaga's space; timing is important.
+Baba Yaga|Scoocher|Baba Yaga's trip is a power and can trigger Scoocher.
+Baba Yaga|Heckler|Baba Yaga can cause a racer to trip, producing a potential Heckler interaction.
+
+Banana|Centaur|Centaur's movement can interact with Banana's trip when racers pass Banana.
+Banana|Huge Baby|Huge Baby/Banana has received designer clarification concerning the interaction.
+Banana|M.O.U.T.H.|Passing and stopping interactions can affect whether M.O.U.T.H. reaches Banana.
+Banana|Flip Flop|Flip Flop's swap is a warp and does not itself count as passing.
+Banana|Hypnotist|Hypnotist warping does not count as passing.
+Banana|Suckerfish|Suckerfish movement can interact with Banana's position.
+Banana|Romantic|Banana's trip is a power; stopping conditions can interact with Romantic.
+Banana|Scoocher|Banana's trip is a power and triggers Scoocher.
+Banana|Heckler|Banana can trip a racer and create a Heckler interaction.
+Banana|Copy Cat|Copy Cat can acquire Banana's power when Banana is in the lead.
+Banana|Leaptoad|Leaptoad's occupied-space skipping changes how Banana's passing condition applies.
+
+Blimp|Gunk|Gunk modifies Blimp's main movement.
+Blimp|Coach|Coach modifies Blimp's main movement.
+Blimp|Hare|Blimp and Hare both affect main movement.
+Blimp|Rocket Scientist|Rocket Scientist can double Blimp's movement and cause a trip.
+Blimp|Alchemist|Alchemist's replacement movement can interact with Blimp's movement rules.
+Blimp|Lackey|Blimp's movement changes do not inherently change a rolled 6.
+Blimp|Inchworm|Blimp's movement changes do not inherently change a rolled 1.
+Blimp|Skipper|Blimp's movement changes do not inherently change a rolled 1.
+Blimp|Sisyphus|Blimp's movement changes do not inherently change a rolled 6.
+Blimp|Magician|Magician can change the die result affecting Blimp.
+Blimp|Dicemonger|Dicemonger can change the die result affecting Blimp.
+Blimp|Banana|Blimp's movement can cause passing interactions with Banana.
+Blimp|Centaur|Blimp's movement can cause passing interactions with Centaur.
+Blimp|Stickler|Blimp's movement must obey exact finishing requirements.
+Blimp|Scoocher|Blimp's ability activation can trigger Scoocher.
+
+Centaur|Banana|A racer passing Centaur can be moved backward; passing Banana can also trigger Banana.
+Centaur|Huge Baby|Centaur can move racers backward, but Huge Baby's space restriction can intervene.
+Centaur|M.O.U.T.H.|Centaur's backward movement can put racers in or out of M.O.U.T.H.'s range.
+Centaur|Baba Yaga|Movement can result in ending on Baba Yaga.
+Centaur|Suckerfish|Suckerfish can interact with movement modified by Centaur.
+Centaur|Romantic|Centaur can end a movement on Romantic.
+Centaur|Stickler|Backward movement does not circumvent Stickler's exact-finish rule.
+Centaur|Scoocher|Hoofwhack is a power and triggers Scoocher.
+
+Cheerleader|Last-place racers|Cheerleader moves racers currently in last place 2 spaces.
+Cheerleader|Huge Baby|Moving racers toward Huge Baby can create displacement interactions.
+Cheerleader|Baba Yaga|Simultaneous movement into Baba Yaga can create timing questions.
+Cheerleader|Romantic|Simultaneous arrival rules are important for Romantic.
+Cheerleader|M.O.U.T.H.|Simultaneous arrival rules are important for M.O.U.T.H.
+Cheerleader|Suckerfish|Cheerleader can move a racer that Suckerfish is attached to.
+Cheerleader|Flip Flop|Cheerleader can change the positions relevant to Flip Flop.
+Cheerleader|Lovable Loser|Both abilities care about last-place positioning.
+Cheerleader|Scoocher|Cheerleader's ability is a power and triggers Scoocher.
+
+Coach|Gunk|Coach's +1 and Gunk's -1 interact directly.
+Coach|Legs|Legs' 5-space Jog is a main move and receives Coach's bonus.
+Coach|Alchemist|Coach can increase Alchemist's replacement movement.
+Coach|Hare|Coach's bonus can stack with Hare's movement.
+Coach|Rocket Scientist|Coach can increase the amount being doubled by Rocket Scientist.
+Coach|Blimp|Coach affects Blimp's movement.
+Coach|Lackey|Coach changes movement but not the underlying die result.
+Coach|Inchworm|Coach changes movement but not the underlying die result.
+Coach|Skipper|Coach changes movement but not the underlying die result.
+Coach|Sisyphus|Coach changes movement but not the underlying die result.
+Coach|Scoocher|Coach's power activation triggers Scoocher.
+
+Copy Cat|Huge Baby|Copy Cat can copy the lead racer's power; copied power takes priority over Copy Cat's normal restrictions in the relevant interaction.
+Copy Cat|M.O.U.T.H.|Copy Cat can acquire M.O.U.T.H.'s Chomp.
+Copy Cat|Gunk|Copy Cat can acquire Gunk's movement modification.
+Copy Cat|Hare|Copy Cat can acquire Hare's power.
+Copy Cat|Suckerfish|Copy Cat can acquire Suckerfish's power.
+Copy Cat|Scoocher|Copy Cat can acquire powers that trigger Scoocher.
+Copy Cat|Romantic|Copy Cat can acquire Romantic when Romantic is the lead racer.
+Copy Cat|Alchemist|Copy Cat can acquire Alchemist's replacement movement.
+Copy Cat|Baba Yaga|Copy Cat can acquire Baba Yaga's trip ability.
+Copy Cat|Banana|Copy Cat can acquire Banana's trip ability.
+Copy Cat|Cheerleader|Copy Cat can acquire Cheerleader's power.
+Copy Cat|Coach|Copy Cat can acquire Coach's movement bonus.
+Copy Cat|Duelist|Copy Cat can acquire Duelist's ability.
+Copy Cat|Hypnotist|Copy Cat can acquire Hypnotist's ability.
+Copy Cat|Inchworm|Copy Cat can acquire Inchworm's ability.
+Copy Cat|Lackey|Copy Cat can acquire Lackey's ability.
+Copy Cat|Leaptoad|Copy Cat can acquire Leaptoad's ability.
+Copy Cat|Legs|Copy Cat can acquire Legs' ability.
+Copy Cat|Lovable Loser|Copy Cat can acquire Lovable Loser's ability.
+Copy Cat|Magician|Copy Cat can acquire Magician's ability.
+Copy Cat|Party Animal|Copy Cat can acquire Party Animal's ability.
+Copy Cat|Rocket Scientist|Copy Cat can acquire Rocket Scientist's ability.
+Copy Cat|Skipper|Copy Cat can acquire Skipper's ability.
+Copy Cat|Stickler|Copy Cat can acquire Stickler's ability.
+Copy Cat|Third Wheel|Copy Cat can acquire Third Wheel's ability.
+Copy Cat|Twin|Copy Cat can acquire Twin's ability.
+
+Dicemonger|Magician|Magician's own rerolls do not count as Dicemonger's reroll service.
+Dicemonger|Genius|Rerolls can invalidate the result predicted by Genius.
+Dicemonger|Inchworm|Rerolling a 1 can prevent Inchworm's trigger.
+Dicemonger|Lackey|Rerolling can change whether a 6 occurs.
+Dicemonger|Skipper|Rerolling can change whether a 1 occurs.
+Dicemonger|Sisyphus|Rerolling can change whether a 6 occurs.
+Dicemonger|Rocket Scientist|The final die result determines Rocket Scientist's movement.
+Dicemonger|Scoocher|Dicemonger can cause Scoocher to move for applicable rerolls.
+
+Duelist|Baba Yaga|Duelist can duel Baba Yaga but still gets tripped.
+Duelist|M.O.U.T.H.|Duelist can duel M.O.U.T.H.; resulting placement can create unusual interactions.
+Duelist|Huge Baby|Huge Baby prevents normal sharing.
+Duelist|Romantic|Duelist sharing a space can interact with Romantic.
+Duelist|Suckerfish|Duelist's position can be altered by Suckerfish.
+Duelist|Scoocher|Each duel is a power activation and can trigger Scoocher.
+Duelist|Stickler|Duelist's movement must obey exact-finish rules.
+Duelist|Banana|Duelist movement can interact with Banana.
+Duelist|Centaur|Duelist movement can interact with Centaur.
+
+Egg|Copy Cat|Copy Cat can copy Egg's active power.
+Egg|Twin|Egg and Twin both involve borrowed character powers.
+Egg|Scoocher|Egg's selected power can trigger Scoocher.
+Egg|Gunk|Egg can inherit Gunk's movement modification.
+Egg|Coach|Egg can inherit Coach's movement bonus.
+Egg|Baba Yaga|Egg can inherit Baba Yaga's trip ability.
+Egg|M.O.U.T.H.|Egg can inherit M.O.U.T.H.'s Chomp.
+Egg|Huge Baby|Egg can inherit Huge Baby's power.
+Egg|Romantic|Egg can inherit Romantic's ability.
+
+Flip Flop|Hypnotist|Hypnotist can warp a racer to its space, affecting Flip Flop's positional advantage.
+Flip Flop|Banana|Flip Flop's swap is a warp and does not itself count as passing.
+Flip Flop|Huge Baby|Flip Flop cannot create an illegal shared space with Huge Baby.
+Flip Flop|M.O.U.T.H.|Warping onto or away from M.O.U.T.H. changes Chomp opportunities.
+Flip Flop|Romantic|Warping does not count as ordinary movement into the space.
+Flip Flop|Duelist|Swapping can create a new shared-space duel situation.
+Flip Flop|Suckerfish|Swapping can alter Suckerfish positioning.
+Flip Flop|Stickler|Warping does not itself count as movement toward the finish.
+
+Genius|Magician|Magician can change the die result Genius predicted.
+Genius|Dicemonger|Dicemonger can change the die result Genius predicted.
+Genius|Gunk|Gunk changes movement, not the predicted die result.
+Genius|Coach|Coach changes movement, not the predicted die result.
+Genius|Hare|Hare changes movement, not the predicted die result.
+Genius|Blimp|Blimp changes movement, not the predicted die result.
+Genius|Rocket Scientist|Genius predicts the die result while Rocket Scientist modifies movement.
+Genius|Lackey|A predicted 6 can produce Lackey's effect.
+Genius|Inchworm|A predicted 1 can produce Inchworm's effect.
+Genius|Skipper|A predicted 1 can produce Skipper's effect.
+Genius|Sisyphus|A predicted 6 can produce Sisyphus's effect.
+Genius|Scoocher|Genius's ability can trigger Scoocher.
+
+Gunk|Coach|Coach's +1 and Gunk's -1 interact directly.
+Gunk|Legs|Gunk reduces Legs' 5-space Jog to 4.
+Gunk|Alchemist|Gunk reduces Alchemist's replacement movement.
+Gunk|Hare|Gunk modifies Hare's movement.
+Gunk|Rocket Scientist|Gunk modifies the movement amount being doubled.
+Gunk|Blimp|Gunk modifies Blimp's movement.
+Gunk|Scoocher|Scoocher moves once for each -1 that affects a main move.
+Gunk|M.O.U.T.H.|Gunk can slow M.O.U.T.H. and alter which racer it reaches.
+Gunk|Huge Baby|Gunk can participate in displacement/loop interactions involving Huge Baby and Scoocher.
+Gunk|Lackey|Gunk does not change the underlying die result; a rolled 6 remains a 6.
+Gunk|Inchworm|Gunk does not change the underlying die result; a rolled 1 remains a 1.
+
+Hare|Gunk|Gunk modifies Hare's movement.
+Hare|Coach|Coach modifies Hare's movement.
+Hare|Blimp|Hare and Blimp can both modify main movement.
+Hare|Rocket Scientist|Rocket Scientist can double Hare's movement and cause a trip.
+Hare|Magician|Magician can change the die result affecting Hare.
+Hare|Dicemonger|Dicemonger can change the die result affecting Hare.
+Hare|Genius|Genius predicts Hare's die result.
+Hare|Banana|Hare's movement can pass Banana.
+Hare|Centaur|Hare's movement can pass Centaur.
+Hare|Stickler|Hare's movement cannot overshoot the finish.
+Hare|Scoocher|Hare's ability activation can trigger Scoocher.
+
+Heckler|Banana|Banana can trip a racer and create a Heckler interaction.
+Heckler|Baba Yaga|Baba Yaga can trip a racer and create a Heckler interaction.
+Heckler|Rocket Scientist|Rocket Scientist deliberately trips after doubling.
+Heckler|Party Animal|Party Animal deliberately trips.
+Heckler|Scoocher|Heckler's ability is a power.
+Heckler|Skipper|Extra turns can affect when a tripped racer recovers.
+Heckler|Inchworm|Extra movement/turn timing can affect recovery timing.
+Heckler|Stickler|Heckler's movement must obey exact-finish rules.
+
+Huge Baby|M.O.U.T.H.|Huge Baby cannot share a space with another racer, preventing normal Chomp interaction.
+Huge Baby|Baba Yaga|Huge Baby prevents normal shared-space interaction.
+Huge Baby|Duelist|Huge Baby prevents ordinary Duelist sharing.
+Huge Baby|Romantic|Huge Baby prevents Romantic's normal shared-space condition.
+Huge Baby|Suckerfish|Huge Baby prevents normal ending on its space.
+Huge Baby|Party Animal|Party Animal has a specific Huge Baby interaction.
+Huge Baby|Banana|Huge Baby/Banana interaction has received designer clarification.
+Huge Baby|Copy Cat|Copy Cat's copied power can take priority over Huge Baby in the specified interaction.
+Huge Baby|Hypnotist|Hypnotist cannot create an illegal shared space; Huge Baby displaces the racer.
+Huge Baby|Third Wheel|Third Wheel cannot create an illegal shared space with Huge Baby.
+Huge Baby|Scoocher|Huge Baby and Scoocher can create a loop; resolve the loop once and stop.
+Huge Baby|Leaptoad|Leaptoad can skip occupied Huge Baby spaces.
+Huge Baby|Cheerleader|Cheerleader movement can cause Huge Baby displacement.
+
+Hypnotist|Baba Yaga|Hypnotist can warp Baba Yaga to its space but still gets tripped.
+Hypnotist|Huge Baby|Huge Baby prevents illegal sharing after a warp.
+Hypnotist|Flip Flop|Hypnotist can undermine Flip Flop's positional advantage.
+Hypnotist|Romantic|Warping does not count as ordinary movement into the space.
+Hypnotist|M.O.U.T.H.|Hypnotist can warp M.O.U.T.H. into a position where Chomp may occur.
+Hypnotist|Duelist|Warping can create a shared-space duel.
+Hypnotist|Suckerfish|Warping can alter Suckerfish's positioning.
+Hypnotist|Third Wheel|Warping can change whether a two-racer target exists.
+Hypnotist|Scoocher|Hypnotist's power activation triggers Scoocher.
+
+Inchworm|Magician|Magician can reroll a 1 before Inchworm triggers.
+Inchworm|Dicemonger|Dicemonger can reroll a 1 before Inchworm triggers.
+Inchworm|Alchemist|Alchemist can roll 1 and replace the resulting movement; Inchworm cares about the roll.
+Inchworm|Skipper|If a racer rolls 1, Inchworm wriggles first and Skipper takes the next turn.
+Inchworm|Sisyphus|Inchworm responds to 1 while Sisyphus responds to 6.
+Inchworm|Gunk|Gunk does not change the underlying die result.
+Inchworm|Coach|Coach changes movement but not the die result.
+Inchworm|Rocket Scientist|A rolled 1 can trigger Inchworm even if movement is later modified.
+Inchworm|Scoocher|Inchworm's ability can trigger Scoocher.
+
+Lackey|Gunk|Gunk changes movement but does not change a rolled 6.
+Lackey|Magician|Magician can reroll a 6 and prevent Lackey's activation.
+Lackey|Dicemonger|Dicemonger can reroll a 6 and prevent Lackey's activation.
+Lackey|Genius|Genius can predict a 6.
+Lackey|Sisyphus|Both respond to a roll of 6 but have different effects.
+Lackey|Coach|Coach changes movement but not the rolled number.
+Lackey|Rocket Scientist|Rocket Scientist doubles movement after the roll.
+Lackey|Scoocher|Lackey's ability can trigger Scoocher.
+
+Leaptoad|Banana|Leaptoad skips occupied spaces, changing how Banana's passing condition applies.
+Leaptoad|Centaur|Leaptoad's movement can skip Centaur rather than interact as ordinary passing.
+Leaptoad|M.O.U.T.H.|Leaptoad can jump over M.O.U.T.H. rather than stop on it.
+Leaptoad|Huge Baby|Leaptoad can skip Huge Baby's occupied space.
+Leaptoad|Romantic|August 2026 rules changed relevant simultaneous-arrival interactions.
+Leaptoad|Suckerfish|Leaptoad's skipped spaces affect where it can interact with Suckerfish.
+Leaptoad|Scoocher|Scoocher moves once for each occupied space Leaptoad skips.
+Leaptoad|Stickler|Leaptoad must still obey exact-finish requirements.
+
+Legs|Gunk|Gunk reduces Legs' 5-space Jog to 4.
+Legs|Coach|Coach can increase Legs' Jog.
+Legs|Inchworm|Legs does not roll a die for Jog, so Inchworm does not trigger from it.
+Legs|Lackey|Legs does not roll a die for Jog, so Lackey does not trigger from it.
+Legs|Sisyphus|Legs does not roll a die for Jog, so Sisyphus does not trigger from it.
+Legs|Skipper|Legs does not roll a die for Jog, so Skipper does not trigger from it.
+Legs|Rocket Scientist|Interaction between Rocket Scientist and Legs' replacement movement needs explicit verification.
+Legs|Stickler|Legs' Jog must obey exact finishing requirements.
+Legs|Banana|Legs can pass Banana.
+Legs|Centaur|Legs can pass Centaur.
+Legs|Scoocher|Jog is a power activation and can trigger Scoocher.
+
+Lovable Loser|Cheerleader|Both abilities care about last-place positioning.
+Lovable Loser|Flip Flop|Being last can make Lovable Loser relevant to Flip Flop's positioning.
+Lovable Loser|Hare|Hare's lead-related ability contrasts with Lovable Loser's last-place ability.
+Lovable Loser|M.O.U.T.H.|Being last can make Lovable Loser vulnerable to M.O.U.T.H. positioning.
+Lovable Loser|Huge Baby|Huge Baby displacement can change last-place status.
+Lovable Loser|Party Animal|Party Animal movement can change who is last.
+Lovable Loser|Scoocher|Lovable Loser's ability is a power.
+
+M.O.U.T.H.|Huge Baby|Huge Baby cannot share a space, preventing normal Chomp.
+M.O.U.T.H.|Duelist|Duelist can duel M.O.U.T.H.; placement can create unusual interactions.
+M.O.U.T.H.|Gunk|Gunk can slow M.O.U.T.H. and alter who it reaches.
+M.O.U.T.H.|Copy Cat|Copy Cat can acquire Chomp.
+M.O.U.T.H.|Baba Yaga|M.O.U.T.H. stopping can overlap with Baba Yaga's trip.
+M.O.U.T.H.|Banana|Banana's position can affect whether M.O.U.T.H. reaches it.
+M.O.U.T.H.|Hypnotist|Hypnotist can warp M.O.U.T.H. into Chomp range.
+M.O.U.T.H.|Flip Flop|Flip Flop can change M.O.U.T.H.'s Chomp opportunities.
+M.O.U.T.H.|Romantic|Simultaneous arrival no longer triggers Chomp under the August rules.
+M.O.U.T.H.|Suckerfish|M.O.U.T.H. can be moved into or out of Chomp range by Suckerfish.
+M.O.U.T.H.|Third Wheel|Third Wheel can warp into a pair involving M.O.U.T.H.
+M.O.U.T.H.|Party Animal|Party Animal's simultaneous movement no longer triggers Chomp.
+M.O.U.T.H.|Stickler|M.O.U.T.H. must obey finishing rules.
+M.O.U.T.H.|Scoocher|Chomp is a power and can trigger Scoocher.
+
+Magician|Dicemonger|Magician's own rerolls do not trigger Dicemonger's reroll service.
+Magician|Inchworm|Magician can reroll a 1 before Inchworm triggers.
+Magician|Genius|Magician can change the die result Genius predicted.
+Magician|Lackey|Magician can reroll a 6 and prevent Lackey.
+Magician|Skipper|Magician can reroll a 1 and prevent Skipper.
+Magician|Sisyphus|Magician can reroll a 6 and prevent Sisyphus.
+Magician|Rocket Scientist|The final roll determines Rocket Scientist's movement.
+Magician|Scoocher|Scoocher moves on each Magician reroll, even if the reroll is not ultimately used.
+Magician|Stickler|The final movement must still obey Stickler.
+
+Mastermind|Copy Cat|Copy Cat does not copy Mastermind's before-race prediction.
+Mastermind|Egg|Egg's borrowed-power rules need to distinguish pre-race abilities.
+Mastermind|Twin|Twin's borrowed-power rules need to distinguish pre-race abilities.
+Mastermind|M.O.U.T.H.|M.O.U.T.H. can eliminate Mastermind before the prediction pays off.
+Mastermind|Sisyphus|Both have special before-race effects.
+Mastermind|Scoocher|If Mastermind ends the race, further power interactions cease.
+
+Party Animal|Huge Baby|Huge Baby has a specific interaction with Party Animal's movement.
+Party Animal|Romantic|Party Animal's simultaneous movement no longer triggers Romantic.
+Party Animal|M.O.U.T.H.|Party Animal's simultaneous movement no longer triggers M.O.U.T.H.
+Party Animal|Baba Yaga|Party Animal creates timing questions with Baba Yaga.
+Party Animal|Banana|Party Animal's movement can cause passing interactions.
+Party Animal|Centaur|Party Animal can move racers affected by Centaur.
+Party Animal|Coach|Party Animal's movement can receive Coach's modification.
+Party Animal|Gunk|Party Animal's movement can be reduced by Gunk.
+Party Animal|Rocket Scientist|Rocket Scientist can cause Party Animal to trip.
+Party Animal|Heckler|Party Animal's ability involves tripping.
+Party Animal|Scoocher|Animal Magnetism is a power and triggers Scoocher.
+Party Animal|Suckerfish|Moving multiple racers can create complicated Suckerfish chains.
+Party Animal|Stickler|Doubled/modified movement cannot circumvent exact-finish requirements.
+
+Rocket Scientist|Gunk|Gunk modifies the movement amount Rocket Scientist doubles.
+Rocket Scientist|Coach|Coach modifies the movement amount Rocket Scientist doubles.
+Rocket Scientist|Hare|Hare modifies movement before Rocket Scientist's doubling.
+Rocket Scientist|Blimp|Blimp modifies movement before Rocket Scientist's doubling.
+Rocket Scientist|Alchemist|Alchemist's replacement movement can interact with Rocket Scientist's doubling.
+Rocket Scientist|Legs|Interaction with Legs' replacement movement needs explicit verification.
+Rocket Scientist|Heckler|Rocket Scientist deliberately trips after doubling.
+Rocket Scientist|Inchworm|A rolled 1 can trigger Inchworm regardless of later movement doubling.
+Rocket Scientist|Lackey|A rolled 6 can trigger Lackey regardless of later movement doubling.
+Rocket Scientist|Skipper|A rolled 1 can trigger Skipper.
+Rocket Scientist|Sisyphus|A rolled 6 can trigger Sisyphus.
+Rocket Scientist|Genius|Genius predicts the die result; Rocket Scientist changes movement.
+Rocket Scientist|Magician|Magician changes the final die result used by Rocket Scientist.
+Rocket Scientist|Dicemonger|Dicemonger changes the final die result used by Rocket Scientist.
+Rocket Scientist|Banana|Doubled movement creates more passing opportunities.
+Rocket Scientist|Centaur|Doubled movement creates more passing opportunities.
+Rocket Scientist|M.O.U.T.H.|Doubled movement changes where Rocket Scientist can finish relative to M.O.U.T.H.
+Rocket Scientist|Baba Yaga|Doubled movement changes where Rocket Scientist can finish relative to Baba Yaga.
+Rocket Scientist|Huge Baby|Doubled movement can encounter Huge Baby's space restrictions.
+Rocket Scientist|Romantic|Doubled movement changes potential Romantic stopping conditions.
+Rocket Scientist|Scoocher|Kablooey is a power activation.
+Rocket Scientist|Stickler|Doubled movement cannot circumvent exact-finish requirements.
+
+Romantic|Suckerfish|Old Romantic/Suckerfish combo is shut down by August 2026 simultaneous-arrival rule.
+Romantic|Party Animal|Party Animal's simultaneous movement no longer triggers Romantic.
+Romantic|Leaptoad|Updated simultaneous-arrival rules affect Romantic/Leaptoad interactions.
+Romantic|Hypnotist|Warping does not count as ordinary stopping movement.
+Romantic|M.O.U.T.H.|Simultaneous arrival does not trigger Romantic/M.O.U.T.H. stopping effects.
+Romantic|Huge Baby|Huge Baby prevents normal shared-space Romantic condition.
+Romantic|Baba Yaga|Stopping with Baba Yaga can create overlapping space effects.
+Romantic|Banana|Banana's trip and Romantic's stopping condition can overlap.
+Romantic|Duelist|Duelist's shared-space duel can overlap with Romantic.
+Romantic|Scoocher|Romantic's ability activation can trigger Scoocher.
+
+Scoocher|Gunk|Scoocher moves once for each -1 affecting a main move.
+Scoocher|Dicemonger|Scoocher moves for applicable Dicemonger rerolls.
+Scoocher|Leaptoad|Scoocher moves once for each occupied space Leaptoad skips.
+Scoocher|Magician|Scoocher moves on each Magician reroll, even if unused.
+Scoocher|Suckerfish|Scoocher/Suckerfish interaction remains valid after August 2026 update.
+Scoocher|Huge Baby|Huge Baby and Scoocher can produce a loop; resolve once and stop.
+Scoocher|Romantic|Romantic activation can cause Scoocher movement.
+Scoocher|Party Animal|Party Animal's Animal Magnetism can cause Scoocher movement.
+Scoocher|Duelist|Duelist's power activation can cause Scoocher movement.
+Scoocher|Banana|Banana's trip can cause Scoocher movement.
+Scoocher|Baba Yaga|Baba Yaga's trip can cause Scoocher movement.
+Scoocher|Centaur|Centaur's Hoofwhack can cause Scoocher movement.
+Scoocher|Coach|Coach's power activation can cause Scoocher movement.
+Scoocher|Alchemist|Alchemist's power activation can cause Scoocher movement.
+Scoocher|Rocket Scientist|Rocket Scientist's Kablooey can cause Scoocher movement.
+Scoocher|M.O.U.T.H.|M.O.U.T.H.'s Chomp can cause Scoocher movement.
+Scoocher|Heckler|Heckler's ability can cause Scoocher movement.
+Scoocher|Hypnotist|Hypnotist's power can cause Scoocher movement.
+Scoocher|Third Wheel|Third Wheel's Roll Through can cause Scoocher movement.
+
+Sisyphus|Magician|Magician can alter whether Sisyphus rolls a 6.
+Sisyphus|Dicemonger|Dicemonger can alter whether Sisyphus rolls a 6.
+Sisyphus|Genius|Genius can predict a 6.
+Sisyphus|Lackey|Both respond to 6 but have different effects.
+Sisyphus|Skipper|Skipper responds to 1 while Sisyphus responds to 6.
+Sisyphus|Inchworm|Inchworm responds to 1 while Sisyphus responds to 6.
+Sisyphus|Gunk|Gunk affects ordinary movement but not the underlying die result.
+Sisyphus|Coach|Coach affects ordinary movement but not the underlying die result.
+Sisyphus|Rocket Scientist|A 6 produces Sisyphus's warp rather than ordinary movement.
+Sisyphus|Stickler|Warping to Start does not count as ordinary movement toward the finish.
+Sisyphus|Scoocher|Keep Rollin' is a power.
+Sisyphus|Mastermind|Both have special pre-race effects.
+
+Skipper|Inchworm|If a racer rolls 1, Inchworm acts first and Skipper takes the next turn.
+Skipper|Magician|Magician can reroll a 1 before Skipper triggers.
+Skipper|Dicemonger|Dicemonger can reroll a 1 before Skipper triggers.
+Skipper|Genius|Genius can predict a 1.
+Skipper|Gunk|Gunk does not change the underlying die result.
+Skipper|Coach|Coach changes movement but not the underlying die result.
+Skipper|Alchemist|Alchemist can roll 1 and replace movement while Skipper still responds to the roll.
+Skipper|Rocket Scientist|Rocket Scientist modifies movement after the roll.
+Skipper|Scoocher|Skipper's extra-turn ability interacts with power-trigger timing.
+
+Stickler|Duelist|Duelist movement cannot overshoot the finish under Stickler.
+Stickler|Legs|Legs' Jog cannot overshoot the finish.
+Stickler|Rocket Scientist|Rocket Scientist's doubled movement cannot overshoot the finish.
+Stickler|Hare|Hare's movement cannot overshoot the finish.
+Stickler|Alchemist|Alchemist's replacement movement cannot overshoot the finish.
+Stickler|Coach|Coach-modified movement must still finish exactly.
+Stickler|Gunk|Gunk-modified movement must still finish exactly.
+Stickler|Blimp|Blimp's movement must still finish exactly.
+Stickler|Suckerfish|Suckerfish movement must respect Stickler.
+Stickler|Centaur|Backward movement does not circumvent Stickler.
+Stickler|Banana|Banana-related movement must respect Stickler.
+Stickler|Baba Yaga|Baba Yaga-related movement must respect Stickler.
+Stickler|Huge Baby|Huge Baby displacement must respect Stickler's movement restrictions.
+Stickler|Party Animal|Party Animal cannot circumvent exact-finish requirements.
+Stickler|Scoocher|Scoocher's movement must obey finishing requirements.
+
+Suckerfish|Romantic|Old Romantic/Suckerfish combo is shut down by August 2026 simultaneous-arrival rule.
+Suckerfish|Scoocher|Scoocher/Suckerfish interaction remains valid after August 2026 update.
+Suckerfish|Huge Baby|Huge Baby prevents normal ending on its space.
+Suckerfish|Baba Yaga|Suckerfish movement can cause Baba Yaga interaction.
+Suckerfish|Banana|Suckerfish movement can interact with Banana.
+Suckerfish|M.O.U.T.H.|Suckerfish can move M.O.U.T.H. into or out of Chomp range.
+Suckerfish|Stickler|Suckerfish can interact with Stickler at the finish.
+Suckerfish|Duelist|Suckerfish movement can alter Duelist's shared-space situation.
+Suckerfish|Party Animal|Party Animal can move racers affected by Suckerfish.
+Suckerfish|Leaptoad|Leaptoad positioning can affect Suckerfish.
+Suckerfish|Hypnotist|Hypnotist can alter Suckerfish positioning.
+Suckerfish|Third Wheel|Third Wheel can change who Suckerfish is interacting with.
+Suckerfish|Centaur|Centaur can alter the movement of the racer Suckerfish is following.
+
+Third Wheel|Romantic|Third Wheel can warp into a pair; updated simultaneous-arrival rules matter.
+Third Wheel|M.O.U.T.H.|Third Wheel can warp into a pair involving M.O.U.T.H.
+Third Wheel|Huge Baby|Third Wheel cannot create illegal sharing with Huge Baby.
+Third Wheel|Duelist|Third Wheel can create a shared-space duel situation.
+Third Wheel|Baba Yaga|Third Wheel warping onto Baba Yaga can trigger relevant trip effects.
+Third Wheel|Banana|Warping does not count as passing Banana.
+Third Wheel|Suckerfish|Third Wheel can change Suckerfish's pair/target situation.
+Third Wheel|Scoocher|Roll Through is a power and triggers Scoocher.
+Third Wheel|Stickler|Third Wheel's subsequent movement must obey exact-finish requirements.
+
+Twin|Copy Cat|Copy Cat can copy Twin's current active power.
+Twin|Egg|Twin and Egg both involve borrowed character powers.
+Twin|Scoocher|Twin's borrowed power can trigger Scoocher.
+Twin|Gunk|Twin can inherit Gunk's movement modification.
+Twin|Coach|Twin can inherit Coach's movement bonus.
+Twin|Blimp|Twin can inherit Blimp's movement ability.
+Twin|M.O.U.T.H.|Twin can inherit M.O.U.T.H.'s Chomp.
+Twin|Huge Baby|Twin can inherit Huge Baby's ability.
+Twin|Baba Yaga|Twin can inherit Baba Yaga's ability.
+Twin|Romantic|Twin can inherit Romantic's ability.
+Twin|Mastermind|Twin's borrowed-power rules need to distinguish pre-race abilities.
+Twin|Sisyphus|Twin's borrowed-power rules need to distinguish pre-race abilities.
+`.trim();
+
+
+/*
+    Convert the interaction text into objects.
+*/
+const rawInteractions = interactionData
+    .split("\n")
+    .map(line => line.trim())
+    .filter(Boolean)
+    .map(line => {
+        const parts = line.split("|");
+
+        return {
+            character: parts[0].trim(),
+            with: parts[1].trim(),
+            details: parts.slice(2).join("|").trim()
+        };
+    });
+
+
+/*
+    Remove exact duplicate relationships.
+
+    This protects the database if the same interaction
+    accidentally gets entered twice.
+*/
+const uniqueInteractions = [];
+
+const interactionKeys = new Set();
+
+rawInteractions.forEach(interaction => {
+    const names = [
+        interaction.character,
+        interaction.with
+    ].sort((a, b) => a.localeCompare(b));
+
+    const key = `${names[0]}|${names[1]}|${interaction.details}`;
+
+    if (!interactionKeys.has(key)) {
+        interactionKeys.add(key);
+        uniqueInteractions.push(interaction);
+    }
+});
+
+
+/*
+    Find every interaction involving a character.
+
+    Because relationships are stored only once, we check
+    BOTH sides of the relationship here.
+*/
+function getInteractions(characterName) {
+    return uniqueInteractions.filter(interaction =>
+        interaction.character === characterName ||
+        interaction.with === characterName
+    );
+}
+
+
+/*
+    Get the OTHER character in an interaction.
+*/
+function getOtherCharacter(interaction, characterName) {
+    return interaction.character === characterName
+        ? interaction.with
+        : interaction.character;
+}
+
+
+/*
+    Escape HTML so character data can safely be inserted
+    into the page.
+*/
 function escapeHTML(value) {
     return String(value)
         .replace(/&/g, "&amp;")
@@ -2192,152 +799,76 @@ function escapeHTML(value) {
 }
 
 
-function getInitials(name) {
-    const words = name
-        .replace(/\./g, "")
-        .split(/\s+/)
-        .filter(Boolean);
+/*
+    Page elements
+*/
+const athleteGrid = document.getElementById("athlete-grid");
+const searchInput = document.getElementById("search");
+const resultCount = document.getElementById("result-count");
 
-    if (words.length === 1) {
-        return words[0].substring(0, 2).toUpperCase();
-    }
+const modal = document.getElementById("modal");
+const modalContent = document.getElementById("modal-content");
+const modalClose = document.getElementById("modal-close");
+const modalBackdrop = document.querySelector(".modal-backdrop");
 
-    return (
-        words[0][0] +
-        words[words.length - 1][0]
-    ).toUpperCase();
-}
+const filterButtons = document.querySelectorAll(".filter");
 
 
-function getInteractionsFor(name) {
-
-    return interactions.filter(item =>
-        item.character === name ||
-        item.with === name
-    );
-
-}
+let currentFilter = "all";
 
 
-function getOtherCharacter(interaction, currentName) {
+/*
+    Render the character cards.
+*/
+function renderAthletes() {
+    const searchTerm = searchInput.value.trim().toLowerCase();
 
-    if (interaction.character === currentName) {
-        return interaction.with;
-    }
+    const filteredAthletes = athletes.filter(athlete => {
+        const matchesFilter =
+            currentFilter === "all" ||
+            athlete.category.toLowerCase() === currentFilter;
 
-    return interaction.character;
+        const interactions = getInteractions(athlete.name);
 
-}
+        const interactionSearchText = interactions
+            .map(interaction => {
+                return [
+                    interaction.character,
+                    interaction.with,
+                    interaction.details
+                ].join(" ");
+            })
+            .join(" ");
 
-
-function getStatusClass(status) {
-
-    const lower = status.toLowerCase();
-
-    if (
-        lower.includes("needs verification")
-    ) {
-        return "verification";
-    }
-
-    if (
-        lower.includes("official")
-    ) {
-        return "official";
-    }
-
-    return "derived";
-}
-
-
-function getStatusLabel(status) {
-
-    return status;
-}
-
-
-/* =========================================================
-   SEARCH / FILTER
-========================================================= */
-
-function matchesSearch(athlete, query) {
-
-    if (!query) {
-        return true;
-    }
-
-    const lowerQuery = query.toLowerCase();
-
-    const athleteText = [
-        athlete.name,
-        athlete.category,
-        athlete.power,
-        athlete.description,
-        athlete.official
-    ]
-        .join(" ")
-        .toLowerCase();
-
-    if (athleteText.includes(lowerQuery)) {
-        return true;
-    }
-
-    const relatedInteractions =
-        getInteractionsFor(athlete.name);
-
-    return relatedInteractions.some(interaction =>
-        [
-            interaction.character,
-            interaction.with,
-            interaction.topic,
-            interaction.details,
-            interaction.status
+        const searchableText = [
+            athlete.name,
+            athlete.category,
+            athlete.power,
+            athlete.ability,
+            interactionSearchText
         ]
             .join(" ")
-            .toLowerCase()
-            .includes(lowerQuery)
-    );
-}
+            .toLowerCase();
 
+        const matchesSearch =
+            searchTerm === "" ||
+            searchableText.includes(searchTerm);
 
-function matchesFilter(athlete) {
+        return matchesFilter && matchesSearch;
+    });
 
-    if (activeFilter === "all") {
-        return true;
-    }
-
-    return athlete.category === activeFilter;
-}
-
-
-/* =========================================================
-   RENDER CARDS
-========================================================= */
-
-function renderAthletes() {
-
-    const query =
-        searchInput.value.trim().toLowerCase();
-
-    const filtered = athletes.filter(athlete =>
-        matchesFilter(athlete) &&
-        matchesSearch(athlete, query)
-    );
-
-    athleteGrid.innerHTML = "";
 
     resultCount.textContent =
-        `${filtered.length} racer${filtered.length === 1 ? "" : "s"}`;
+        filteredAthletes.length === 1
+            ? "1 racer"
+            : `${filteredAthletes.length} racers`;
 
-    if (filtered.length === 0) {
 
+    if (filteredAthletes.length === 0) {
         athleteGrid.innerHTML = `
             <div class="no-results">
-                <h3>No racers found</h3>
-                <p>
-                    Try a different character, ability,
-                    interaction, or search term.
-                </p>
+                <h2>No racers found</h2>
+                <p>Try a different search or filter.</p>
             </div>
         `;
 
@@ -2345,251 +876,126 @@ function renderAthletes() {
     }
 
 
-    filtered.forEach((athlete, index) => {
+    athleteGrid.innerHTML = filteredAthletes
+        .map(athlete => `
+            <article
+                class="athlete-card"
+                tabindex="0"
+                role="button"
+                data-name="${escapeHTML(athlete.name)}"
+                aria-label="View ${escapeHTML(athlete.name)}"
+            >
 
-        const athleteInteractions =
-            getInteractionsFor(athlete.name);
+                <img
+                    class="athlete-image"
+                    src="${escapeHTML(athlete.image)}"
+                    alt="${escapeHTML(athlete.name)}"
+                    loading="lazy"
+                >
 
-        const card =
-            document.createElement("article");
+                <h2 class="card-name">
+                    ${escapeHTML(athlete.name)}
+                </h2>
 
-        card.className = "athlete-card";
+                <p class="card-power">
+                    ${escapeHTML(athlete.power)}
+                </p>
 
-        card.tabIndex = 0;
-
-        card.setAttribute(
-            "role",
-            "button"
-        );
-
-        card.setAttribute(
-            "aria-label",
-            `View ${athlete.name}`
-        );
-
-        card.innerHTML = `
-
-            <span class="card-number">
-                ${String(
-                    athletes.indexOf(athlete) + 1
-                ).padStart(2, "0")}
-            </span>
-
-            <div class="avatar">
-                ${escapeHTML(
-                    getInitials(athlete.name)
-                )}
-            </div>
-
-            <h2 class="card-name">
-                ${escapeHTML(athlete.name)}
-            </h2>
-
-            <p class="card-power">
-                ${escapeHTML(athlete.power)}
-            </p>
-
-            <p class="card-description">
-                ${escapeHTML(athlete.description)}
-            </p>
-
-            <span class="type">
-                ${escapeHTML(athlete.category)}
-            </span>
-
-            <span class="interaction-count">
-                ${athleteInteractions.length}
-                interaction${athleteInteractions.length === 1 ? "" : "s"}
-            </span>
-
-        `;
+            </article>
+        `)
+        .join("");
 
 
-        card.addEventListener(
-            "click",
-            () => openModal(athlete.name)
-        );
+    document.querySelectorAll(".athlete-card").forEach(card => {
+        card.addEventListener("click", () => {
+            openModal(card.dataset.name);
+        });
 
-
-        card.addEventListener(
-            "keydown",
-            event => {
-
-                if (
-                    event.key === "Enter" ||
-                    event.key === " "
-                ) {
-
-                    event.preventDefault();
-
-                    openModal(athlete.name);
-                }
-
+        card.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openModal(card.dataset.name);
             }
-        );
-
-
-        athleteGrid.appendChild(card);
-
+        });
     });
-
 }
 
 
-/* =========================================================
-   OPEN MODAL
-========================================================= */
-
-function openModal(name) {
-
-    const athlete =
-        athletes.find(
-            item => item.name === name
-        );
+/*
+    Open a character modal.
+*/
+function openModal(characterName) {
+    const athlete = athletes.find(
+        athlete => athlete.name === characterName
+    );
 
     if (!athlete) {
         return;
     }
 
-    const athleteInteractions =
-        getInteractionsFor(name);
+
+    const interactions = getInteractions(characterName)
+        .sort((a, b) => {
+            const otherA = getOtherCharacter(a, characterName);
+            const otherB = getOtherCharacter(b, characterName);
+
+            return otherA.localeCompare(otherB);
+        });
 
 
-    athleteInteractions.sort(
-        (a, b) =>
-            getOtherCharacter(a, name)
-                .localeCompare(
-                    getOtherCharacter(b, name)
-                )
-    );
+    const interactionHTML = interactions.length > 0
+        ? `
+            <div class="interaction-list">
+                ${interactions
+                    .map(interaction => {
+                        const otherCharacter =
+                            getOtherCharacter(interaction, characterName);
 
+                        return `
+                            <article class="interaction">
 
-    const interactionHTML =
-        athleteInteractions.length > 0
-
-        ?
-
-        athleteInteractions.map(
-            interaction => {
-
-                const otherCharacter =
-                    getOtherCharacter(
-                        interaction,
-                        name
-                    );
-
-                const statusClass =
-                    getStatusClass(
-                        interaction.status
-                    );
-
-                const isVerification =
-                    interaction.status
-                        .toLowerCase()
-                        .includes(
-                            "needs verification"
-                        );
-
-
-                return `
-
-                    <article
-                        class="interaction ${statusClass}"
-                    >
-
-                        <div class="interaction-top">
-
-                            <span class="interaction-with">
-                                ${escapeHTML(
-                                    otherCharacter
-                                )}
-                            </span>
-
-                            <span class="interaction-status">
-                                ${escapeHTML(
-                                    getStatusLabel(
-                                        interaction.status
-                                    )
-                                )}
-                            </span>
-
-                        </div>
-
-                        <div class="interaction-topic">
-                            ${escapeHTML(
-                                interaction.topic
-                            )}
-                        </div>
-
-                        <div class="interaction-details">
-                            ${escapeHTML(
-                                interaction.details
-                            )}
-                        </div>
-
-                        ${
-                            isVerification
-                            ?
-                            `
-                                <div class="interaction-warning">
-                                    ⚠ Needs verification
+                                <div class="interaction-with">
+                                    ${escapeHTML(otherCharacter)}
                                 </div>
-                            `
-                            :
-                            ""
-                        }
 
-                    </article>
+                                <div class="interaction-details">
+                                    ${escapeHTML(interaction.details)}
+                                </div>
 
-                `;
-
-            }
-        ).join("")
-
-        :
-
-        `
-            <div class="no-results">
-                No interaction entries are currently
-                recorded for this racer.
+                            </article>
+                        `;
+                    })
+                    .join("")}
             </div>
+        `
+        : `
+            <p class="interaction-summary">
+                No character interactions are currently listed.
+            </p>
         `;
 
 
     modalContent.innerHTML = `
-
         <div class="modal-header">
 
-            <div class="modal-avatar">
-                ${escapeHTML(
-                    getInitials(
-                        athlete.name
-                    )
-                )}
-            </div>
+            <img
+                class="modal-athlete-image"
+                src="${escapeHTML(athlete.image)}"
+                alt="${escapeHTML(athlete.name)}"
+            >
 
-            <div>
+            <div class="modal-heading">
 
-                <div class="modal-number">
-                    RACER
-                    ${String(
-                        athletes.indexOf(athlete) + 1
-                    ).padStart(2, "0")}
-                </div>
+                <p class="modal-category">
+                    ${escapeHTML(athlete.category)}
+                </p>
 
-                <h2
-                    id="modal-title"
-                    class="modal-title"
-                >
-                    ${escapeHTML(
-                        athlete.name
-                    )}
+                <h2 id="modal-title" class="modal-title">
+                    ${escapeHTML(athlete.name)}
                 </h2>
 
                 <p class="modal-power-name">
-                    ${escapeHTML(
-                        athlete.power
-                    )}
+                    ${escapeHTML(athlete.power)}
                 </p>
 
             </div>
@@ -2599,29 +1005,10 @@ function openModal(name) {
 
         <section class="info-section">
 
-            <h3>
-                Ability
-            </h3>
+            <h3>Ability</h3>
 
-            <div class="official-text">
-                ${escapeHTML(
-                    athlete.official
-                )}
-            </div>
-
-        </section>
-
-
-        <section class="info-section">
-
-            <h3>
-                Plain-English Explanation
-            </h3>
-
-            <div class="official-text">
-                ${escapeHTML(
-                    athlete.description
-                )}
+            <div class="official-text ability-text">
+                ${escapeHTML(athlete.ability)}
             </div>
 
         </section>
@@ -2630,151 +1017,91 @@ function openModal(name) {
         <section class="info-section">
 
             <div class="interaction-heading">
-
-                <h3>
-                    Character Interactions
-                </h3>
-
-                <span>
-                    ${athleteInteractions.length}
-                </span>
-
+                <h3>Character Interactions</h3>
             </div>
 
-            <p class="interaction-summary">
-                Interactions involving
-                <strong>
-                    ${escapeHTML(athlete.name)}
-                </strong>
-                are shown below. Each entry preserves
-                its source/status classification.
-            </p>
-
-            <div class="interaction-list">
-                ${interactionHTML}
-            </div>
+            ${interactionHTML}
 
         </section>
-
     `;
 
 
     modal.classList.add("open");
-
-    modal.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-    document.body.style.overflow = "hidden";
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
 
     modalClose.focus();
-
 }
 
 
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
-
+/*
+    Close the modal.
+*/
 function closeModal() {
-
     modal.classList.remove("open");
-
-    modal.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-    document.body.style.overflow = "";
-
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
 }
 
 
-/* =========================================================
-   EVENT LISTENERS
-========================================================= */
-
-searchInput.addEventListener(
-    "input",
-    renderAthletes
-);
+/*
+    Search
+*/
+searchInput.addEventListener("input", renderAthletes);
 
 
+/*
+    Filters
+*/
 filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
 
-    button.addEventListener(
-        "click",
-        () => {
+        filterButtons.forEach(filter => {
+            filter.classList.remove("active");
+        });
 
-            filterButtons.forEach(
-                item =>
-                    item.classList.remove(
-                        "active"
-                    )
-            );
+        button.classList.add("active");
 
-            button.classList.add("active");
+        currentFilter = button.dataset.filter;
 
-            activeFilter =
-                button.dataset.filter;
-
-            renderAthletes();
-
-        }
-    );
-
+        renderAthletes();
+    });
 });
 
 
-modalClose.addEventListener(
-    "click",
-    closeModal
-);
+/*
+    Modal close button
+*/
+modalClose.addEventListener("click", closeModal);
 
 
-document
-    .querySelector(".modal-backdrop")
-    .addEventListener(
-        "click",
-        closeModal
-    );
+/*
+    Clicking the dark background closes the modal.
+*/
+modalBackdrop.addEventListener("click", closeModal);
 
 
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "Escape" &&
-            modal.classList.contains("open")
-        ) {
-            closeModal();
-        }
-
+/*
+    Escape key closes the modal.
+*/
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && modal.classList.contains("open")) {
+        closeModal();
     }
-);
+});
 
 
-/* =========================================================
-   INITIALIZE
-========================================================= */
+/*
+    Prevent clicks inside the dialog from closing the modal.
+*/
+const modalDialog = document.querySelector(".modal-dialog");
 
+modalDialog.addEventListener("click", event => {
+    event.stopPropagation();
+});
+
+
+/*
+    Initial render
+*/
 renderAthletes();
-
-
-/* =========================================================
-   OPTIONAL GLOBAL ACCESS
-========================================================= */
-
-window.MagicalAthlete = {
-
-    athletes,
-
-    interactions,
-
-    openModal,
-
-    closeModal
-
-};
