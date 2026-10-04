@@ -458,7 +458,8 @@ main {
 
 
 /* =========================================
-   UPDATED ABILITY NAME FONT
+   ABILITY NAME
+   Smaller serif font
 ========================================= */
 
 .ability-name {
@@ -471,16 +472,17 @@ main {
     "Times New Roman",
     serif;
 
-  font-size: 1.25rem;
+  font-size: 1rem;
 
-  font-weight: 700;
+  font-weight: 500;
 
   line-height: 1.25;
 }
 
 
 /* =========================================
-   UPDATED ABILITY DESCRIPTION FONT
+   ABILITY DESCRIPTION
+   Larger + bold serif font
 ========================================= */
 
 .ability-text {
@@ -491,11 +493,11 @@ main {
     "Times New Roman",
     serif;
 
-  font-size: 1rem;
+  font-size: 1.15rem;
 
-  font-weight: 400;
+  font-weight: 700;
 
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 
@@ -562,6 +564,7 @@ main {
 
 /* =========================================
    INTERACTED CHARACTER NAME
+   Large, bold, red, no bubble
 ========================================= */
 
 .interaction-character {
@@ -579,7 +582,6 @@ main {
 
 /* =========================================
    CLICKABLE CHARACTER NAME
-   NO BUBBLE
 ========================================= */
 
 .character-link {
@@ -659,9 +661,11 @@ main {
     height: 94vh;
   }
 
+
   /*
-    The profile is now split into:
-    1. Fixed character area
+    The profile is split into:
+
+    1. Fixed character/ability area
     2. Scrollable interactions area
   */
 
@@ -738,16 +742,24 @@ main {
     margin-bottom: 4px;
   }
 
+
+  /* Smaller ability name */
   .ability-name {
     margin-bottom: 4px;
 
-    font-size: 1rem;
-  }
-
-  .ability-text {
     font-size: 0.9rem;
 
-    line-height: 1.35;
+    font-weight: 500;
+  }
+
+
+  /* Larger + bold ability description */
+  .ability-text {
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    line-height: 1.45;
   }
 
 
@@ -873,8 +885,20 @@ main {
       12px;
   }
 
+
+  .ability-name {
+    font-size: 0.9rem;
+
+    font-weight: 500;
+  }
+
+
   .ability-text {
-    font-size: 0.85rem;
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    line-height: 1.45;
   }
 
 
