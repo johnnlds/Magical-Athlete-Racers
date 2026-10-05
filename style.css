@@ -445,36 +445,32 @@ main {
   border-radius: 8px;
 }
 
-.ability-label {
-  margin-bottom: 7px;
-
-  color: var(--red);
-
-  font-size: 0.75rem;
-  font-weight: 900;
-
-  letter-spacing: 1px;
-}
-
 
 /* =========================================
    ABILITY NAME
-   Smaller serif font
+   Same style as former "ABILITY" label
 ========================================= */
 
 .ability-name {
-  margin-bottom: 8px;
+  margin: 0 0 8px;
 
-  color: var(--black);
+  color: var(--red);
 
   font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
 
-  font-size: 1rem;
+  font-size: 0.75rem;
 
-  font-weight: 500;
+  font-weight: 900;
+
+  letter-spacing: 1px;
 
   line-height: 1.25;
 }
@@ -482,16 +478,24 @@ main {
 
 /* =========================================
    ABILITY DESCRIPTION
-   Larger + bold serif font
+   Same font as rest of site
+   Larger + bold
 ========================================= */
 
 .ability-text {
+  margin: 0;
+
   color: var(--dark-gray);
 
   font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
 
   font-size: 1.15rem;
 
@@ -662,12 +666,9 @@ main {
   }
 
 
-  /*
-    The profile is split into:
-
-    1. Fixed character/ability area
-    2. Scrollable interactions area
-  */
+  /* ---------------------------------------
+     PROFILE LAYOUT
+  --------------------------------------- */
 
   .profile-layout {
     display: flex;
@@ -680,9 +681,9 @@ main {
   }
 
 
-  /* =======================================
+  /* ---------------------------------------
      FIXED CHARACTER AREA
-  ======================================= */
+  --------------------------------------- */
 
   .profile-sidebar {
     position: relative;
@@ -728,9 +729,9 @@ main {
   }
 
 
-  /* =======================================
+  /* ---------------------------------------
      MOBILE ABILITY
-  ======================================= */
+  --------------------------------------- */
 
   .ability-box {
     padding: 12px 14px;
@@ -738,22 +739,18 @@ main {
     text-align: left;
   }
 
-  .ability-label {
-    margin-bottom: 4px;
-  }
 
-
-  /* Smaller ability name */
   .ability-name {
-    margin-bottom: 4px;
+    margin: 0 0 4px;
 
-    font-size: 0.9rem;
+    font-size: 0.75rem;
 
-    font-weight: 500;
+    font-weight: 900;
+
+    letter-spacing: 1px;
   }
 
 
-  /* Larger + bold ability description */
   .ability-text {
     font-size: 1rem;
 
@@ -763,9 +760,9 @@ main {
   }
 
 
-  /* =======================================
+  /* ---------------------------------------
      ONLY INTERACTIONS SCROLL
-  ======================================= */
+  --------------------------------------- */
 
   .profile-interactions {
     flex: 1 1 auto;
@@ -804,9 +801,9 @@ main {
   }
 
 
-  /* =======================================
+  /* ---------------------------------------
      CHARACTER GRID
-  ======================================= */
+  --------------------------------------- */
 
   .character-grid {
     grid-template-columns:
@@ -818,9 +815,11 @@ main {
     gap: 12px;
   }
 
+
   .character-card-image {
     height: 170px;
   }
+
 
   .character-card-name {
     font-size: 0.95rem;
@@ -832,13 +831,14 @@ main {
   }
 
 
-  /* =======================================
+  /* ---------------------------------------
      FULL SCREEN PROFILE
-  ======================================= */
+  --------------------------------------- */
 
   .modal {
     padding: 0;
   }
+
 
   .profile-modal {
     width: 100%;
@@ -849,9 +849,9 @@ main {
   }
 
 
-  /* =======================================
+  /* ---------------------------------------
      FIXED CHARACTER AREA
-  ======================================= */
+  --------------------------------------- */
 
   .profile-sidebar {
     padding:
@@ -875,9 +875,9 @@ main {
   }
 
 
-  /* =======================================
+  /* ---------------------------------------
      ABILITY
-  ======================================= */
+  --------------------------------------- */
 
   .ability-box {
     padding:
@@ -887,9 +887,11 @@ main {
 
 
   .ability-name {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
 
-    font-weight: 500;
+    font-weight: 900;
+
+    letter-spacing: 1px;
   }
 
 
@@ -902,9 +904,9 @@ main {
   }
 
 
-  /* =======================================
+  /* ---------------------------------------
      INTERACTIONS
-  ======================================= */
+  --------------------------------------- */
 
   .profile-interactions {
     padding: 16px;
@@ -914,6 +916,7 @@ main {
   .interaction-character {
     font-size: 1.2rem;
   }
+
 
   .character-link {
     font-size: 1.2rem;
