@@ -29,7 +29,9 @@ html {
 
 body {
   margin: 0;
+
   background: var(--background);
+
   color: var(--black);
 
   font-family:
@@ -50,6 +52,7 @@ body {
 
 .site-header {
   background: var(--white);
+
   border-bottom: 4px solid var(--red);
 
   position: sticky;
@@ -60,6 +63,7 @@ body {
 
 .header-inner {
   max-width: 1250px;
+
   margin: 0 auto;
 
   padding: 28px 24px 24px;
@@ -71,9 +75,11 @@ body {
   color: var(--red);
 
   font-size: clamp(2.1rem, 5vw, 4rem);
+
   font-weight: 900;
 
   letter-spacing: -2px;
+
   line-height: 1;
 }
 
@@ -83,6 +89,7 @@ body {
   color: var(--dark-gray);
 
   font-size: 1.1rem;
+
   font-weight: 600;
 }
 
@@ -101,9 +108,11 @@ body {
   padding: 14px 17px;
 
   border: 2px solid var(--light-gray);
+
   border-radius: 10px;
 
   background: var(--white);
+
   color: var(--black);
 
   font-size: 1rem;
@@ -148,6 +157,7 @@ main {
   display: flex;
 
   align-items: baseline;
+
   justify-content: space-between;
 
   gap: 15px;
@@ -188,6 +198,7 @@ main {
   background: var(--white);
 
   border: 1px solid var(--light-gray);
+
   border-radius: 14px;
 
   overflow: hidden;
@@ -213,14 +224,17 @@ main {
 
 .character-card:focus-visible {
   outline: 3px solid var(--red);
+
   outline-offset: 3px;
 }
 
 .character-card-image {
   width: 100%;
+
   height: 205px;
 
   object-fit: cover;
+
   object-position: center;
 
   display: block;
@@ -236,6 +250,7 @@ main {
   color: var(--black);
 
   font-size: 1.05rem;
+
   font-weight: 800;
 
   text-align: center;
@@ -281,6 +296,7 @@ main {
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 }
 
@@ -319,11 +335,13 @@ main {
   position: absolute;
 
   top: 15px;
+
   right: 15px;
 
   z-index: 10;
 
   width: 42px;
+
   height: 42px;
 
   border: none;
@@ -335,6 +353,7 @@ main {
   color: var(--black);
 
   font-size: 28px;
+
   line-height: 1;
 
   cursor: pointer;
@@ -406,11 +425,13 @@ main {
 
 .profile-image {
   width: 100%;
+
   height: 100%;
 
   display: block;
 
   object-fit: cover;
+
   object-position: center;
 }
 
@@ -425,6 +446,7 @@ main {
   color: var(--red);
 
   font-size: 2rem;
+
   font-weight: 900;
 
   line-height: 1.05;
@@ -448,11 +470,11 @@ main {
 
 /* =========================================
    ABILITY NAME
-   Same style as former "ABILITY" label
+   Larger than interaction text
 ========================================= */
 
 .ability-name {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
 
   color: var(--red);
 
@@ -466,7 +488,7 @@ main {
     Arial,
     sans-serif;
 
-  font-size: 0.75rem;
+  font-size: 1.05rem;
 
   font-weight: 900;
 
@@ -478,8 +500,7 @@ main {
 
 /* =========================================
    ABILITY DESCRIPTION
-   Same font as rest of site
-   Larger + bold
+   Larger and bolder than interaction text
 ========================================= */
 
 .ability-text {
@@ -497,7 +518,7 @@ main {
     Arial,
     sans-serif;
 
-  font-size: 1.15rem;
+  font-size: 1.3rem;
 
   font-weight: 700;
 
@@ -568,7 +589,6 @@ main {
 
 /* =========================================
    INTERACTED CHARACTER NAME
-   Large, bold, red, no bubble
 ========================================= */
 
 .interaction-character {
@@ -666,10 +686,6 @@ main {
   }
 
 
-  /* ---------------------------------------
-     PROFILE LAYOUT
-  --------------------------------------- */
-
   .profile-layout {
     display: flex;
 
@@ -681,9 +697,7 @@ main {
   }
 
 
-  /* ---------------------------------------
-     FIXED CHARACTER AREA
-  --------------------------------------- */
+  /* FIXED CHARACTER AREA */
 
   .profile-sidebar {
     position: relative;
@@ -729,9 +743,7 @@ main {
   }
 
 
-  /* ---------------------------------------
-     MOBILE ABILITY
-  --------------------------------------- */
+  /* MOBILE ABILITY */
 
   .ability-box {
     padding: 12px 14px;
@@ -741,9 +753,9 @@ main {
 
 
   .ability-name {
-    margin: 0 0 4px;
+    margin: 0 0 6px;
 
-    font-size: 0.75rem;
+    font-size: 0.95rem;
 
     font-weight: 900;
 
@@ -752,7 +764,7 @@ main {
 
 
   .ability-text {
-    font-size: 1rem;
+    font-size: 1.15rem;
 
     font-weight: 700;
 
@@ -760,9 +772,7 @@ main {
   }
 
 
-  /* ---------------------------------------
-     ONLY INTERACTIONS SCROLL
-  --------------------------------------- */
+  /* ONLY INTERACTIONS SCROLL */
 
   .profile-interactions {
     flex: 1 1 auto;
@@ -801,9 +811,7 @@ main {
   }
 
 
-  /* ---------------------------------------
-     CHARACTER GRID
-  --------------------------------------- */
+  /* CHARACTER GRID */
 
   .character-grid {
     grid-template-columns:
@@ -831,9 +839,7 @@ main {
   }
 
 
-  /* ---------------------------------------
-     FULL SCREEN PROFILE
-  --------------------------------------- */
+  /* FULL SCREEN PROFILE */
 
   .modal {
     padding: 0;
@@ -849,9 +855,7 @@ main {
   }
 
 
-  /* ---------------------------------------
-     FIXED CHARACTER AREA
-  --------------------------------------- */
+  /* FIXED CHARACTER AREA */
 
   .profile-sidebar {
     padding:
@@ -875,9 +879,7 @@ main {
   }
 
 
-  /* ---------------------------------------
-     ABILITY
-  --------------------------------------- */
+  /* ABILITY */
 
   .ability-box {
     padding:
@@ -887,7 +889,7 @@ main {
 
 
   .ability-name {
-    font-size: 0.75rem;
+    font-size: 0.95rem;
 
     font-weight: 900;
 
@@ -896,7 +898,7 @@ main {
 
 
   .ability-text {
-    font-size: 1rem;
+    font-size: 1.15rem;
 
     font-weight: 700;
 
@@ -904,9 +906,7 @@ main {
   }
 
 
-  /* ---------------------------------------
-     INTERACTIONS
-  --------------------------------------- */
+  /* INTERACTIONS */
 
   .profile-interactions {
     padding: 16px;
