@@ -224,9 +224,6 @@ const athletes = [
 
 /* =========================================================
    INTERACTION DATABASE
-
-   Each interaction is stored ONCE.
-   It is automatically displayed on both racers' profiles.
 ========================================================= */
 
 const interactionData = [
@@ -479,71 +476,12 @@ const interactionData = [
 
 
 /* =========================================================
-   HELPER FUNCTIONS
+   HELPER
 ========================================================= */
 
 function getAthlete(name) {
   return athletes.find(
     athlete => athlete.name === name
-  );
-}
-
-
-/*
-  Turns racer names inside interaction text into
-  clickable links when that name is an actual racer.
-
-  Names such as "Lead Racer" remain normal text.
-*/
-function makeCharacterLinks(text, currentCharacter) {
-
-  let result = text;
-
-  /*
-    Sort longest names first so names like
-    "M.O.U.T.H." are handled correctly.
-  */
-  const names = athletes
-    .map(athlete => athlete.name)
-    .sort((a, b) => b.length - a.length);
-
-  names.forEach(name => {
-
-    if (name === currentCharacter) {
-      return;
-    }
-
-    const escapedName = name.replace(
-      /[.*+?^${}()|[\]\\]/g,
-      "\\$&"
-    );
-
-    const regex = new RegExp(
-      `(?<![\\w-])${escapedName}(?![\\w-])`,
-      "g"
-    );
-
-    result = result.replace(
-      regex,
-      `<button class="character-link" type="button" data-character="${name}">${name}</button>`
-    );
-  });
-
-  return result;
-}
-
-
-/*
-  Get every interaction involving a character.
-
-  Each interaction is stored only once in interactionData,
-  but is displayed on both racers' profiles.
-*/
-function getInteractionsForCharacter(characterName) {
-
-  return interactionData.filter(
-    interaction =>
-      interaction.racers.includes(characterName)
   );
 }
 
@@ -660,14 +598,9 @@ searchInput.addEventListener(
 
 
     /*
-      IMPORTANT:
       Search only checks racer names.
-
-      It does NOT search:
-      - abilities
-      - power names
-      - interactions
-      - interaction text
+      It does not search abilities,
+      power names, or interactions.
     */
 
     const filtered =
@@ -719,8 +652,7 @@ const noInteractions =
   document.getElementById("noInteractions");
 
 
-let currentProfile =
-  null;
+let currentProfile = null;
 
 
 /* =========================================================
@@ -741,9 +673,7 @@ function openProfile(characterName) {
     athlete.name;
 
 
-  /*
-    Character information
-  */
+  /* CHARACTER INFORMATION */
 
   profileImage.src =
     athlete.image;
@@ -761,13 +691,14 @@ function openProfile(characterName) {
     athlete.ability;
 
 
-  /*
-    Interactions
-  */
+  /* INTERACTIONS */
 
   const interactions =
-    getInteractionsForCharacter(
-      athlete.name
+    interactionData.filter(
+      interaction =>
+        interaction.racers.includes(
+          athlete.name
+        )
     );
 
 
@@ -799,14 +730,10 @@ function openProfile(characterName) {
       interaction => {
 
         /*
-          Determine the other racer.
-
-          For normal two-racer interactions,
-          this is the other named racer.
-
-          For special entries such as "Lead Racer",
-          it will simply display the other entry.
+          Find the other character in the
+          interaction.
         */
+
         const otherCharacter =
           interaction.racers.find(
             racer =>
@@ -821,17 +748,17 @@ function openProfile(characterName) {
           "interaction-card";
 
 
+        /*
+          Only the character name in the
+          INTERACTION HEADER is clickable.
+
+          Names appearing inside the description
+          are deliberately left as normal text.
+        */
+
         const otherAthlete =
           getAthlete(otherCharacter);
 
-
-        /*
-          Real racer names are clickable.
-
-          Pseudo names such as:
-          - Lead Racer
-          remain normal text.
-        */
 
         let characterHeading;
 
@@ -856,16 +783,10 @@ function openProfile(characterName) {
 
 
         /*
-          Make any additional racer names appearing
-          inside the interaction text clickable too.
+          IMPORTANT:
+          Do NOT turn character names inside
+          interaction descriptions into links.
         */
-
-        const linkedText =
-          makeCharacterLinks(
-            interaction.text,
-            athlete.name
-          );
-
 
         interactionCard.innerHTML = `
           <div class="interaction-character">
@@ -873,7 +794,7 @@ function openProfile(characterName) {
           </div>
 
           <div class="interaction-text">
-            ${linkedText}
+            ${interaction.text}
           </div>
         `;
 
@@ -886,9 +807,7 @@ function openProfile(characterName) {
   }
 
 
-  /*
-    Show modal
-  */
+  /* SHOW MODAL */
 
   profileModal.classList.add(
     "open"
@@ -900,19 +819,13 @@ function openProfile(characterName) {
   );
 
 
-  /*
-    Prevent the page behind the modal
-    from scrolling.
-  */
+  /* Prevent background scrolling */
 
   document.body.style.overflow =
     "hidden";
 
 
-  /*
-    Start interaction scroll area
-    at the top.
-  */
+  /* Reset interaction scroll */
 
   const interactionsPanel =
     document.querySelector(
@@ -920,14 +833,11 @@ function openProfile(characterName) {
     );
 
   if (interactionsPanel) {
-
     interactionsPanel.scrollTop = 0;
   }
 
 
-  /*
-    Put focus on the close button.
-  */
+  /* Focus close button */
 
   setTimeout(
     () => closeModalButton.focus(),
@@ -1001,11 +911,11 @@ document.addEventListener(
 
 
 /* =========================================================
-   CLICKABLE RACER NAMES
+   CLICKABLE INTERACTION HEADER NAMES
 =========================================================
 
-   Because the interaction cards are created
-   dynamically, event delegation is used here.
+   Only .character-link elements in the
+   interaction header are clickable.
 ========================================================= */
 
 interactionList.addEventListener(
