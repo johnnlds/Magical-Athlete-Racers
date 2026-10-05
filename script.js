@@ -1,11 +1,3 @@
-// ============================================================
-// MAGICAL ATHLETE — CHARACTER PROFILES
-// ============================================================
-
-// ============================================================
-// ORIGINAL RACERS
-// ============================================================
-
 const athletes = [
   {
     name: "Alchemist",
@@ -34,7 +26,7 @@ const athletes = [
   {
     name: "Centaur",
     power: "Hoofwhack",
-    ability: "When I pass a racer, they move -2. They cannot be moved farther back than Start.",
+    ability: "When I pass a racer, they move -2.",
     image: "images/IMG_3308.png"
   },
   {
@@ -52,13 +44,13 @@ const athletes = [
   {
     name: "Copycat",
     power: "Copy That",
-    ability: "I have the power of the racer currently in the lead. If there's a tie, I pick.",
+    ability: "I have the power of the racer currently in the lead. If there’s a tie, I pick.",
     image: "images/IMG_3311.png"
   },
   {
     name: "Dicemonger",
     power: "Dicey Deals",
-    ability: "Anyone can reroll their main move once per turn. When another racer rerolls, I move 1.",
+    ability: "Anyone can reroll their main move once per turn. When another racer does it, I move 1.",
     image: "images/IMG_3312.png"
   },
   {
@@ -94,7 +86,7 @@ const athletes = [
   {
     name: "Hare",
     power: "Hubris",
-    ability: "I get +2 to my main move. If I start my turn alone in the lead, I skip my main move.",
+    ability: "I get +2 to my main move. When I start my turn alone in the lead, I skip my main move.",
     image: "images/IMG_3318.png"
   },
   {
@@ -106,13 +98,13 @@ const athletes = [
   {
     name: "Huge Baby",
     power: "Really Huge",
-    ability: "No one can ever be on my space except at Start. If someone would land there, put them on the space behind me instead.",
+    ability: "No one can ever be on my space, besides the Start. Whenever that would happen, put the racer on the space behind me instead.",
     image: "images/IMG_3320.png"
   },
   {
     name: "Hypnotist",
     power: "Hssssst",
-    ability: "Before my main move, I can warp another racer to my space.",
+    ability: "Before my main move, I can warp a racer to my space.",
     image: "images/IMG_3321.png"
   },
   {
@@ -124,43 +116,43 @@ const athletes = [
   {
     name: "Lackey",
     power: "Very Good Sire",
-    ability: "When another racer rolls a 6, I move 2 before they move.",
+    ability: "When another racer rolls a 6 for their main move, I move 2 before they move.",
     image: "images/IMG_3323.png"
   },
   {
     name: "Leaptoad",
     power: "Jumpfrog",
-    ability: "While moving, I skip spaces occupied by other racers.",
+    ability: "While moving, I skip spaces with other racers on them.",
     image: "images/IMG_3324.png"
   },
   {
     name: "Legs",
     power: "Jog",
-    ability: "I can skip rolling and move 5 instead.",
+    ability: "I can skip rolling for my main move and move 5 instead.",
     image: "images/IMG_3325.png"
   },
   {
     name: "Lovable Loser",
     power: "D’Aww",
-    ability: "Before my main move, I get a 1-point chip if I’m alone in last place.",
+    ability: "Before my main move, I get 1 point chip if I’m alone in last place.",
     image: "images/IMG_3326.png"
   },
   {
     name: "Magician",
     power: "Poof",
-    ability: "I can reroll my main move up to two times. I must use the final roll.",
+    ability: "I can reroll my main move up to two times.",
     image: "images/IMG_3327.png"
   },
   {
     name: "Mastermind",
     power: "Know-It-All",
-    ability: "At the start of my first turn, I predict which racer will win. If correct, the race immediately ends and I finish 2nd.",
+    ability: "At the start of my first turn, I predict which racer will win. If I’m right, the race ends immediately and I finish 2nd.",
     image: "images/IMG_3328.png"
   },
   {
     name: "M.O.U.T.H.",
     power: "Chomp",
-    ability: "When I stop on a space with exactly one other racer, that racer is eliminated.",
+    ability: "When I stop on a space with exactly one other racer, they’re eliminated from the race.",
     image: "images/IMG_3329.png"
   },
   {
@@ -172,7 +164,7 @@ const athletes = [
   {
     name: "Rocket Scientist",
     power: "Kablooey",
-    ability: "When I roll for my main move, I can have double that number. If I do, I trip.",
+    ability: "When I roll for my main move, I can move double that number. If I do, I trip after moving.",
     image: "images/IMG_3331.png"
   },
   {
@@ -189,7 +181,7 @@ const athletes = [
   },
   {
     name: "Sisyphus",
-    power: "Keep Rollin'",
+    power: "Keep Rollin’",
     ability: "Before my race, I take 4 point chips. When I roll a 6 for my main move, instead of moving, I warp to the Start and lose 1 point chip.",
     image: "images/IMG_3334.png"
   },
@@ -202,185 +194,308 @@ const athletes = [
   {
     name: "Stickler",
     power: "Actually…",
-    ability: "I must land exactly on the Finish to win.",
+    ability: "Other racers can only cross the finish line by moving the exact number of spaces they need. If they overshoot, they don’t move.",
     image: "images/IMG_3336.png"
   },
   {
     name: "Suckerfish",
     power: "Sucker!",
-    ability: "When another racer moves, I can move with them.",
+    ability: "When a racer on my space moves, I can move to their new space.",
     image: "images/IMG_3337.png"
   },
   {
     name: "Third Wheel",
     power: "Roll Through",
-    ability: "Before my main move, I can warp to a space with exactly two other racers.",
+    ability: "Before my main move, I can warp to any space with exactly 2 racers on it.",
     image: "images/IMG_3338.png"
   },
   {
     name: "Twin",
     power: "Double Dip",
-    ability: "I have the power of my twin. If my twin is eliminated, I lose this power.",
+    ability: "Before my race, I can pick a racer who won a previous race and race with their powers.",
     image: "images/IMG_3339.png"
   }
 ];
 
 
-// ============================================================
-// EXPANSION RACERS
-// Pictures only for now.
-// ============================================================
+/* =========================================================
+   EXPANSION RACERS
+   Original uploaded filenames
+   ========================================================= */
 
 const expansionAthletes = [
-  "Bite Mark",
-  "Blunderdog",
-  "Cheatah",
-  "Critic",
-  "Diva",
-  "Doppelgängster",
-  "Gloth",
-  "Hog Knight",
-  "Hopfrog",
-  "Hotel",
-  "Icarus",
-  "Kingtripper",
-  "Kraken",
-  "LeSaboteur",
-  "Magical Athlete",
-  "Mr. Dice Guy",
-  "Mole",
-  "Mush",
-  "Nemesis",
-  "Nepo Baby",
-  "Null",
-  "Overtaker",
-  "Party Pooper",
-  "Penguin",
-  "Re-Runner",
-  "Show-Off",
-  "Soulmate",
-  "Speed Demon",
-  "Spoilsport",
-  "Stepdad",
-  "Streaker",
-  "Stunner",
-  "Switcharoo",
-  "Tail",
-  "The Hose",
-  "Understudy"
-].map(name => ({
-  name,
-  expansion: true,
-  image: `images/expansion/${name}.png`
-}));
-
-
-// ============================================================
-// ALL RACERS
-//
-// Original racers always appear first.
-// Expansion racers appear afterward alphabetically.
-// ============================================================
-
-const allAthletes = [
-  ...athletes,
-  ...expansionAthletes
+  ["Bite Mark", "images/expansion/Bite Mark.png"],
+  ["Blunderdog", "images/expansion/Blunderdog.png"],
+  ["Cheatah", "images/expansion/Cheatah.png"],
+  ["Critic", "images/expansion/Critic.png"],
+  ["Diva", "images/expansion/Diva.png"],
+  ["Doppelgängster", "images/expansion/Doppelgängster.png"],
+  ["Gloth", "images/expansion/Gloth.png"],
+  ["Hog Knight", "images/expansion/Hog Knight.png"],
+  ["Hopfrog", "images/expansion/Hopfrog.png"],
+  ["Hotel", "images/expansion/Hotel.png"],
+  ["Icarus", "images/expansion/Icarus.png"],
+  ["Kingtripper", "images/expansion/Kingtripper.png"],
+  ["Kraken", "images/expansion/Kraken.png"],
+  ["LeSaboteur", "images/expansion/LeSaboteur.png"],
+  ["Magical Athlete", "images/expansion/Magical Athlete.png"],
+  ["Mr. Dice Guy", "images/expansion/Mr. Dice Guy.png"],
+  ["Mole", "images/expansion/Mole.png"],
+  ["Mush", "images/expansion/Mush.png"],
+  ["Nemesis", "images/expansion/Nemesis.png"],
+  ["Nepo Baby", "images/expansion/Nepo Baby.png"],
+  ["Null", "images/expansion/Null.png"],
+  ["Overtaker", "images/expansion/Overtaker.png"],
+  ["Party Pooper", "images/expansion/Party Pooper.png"],
+  ["Penguin", "images/expansion/Penguin.png"],
+  ["Re-Runner", "images/expansion/Re-Runner.png"],
+  ["Show-Off", "images/expansion/Show-Off.png"],
+  ["Soulmate", "images/expansion/Soulmate.png"],
+  ["Speed Demon", "images/expansion/Speed Demon.png"],
+  ["Spoilsport", "images/expansion/Spoilsport.png"],
+  ["Stepdad", "images/expansion/Stepdad.png"],
+  ["Streaker", "images/expansion/Streaker.png"],
+  ["Stunner", "images/expansion/Stunner.png"],
+  ["Switcharoo", "images/expansion/Switcharoo.png"],
+  ["Tail", "images/expansion/Tail.png"],
+  ["The Hose", "images/expansion/The Hose.png"],
+  ["Understudy", "images/expansion/Understudy.png"]
 ];
 
 
-// ============================================================
-// INTERACTIONS
-// ============================================================
+/* =========================================================
+   INTERACTIONS
+   ========================================================= */
 
 const interactionData = [
-  ["Alchemist","Coach","If Alchemist rolls 1 or 2 and uses Transmute ‘N’ Scoot, Coach’s +1 applies to the 4-space main move, so Alchemist moves 5."],
-  ["Alchemist","Gunk","If Alchemist rolls 1 or 2 and uses Transmute ‘N’ Scoot to move 4, Gunk reduces Alchemist’s movement to 3. The die result remains 1 or 2."],
-  ["Alchemist","Inchworm","If Alchemist rolls 1, Inchworm makes Alchemist skip the main move. Alchemist therefore cannot use Transmute ‘N’ Scoot to move 4."],
-  ["Alchemist","Skipper","If Alchemist rolls 1 and uses Transmute ‘N’ Scoot to move 4, Skipper still triggers because Alchemist rolled a 1. Skipper takes the next turn after Alchemist’s turn."],
+  {
+    racers: ["Alchemist", "Coach"],
+    text: "If Alchemist rolls 1 or 2 and uses Transmute ‘N’ Scoot, Coach’s +1 applies to the 4-space main move, so Alchemist moves 5."
+  },
+  {
+    racers: ["Alchemist", "Gunk"],
+    text: "If Alchemist rolls 1 or 2 and uses Transmute ‘N’ Scoot to move 4, Gunk reduces Alchemist’s movement to 3. The die result remains 1 or 2."
+  },
+  {
+    racers: ["Alchemist", "Inchworm"],
+    text: "If Alchemist rolls 1, Inchworm makes Alchemist skip the main move. Alchemist therefore cannot use Transmute ‘N’ Scoot to move 4."
+  },
+  {
+    racers: ["Alchemist", "Skipper"],
+    text: "If Alchemist rolls 1 and uses Transmute ‘N’ Scoot to move 4, Skipper still triggers because Alchemist rolled a 1. Skipper takes the next turn after Alchemist’s turn."
+  },
+  {
+    racers: ["Baba Yaga", "Duelist"],
+    text: "If Duelist shares Baba Yaga’s space, they can duel, but Duelist still trips from Baba Yaga."
+  },
+  {
+    racers: ["Baba Yaga", "Huge Baby"],
+    text: "The two cannot share a space, so Huge Baby cannot be tripped."
+  },
+  {
+    racers: ["Baba Yaga", "Hypnotist"],
+    text: "Hypnotist can warp Baba Yaga onto Hypnotist’s space, but Hypnotist trips."
+  },
+  {
+    racers: ["Baba Yaga", "Party Animal"],
+    text: "If Party Animal moves racers simultaneously onto Baba Yaga’s space, Baba Yaga does not trip them."
+  },
+  {
+    racers: ["Banana", "Centaur"],
+    text: "If Centaur passes Banana, Centaur’s Hoofwhack moves Banana back 2, and Banana then trips Centaur for passing Banana."
+  },
+  {
+    racers: ["Banana", "Leaptoad"],
+    text: "Leaptoad skips over Banana’s occupied space, but that still counts as passing Banana. Banana therefore trips Leaptoad after its movement."
+  },
+  {
+    racers: ["Blimp", "Coach"],
+    text: "If Blimp shares Coach’s space, Coach’s +1 applies to Blimp’s main move in addition to Blimp’s +3 or -1."
+  },
+  {
+    racers: ["Blimp", "Gunk"],
+    text: "Gunk’s -1 applies to Blimp’s main move. Before the second corner, Blimp’s +3 and Gunk’s -1 result in +2; on or after the second corner, Blimp’s -1 and Gunk’s -1 result in -2."
+  },
+  {
+    racers: ["Coach", "Gunk"],
+    text: "If Coach is on Gunk’s board, Gunk’s -1 applies to Coach’s main move while Coach’s +1 applies to Coach’s own main move. The two modifiers cancel, leaving Coach’s normal die result."
+  },
+  {
+    racers: ["Coach", "Legs"],
+    text: "Legs’ JOG counts as a main move, so Coach’s +1 applies. Legs moves 6 instead of 5."
+  },
+  {
+    racers: ["Copycat", "Gunk"],
+    text: "If Copycat is copying Gunk, everyone else has -2 to their move, Gunk has -1, and Copycat has -1."
+  },
+  {
+    racers: ["Copycat", "Hare"],
+    text: "If Copycat is copying Hare, Copycat gets Hare’s +2 movement ability. If the lead changes, Copycat immediately changes to the new leader’s power."
+  },
+  {
+    racers: ["Copycat", "Huge Baby"],
+    text: "If Copycat is copying Huge Baby, Huge Baby’s power takes priority."
+  },
+  {
+    racers: ["Copycat", "Lead Racer"],
+    text: "Copycat continuously copies the racer currently in the lead, not just at the beginning of its turn. If the lead changes, Copycat’s power changes immediately."
+  },
+  {
+    racers: ["Dicemonger", "Inchworm"],
+    text: "If a racer rolls 1 and rerolls using Dicemonger’s ability, the original 1 is treated as if it never happened."
+  },
+  {
+    racers: ["Dicemonger", "Magician"],
+    text: "Magician’s own rerolls do not make Dicemonger move. Dicemonger only moves when another racer uses Dicemonger’s reroll."
+  },
+  {
+    racers: ["Dicemonger", "Scoocher"],
+    text: "Whenever another racer uses Dicemonger’s reroll, Dicemonger moves 1 and Scoocher also moves 1 because a reroll occurred."
+  },
+  {
+    racers: ["Dicemonger", "Skipper"],
+    text: "If a racer rolls 1 and rerolls using Dicemonger’s ability, the original 1 is treated as if it never happened."
+  },
+  {
+    racers: ["Duelist", "Huge Baby"],
+    text: "Duelist cannot share Huge Baby’s space, so they cannot duel."
+  },
+  {
+    racers: ["Duelist", "M.O.U.T.H."],
+    text: "If Duelist duels M.O.U.T.H. and M.O.U.T.H. wins, M.O.U.T.H. moves 2. If that movement ends with exactly one other racer on its space, M.O.U.T.H. eliminates that racer. If M.O.U.T.H. lands on Duelist’s space, they do not duel and Duelist is eaten."
+  },
+  {
+    racers: ["Duelist", "Stickler"],
+    text: "If Duelist wins a duel near the finish and the 2-space movement would overshoot the finish, Stickler prevents Duelist from crossing. Duelist does not move."
+  },
+  {
+    racers: ["Gunk", "Heckler"],
+    text: "If Gunk reduces a racer’s main move so they finish their turn within 1 space of where they started, Heckler triggers and moves 2."
+  },
+  {
+    racers: ["Gunk", "Lackey"],
+    text: "Gunk changes movement, not the die result. A racer who rolls 6 still rolled a 6, so Lackey still moves 2 before that racer."
+  },
+  {
+    racers: ["Gunk", "Legs"],
+    text: "Gunk reduces Legs’ 5-space JOG to 4. JOG still counts as Legs’ main move."
+  },
+  {
+    racers: ["Gunk", "Scoocher"],
+    text: "Scoocher moves 1 for each -1 that Gunk applies to another racer’s main move."
+  },
+  {
+    racers: ["Huge Baby", "M.O.U.T.H."],
+    text: "Huge Baby cannot be eaten by M.O.U.T.H."
+  },
+  {
+    racers: ["Huge Baby", "Party Animal"],
+    text: "If Huge Baby is moved onto Party Animal’s space by Party Animal’s power, everyone on that space is moved back 1."
+  },
+  {
+    racers: ["Huge Baby", "Scoocher"],
+    text: "If Scoocher’s power moves Scoocher onto Huge Baby’s space, Huge Baby places Scoocher one space behind."
+  },
+  {
+    racers: ["Huge Baby", "Suckerfish"],
+    text: "Suckerfish cannot follow Huge Baby."
+  },
+  {
+    racers: ["Inchworm", "Magician"],
+    text: "Magician can reroll a 1 before Inchworm’s trigger resolves. If the reroll is not 1, Inchworm does not trigger."
+  },
+  {
+    racers: ["Inchworm", "Skipper"],
+    text: "When another racer rolls 1, Inchworm makes that racer skip the main move and moves 1. Skipper then takes the next turn. Both abilities trigger."
+  },
+  {
+    racers: ["Leaptoad", "Scoocher"],
+    text: "Scoocher moves 1 for every occupied space Leaptoad skips. If Leaptoad skips two occupied spaces, Scoocher moves twice."
+  },
+  {
+    racers: ["Magician", "Scoocher"],
+    text: "Every Magician reroll triggers Scoocher, so Scoocher moves 1 for each reroll, even if the reroll is not ultimately used."
+  },
+  {
+    racers: ["Party Animal", "Baba Yaga"],
+    text: "If Party Animal moves racers simultaneously onto Baba Yaga’s space, Baba Yaga does not trip them because they arrived simultaneously."
+  },
+  {
+    racers: ["Party Animal", "M.O.U.T.H."],
+    text: "When Party Animal moves M.O.U.T.H. simultaneously onto another racer, M.O.U.T.H. does not eliminate that racer from the simultaneous arrival."
+  },
+  {
+    racers: ["Party Animal", "Romantic"],
+    text: "When Party Animal moves racers simultaneously toward Party Animal, Romantic does not trigger from those simultaneous arrivals."
+  },
+  {
+    racers: ["Rocket Scientist", "Coach"],
+    text: "If Rocket Scientist shares Coach’s space, Coach’s +1 applies to Rocket Scientist’s main move, including a doubled main move."
+  },
+  {
+    racers: ["Rocket Scientist", "Gunk"],
+    text: "Gunk reduces Rocket Scientist’s resulting main-move distance by 1. If Rocket Scientist doubles a roll, Gunk reduces the doubled movement by 1."
+  },
+  {
+    racers: ["Rocket Scientist", "Inchworm"],
+    text: "If Rocket Scientist rolls 1 and doubles it to 2, Inchworm still triggers because the die roll was 1. Rocket Scientist skips the main move; its doubling does not prevent Inchworm."
+  },
+  {
+    racers: ["Rocket Scientist", "Skipper"],
+    text: "If Rocket Scientist rolls 1 and doubles it to 2, Skipper still triggers because the die roll was 1."
+  },
+  {
+    racers: ["Romantic", "Suckerfish"],
+    text: "If Suckerfish follows Romantic’s movement and arrives simultaneously, Romantic does not trigger from Suckerfish’s arrival."
+  },
+  {
+    racers: ["Scoocher", "Suckerfish"],
+    text: "If Scoocher moves while sharing a space with Suckerfish, Suckerfish can follow Scoocher to the new space. Suckerfish’s movement can then trigger Scoocher again, so this chain can continue."
+  },
+  {
+    racers: ["Stickler", "Hare"],
+    text: "Hare’s +2 can make it overshoot the finish. If Hare would overshoot, Stickler prevents the movement and Hare does not cross."
+  },
+  {
+    racers: ["Stickler", "Scoocher"],
+    text: "Scoocher’s 1-space movement is also subject to Stickler. If that movement would overshoot the finish, Scoocher does not cross."
+  },
+  {
+    racers: ["Third Wheel", "Baba Yaga"],
+    text: "If Third Wheel warps onto a space containing Baba Yaga, Baba Yaga’s ability trips Third Wheel."
+  }
+];
 
-  ["Baba Yaga","Duelist","If Duelist shares Baba Yaga’s space, they can duel, but Duelist still trips from Baba Yaga."],
-  ["Baba Yaga","Huge Baby","The two cannot share a space, so Huge Baby cannot be tripped."],
-  ["Baba Yaga","Hypnotist","Hypnotist can warp Baba Yaga onto Hypnotist’s space, but Hypnotist trips."],
-  ["Baba Yaga","Party Animal","If Party Animal moves racers simultaneously onto Baba Yaga’s space, Baba Yaga does not trip them."],
 
-  ["Banana","Centaur","If Centaur passes Banana, Centaur’s Hoofwhack moves Banana back 2, and Banana then trips Centaur for passing Banana."],
-  ["Banana","Leaptoad","Leaptoad skips over Banana’s occupied space, but that still counts as passing Banana. Banana therefore trips Leaptoad after its movement."],
+/* =========================================================
+   COMBINE ORIGINAL + EXPANSION
+   ========================================================= */
 
-  ["Blimp","Coach","If Blimp shares Coach’s space, Coach’s +1 applies to Blimp’s main move in addition to Blimp’s +3 or -1."],
-  ["Blimp","Gunk","Gunk’s -1 applies to Blimp’s main move. Before the second corner, Blimp’s +3 and Gunk’s -1 result in +2; on or after the second corner, Blimp’s -1 and Gunk’s -1 result in -2."],
-
-  ["Coach","Gunk","If Coach is on Gunk’s board, Gunk’s -1 applies to Coach’s main move while Coach’s +1 applies to Coach’s own main move. The two modifiers cancel, leaving Coach’s normal die result."],
-  ["Coach","Legs","Legs’ JOG counts as a main move, so Coach’s +1 applies. Legs moves 6 instead of 5."],
-
-  ["Copycat","Gunk","If Copycat is copying Gunk, everyone else has -2 to their move, Gunk has -1, and Copycat has -1."],
-  ["Copycat","Hare","If Copycat is copying Hare, Copycat gets Hare’s +2 movement ability. If the lead changes, Copycat immediately changes to the new leader’s power."],
-  ["Copycat","Huge Baby","If Copycat is copying Huge Baby, Huge Baby’s power takes priority."],
-  ["Copycat","Lead Racer","Copycat continuously copies the racer currently in the lead, not just at the beginning of its turn. If the lead changes, Copycat’s power changes immediately."],
-
-  ["Dicemonger","Inchworm","If a racer rolls 1 and rerolls using Dicemonger’s ability, the original 1 is treated as if it never happened."],
-  ["Dicemonger","Magician","Magician’s own rerolls do not make Dicemonger move. Dicemonger only moves when another racer uses Dicemonger’s reroll."],
-  ["Dicemonger","Scoocher","Whenever another racer uses Dicemonger’s reroll, Dicemonger moves 1 and Scoocher also moves 1 because a reroll occurred."],
-  ["Dicemonger","Skipper","If a racer rolls 1 and rerolls using Dicemonger’s ability, the original 1 is treated as if it never happened."],
-
-  ["Duelist","Huge Baby","Duelist cannot share Huge Baby’s space, so they cannot duel."],
-  ["Duelist","M.O.U.T.H.","If Duelist duels M.O.U.T.H. and M.O.U.T.H. wins, M.O.U.T.H. moves 2. If that movement ends with exactly one other racer on its space, M.O.U.T.H. eliminates that racer. If M.O.U.T.H. lands on Duelist’s space, they do not duel and Duelist is eaten."],
-  ["Duelist","Stickler","If Duelist wins a duel near the finish and the 2-space movement would overshoot the finish, Stickler prevents Duelist from crossing. Duelist does not move."],
-
-  ["Gunk","Heckler","If Gunk reduces a racer’s main move so they finish their turn within 1 space of where they started, Heckler triggers and moves 2."],
-  ["Gunk","Lackey","Gunk changes movement, not the die result. A racer who rolls 6 still rolled a 6, so Lackey still moves 2 before that racer."],
-  ["Gunk","Legs","Gunk reduces Legs’ 5-space JOG to 4. JOG still counts as Legs’ main move."],
-  ["Gunk","Scoocher","Scoocher moves 1 for each -1 that Gunk applies to another racer’s main move."],
-
-  ["Huge Baby","M.O.U.T.H.","Huge Baby cannot be eaten by M.O.U.T.H."],
-  ["Huge Baby","Party Animal","If Huge Baby is moved onto Party Animal’s space by Party Animal’s power, everyone on that space is moved back 1."],
-  ["Huge Baby","Scoocher","If Scoocher’s power moves Scoocher onto Huge Baby’s space, Huge Baby places Scoocher one space behind."],
-  ["Huge Baby","Suckerfish","Suckerfish cannot follow Huge Baby."],
-
-  ["Inchworm","Magician","Magician can reroll a 1 before Inchworm’s trigger resolves. If the reroll is not 1, Inchworm does not trigger."],
-  ["Inchworm","Skipper","When another racer rolls 1, Inchworm makes that racer skip the main move and moves 1. Skipper then takes the next turn. Both abilities trigger."],
-
-  ["Leaptoad","Scoocher","Scoocher moves 1 for every occupied space Leaptoad skips. If Leaptoad skips two occupied spaces, Scoocher moves twice."],
-
-  ["Magician","Scoocher","Every Magician reroll triggers Scoocher, so Scoocher moves 1 for each reroll, even if the reroll is not ultimately used."],
-
-  ["Party Animal","Baba Yaga","If Party Animal moves racers simultaneously onto Baba Yaga’s space, Baba Yaga does not trip them because they arrived simultaneously."],
-  ["Party Animal","M.O.U.T.H.","When Party Animal moves M.O.U.T.H. simultaneously onto another racer, M.O.U.T.H. does not eliminate that racer from the simultaneous arrival."],
-  ["Party Animal","Romantic","When Party Animal moves racers simultaneously toward Party Animal, Romantic does not trigger from those simultaneous arrivals."],
-
-  ["Rocket Scientist","Coach","If Rocket Scientist shares Coach’s space, Coach’s +1 applies to Rocket Scientist’s main move, including a doubled main move."],
-  ["Rocket Scientist","Gunk","Gunk reduces Rocket Scientist’s resulting main-move distance by 1. If Rocket Scientist doubles a roll, Gunk reduces the doubled movement by 1."],
-  ["Rocket Scientist","Inchworm","If Rocket Scientist rolls 1 and doubles it to 2, Inchworm still triggers because the die roll was 1. Rocket Scientist skips the main move; its doubling does not prevent Inchworm."],
-  ["Rocket Scientist","Skipper","If Rocket Scientist rolls 1 and doubles it to 2, Skipper still triggers because the die roll was 1."],
-
-  ["Romantic","Suckerfish","If Suckerfish follows Romantic’s movement and arrives simultaneously, Romantic does not trigger from Suckerfish’s arrival."],
-
-  ["Scoocher","Suckerfish","If Scoocher moves while sharing a space with Suckerfish, Suckerfish can follow Scoocher to the new space. Suckerfish’s movement can then trigger Scoocher again, so this chain can continue."],
-
-  ["Stickler","Hare","Hare’s +2 can make it overshoot the finish. If Hare would overshoot, Stickler prevents the movement and Hare does not cross."],
-  ["Stickler","Scoocher","Scoocher’s 1-space movement is also subject to Stickler. If that movement would overshoot the finish, Scoocher does not cross."],
-
-  ["General","Simultaneous Arrival","Stopping-on-a-space powers do not trigger from simultaneous arrival under the August 2026 rule."],
-
-  ["Third Wheel","Baba Yaga","If Third Wheel warps onto a space containing Baba Yaga, Baba Yaga’s ability trips Third Wheel."]
-].map(([a,b,details]) => ({ a, b, details }));
+const allAthletes = [
+  ...athletes,
+  ...expansionAthletes.map(([name, image]) => ({
+    name,
+    image,
+    expansion: true
+  }))
+];
 
 
-// ============================================================
-// DOM ELEMENTS
-// ============================================================
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
 
 const characterGrid = document.getElementById("characterGrid");
-const characterCount = document.getElementById("characterCount");
-const noResults = document.getElementById("noResults");
 const searchInput = document.getElementById("searchInput");
+const noResults = document.getElementById("noResults");
+const characterCount = document.getElementById("characterCount");
 
 const profileModal = document.getElementById("profileModal");
 const modalOverlay = document.getElementById("modalOverlay");
-const closeModalButton = document.getElementById("closeModal");
+const closeModal = document.getElementById("closeModal");
 
 const profileImage = document.getElementById("profileImage");
 const profileName = document.getElementById("profileName");
-
 const profileAbilityName = document.getElementById("profileAbilityName");
 const profileAbilityText = document.getElementById("profileAbilityText");
 
@@ -389,330 +504,171 @@ const interactionCount = document.getElementById("interactionCount");
 const noInteractions = document.getElementById("noInteractions");
 
 
-// ============================================================
-// CHARACTER LOOKUP
-// ============================================================
+/* =========================================================
+   CHARACTER CARDS
+   ========================================================= */
 
-const characterMap = new Map(
-  allAthletes.map(character => [character.name, character])
-);
+function renderCharacters(searchTerm = "") {
+  const term = searchTerm.trim().toLowerCase();
 
-
-// ============================================================
-// HTML SAFETY
-// ============================================================
-
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-
-// ============================================================
-// GET INTERACTIONS
-// ============================================================
-
-function getInteractions(characterName) {
-  return interactionData.filter(interaction =>
-    interaction.a === characterName ||
-    interaction.b === characterName
+  const filtered = allAthletes.filter((athlete) =>
+    athlete.name.toLowerCase().includes(term)
   );
-}
-
-
-// ============================================================
-// GET OTHER CHARACTER
-// ============================================================
-
-function getOtherCharacter(interaction, characterName) {
-  if (interaction.a === characterName) {
-    return interaction.b;
-  }
-
-  return interaction.a;
-}
-
-
-// ============================================================
-// RENDER RACER CARDS
-// ============================================================
-
-function renderCharacters(list) {
 
   characterGrid.innerHTML = "";
 
-  characterCount.textContent =
-    `${list.length} ${list.length === 1 ? "racer" : "racers"}`;
-
-  if (list.length === 0) {
-    noResults.classList.remove("hidden");
-    return;
-  }
-
-  noResults.classList.add("hidden");
-
-  list.forEach(character => {
-
+  filtered.forEach((athlete) => {
     const card = document.createElement("button");
 
     card.type = "button";
     card.className = "character-card";
-    card.dataset.character = character.name;
 
     card.innerHTML = `
       <img
         class="character-card-image"
-        src="${escapeHtml(character.image)}"
-        alt="${escapeHtml(character.name)}"
-        loading="lazy"
+        src="${athlete.image}"
+        alt="${athlete.name}"
       >
-
-      <h3 class="character-card-name">
-        ${escapeHtml(character.name)}
-      </h3>
+      <div class="character-card-content">
+        <h3>${athlete.name}</h3>
+      </div>
     `;
+
+    card.addEventListener("click", () => {
+      openProfile(athlete.name);
+    });
 
     characterGrid.appendChild(card);
   });
+
+  characterCount.textContent =
+    `${filtered.length} racer${filtered.length === 1 ? "" : "s"}`;
+
+  noResults.classList.toggle("hidden", filtered.length !== 0);
 }
 
 
-// ============================================================
-// RENDER INTERACTIONS
-// ============================================================
+/* =========================================================
+   OPEN PROFILE
+   ========================================================= */
 
-function renderInteractions(characterName) {
+function openProfile(name) {
+  const athlete = allAthletes.find((item) => item.name === name);
 
-  const interactions = getInteractions(characterName);
+  if (!athlete) return;
 
-  interactionList.innerHTML = "";
+  profileImage.src = athlete.image;
+  profileImage.alt = athlete.name;
+  profileName.textContent = athlete.name;
 
-  interactionCount.textContent =
-    `${interactions.length} ${
-      interactions.length === 1
-        ? "interaction"
-        : "interactions"
-    }`;
-
-  if (interactions.length === 0) {
-
-    noInteractions.classList.remove("hidden");
-
-    return;
-  }
-
-  noInteractions.classList.add("hidden");
-
-  interactions.forEach(interaction => {
-
-    const otherCharacter =
-      getOtherCharacter(interaction, characterName);
-
-    const card = document.createElement("div");
-
-    card.className = "interaction-card";
-
-    card.innerHTML = `
-      <div class="interaction-character">
-        <button
-          type="button"
-          class="character-link"
-          data-character="${escapeHtml(otherCharacter)}"
-        >
-          ${escapeHtml(otherCharacter)}
-        </button>
-      </div>
-
-      <div class="interaction-text">
-        ${escapeHtml(interaction.details)}
-      </div>
-    `;
-
-    interactionList.appendChild(card);
-  });
-}
-
-
-// ============================================================
-// OPEN PROFILE
-// ============================================================
-
-function openProfile(characterName) {
-
-  const character = characterMap.get(characterName);
-
-  if (!character) {
-    return;
-  }
-
-  profileImage.src = character.image;
-  profileImage.alt = character.name;
-
-  profileName.textContent = character.name;
-
-  // ----------------------------------------------------------
-  // EXPANSION RACERS
-  // ----------------------------------------------------------
-
-  if (character.expansion) {
-
+  if (athlete.expansion) {
     profileAbilityName.textContent = "";
     profileAbilityText.textContent = "More info coming soon.";
 
     interactionList.innerHTML = "";
-
     interactionCount.textContent = "";
-
     noInteractions.classList.add("hidden");
+  } else {
+    profileAbilityName.textContent = athlete.power;
+    profileAbilityText.textContent = athlete.ability;
 
-  }
-
-  // ----------------------------------------------------------
-  // ORIGINAL RACERS
-  // ----------------------------------------------------------
-
-  else {
-
-    profileAbilityName.textContent = character.power;
-    profileAbilityText.textContent = character.ability;
-
-    renderInteractions(character.name);
-
+    renderInteractions(athlete.name);
   }
 
   profileModal.classList.add("open");
-
-  profileModal.setAttribute(
-    "aria-hidden",
-    "false"
-  );
-
-  document.body.style.overflow = "hidden";
-
-  const interactionPanel =
-    document.querySelector(".profile-interactions");
-
-  if (interactionPanel) {
-    interactionPanel.scrollTop = 0;
-  }
+  profileModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
 }
 
 
-// ============================================================
-// CLOSE PROFILE
-// ============================================================
+/* =========================================================
+   RENDER INTERACTIONS
+   ========================================================= */
 
-function closeProfile() {
-
-  profileModal.classList.remove("open");
-
-  profileModal.setAttribute(
-    "aria-hidden",
-    "true"
+function renderInteractions(name) {
+  const interactions = interactionData.filter((interaction) =>
+    interaction.racers.includes(name)
   );
 
-  document.body.style.overflow = "";
-}
+  interactionList.innerHTML = "";
 
-
-// ============================================================
-// CHARACTER CARD CLICK
-// ============================================================
-
-characterGrid.addEventListener("click", event => {
-
-  const card =
-    event.target.closest(".character-card");
-
-  if (!card) {
-    return;
-  }
-
-  openProfile(card.dataset.character);
-});
-
-
-// ============================================================
-// CLICKABLE CHARACTER NAMES IN INTERACTIONS
-// ============================================================
-
-interactionList.addEventListener("click", event => {
-
-  const link =
-    event.target.closest(".character-link");
-
-  if (!link) {
-    return;
-  }
-
-  openProfile(link.dataset.character);
-});
-
-
-// ============================================================
-// SEARCH
-// ============================================================
-
-searchInput.addEventListener("input", () => {
-
-  const query =
-    searchInput.value
-      .trim()
-      .toLowerCase();
-
-  const filteredCharacters =
-    allAthletes.filter(character =>
-      character.name
-        .toLowerCase()
-        .includes(query)
+  interactions.forEach((interaction) => {
+    const otherName = interaction.racers.find(
+      (racer) => racer !== name
     );
 
-  renderCharacters(filteredCharacters);
-});
+    const item = document.createElement("article");
+    item.className = "interaction-item";
+
+    item.innerHTML = `
+      <div class="interaction-character">
+        <button
+          type="button"
+          class="character-link"
+          data-character="${otherName}"
+        >${otherName}</button>
+      </div>
+
+      <div class="interaction-text">
+        ${interaction.text}
+      </div>
+    `;
+
+    interactionList.appendChild(item);
+  });
+
+  interactionCount.textContent =
+    `${interactions.length} interaction${interactions.length === 1 ? "" : "s"}`;
+
+  noInteractions.classList.toggle(
+    "hidden",
+    interactions.length !== 0
+  );
+
+  document.querySelectorAll(".character-link").forEach((button) => {
+    button.addEventListener("click", () => {
+      openProfile(button.dataset.character);
+    });
+  });
+}
 
 
-// ============================================================
-// CLOSE BUTTON
-// ============================================================
+/* =========================================================
+   CLOSE MODAL
+   ========================================================= */
 
-closeModalButton.addEventListener(
-  "click",
-  closeProfile
-);
+function closeProfile() {
+  profileModal.classList.remove("open");
+  profileModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+}
 
-
-// ============================================================
-// CLICK OUTSIDE PROFILE
-// ============================================================
-
-modalOverlay.addEventListener(
-  "click",
-  closeProfile
-);
+closeModal.addEventListener("click", closeProfile);
+modalOverlay.addEventListener("click", closeProfile);
 
 
-// ============================================================
-// ESCAPE KEY
-// ============================================================
+/* =========================================================
+   ESCAPE KEY
+   ========================================================= */
 
-document.addEventListener("keydown", event => {
-
-  if (
-    event.key === "Escape" &&
-    profileModal.classList.contains("open")
-  ) {
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
     closeProfile();
   }
-
 });
 
 
-// ============================================================
-// INITIAL PAGE LOAD
-// ============================================================
+/* =========================================================
+   SEARCH
+   ========================================================= */
 
-renderCharacters(allAthletes);
+searchInput.addEventListener("input", (event) => {
+  renderCharacters(event.target.value);
+});
+
+
+/* =========================================================
+   INITIAL LOAD
+   ========================================================= */
+
+renderCharacters();
