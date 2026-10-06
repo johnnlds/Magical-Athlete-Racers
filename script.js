@@ -218,55 +218,6 @@ const athletes = [
 ];
 
 
-/* =========================================================
-   EXPANSION RACERS
-   Actual folder name: four spaces + "expansion"
-   ========================================================= */
-
-const expansionAthletes = [
-  ["Bite Mark", "images/    expansion/Bite Mark.png"],
-  ["Blunderdog", "images/    expansion/Blunderdog.png"],
-  ["Cheatah", "images/    expansion/Cheatah.png"],
-  ["Critic", "images/    expansion/Critic.png"],
-  ["Diva", "images/    expansion/Diva.png"],
-  ["Doppelgängster", "images/    expansion/Doppelgängster.png"],
-  ["Gloth", "images/    expansion/Gloth.png"],
-  ["Hog Knight", "images/    expansion/Hog Knight.png"],
-  ["Hopfrog", "images/    expansion/Hopfrog.png"],
-  ["Hotel", "images/    expansion/Hotel.png"],
-  ["Icarus", "images/    expansion/Icarus.png"],
-  ["Kingtripper", "images/    expansion/Kingtripper.png"],
-  ["Kraken", "images/    expansion/Kraken.png"],
-  ["LeSaboteur", "images/    expansion/LeSaboteur.png"],
-  ["Magical Athlete", "images/    expansion/Magical Athlete.png"],
-  ["Mr. Dice Guy", "images/    expansion/Mr. Dice Guy.png"],
-  ["Mole", "images/    expansion/Mole.png"],
-  ["Mush", "images/    expansion/Mush.png"],
-  ["Nemesis", "images/    expansion/Nemesis.png"],
-  ["Nepo Baby", "images/    expansion/Nepo Baby.png"],
-  ["Null", "images/    expansion/Null.png"],
-  ["Overtaker", "images/    expansion/Overtaker.png"],
-  ["Party Pooper", "images/    expansion/Party Pooper.png"],
-  ["Penguin", "images/    expansion/Penguin.png"],
-  ["Re-Runner", "images/    expansion/Re-Runner.png"],
-  ["Show-Off", "images/    expansion/Show-Off.png"],
-  ["Soulmate", "images/    expansion/Soulmate.png"],
-  ["Speed Demon", "images/    expansion/Speed Demon.png"],
-  ["Spoilsport", "images/    expansion/Spoilsport.png"],
-  ["Stepdad", "images/    expansion/Stepdad.png"],
-  ["Streaker", "images/    expansion/Streaker.png"],
-  ["Stunner", "images/    expansion/Stunner.png"],
-  ["Switcharoo", "images/    expansion/Switcharoo.png"],
-  ["Tail", "images/    expansion/Tail.png"],
-  ["The Hose", "images/    expansion/The Hose.png"],
-  ["Understudy", "images/    expansion/Understudy.png"]
-];
-
-
-/* =========================================================
-   INTERACTIONS
-   ========================================================= */
-
 const interactionData = [
   {
     racers: ["Alchemist", "Coach"],
@@ -467,32 +418,273 @@ const interactionData = [
 ];
 
 
-/* =========================================================
-   COMBINE ORIGINAL + EXPANSION
-   ========================================================= */
-
-const allAthletes = [
-  ...athletes,
-  ...expansionAthletes.map(([name, image]) => ({
-    name,
-    image,
+const expansionAthletes = [
+  {
+    name: "Bite Mark",
+    power: "HUUAARRGGHHH!!!!",
+    ability: "When I roll a 1 or 2 for my main move, I transform into a W.E.R.E.M.O.U.T.H. who eliminates any racers I pass.",
+    image: "images/expansion/Bite Mark.png",
     expansion: true
-  }))
+  },
+  {
+    name: "Blunderdog",
+    power: "BLUNDERTRAIL",
+    ability: "When I'm in last place, triple my main move roll. When I'm not, I move backwards for my main move instead.",
+    image: "images/expansion/Blunderdog.png",
+    expansion: true
+  },
+  {
+    name: "Cheetah",
+    power: "SLEIGHT OF PAW",
+    ability: "Instead of rolling for my main move, I secretly set my die to any number. If the player to my right guesses the number, I don't move.",
+    image: "images/expansion/Cheatah.png",
+    expansion: true
+  },
+  {
+    name: "Critic",
+    power: "BON MOTS",
+    ability: "I can make racers ahead of me reroll their main move once per turn.",
+    image: "images/expansion/Critic.png",
+    expansion: true
+  },
+  {
+    name: "Diva",
+    power: "QUELLE DRAMATIQUE!",
+    ability: "If I'm in last place at the start of my turn, I swap spaces with the lead racer. Otherwise, I swap with the last place racer.",
+    image: "images/expansion/Diva.png",
+    expansion: true
+  },
+  {
+    name: "Doppelgängster",
+    power: "TAKE A DIVE",
+    ability: "The racer who finishes 1st is eliminated instead. I get their power.",
+    image: "images/expansion/Doppelgänger.png",
+    expansion: true
+  },
+  {
+    name: "Gloth",
+    power: "GLORPOR",
+    ability: "I get -1 to my main move. When the race ends, I get 3 points if I'm not past the second corner.",
+    image: "images/expansion/Gloth.png",
+    expansion: true
+  },
+  {
+    name: "Hog Knight",
+    power: "PIGGYBACK",
+    ability: "I start my race on a hog that gives +2 to its rider's main move. When a racer stops on the hog's space, they take it.",
+    image: "images/expansion/Hog Knight.png",
+    expansion: true
+  },
+  {
+    name: "Hopfrog",
+    power: "BOIOIOING",
+    ability: "When I end my turn 1 space behind a racer, I take an extra turn.",
+    image: "images/expansion/Hopfrog.png",
+    expansion: true
+  },
+  {
+    name: "Hotel",
+    power: "MONOPOLIZE",
+    ability: "When a racer stops on my space, they pay me 1 point. If they can't, they trip.",
+    image: "images/expansion/Hotel.png",
+    expansion: true
+  },
+  {
+    name: "Icarus",
+    power: "FLIGHT RISK",
+    ability: "I get +3 to my main move. If I roll a 6 for my main move, I'm eliminated.",
+    image: "images/expansion/Icarus.png",
+    expansion: true
+  },
+  {
+    name: "Kingtripper",
+    power: "REGISLIDE",
+    ability: "At the start of my turn, I can trip the lead racer.",
+    image: "images/expansion/Kingtripper.png",
+    expansion: true
+  },
+  {
+    name: "Kraken",
+    power: "GET OVER HERE",
+    ability: "Once per race, at the start of my turn, I can warp all other racers to my space and trip them.",
+    image: "images/expansion/Kraken.png",
+    expansion: true
+  },
+  {
+    name: "Le Saboteur",
+    power: "TROIS REVOIR",
+    ability: "When other racers roll a 3 for their main move, they move backwards instead.",
+    image: "images/expansion/LeSaboteur.png",
+    expansion: true
+  },
+  {
+    name: "Magical Athlete",
+    power: "FLEXOMANCY",
+    ability: "When I roll this for my main move…\n1: I move 7.\n2: The last place racer warps to me.\n3: I warp to another racer and trip them.\n4: I move 4 and take an extra turn.\n5: The lead racer moves backwards 5.\n6: I move 6 and trip any racers I pass.",
+    image: "images/expansion/Magical Athlete.png",
+    expansion: true
+  },
+  {
+    name: "Mole",
+    power: "TUNNELIN'",
+    ability: "If there aren't any racers within 1 space of me, I can skip rolling for my main move and move 6 instead.",
+    image: "images/expansion/Mole.png",
+    expansion: true
+  },
+  {
+    name: "Mr. Dice Guy",
+    power: "YES! MORE!",
+    ability: "I roll all six dice for my main move and pick any number that was rolled more than once.",
+    image: "images/expansion/Mr. Dice Guy.png",
+    expansion: true
+  },
+  {
+    name: "Mush",
+    power: "GLOBSTER MASH",
+    ability: "When I roll a 1 or 2 for my main move, I draw a racer card and get its power for the rest of the race.",
+    image: "images/expansion/Mush.png",
+    expansion: true
+  },
+  {
+    name: "Nemesis",
+    power: "GRUDGE MATCH",
+    ability: "When other racers roll for their main move, I can roll too. If I roll the same, I move that amount.",
+    image: "images/expansion/Nemesis.png",
+    expansion: true
+  },
+  {
+    name: "Nepo Baby",
+    power: "HUGELY RICH",
+    ability: "I start the race on the first corner of the track.",
+    image: "images/expansion/Nepo Baby.png",
+    expansion: true
+  },
+  {
+    name: "Null",
+    power: "VOID",
+    ability: "Racers ahead of me get -1 to their main move and have no powers.",
+    image: "images/expansion/Null.png",
+    expansion: true
+  },
+  {
+    name: "Overtaker",
+    power: "SKULLDIGGERY",
+    ability: "I get +1 to my main move for each racer ahead of me.",
+    image: "images/expansion/Overtaker.png",
+    expansion: true
+  },
+  {
+    name: "Party Pooper",
+    power: "NOISE COMPLAINT",
+    ability: "All sixes must be rerolled. When they are, I move 1.",
+    image: "images/expansion/Party Pooper.png",
+    expansion: true
+  },
+  {
+    name: "Penguin",
+    power: "TUMMY TIME",
+    ability: "Whenever a racer passes me, I trip. While I'm tripped, double my roll for my main move instead of skipping it.",
+    image: "images/expansion/Penguin.png",
+    expansion: true
+  },
+  {
+    name: "Re-Runner",
+    power: "RUN IT BACK",
+    ability: "After my first race, I race as an extra racer for my player in all remaining races.",
+    image: "images/expansion/Re-Runner.png",
+    expansion: true
+  },
+  {
+    name: "Show-Off",
+    power: "GUYS, WATCH!",
+    ability: "After I roll for my main move, I can keep rolling and adding each amount to my move. If I ever roll the same or lower, I don't move.",
+    image: "images/expansion/Show-Off.png",
+    expansion: true
+  },
+  {
+    name: "Soulmate",
+    power: "TWIN FLAME",
+    ability: "Before my race, I pick any opposing racer. When I start my turn within 5 spaces of them, I warp to their space.",
+    image: "images/expansion/Soulmate.png",
+    expansion: true
+  },
+  {
+    name: "Speed Demon",
+    power: "TERMINAL VELOCITY",
+    ability: "I get +1 to my main move for each point my player has. I am eliminated if I'm 4+ spaces in the lead at the start of my turn.",
+    image: "images/expansion/Speed Demon.png",
+    expansion: true
+  },
+  {
+    name: "Spoilsport",
+    power: "CRY FOUL",
+    ability: "If all other racers are 5+ spaces ahead of me at the start of my turn, the race is cancelled and I get 3 points.",
+    image: "images/expansion/Spoilsport.png",
+    expansion: true
+  },
+  {
+    name: "Stepdad",
+    power: "STEP UP",
+    ability: "The racer to my left gets +2 to their main move. If they finish 1st, I get 3 points.",
+    image: "images/expansion/Stepdad.png",
+    expansion: true
+  },
+  {
+    name: "Streaker",
+    power: "EXHIBIT B",
+    ability: "When I pass any racers, I get 1 point.",
+    image: "images/expansion/Streaker.png",
+    expansion: true
+  },
+  {
+    name: "Stunner",
+    power: "STOP TRAFFIC",
+    ability: "Other racers within 1 space of me roll a 1 for all rolls.",
+    image: "images/expansion/Stunner.png",
+    expansion: true
+  },
+  {
+    name: "Switcharoo",
+    power: "MARSWAPIAL",
+    ability: "When I end my turn within 1 space of another racer, I can swap who controls which racer: their player takes my card and I take theirs.",
+    image: "images/expansion/Switcharoo.png",
+    expansion: true
+  },
+  {
+    name: "Tail",
+    power: "REAR END",
+    ability: "At the start of my turn, I can warp to the space behind the next racer ahead of me.",
+    image: "images/expansion/Tail.png",
+    expansion: true
+  },
+  {
+    name: "The Hose",
+    power: "POWER WASH",
+    ability: "At the end of my turn, roll a die and trip every racer within that many spaces ahead of me.",
+    image: "images/expansion/The Hose.png",
+    expansion: true
+  },
+  {
+    name: "Understudy",
+    power: "THE METHOD",
+    ability: "Before my race, I copy an opposing racer's power.",
+    image: "images/expansion/Understudy.png",
+    expansion: true
+  }
 ];
 
 
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
+const allAthletes = [...athletes, ...expansionAthletes];
+
 
 const characterGrid = document.getElementById("characterGrid");
 const searchInput = document.getElementById("searchInput");
-const noResults = document.getElementById("noResults");
 const characterCount = document.getElementById("characterCount");
+const noResults = document.getElementById("noResults");
 
 const profileModal = document.getElementById("profileModal");
 const modalOverlay = document.getElementById("modalOverlay");
-const closeModal = document.getElementById("closeModal");
+const closeModalButton = document.getElementById("closeModal");
 
 const profileImage = document.getElementById("profileImage");
 const profileName = document.getElementById("profileName");
@@ -504,33 +696,48 @@ const interactionCount = document.getElementById("interactionCount");
 const noInteractions = document.getElementById("noInteractions");
 
 
-/* =========================================================
-   CHARACTER CARDS
-   ========================================================= */
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
-function renderCharacters(searchTerm = "") {
-  const term = searchTerm.trim().toLowerCase();
 
-  const filtered = allAthletes.filter((athlete) =>
-    athlete.name.toLowerCase().includes(term)
-  );
+function findAthlete(name) {
+  return allAthletes.find(athlete => athlete.name === name);
+}
 
+
+function renderCharacters(list = allAthletes) {
   characterGrid.innerHTML = "";
 
-  filtered.forEach((athlete) => {
-    const card = document.createElement("button");
+  characterCount.textContent = `${list.length} ${list.length === 1 ? "racer" : "racers"}`;
 
+  if (list.length === 0) {
+    noResults.classList.remove("hidden");
+    return;
+  }
+
+  noResults.classList.add("hidden");
+
+  list.forEach(athlete => {
+    const card = document.createElement("button");
     card.type = "button";
     card.className = "character-card";
+    card.setAttribute("aria-label", `Open ${athlete.name} profile`);
 
     card.innerHTML = `
       <img
         class="character-card-image"
-        src="${athlete.image}"
-        alt="${athlete.name}"
+        src="${escapeHtml(athlete.image)}"
+        alt="${escapeHtml(athlete.name)}"
+        loading="lazy"
       >
       <div class="character-card-content">
-        <h3>${athlete.name}</h3>
+        <h3>${escapeHtml(athlete.name)}</h3>
       </div>
     `;
 
@@ -540,102 +747,107 @@ function renderCharacters(searchTerm = "") {
 
     characterGrid.appendChild(card);
   });
-
-  characterCount.textContent =
-    `${filtered.length} racer${filtered.length === 1 ? "" : "s"}`;
-
-  noResults.classList.toggle("hidden", filtered.length !== 0);
 }
 
 
-/* =========================================================
-   OPEN PROFILE
-   ========================================================= */
-
-function openProfile(name) {
-  const athlete = allAthletes.find((item) => item.name === name);
-
-  if (!athlete) return;
-
-  profileImage.src = athlete.image;
-  profileImage.alt = athlete.name;
-  profileName.textContent = athlete.name;
-
-  if (athlete.expansion) {
-    profileAbilityName.textContent = "";
-    profileAbilityText.textContent = "More info coming soon.";
-
-    interactionList.innerHTML = "";
-    interactionCount.textContent = "";
-    noInteractions.classList.add("hidden");
-  } else {
-    profileAbilityName.textContent = athlete.power;
-    profileAbilityText.textContent = athlete.ability;
-
-    renderInteractions(athlete.name);
-  }
-
-  profileModal.classList.add("open");
-  profileModal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
-}
-
-
-/* =========================================================
-   RENDER INTERACTIONS
-   ========================================================= */
-
-function renderInteractions(name) {
-  const interactions = interactionData.filter((interaction) =>
+function getInteractionsForAthlete(name) {
+  return interactionData.filter(interaction =>
     interaction.racers.includes(name)
   );
+}
 
-  interactionList.innerHTML = "";
 
-  interactions.forEach((interaction) => {
-    const otherName = interaction.racers.find(
-      (racer) => racer !== name
-    );
-
-    const item = document.createElement("article");
-    item.className = "interaction-item";
-
-    item.innerHTML = `
-      <div class="interaction-character">
-        <button
-          type="button"
-          class="character-link"
-          data-character="${otherName}"
-        >${otherName}</button>
-      </div>
-
-      <div class="interaction-text">
-        ${interaction.text}
-      </div>
+function createInteractionHtml(interaction) {
+  const characterLinks = interaction.racers.map(name => {
+    return `
+      <button
+        type="button"
+        class="character-link"
+        data-character="${escapeHtml(name)}"
+      >${escapeHtml(name)}</button>
     `;
+  }).join(" <span class=\"interaction-vs\">×</span> ");
 
-    interactionList.appendChild(item);
-  });
+  return `
+    <div class="interaction-card">
+      <div class="interaction-character">
+        ${characterLinks}
+      </div>
+      <div class="interaction-text">
+        ${escapeHtml(interaction.text)}
+      </div>
+    </div>
+  `;
+}
 
-  interactionCount.textContent =
-    `${interactions.length} interaction${interactions.length === 1 ? "" : "s"}`;
 
-  noInteractions.classList.toggle(
-    "hidden",
-    interactions.length !== 0
-  );
+function attachInteractionCharacterEvents() {
+  const links = interactionList.querySelectorAll(".character-link");
 
-  document.querySelectorAll(".character-link").forEach((button) => {
-    button.addEventListener("click", () => {
-      openProfile(button.dataset.character);
+  links.forEach(link => {
+    link.addEventListener("click", event => {
+      event.stopPropagation();
+
+      const characterName = link.getAttribute("data-character");
+
+      if (characterName) {
+        openProfile(characterName);
+      }
     });
   });
 }
 
 
-/* =========================================================
-   CLOSE MODAL
-   ========================================================= */
+function openProfile(name) {
+  const athlete = findAthlete(name);
+
+  if (!athlete) {
+    return;
+  }
+
+  profileImage.src = athlete.image;
+  profileImage.alt = athlete.name;
+
+  profileName.textContent = athlete.name;
+  profileAbilityName.textContent = athlete.power;
+  profileAbilityText.textContent = athlete.ability;
+
+  if (athlete.expansion) {
+    interactionCount.textContent = "Coming soon";
+    interactionList.innerHTML = `
+      <div class="interaction-card">
+        <div class="interaction-text">Coming soon.</div>
+      </div>
+    `;
+
+    noInteractions.classList.add("hidden");
+  } else {
+    const interactions = getInteractionsForAthlete(athlete.name);
+
+    interactionCount.textContent =
+      `${interactions.length} ${interactions.length === 1 ? "interaction" : "interactions"}`;
+
+    if (interactions.length === 0) {
+      interactionList.innerHTML = "";
+      noInteractions.classList.remove("hidden");
+    } else {
+      noInteractions.classList.add("hidden");
+
+      interactionList.innerHTML = interactions
+        .map(createInteractionHtml)
+        .join("");
+
+      attachInteractionCharacterEvents();
+    }
+  }
+
+  profileModal.classList.add("open");
+  profileModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+
+  profileModal.scrollTop = 0;
+}
+
 
 function closeProfile() {
   profileModal.classList.remove("open");
@@ -643,32 +855,39 @@ function closeProfile() {
   document.body.classList.remove("modal-open");
 }
 
-closeModal.addEventListener("click", closeProfile);
+
+searchInput.addEventListener("input", () => {
+  const searchTerm = searchInput.value.trim().toLowerCase();
+
+  if (!searchTerm) {
+    renderCharacters(allAthletes);
+    return;
+  }
+
+  const filtered = allAthletes.filter(athlete =>
+    athlete.name.toLowerCase().includes(searchTerm)
+  );
+
+  renderCharacters(filtered);
+});
+
+
+closeModalButton.addEventListener("click", closeProfile);
 modalOverlay.addEventListener("click", closeProfile);
 
 
-/* =========================================================
-   ESCAPE KEY
-   ========================================================= */
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && profileModal.classList.contains("open")) {
     closeProfile();
   }
 });
 
 
-/* =========================================================
-   SEARCH
-   ========================================================= */
-
-searchInput.addEventListener("input", (event) => {
-  renderCharacters(event.target.value);
+profileModal.addEventListener("click", event => {
+  if (event.target === profileModal) {
+    closeProfile();
+  }
 });
 
 
-/* =========================================================
-   INITIAL LOAD
-   ========================================================= */
-
-renderCharacters();
+renderCharacters(allAthletes);
