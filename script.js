@@ -216,8 +216,6 @@ const athletes = [
     image: "images/IMG_3339.png"
   }
 ];
-
-
 const interactionData = [
   {
     racers: ["Alchemist", "Coach"],
@@ -416,8 +414,6 @@ const interactionData = [
     text: "If Third Wheel warps onto a space containing Baba Yaga, Baba Yaga’s ability trips Third Wheel."
   }
 ];
-
-
 const expansionAthletes = [
   {
     name: "Bite Mark",
@@ -434,7 +430,7 @@ const expansionAthletes = [
     expansion: true
   },
   {
-    name: "Cheetah",
+    name: "Cheatah",
     power: "SLEIGHT OF PAW",
     ability: "Instead of rolling for my main move, I secretly set my die to any number. If the player to my right guesses the number, I don't move.",
     image: "images/expansion/Cheatah.png",
@@ -458,7 +454,7 @@ const expansionAthletes = [
     name: "Doppelgängster",
     power: "TAKE A DIVE",
     ability: "The racer who finishes 1st is eliminated instead. I get their power.",
-    image: "images/expansion/Doppelgänger.png",
+    image: "images/expansion/dopelgangster.png",
     expansion: true
   },
   {
@@ -672,30 +668,21 @@ const expansionAthletes = [
     expansion: true
   }
 ];
-
-
 const allAthletes = [...athletes, ...expansionAthletes];
-
-
 const characterGrid = document.getElementById("characterGrid");
-const searchInput = document.getElementById("searchInput");
 const characterCount = document.getElementById("characterCount");
 const noResults = document.getElementById("noResults");
-
+const searchInput = document.getElementById("searchInput");
 const profileModal = document.getElementById("profileModal");
 const modalOverlay = document.getElementById("modalOverlay");
 const closeModalButton = document.getElementById("closeModal");
-
 const profileImage = document.getElementById("profileImage");
 const profileName = document.getElementById("profileName");
 const profileAbilityName = document.getElementById("profileAbilityName");
 const profileAbilityText = document.getElementById("profileAbilityText");
-
-const interactionList = document.getElementById("interactionList");
 const interactionCount = document.getElementById("interactionCount");
+const interactionList = document.getElementById("interactionList");
 const noInteractions = document.getElementById("noInteractions");
-
-
 function escapeHtml(value) {
   return String(value)
     .replace(/&/g, "&amp;")
@@ -704,114 +691,96 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
-
-
 function findAthlete(name) {
   return allAthletes.find(athlete => athlete.name === name);
 }
-
-
-function renderCharacters(list = allAthletes) {
-  characterGrid.innerHTML = "";
-
-  characterCount.textContent = `${list.length} ${list.length === 1 ? "racer" : "racers"}`;
-
-  if (list.length === 0) {
+function renderCharacters(filter = "") {
+  const query = filter.trim().toLowerCase();
+  const filtered = allAthletes.filter(athlete =>
+    athlete.name.toLowerCase().includes(query)
+  );
+  characterCount.textContent = `${filtered.length} ${filtered.length === 1 ? "racer" : "racers"}`;
+  if (filtered.length === 0) {
+    characterGrid.innerHTML = "";
     noResults.classList.remove("hidden");
     return;
   }
-
   noResults.classList.add("hidden");
-
-  list.forEach(athlete => {
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = "character-card";
-    card.setAttribute("aria-label", `Open ${athlete.name} profile`);
-
-    card.innerHTML = `
-      <img
-        class="character-card-image"
-        src="${escapeHtml(athlete.image)}"
-        alt="${escapeHtml(athlete.name)}"
-        loading="lazy"
+  characterGrid.innerHTML = filtered
+    .map(athlete => `
+      <button
+        class="character-card"
+        type="button"
+        data-character="${escapeHtml(athlete.name)}"
       >
-      <div class="character-card-content">
-        <h3>${escapeHtml(athlete.name)}</h3>
-      </div>
-    `;
-
+        <div class="character-image-wrap">
+          <img
+            class="character-image"
+            src="${escapeHtml(athlete.image)}"
+            alt="${escapeHtml(athlete.name)}"
+            loading="lazy"
+          >
+        </div>
+        <div class="character-name">${escapeHtml(athlete.name)}</div>
+      </button>
+    `)
+    .join("");
+  document.querySelectorAll(".character-card").forEach(card => {
     card.addEventListener("click", () => {
-      openProfile(athlete.name);
+      openProfile(card.dataset.character);
     });
-
-    characterGrid.appendChild(card);
   });
 }
-
-
 function getInteractionsForAthlete(name) {
   return interactionData.filter(interaction =>
     interaction.racers.includes(name)
   );
 }
-
-
 function createInteractionHtml(interaction) {
-  const characterLinks = interaction.racers.map(name => {
-    return `
-      <button
-        type="button"
-        class="character-link"
-        data-character="${escapeHtml(name)}"
-      >${escapeHtml(name)}</button>
-    `;
-  }).join(" <span class=\"interaction-vs\">×</span> ");
-
+  const firstRacer = interaction.racers[0];
+  const secondRacer = interaction.racers[1];
   return `
-    <div class="interaction-card">
-      <div class="interaction-character">
-        ${characterLinks}
+    <article class="interaction-card">
+      <div class="interaction-racers">
+        <button
+          class="interaction-character"
+          type="button"
+          data-character="${escapeHtml(firstRacer)}"
+        >
+          ${escapeHtml(firstRacer)}
+        </button>
+        <span class="interaction-vs">×</span>
+        <button
+          class="interaction-character"
+          type="button"
+          data-character="${escapeHtml(secondRacer)}"
+        >
+          ${escapeHtml(secondRacer)}
+        </button>
       </div>
       <div class="interaction-text">
         ${escapeHtml(interaction.text)}
       </div>
-    </div>
+    </article>
   `;
 }
-
-
 function attachInteractionCharacterEvents() {
-  const links = interactionList.querySelectorAll(".character-link");
-
-  links.forEach(link => {
-    link.addEventListener("click", event => {
-      event.stopPropagation();
-
-      const characterName = link.getAttribute("data-character");
-
-      if (characterName) {
-        openProfile(characterName);
-      }
+  document.querySelectorAll(".interaction-character").forEach(button => {
+    button.addEventListener("click", () => {
+      openProfile(button.dataset.character);
     });
   });
 }
-
-
 function openProfile(name) {
   const athlete = findAthlete(name);
-
   if (!athlete) {
     return;
   }
-
   profileImage.src = athlete.image;
   profileImage.alt = athlete.name;
-
   profileName.textContent = athlete.name;
   profileAbilityName.textContent = athlete.power;
   profileAbilityText.textContent = athlete.ability;
-
   if (athlete.expansion) {
     interactionCount.textContent = "Coming soon";
     interactionList.innerHTML = `
@@ -819,75 +788,42 @@ function openProfile(name) {
         <div class="interaction-text">Coming soon.</div>
       </div>
     `;
-
     noInteractions.classList.add("hidden");
   } else {
     const interactions = getInteractionsForAthlete(athlete.name);
-
     interactionCount.textContent =
-      `${interactions.length} ${interactions.length === 1 ? "interaction" : "interactions"}`;
-
+      `${interactions.length} ${
+        interactions.length === 1 ? "interaction" : "interactions"
+      }`;
     if (interactions.length === 0) {
       interactionList.innerHTML = "";
       noInteractions.classList.remove("hidden");
     } else {
       noInteractions.classList.add("hidden");
-
       interactionList.innerHTML = interactions
         .map(createInteractionHtml)
         .join("");
-
       attachInteractionCharacterEvents();
     }
   }
-
   profileModal.classList.add("open");
   profileModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
-
   profileModal.scrollTop = 0;
 }
-
-
 function closeProfile() {
   profileModal.classList.remove("open");
   profileModal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("modal-open");
 }
-
-
-searchInput.addEventListener("input", () => {
-  const searchTerm = searchInput.value.trim().toLowerCase();
-
-  if (!searchTerm) {
-    renderCharacters(allAthletes);
-    return;
-  }
-
-  const filtered = allAthletes.filter(athlete =>
-    athlete.name.toLowerCase().includes(searchTerm)
-  );
-
-  renderCharacters(filtered);
+searchInput.addEventListener("input", event => {
+  renderCharacters(event.target.value);
 });
-
-
 closeModalButton.addEventListener("click", closeProfile);
 modalOverlay.addEventListener("click", closeProfile);
-
-
 document.addEventListener("keydown", event => {
   if (event.key === "Escape" && profileModal.classList.contains("open")) {
     closeProfile();
   }
 });
-
-
-profileModal.addEventListener("click", event => {
-  if (event.target === profileModal) {
-    closeProfile();
-  }
-});
-
-
-renderCharacters(allAthletes);
+renderCharacters();
