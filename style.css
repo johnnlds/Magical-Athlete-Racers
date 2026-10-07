@@ -29,9 +29,7 @@ html {
 
 body {
   margin: 0;
-
   background: var(--background);
-
   color: var(--black);
 
   font-family:
@@ -52,20 +50,16 @@ body {
 
 .site-header {
   background: var(--white);
-
   border-bottom: 4px solid var(--red);
 
   position: sticky;
   top: 0;
-
   z-index: 50;
 }
 
 .header-inner {
   max-width: 1250px;
-
   margin: 0 auto;
-
   padding: 28px 24px 24px;
 }
 
@@ -75,11 +69,9 @@ body {
   color: var(--red);
 
   font-size: clamp(2.1rem, 5vw, 4rem);
-
   font-weight: 900;
 
   letter-spacing: -2px;
-
   line-height: 1;
 }
 
@@ -89,7 +81,6 @@ body {
   color: var(--dark-gray);
 
   font-size: 1.1rem;
-
   font-weight: 600;
 }
 
@@ -108,11 +99,9 @@ body {
   padding: 14px 17px;
 
   border: 2px solid var(--light-gray);
-
   border-radius: 10px;
 
   background: var(--white);
-
   color: var(--black);
 
   font-size: 1rem;
@@ -137,6 +126,68 @@ body {
 
 
 /* =========================================
+   CONTROLS
+========================================= */
+
+.controls {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-top: 18px;
+
+  flex-wrap: wrap;
+}
+
+.filter-controls,
+.view-controls {
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+.filter-button,
+.view-button {
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+
+  padding: 9px 13px;
+
+  background: var(--white);
+  color: var(--dark-gray);
+
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.filter-button:hover,
+.view-button:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.filter-button.active,
+.view-button.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--white);
+}
+
+
+/* =========================================
    MAIN
 ========================================= */
 
@@ -157,7 +208,6 @@ main {
   display: flex;
 
   align-items: baseline;
-
   justify-content: space-between;
 
   gap: 15px;
@@ -198,7 +248,6 @@ main {
   background: var(--white);
 
   border: 1px solid var(--light-gray);
-
   border-radius: 14px;
 
   overflow: hidden;
@@ -224,9 +273,13 @@ main {
 
 .character-card:focus-visible {
   outline: 3px solid var(--red);
-
   outline-offset: 3px;
 }
+
+
+/* IMPORTANT:
+   KEEPING THE ORIGINAL IMAGE CLASS
+*/
 
 .character-card-image {
   width: 100%;
@@ -250,10 +303,111 @@ main {
   color: var(--black);
 
   font-size: 1.05rem;
-
   font-weight: 800;
 
   text-align: center;
+}
+
+
+/* =========================================
+   LIST VIEW
+========================================= */
+
+.character-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.character-list-item {
+  display: grid;
+
+  grid-template-columns: 95px minmax(0, 1fr);
+
+  gap: 18px;
+
+  align-items: center;
+
+  padding: 12px;
+
+  background: var(--white);
+
+  border: 1px solid var(--light-gray);
+  border-radius: 12px;
+
+  box-shadow: var(--shadow);
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.character-list-item:hover {
+  border-color: var(--red);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.character-list-image {
+  width: 95px;
+
+  height: 95px;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  display: block;
+
+  border-radius: 9px;
+
+  background: #eeeeee;
+}
+
+.character-list-info {
+  min-width: 0;
+}
+
+.character-list-name {
+  margin: 0 0 5px;
+
+  color: var(--red);
+
+  font-size: 1.25rem;
+
+  font-weight: 900;
+}
+
+.character-list-power {
+  margin: 0 0 6px;
+
+  color: var(--red);
+
+  font-size: 0.95rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.5px;
+}
+
+.character-list-ability {
+  margin: 0;
+
+  color: var(--dark-gray);
+
+  font-size: 1rem;
+
+  font-weight: 600;
+
+  line-height: 1.45;
 }
 
 
@@ -296,7 +450,6 @@ main {
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 }
 
@@ -335,25 +488,20 @@ main {
   position: absolute;
 
   top: 15px;
-
   right: 15px;
 
-  z-index: 10;
+  z-index: 20;
 
   width: 42px;
-
   height: 42px;
 
   border: none;
-
   border-radius: 50%;
 
   background: var(--white);
-
   color: var(--black);
 
   font-size: 28px;
-
   line-height: 1;
 
   cursor: pointer;
@@ -364,8 +512,70 @@ main {
 
 .close-button:hover {
   background: var(--red);
+  color: var(--white);
+}
+
+
+/* =========================================
+   PROFILE NAVIGATION ARROWS
+========================================= */
+
+.profile-nav {
+  position: absolute;
+
+  top: 50%;
+
+  z-index: 15;
+
+  width: 46px;
+  height: 70px;
+
+  margin-top: -35px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  color: var(--red);
+
+  font-family: Arial, sans-serif;
+
+  font-size: 48px;
+
+  line-height: 60px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 3px 15px rgba(0, 0, 0, 0.18);
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.profile-nav:hover {
+  background: var(--red);
 
   color: var(--white);
+
+  transform: scale(1.05);
+}
+
+.profile-nav:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
+
+.profile-nav-previous {
+  left: 12px;
+}
+
+.profile-nav-next {
+  right: 12px;
 }
 
 
@@ -467,12 +677,6 @@ main {
   border-radius: 8px;
 }
 
-
-/* =========================================
-   ABILITY NAME
-   Larger than interaction text
-========================================= */
-
 .ability-name {
   margin: 0 0 10px;
 
@@ -497,12 +701,6 @@ main {
   line-height: 1.25;
 }
 
-
-/* =========================================
-   ABILITY DESCRIPTION
-   Larger and bolder than interaction text
-========================================= */
-
 .ability-text {
   margin: 0;
 
@@ -523,6 +721,8 @@ main {
   font-weight: 700;
 
   line-height: 1.5;
+
+  white-space: pre-line;
 }
 
 
@@ -681,6 +881,21 @@ main {
 
 @media (max-width: 800px) {
 
+  .controls {
+    align-items: stretch;
+  }
+
+  .filter-controls,
+  .view-controls {
+    width: 100%;
+  }
+
+  .filter-button,
+  .view-button {
+    flex: 1;
+  }
+
+
   .profile-modal {
     height: 94vh;
   }
@@ -696,8 +911,6 @@ main {
     overflow: hidden;
   }
 
-
-  /* FIXED CHARACTER AREA */
 
   .profile-sidebar {
     position: relative;
@@ -743,8 +956,6 @@ main {
   }
 
 
-  /* MOBILE ABILITY */
-
   .ability-box {
     padding: 12px 14px;
 
@@ -772,8 +983,6 @@ main {
   }
 
 
-  /* ONLY INTERACTIONS SCROLL */
-
   .profile-interactions {
     flex: 1 1 auto;
 
@@ -791,6 +1000,28 @@ main {
 
   .interactions-header {
     margin-bottom: 14px;
+  }
+
+
+  .profile-nav {
+    width: 40px;
+    height: 58px;
+
+    margin-top: -29px;
+
+    font-size: 40px;
+
+    line-height: 50px;
+
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .profile-nav-previous {
+    left: 7px;
+  }
+
+  .profile-nav-next {
+    right: 7px;
   }
 }
 
@@ -811,8 +1042,6 @@ main {
   }
 
 
-  /* CHARACTER GRID */
-
   .character-grid {
     grid-template-columns:
       repeat(
@@ -823,6 +1052,8 @@ main {
     gap: 12px;
   }
 
+
+  /* ORIGINAL CARD IMAGE DIMENSIONS */
 
   .character-card-image {
     height: 170px;
@@ -836,6 +1067,34 @@ main {
       12px
       8px
       14px;
+  }
+
+
+  /* LIST VIEW */
+
+  .character-list-item {
+    grid-template-columns: 75px minmax(0, 1fr);
+
+    gap: 12px;
+
+    padding: 10px;
+  }
+
+  .character-list-image {
+    width: 75px;
+    height: 75px;
+  }
+
+  .character-list-name {
+    font-size: 1.05rem;
+  }
+
+  .character-list-power {
+    font-size: 0.85rem;
+  }
+
+  .character-list-ability {
+    font-size: 0.9rem;
   }
 
 
@@ -854,8 +1113,6 @@ main {
     border-radius: 0;
   }
 
-
-  /* FIXED CHARACTER AREA */
 
   .profile-sidebar {
     padding:
@@ -878,8 +1135,6 @@ main {
     margin-bottom: 10px;
   }
 
-
-  /* ABILITY */
 
   .ability-box {
     padding:
@@ -906,8 +1161,6 @@ main {
   }
 
 
-  /* INTERACTIONS */
-
   .profile-interactions {
     padding: 16px;
   }
@@ -920,5 +1173,23 @@ main {
 
   .character-link {
     font-size: 1.2rem;
+  }
+
+
+  .profile-nav {
+    width: 36px;
+    height: 52px;
+
+    margin-top: -26px;
+
+    font-size: 36px;
+  }
+
+  .profile-nav-previous {
+    left: 5px;
+  }
+
+  .profile-nav-next {
+    right: 5px;
   }
 }
