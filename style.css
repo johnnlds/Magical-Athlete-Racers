@@ -30,7 +30,9 @@ button,
 input {
   font: inherit;
 }
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 .site-header {
   position: static;
   background: #ffffff;
@@ -55,6 +57,9 @@ input {
   font-size: 1rem;
   font-weight: 600;
 }
+/* =========================
+   SEARCH
+========================= */
 .search-container {
   width: 100%;
 }
@@ -67,7 +72,9 @@ input {
   color: var(--text);
   font-size: 1rem;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 #searchInput::placeholder {
   color: #888888;
@@ -76,7 +83,9 @@ input {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(196, 0, 0, 0.1);
 }
-/* FILTERS */
+/* =========================
+   FILTER BUTTONS
+========================= */
 .filter-toggle {
   display: flex;
   flex-wrap: wrap;
@@ -92,7 +101,10 @@ input {
   font-size: 0.88rem;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 .filter-button:hover {
   border-color: var(--accent);
@@ -103,7 +115,9 @@ input {
   border-color: var(--accent);
   color: #ffffff;
 }
-/* MAIN */
+/* =========================
+   MAIN
+========================= */
 main {
   width: min(calc(100% - 32px), var(--max-width));
   margin: 0 auto;
@@ -128,7 +142,10 @@ main {
   font-size: 0.9rem;
   font-weight: 600;
 }
-/* CHARACTER GRID - ICON VIEW */
+/* =========================
+   CHARACTER GRID
+   THIS IS THE ONLY VIEW
+========================= */
 .character-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -200,7 +217,9 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-/* GENERAL */
+/* =========================
+   GENERAL
+========================= */
 .no-results {
   padding: 50px 20px;
   border: 1px dashed #cccccc;
@@ -211,7 +230,9 @@ main {
 .hidden {
   display: none !important;
 }
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 .modal {
   position: fixed;
   inset: 0;
@@ -241,6 +262,9 @@ main {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   touch-action: pan-y;
 }
+/* =========================
+   CLOSE BUTTON
+========================= */
 .close-button {
   position: absolute;
   top: 10px;
@@ -259,6 +283,9 @@ main {
 .close-button:hover {
   background: #dddddd;
 }
+/* =========================
+   PROFILE NAVIGATION
+========================= */
 .profile-nav {
   position: absolute;
   top: 50%;
@@ -273,7 +300,9 @@ main {
   line-height: 36px;
   cursor: pointer;
   transform: translateY(-50%);
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 .profile-nav:hover {
   background: var(--accent);
@@ -293,7 +322,9 @@ main {
 .profile-nav-next {
   right: -21px;
 }
-/* PROFILE */
+/* =========================
+   PROFILE LAYOUT
+========================= */
 .profile-layout {
   display: grid;
   grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
@@ -323,6 +354,9 @@ main {
   font-weight: 900;
   line-height: 1.1;
 }
+/* =========================
+   ABILITY
+========================= */
 .ability-box {
   border-top: 1px solid var(--border);
   padding-top: 13px;
@@ -341,7 +375,9 @@ main {
   line-height: 1.45;
   white-space: pre-line;
 }
-/* INTERACTIONS */
+/* =========================
+   INTERACTIONS
+========================= */
 .profile-interactions {
   min-width: 0;
   max-height: calc(100vh - 100px);
@@ -407,7 +443,9 @@ main {
   color: var(--muted);
   text-align: center;
 }
-/* TABLET */
+/* =========================
+   TABLET
+========================= */
 @media (max-width: 800px) {
   .character-card-image {
     height: 170px;
@@ -429,7 +467,9 @@ main {
     font-size: 1.15rem;
   }
 }
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 @media (max-width: 650px) {
   .site-header {
     padding: 32px 16px 22px;
@@ -493,7 +533,9 @@ main {
     right: 5px;
   }
 }
-/* SMALL PHONES */
+/* =========================
+   SMALL PHONES
+========================= */
 @media (max-width: 500px) {
   .character-card-image {
     height: 170px;
