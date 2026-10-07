@@ -245,7 +245,7 @@ main {
 
 
 /* =========================
-   CHARACTER GRID / ICON VIEW
+   ICON VIEW
    ========================= */
 
 .character-grid {
@@ -400,7 +400,7 @@ main {
 
   grid-template-columns: 82px minmax(0, 1fr);
 
-  align-items: stretch;
+  align-items: center;
 
   min-height: 82px;
 }
@@ -410,6 +410,11 @@ main {
   height: 82px;
 
   object-fit: cover;
+  object-position: center center;
+
+  align-self: center;
+
+  display: block;
 }
 
 .character-grid.list-view .character-card-content {
@@ -607,6 +612,18 @@ main {
   color: #ffffff;
 }
 
+.profile-nav:disabled {
+  opacity: 0.35;
+
+  cursor: default;
+}
+
+.profile-nav:disabled:hover {
+  background: #eeeeee;
+
+  color: #222222;
+}
+
 .profile-nav-prev {
   left: -21px;
 }
@@ -771,6 +788,14 @@ main {
 }
 
 .interaction-character {
+  display: inline;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
   color: var(--accent);
 
   font-size: 1rem;
@@ -887,6 +912,11 @@ main {
   .character-grid.list-view .character-card-image {
     width: 72px;
     height: 72px;
+
+    object-fit: cover;
+    object-position: center center;
+
+    align-self: center;
   }
 
   .character-grid.list-view .character-card-content {
