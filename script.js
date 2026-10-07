@@ -314,7 +314,7 @@ const expansionAthletes = [
     name: "Doppelgängster",
     power: "TAKE A DIVE",
     ability: "The racer who finishes 1st is eliminated instead. I get their power.",
-    image: "images/expansion/doppelgangster.png",
+    image: "images/expansion/Doppelgangster.png",
     expansion: true,
     tags: ["second wind"]
   },
