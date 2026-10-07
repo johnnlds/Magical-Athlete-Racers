@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Magical Athlete Character Profiles</title>
   <meta name="description" content="Magical Athlete racer character profiles, abilities, and interactions.">
-  <link rel="stylesheet" href="style.css?v=11">
+  <link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
   <header class="site-header">
@@ -22,9 +22,15 @@
         >
       </div>
       <div class="filter-toggle">
-        <button id="allFilterButton" class="filter-button active" type="button">All</button>
-        <button id="baseFilterButton" class="filter-button" type="button">Base Game</button>
-        <button id="expansionFilterButton" class="filter-button" type="button">Second Wind</button>
+        <button id="allFilterButton" class="filter-button active" type="button">
+          All
+        </button>
+        <button id="baseFilterButton" class="filter-button" type="button">
+          Base Game
+        </button>
+        <button id="expansionFilterButton" class="filter-button" type="button">
+          Second Wind
+        </button>
       </div>
     </div>
   </header>
@@ -40,6 +46,9 @@
       </div>
     </section>
   </main>
+  <!-- =========================
+       PROFILE MODAL
+  ========================= -->
   <div id="profileModal" class="modal" aria-hidden="true">
     <div id="modalOverlay" class="modal-overlay"></div>
     <div
@@ -69,7 +78,12 @@
       <div class="profile-layout">
         <aside class="profile-sidebar">
           <div class="profile-image-container">
-            <img id="profileImage" class="profile-image" src="" alt="">
+            <img
+              id="profileImage"
+              class="profile-image"
+              src=""
+              alt=""
+            >
           </div>
           <h2 id="profileName"></h2>
           <div class="ability-box">
@@ -90,6 +104,96 @@
       </div>
     </div>
   </div>
+  <!-- =========================
+       FOOTER
+  ========================= -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-about">
+        <h2>About This Site</h2>
+        <p>
+          This is an unofficial fan-made reference for
+          <em>Magical Athlete</em>.
+        </p>
+        <p class="footer-note">
+          Magical Athlete and its characters are the property of
+          their respective creators and publisher.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a
+          href="https://www.cmyk.games/products/magical-athlete"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-button"
+        >
+          Buy Magical Athlete
+        </a>
+        <a
+          href="officialrules.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-button secondary"
+        >
+          View Official Rulebook
+        </a>
+      </div>
+      <div class="footer-credits">
+        <h2>Credits</h2>
+        <p>
+          <strong>Original Game Design:</strong> Takashi Ishida
+        </p>
+        <p>
+          <strong>Updated Game Design:</strong> Richard Garfield
+        </p>
+        <p>
+          <strong>Creative Director:</strong> Alex Hague
+        </p>
+        <p>
+          <strong>Art:</strong> Angela Kirkwood
+        </p>
+        <p>
+          <strong>Graphic Design:</strong> Elizabeth Goodspeed, Janet Delavan
+        </p>
+        <p>
+          <strong>Additional Design and Development:</strong><br>
+          Skaff Elias, James Nathan Spencer, Justin Vickers
+        </p>
+        <p>
+          <strong>Lead Writer:</strong> Sophie Abromowitz
+        </p>
+        <p>
+          <strong>Publisher:</strong> CMYK
+        </p>
+        <p>
+          <strong>Manufacturer:</strong> Strom MFG
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Fan-made reference site · Not affiliated with CMYK</p>
+    </div>
+  </footer>
   <script src="./script.js?v=11"></script>
 </body>
 </html>
+
+What you’ll need to do in GitHub
+
+Your repository should now contain:
+
+index.html
+style.css
+script.js
+officialrules.pdf
+images/
+
+And officialrules.pdf needs to be in the same folder as index.html.
+
+The two footer buttons will then be:
+
+BUY MAGICAL ATHLETE → official CMYK product page
+
+VIEW OFFICIAL RULEBOOK → opens officialrules.pdf directly in a new tab.
+
+One small note: because you’re hosting this as a fan site, I would keep the “unofficial fan-made reference” wording. It makes the nature of the site clear without cluttering the page.
