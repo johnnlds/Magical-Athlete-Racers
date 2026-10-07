@@ -1,344 +1,58 @@
-/* =========================================================
-   BASE GAME RACERS
-   ========================================================= */
-
 const athletes = [
-  {
-    name:"Alchemist",
-    power:"Transmute ‘N’ Scoot",
-    ability:"When I roll a 1 or 2 for my main move, I can move 4 instead.",
-    image:"images/IMG_3304.png"
-  },
-  {
-    name:"Baba Yaga",
-    power:"Leg It",
-    ability:"Trip any racer that stops on my space, or when I stop on theirs.",
-    image:"images/IMG_3305.png"
-  },
-  {
-    name:"Banana",
-    power:"The Slip",
-    ability:"I trip any racer that passes me.",
-    image:"images/IMG_3306.png"
-  },
-  {
-    name:"Blimp",
-    power:"Blow It",
-    ability:"When I start my turn before the second corner of the track, I get +3 to my main move. On or after that corner, I get -1.",
-    image:"images/IMG_3307.png"
-  },
-  {
-    name:"Centaur",
-    power:"Hoofwhack",
-    ability:"When I pass a racer, they move -2.",
-    image:"images/IMG_3308.png"
-  },
-  {
-    name:"Cheerleader",
-    power:"Rah Rah",
-    ability:"Before my main move, I can make the racer(s) in last place move 2. If I do, I move 1.",
-    image:"images/IMG_3309.png"
-  },
-  {
-    name:"Coach",
-    power:"Good Hustle",
-    ability:"Everyone on my space gets +1 to their main move, including me.",
-    image:"images/IMG_3310.png"
-  },
-  {
-    name:"Copycat",
-    power:"Copy That",
-    ability:"I have the power of the racer currently in the lead. If there’s a tie, I pick.",
-    image:"images/IMG_3311.png"
-  },
-  {
-    name:"Dicemonger",
-    power:"Dicey Deals",
-    ability:"Anyone can reroll their main move once per turn. When another racer does it, I move 1.",
-    image:"images/IMG_3312.png"
-  },
-  {
-    name:"Duelist",
-    power:"Duel!",
-    ability:"Whenever a racer shares my space, I can shout DUEL! We roll our dice and whoever rolls highest moves 2. I win ties.",
-    image:"images/IMG_3313.png"
-  },
-  {
-    name:"Egg",
-    power:"Scramble",
-    ability:"Before my race, draw 3 new racers from the deck and pick one. I have its powers.",
-    image:"images/IMG_3314.png"
-  },
-  {
-    name:"Flip Flop",
-    power:"Flop Flip",
-    ability:"I can skip rolling for my main move and swap spaces with another racer instead.",
-    image:"images/IMG_3315.png"
-  },
-  {
-    name:"Genius",
-    power:"Think Good",
-    ability:"I can predict what number I’ll roll for my main move. If I’m right, I take another turn after this one.",
-    image:"images/IMG_3316.png"
-  },
-  {
-    name:"Gunk",
-    power:"Goop ‘Em",
-    ability:"Other racers get -1 to their main move.",
-    image:"images/IMG_3317.png"
-  },
-  {
-    name:"Hare",
-    power:"Hubris",
-    ability:"I get +2 to my main move. When I start my turn alone in the lead, I skip my main move.",
-    image:"images/IMG_3318.png"
-  },
-  {
-    name:"Heckler",
-    power:"Schadenfreude",
-    ability:"When a racer ends their turn within 1 space of where they started, I move 2.",
-    image:"images/IMG_3319.png"
-  },
-  {
-    name:"Huge Baby",
-    power:"Really Huge",
-    ability:"No one can ever be on my space, besides the Start. Whenever that would happen, put the racer on the space behind me instead.",
-    image:"images/IMG_3320.png"
-  },
-  {
-    name:"Hypnotist",
-    power:"Hssssst",
-    ability:"Before my main move, I can warp a racer to my space.",
-    image:"images/IMG_3321.png"
-  },
-  {
-    name:"Inchworm",
-    power:"Wriggle",
-    ability:"When another racer rolls a 1 for their main move, they skip that move and I move 1.",
-    image:"images/IMG_3322.png"
-  },
-  {
-    name:"Lackey",
-    power:"Very Good Sire",
-    ability:"When another racer rolls a 6 for their main move, I move 2 before they move.",
-    image:"images/IMG_3323.png"
-  },
-  {
-    name:"Leaptoad",
-    power:"Jumpfrog",
-    ability:"While moving, I skip spaces with other racers on them.",
-    image:"images/IMG_3324.png"
-  },
-  {
-    name:"Legs",
-    power:"Jog",
-    ability:"I can skip rolling for my main move and move 5 instead.",
-    image:"images/IMG_3325.png"
-  },
-  {
-    name:"Lovable Loser",
-    power:"D’Aww",
-    ability:"Before my main move, I get 1 point chip if I’m alone in last place.",
-    image:"images/IMG_3326.png"
-  },
-  {
-    name:"Magician",
-    power:"Poof",
-    ability:"I can reroll my main move up to two times.",
-    image:"images/IMG_3327.png"
-  },
-  {
-    name:"Mastermind",
-    power:"Know-It-All",
-    ability:"At the start of my first turn, I predict which racer will win. If I’m right, the race ends immediately and I finish 2nd.",
-    image:"images/IMG_3328.png"
-  },
-  {
-    name:"M.O.U.T.H.",
-    power:"Chomp",
-    ability:"When I stop on a space with exactly one other racer, they’re eliminated from the race.",
-    image:"images/IMG_3329.png"
-  },
-  {
-    name:"Party Animal",
-    power:"Animal Magnetism",
-    ability:"Before my main move, all racers move 1 space towards me. Each other racer on my space gives me +1 to my main move.",
-    image:"images/IMG_3330.png"
-  },
-  {
-    name:"Rocket Scientist",
-    power:"Kablooey",
-    ability:"When I roll for my main move, I can move double that number. If I do, I trip after moving.",
-    image:"images/IMG_3331.png"
-  },
-  {
-    name:"Romantic",
-    power:"Ah, Love!",
-    ability:"When anyone stops on a space with exactly one other racer, I move 2.",
-    image:"images/IMG_3332.png"
-  },
-  {
-    name:"Scoocher",
-    power:"Scooch Scooch",
-    ability:"When another racer’s power happens, I move 1.",
-    image:"images/IMG_3333.png"
-  },
-  {
-    name:"Sisyphus",
-    power:"Keep Rollin’",
-    ability:"Before my race, I take 4 point chips. When I roll a 6 for my main move, instead of moving, I warp to the Start and lose 1 point chip.",
-    image:"images/IMG_3334.png"
-  },
-  {
-    name:"Skipper",
-    power:"Salty Dog",
-    ability:"When anyone rolls a 1 for their main move, I go next in turn order.",
-    image:"images/IMG_3335.png"
-  },
-  {
-    name:"Stickler",
-    power:"Actually…",
-    ability:"Other racers can only cross the finish line by moving the exact number of spaces they need. If they overshoot, they don’t move.",
-    image:"images/IMG_3336.png"
-  },
-  {
-    name:"Suckerfish",
-    power:"Sucker!",
-    ability:"When a racer on my space moves, I can move to their new space.",
-    image:"images/IMG_3337.png"
-  },
-  {
-    name:"Third Wheel",
-    power:"Roll Through",
-    ability:"Before my main move, I can warp to any space with exactly 2 racers on it.",
-    image:"images/IMG_3338.png"
-  },
-  {
-    name:"Twin",
-    power:"Double Dip",
-    ability:"Before my race, I can pick a racer who won a previous race and race with their powers.",
-    image:"images/IMG_3339.png"
-  }
+  { name:"Alchemist", power:"Transmute ‘N’ Scoot", ability:"When I roll a 1 or 2 for my main move, I can move 4 instead.", image:"images/IMG_3304.png" },
+  { name:"Baba Yaga", power:"Leg It", ability:"Trip any racer that stops on my space, or when I stop on theirs.", image:"images/IMG_3305.png" },
+  { name:"Banana", power:"The Slip", ability:"I trip any racer that passes me.", image:"images/IMG_3306.png" },
+  { name:"Blimp", power:"Blow It", ability:"When I start my turn before the second corner of the track, I get +3 to my main move. On or after that corner, I get -1.", image:"images/IMG_3307.png" },
+  { name:"Centaur", power:"Hoofwhack", ability:"When I pass a racer, they move -2.", image:"images/IMG_3308.png" },
+  { name:"Cheerleader", power:"Rah Rah", ability:"Before my main move, I can make the racer(s) in last place move 2. If I do, I move 1.", image:"images/IMG_3309.png" },
+  { name:"Coach", power:"Good Hustle", ability:"Everyone on my space gets +1 to their main move, including me.", image:"images/IMG_3310.png" },
+  { name:"Copycat", power:"Copy That", ability:"I have the power of the racer currently in the lead. If there’s a tie, I pick.", image:"images/IMG_3311.png" },
+  { name:"Dicemonger", power:"Dicey Deals", ability:"Anyone can reroll their main move once per turn. When another racer does it, I move 1.", image:"images/IMG_3312.png" },
+  { name:"Duelist", power:"Duel!", ability:"Whenever a racer shares my space, I can shout DUEL! We roll our dice and whoever rolls highest moves 2. I win ties.", image:"images/IMG_3313.png" },
+  { name:"Egg", power:"Scramble", ability:"Before my race, draw 3 new racers from the deck and pick one. I have its powers.", image:"images/IMG_3314.png" },
+  { name:"Flip Flop", power:"Flop Flip", ability:"I can skip rolling for my main move and swap spaces with another racer instead.", image:"images/IMG_3315.png" },
+  { name:"Genius", power:"Think Good", ability:"I can predict what number I’ll roll for my main move. If I’m right, I take another turn after this one.", image:"images/IMG_3316.png" },
+  { name:"Gunk", power:"Goop ‘Em", ability:"Other racers get -1 to their main move.", image:"images/IMG_3317.png" },
+  { name:"Hare", power:"Hubris", ability:"I get +2 to my main move. When I start my turn alone in the lead, I skip my main move.", image:"images/IMG_3318.png" },
+  { name:"Heckler", power:"Schadenfreude", ability:"When a racer ends their turn within 1 space of where they started, I move 2.", image:"images/IMG_3319.png" },
+  { name:"Huge Baby", power:"Really Huge", ability:"No one can ever be on my space, besides the Start. Whenever that would happen, put the racer on the space behind me instead.", image:"images/IMG_3320.png" },
+  { name:"Hypnotist", power:"Hssssst", ability:"Before my main move, I can warp a racer to my space.", image:"images/IMG_3321.png" },
+  { name:"Inchworm", power:"Wriggle", ability:"When another racer rolls a 1 for their main move, they skip that move and I move 1.", image:"images/IMG_3322.png" },
+  { name:"Lackey", power:"Very Good Sire", ability:"When another racer rolls a 6 for their main move, I move 2 before they move.", image:"images/IMG_3323.png" },
+  { name:"Leaptoad", power:"Jumpfrog", ability:"While moving, I skip spaces with other racers on them.", image:"images/IMG_3324.png" },
+  { name:"Legs", power:"Jog", ability:"I can skip rolling for my main move and move 5 instead.", image:"images/IMG_3325.png" },
+  { name:"Lovable Loser", power:"D’Aww", ability:"Before my main move, I get 1 point chip if I’m alone in last place.", image:"images/IMG_3326.png" },
+  { name:"Magician", power:"Poof", ability:"I can reroll my main move up to two times.", image:"images/IMG_3327.png" },
+  { name:"Mastermind", power:"Know-It-All", ability:"At the start of my first turn, I predict which racer will win. If I’m right, the race ends immediately and I finish 2nd.", image:"images/IMG_3328.png" },
+  { name:"M.O.U.T.H.", power:"Chomp", ability:"When I stop on a space with exactly one other racer, they’re eliminated from the race.", image:"images/IMG_3329.png" },
+  { name:"Party Animal", power:"Animal Magnetism", ability:"Before my main move, all racers move 1 space towards me. Each other racer on my space gives me +1 to my main move.", image:"images/IMG_3330.png" },
+  { name:"Rocket Scientist", power:"Kablooey", ability:"When I roll for my main move, I can move double that number. If I do, I trip after moving.", image:"images/IMG_3331.png" },
+  { name:"Romantic", power:"Ah, Love!", ability:"When anyone stops on a space with exactly one other racer, I move 2.", image:"images/IMG_3332.png" },
+  { name:"Scoocher", power:"Scooch Scooch", ability:"When another racer’s power happens, I move 1.", image:"images/IMG_3333.png" },
+  { name:"Sisyphus", power:"Keep Rollin’", ability:"Before my race, I take 4 point chips. When I roll a 6 for my main move, instead of moving, I warp to the Start and lose 1 point chip.", image:"images/IMG_3334.png" },
+  { name:"Skipper", power:"Salty Dog", ability:"When anyone rolls a 1 for their main move, I go next in turn order.", image:"images/IMG_3335.png" },
+  { name:"Stickler", power:"Actually…", ability:"Other racers can only cross the finish line by moving the exact number of spaces they need. If they overshoot, they don’t move.", image:"images/IMG_3336.png" },
+  { name:"Suckerfish", power:"Sucker!", ability:"When a racer on my space moves, I can move to their new space.", image:"images/IMG_3337.png" },
+  { name:"Third Wheel", power:"Roll Through", ability:"Before my main move, I can warp to any space with exactly 2 racers on it.", image:"images/IMG_3338.png" },
+  { name:"Twin", power:"Double Dip", ability:"Before my race, I can pick a racer who won a previous race and race with their powers.", image:"images/IMG_3339.png" }
 ];
 
 
-/* =========================================================
-   SECOND WIND RACERS
-   ========================================================= */
-
 const expansionAthletes = [
-  {
-    name:"Bite Mark",
-    power:"HUUAARRGGHHH!!!!",
-    ability:"When I roll a 1 or 2 for my main move, I transform into a W.E.R.E.M.O.U.T.H. who eliminates any racers I pass.",
-    image:"images/expansion/Bite Mark.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Blunderdog",
-    power:"BLUNDERTRAIL",
-    ability:"When I'm in last place, triple my main move roll. When I'm not, I move backwards for my main move instead.",
-    image:"images/expansion/Blunderdog.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Cheatah",
-    power:"SLEIGHT OF PAW",
-    ability:"Instead of rolling for my main move, I secretly set my die to any number. If the player to my right guesses the number, I don't move.",
-    image:"images/expansion/Cheatah.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Critic",
-    power:"BON MOTS",
-    ability:"I can make racers ahead of me reroll their main move once per turn.",
-    image:"images/expansion/Critic.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Diva",
-    power:"QUELLE DRAMATIQUE!",
-    ability:"If I'm in last place at the start of my turn, I swap spaces with the lead racer. Otherwise, I swap with the last place racer.",
-    image:"images/expansion/Diva.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Doppelgängster",
-    power:"TAKE A DIVE",
-    ability:"The racer who finishes 1st is eliminated instead. I get their power.",
-    image:"images/expansion/dopelgangster.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Gloth",
-    power:"GLORPOR",
-    ability:"I get -1 to my main move. When the race ends, I get 3 points if I'm not past the second corner.",
-    image:"images/expansion/Gloth.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Hog Knight",
-    power:"PIGGYBACK",
-    ability:"I start my race on a hog that gives +2 to its rider's main move. When a racer stops on the hog's space, they take it.",
-    image:"images/expansion/Hog Knight.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Hopfrog",
-    power:"BOIOIOING",
-    ability:"When I end my turn 1 space behind a racer, I take an extra turn.",
-    image:"images/expansion/Hopfrog.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Hotel",
-    power:"MONOPOLIZE",
-    ability:"When a racer stops on my space, they pay me 1 point. If they can't, they trip.",
-    image:"images/expansion/Hotel.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Icarus",
-    power:"FLIGHT RISK",
-    ability:"I get +3 to my main move. If I roll a 6 for my main move, I'm eliminated.",
-    image:"images/expansion/Icarus.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Kingtripper",
-    power:"REGISLIDE",
-    ability:"At the start of my turn, I can trip the lead racer.",
-    image:"images/expansion/Kingtripper.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Kraken",
-    power:"GET OVER HERE",
-    ability:"Once per race, at the start of my turn, I can warp all other racers to my space and trip them.",
-    image:"images/expansion/Kraken.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Le Saboteur",
-    power:"TROIS REVOIR",
-    ability:"When other racers roll a 3 for their main move, they move backwards instead.",
-    image:"images/expansion/LeSaboteur.png",
-    expansion:true,
-    tags:["second wind"]
-  },
+  { name:"Bite Mark", power:"HUUAARRGGHHH!!!!", ability:"When I roll a 1 or 2 for my main move, I transform into a W.E.R.E.M.O.U.T.H. who eliminates any racers I pass.", image:"images/expansion/Bite Mark.png", expansion:true, tags:["second wind"] },
+  { name:"Blunderdog", power:"BLUNDERTRAIL", ability:"When I'm in last place, triple my main move roll. When I'm not, I move backwards for my main move instead.", image:"images/expansion/Blunderdog.png", expansion:true, tags:["second wind"] },
+  { name:"Cheatah", power:"SLEIGHT OF PAW", ability:"Instead of rolling for my main move, I secretly set my die to any number. If the player to my right guesses the number, I don't move.", image:"images/expansion/Cheatah.png", expansion:true, tags:["second wind"] },
+  { name:"Critic", power:"BON MOTS", ability:"I can make racers ahead of me reroll their main move once per turn.", image:"images/expansion/Critic.png", expansion:true, tags:["second wind"] },
+  { name:"Diva", power:"QUELLE DRAMATIQUE!", ability:"If I'm in last place at the start of my turn, I swap spaces with the lead racer. Otherwise, I swap with the last place racer.", image:"images/expansion/Diva.png", expansion:true, tags:["second wind"] },
+  { name:"Doppelgängster", power:"TAKE A DIVE", ability:"The racer who finishes 1st is eliminated instead. I get their power.", image:"images/expansion/Doppelgangster.png", expansion:true, tags:["second wind"] },
+  { name:"Gloth", power:"GLORPOR", ability:"I get -1 to my main move. When the race ends, I get 3 points if I'm not past the second corner.", image:"images/expansion/Gloth.png", expansion:true, tags:["second wind"] },
+  { name:"Hog Knight", power:"PIGGYBACK", ability:"I start my race on a hog that gives +2 to its rider's main move. When a racer stops on the hog's space, they take it.", image:"images/expansion/Hog Knight.png", expansion:true, tags:["second wind"] },
+  { name:"Hopfrog", power:"BOIOIOING", ability:"When I end my turn 1 space behind a racer, I take an extra turn.", image:"images/expansion/Hopfrog.png", expansion:true, tags:["second wind"] },
+  { name:"Hotel", power:"MONOPOLIZE", ability:"When a racer stops on my space, they pay me 1 point. If they can't, they trip.", image:"images/expansion/Hotel.png", expansion:true, tags:["second wind"] },
+  { name:"Icarus", power:"FLIGHT RISK", ability:"I get +3 to my main move. If I roll a 6 for my main move, I'm eliminated.", image:"images/expansion/Icarus.png", expansion:true, tags:["second wind"] },
+  { name:"Kingtripper", power:"REGISLIDE", ability:"At the start of my turn, I can trip the lead racer.", image:"images/expansion/Kingtripper.png", expansion:true, tags:["second wind"] },
+  { name:"Kraken", power:"GET OVER HERE", ability:"Once per race, at the start of my turn, I can warp all other racers to my space and trip them.", image:"images/expansion/Kraken.png", expansion:true, tags:["second wind"] },
+  { name:"Le Saboteur", power:"TROIS REVOIR", ability:"When other racers roll a 3 for their main move, they move backwards instead.", image:"images/expansion/LeSaboteur.png", expansion:true, tags:["second wind"] },
   {
     name:"Magical Athlete",
     power:"FLEXOMANCY",
@@ -347,180 +61,29 @@ const expansionAthletes = [
     expansion:true,
     tags:["second wind"]
   },
-  {
-    name:"Mole",
-    power:"TUNNELIN'",
-    ability:"If there aren't any racers within 1 space of me, I can skip rolling for my main move and move 6 instead.",
-    image:"images/expansion/Mole.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Mr. Dice Guy",
-    power:"YES! MORE!",
-    ability:"I roll all six dice for my main move and pick any number that was rolled more than once.",
-    image:"images/expansion/Mr. Dice Guy.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Mush",
-    power:"GLOBSTER MASH",
-    ability:"When I roll a 1 or 2 for my main move, I draw a racer card and get its power for the rest of the race.",
-    image:"images/expansion/Mush.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Nemesis",
-    power:"GRUDGE MATCH",
-    ability:"When other racers roll for their main move, I can roll too. If I roll the same, I move that amount.",
-    image:"images/expansion/Nemesis.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Nepo Baby",
-    power:"HUGELY RICH",
-    ability:"I start the race on the first corner of the track.",
-    image:"images/expansion/Nepo Baby.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Null",
-    power:"VOID",
-    ability:"Racers ahead of me get -1 to their main move and have no powers.",
-    image:"images/expansion/Null.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Overtaker",
-    power:"SKULLDIGGERY",
-    ability:"I get +1 to my main move for each racer ahead of me.",
-    image:"images/expansion/Overtaker.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Party Pooper",
-    power:"NOISE COMPLAINT",
-    ability:"All sixes must be rerolled. When they are, I move 1.",
-    image:"images/expansion/Party Pooper.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Penguin",
-    power:"TUMMY TIME",
-    ability:"Whenever a racer passes me, I trip. While I'm tripped, double my roll for my main move instead of skipping it.",
-    image:"images/expansion/Penguin.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Re-Runner",
-    power:"RUN IT BACK",
-    ability:"After my first race, I race as an extra racer for my player in all remaining races.",
-    image:"images/expansion/Re-Runner.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Show-Off",
-    power:"GUYS, WATCH!",
-    ability:"After I roll for my main move, I can keep rolling and adding each amount to my move. If I ever roll the same or lower, I don't move.",
-    image:"images/expansion/Show-Off.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Soulmate",
-    power:"TWIN FLAME",
-    ability:"Before my race, I pick any opposing racer. When I start my turn within 5 spaces of them, I warp to their space.",
-    image:"images/expansion/Soulmate.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Speed Demon",
-    power:"TERMINAL VELOCITY",
-    ability:"I get +1 to my main move for each point my player has. I am eliminated if I'm 4+ spaces in the lead at the start of my turn.",
-    image:"images/expansion/Speed Demon.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Spoilsport",
-    power:"CRY FOUL",
-    ability:"If all other racers are 5+ spaces ahead of me at the start of my turn, the race is cancelled and I get 3 points.",
-    image:"images/expansion/Spoilsport.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Stepdad",
-    power:"STEP UP",
-    ability:"The racer to my left gets +2 to their main move. If they finish 1st, I get 3 points.",
-    image:"images/expansion/Stepdad.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Streaker",
-    power:"EXHIBIT B",
-    ability:"When I pass any racers, I get 1 point.",
-    image:"images/expansion/Streaker.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Stunner",
-    power:"STOP TRAFFIC",
-    ability:"Other racers within 1 space of me roll a 1 for all rolls.",
-    image:"images/expansion/Stunner.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Switcharoo",
-    power:"MARSWAPIAL",
-    ability:"When I end my turn within 1 space of another racer, I can swap who controls which racer: their player takes my card and I take theirs.",
-    image:"images/expansion/Switcharoo.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Tail",
-    power:"REAR END",
-    ability:"At the start of my turn, I can warp to the space behind the next racer ahead of me.",
-    image:"images/expansion/Tail.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"The Hose",
-    power:"POWER WASH",
-    ability:"At the end of my turn, roll a die and trip every racer within that many spaces ahead of me.",
-    image:"images/expansion/The Hose.png",
-    expansion:true,
-    tags:["second wind"]
-  },
-  {
-    name:"Understudy",
-    power:"THE METHOD",
-    ability:"Before my race, I copy an opposing racer's power.",
-    image:"images/expansion/Understudy.png",
-    expansion:true,
-    tags:["second wind"]
-  }
+  { name:"Mole", power:"TUNNELIN'", ability:"If there aren't any racers within 1 space of me, I can skip rolling for my main move and move 6 instead.", image:"images/expansion/Mole.png", expansion:true, tags:["second wind"] },
+  { name:"Mr. Dice Guy", power:"YES! MORE!", ability:"I roll all six dice for my main move and pick any number that was rolled more than once.", image:"images/expansion/Mr. Dice Guy.png", expansion:true, tags:["second wind"] },
+  { name:"Mush", power:"GLOBSTER MASH", ability:"When I roll a 1 or 2 for my main move, I draw a racer card and get its power for the rest of the race.", image:"images/expansion/Mush.png", expansion:true, tags:["second wind"] },
+  { name:"Nemesis", power:"GRUDGE MATCH", ability:"When other racers roll for their main move, I can roll too. If I roll the same, I move that amount.", image:"images/expansion/Nemesis.png", expansion:true, tags:["second wind"] },
+  { name:"Nepo Baby", power:"HUGELY RICH", ability:"I start the race on the first corner of the track.", image:"images/expansion/Nepo Baby.png", expansion:true, tags:["second wind"] },
+  { name:"Null", power:"VOID", ability:"Racers ahead of me get -1 to their main move and have no powers.", image:"images/expansion/Null.png", expansion:true, tags:["second wind"] },
+  { name:"Overtaker", power:"SKULLDIGGERY", ability:"I get +1 to my main move for each racer ahead of me.", image:"images/expansion/Overtaker.png", expansion:true, tags:["second wind"] },
+  { name:"Party Pooper", power:"NOISE COMPLAINT", ability:"All sixes must be rerolled. When they are, I move 1.", image:"images/expansion/Party Pooper.png", expansion:true, tags:["second wind"] },
+  { name:"Penguin", power:"TUMMY TIME", ability:"Whenever a racer passes me, I trip. While I'm tripped, double my roll for my main move instead of skipping it.", image:"images/expansion/Penguin.png", expansion:true, tags:["second wind"] },
+  { name:"Re-Runner", power:"RUN IT BACK", ability:"After my first race, I race as an extra racer for my player in all remaining races.", image:"images/expansion/Re-Runner.png", expansion:true, tags:["second wind"] },
+  { name:"Show-Off", power:"GUYS, WATCH!", ability:"After I roll for my main move, I can keep rolling and adding each amount to my move. If I ever roll the same or lower, I don't move.", image:"images/expansion/Show-Off.png", expansion:true, tags:["second wind"] },
+  { name:"Soulmate", power:"TWIN FLAME", ability:"Before my race, I pick any opposing racer. When I start my turn within 5 spaces of them, I warp to their space.", image:"images/expansion/Soulmate.png", expansion:true, tags:["second wind"] },
+  { name:"Speed Demon", power:"TERMINAL VELOCITY", ability:"I get +1 to my main move for each point my player has. I am eliminated if I'm 4+ spaces in the lead at the start of my turn.", image:"images/expansion/Speed Demon.png", expansion:true, tags:["second wind"] },
+  { name:"Spoilsport", power:"CRY FOUL", ability:"If all other racers are 5+ spaces ahead of me at the start of my turn, the race is cancelled and I get 3 points.", image:"images/expansion/Spoilsport.png", expansion:true, tags:["second wind"] },
+  { name:"Stepdad", power:"STEP UP", ability:"The racer to my left gets +2 to their main move. If they finish 1st, I get 3 points.", image:"images/expansion/Stepdad.png", expansion:true, tags:["second wind"] },
+  { name:"Streaker", power:"EXHIBIT B", ability:"When I pass any racers, I get 1 point.", image:"images/expansion/Streaker.png", expansion:true, tags:["second wind"] },
+  { name:"Stunner", power:"STOP TRAFFIC", ability:"Other racers within 1 space of me roll a 1 for all rolls.", image:"images/expansion/Stunner.png", expansion:true, tags:["second wind"] },
+  { name:"Switcharoo", power:"MARSWAPIAL", ability:"When I end my turn within 1 space of another racer, I can swap who controls which racer: their player takes my card and I take theirs.", image:"images/expansion/Switcharoo.png", expansion:true, tags:["second wind"] },
+  { name:"Tail", power:"REAR END", ability:"At the start of my turn, I can warp to the space behind the next racer ahead of me.", image:"images/expansion/Tail.png", expansion:true, tags:["second wind"] },
+  { name:"The Hose", power:"POWER WASH", ability:"At the end of my turn, roll a die and trip every racer within that many spaces ahead of me.", image:"images/expansion/The Hose.png", expansion:true, tags:["second wind"] },
+  { name:"Understudy", power:"THE METHOD", ability:"Before my race, I copy an opposing racer's power.", image:"images/expansion/Understudy.png", expansion:true, tags:["second wind"] }
 ];
 
-
-/* =========================================================
-   INTERACTIONS
-   ========================================================= */
 
 const interactionData = [
   { racers:["Alchemist","Coach"], text:"If Alchemist rolls 1 or 2 and uses Transmute ‘N’ Scoot, Coach’s +1 applies to the 4-space main move, so Alchemist moves 5." },
@@ -575,50 +138,24 @@ const interactionData = [
 ];
 
 
-/* =========================================================
-   COMBINED DATA
-   ========================================================= */
-
 const allAthletes = [
   ...athletes,
   ...expansionAthletes
 ];
 
-
-/* =========================================================
-   STATE
-   ========================================================= */
-
 let currentView = "list";
-
 let currentFilter = "all";
-
 let currentProfileName = null;
-
 let currentNavigationList = [];
-
 let currentProfileIndex = -1;
-
 let touchStartX = 0;
-
 let touchStartY = 0;
 
 
-/* =========================================================
-   DOM
-   ========================================================= */
-
-const characterGrid =
-  document.getElementById("characterGrid");
-
-const searchInput =
-  document.getElementById("searchInput");
-
-const characterCount =
-  document.getElementById("characterCount");
-
-const noResults =
-  document.getElementById("noResults");
+const characterGrid = document.getElementById("characterGrid");
+const searchInput = document.getElementById("searchInput");
+const characterCount = document.getElementById("characterCount");
+const noResults = document.getElementById("noResults");
 
 const listViewButton =
   document.getElementById("listViewButton");
@@ -672,38 +209,24 @@ const noInteractions =
   document.getElementById("noInteractions");
 
 
-/* =========================================================
-   HELPERS
-   ========================================================= */
-
 function escapeHtml(value) {
-
   return String(value)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
-
 }
 
 
 function findAthlete(name) {
-
   return allAthletes.find(
-    athlete =>
-      athlete.name === name
+    athlete => athlete.name === name
   );
-
 }
 
 
-/* =========================================================
-   FILTER
-   ========================================================= */
-
 function getFilteredAthletes() {
-
   if (currentFilter === "base") {
     return athletes;
   }
@@ -713,21 +236,12 @@ function getFilteredAthletes() {
   }
 
   return allAthletes;
-
 }
 
 
-/* =========================================================
-   SEARCH
-   ========================================================= */
-
 function getVisibleAthletes() {
-
   const searchTerm =
-    searchInput.value
-      .trim()
-      .toLowerCase();
-
+    searchInput.value.trim().toLowerCase();
 
   return getFilteredAthletes().filter(
     athlete => {
@@ -736,52 +250,39 @@ function getVisibleAthletes() {
         return true;
       }
 
-
       const nameMatch =
         athlete.name
           .toLowerCase()
           .includes(searchTerm);
 
-
       const tagMatch =
-        (athlete.tags || [])
-          .some(
-            tag =>
-              tag
-                .toLowerCase()
-                .includes(searchTerm)
-          );
-
+        (athlete.tags || []).some(
+          tag =>
+            tag
+              .toLowerCase()
+              .includes(searchTerm)
+        );
 
       return nameMatch || tagMatch;
-
     }
   );
-
 }
 
-
-/* =========================================================
-   RENDER CHARACTER LIST
-   ========================================================= */
 
 function renderCharacters() {
 
   const visibleAthletes =
     getVisibleAthletes();
 
-
   characterGrid.classList.toggle(
     "list-view",
     currentView === "list"
   );
 
-
   characterGrid.classList.toggle(
     "icon-view",
     currentView === "grid"
   );
-
 
   characterCount.textContent =
     `${visibleAthletes.length} ${
@@ -790,10 +291,7 @@ function renderCharacters() {
         : "racers"
     }`;
 
-
-  if (
-    visibleAthletes.length === 0
-  ) {
+  if (visibleAthletes.length === 0) {
 
     characterGrid.innerHTML = "";
 
@@ -802,33 +300,22 @@ function renderCharacters() {
     );
 
     return;
-
   }
-
 
   noResults.classList.add(
     "hidden"
   );
-
 
   characterGrid.innerHTML =
     visibleAthletes
       .map(createCharacterCard)
       .join("");
 
-
   attachCharacterEvents();
-
 }
 
 
-/* =========================================================
-   CHARACTER CARD
-   ========================================================= */
-
-function createCharacterCard(
-  athlete
-) {
+function createCharacterCard(athlete) {
 
   const secondWindBadge =
     athlete.expansion
@@ -839,9 +326,7 @@ function createCharacterCard(
       `
       : "";
 
-
   return `
-
     <article
       class="character-card"
       tabindex="0"
@@ -876,15 +361,9 @@ function createCharacterCard(
       </div>
 
     </article>
-
   `;
-
 }
 
-
-/* =========================================================
-   CARD EVENTS
-   ========================================================= */
 
 function attachCharacterEvents() {
 
@@ -893,57 +372,41 @@ function attachCharacterEvents() {
       ".character-card"
     );
 
+  cards.forEach(card => {
 
-  cards.forEach(
-    card => {
+    const name =
+      card.dataset.name;
 
-      const name =
-        card.dataset.name;
+    card.addEventListener(
+      "click",
+      () => openProfile(name)
+    );
 
+    card.addEventListener(
+      "keydown",
+      event => {
 
-      card.addEventListener(
-        "click",
-        () => openProfile(name)
-      );
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
 
+          event.preventDefault();
 
-      card.addEventListener(
-        "keydown",
-        event => {
-
-          if (
-            event.key === "Enter" ||
-            event.key === " "
-          ) {
-
-            event.preventDefault();
-
-            openProfile(name);
-
-          }
-
+          openProfile(name);
         }
-      );
-
-    }
-  );
-
+      }
+    );
+  });
 }
 
 
-/* =========================================================
-   INTERACTIONS
-   ========================================================= */
-
-function getInteractionsForAthlete(
-  name
-) {
+function getInteractionsForAthlete(name) {
 
   return interactionData.filter(
     interaction =>
       interaction.racers.includes(name)
   );
-
 }
 
 
@@ -957,13 +420,11 @@ function createInteractionHtml(
         racer !== currentProfileName
     );
 
-
   const racerLinks =
     otherRacers.length
       ? otherRacers
           .map(
             racer => `
-
               <button
                 type="button"
                 class="interaction-character"
@@ -971,7 +432,6 @@ function createInteractionHtml(
               >
                 ${escapeHtml(racer)}
               </button>
-
             `
           )
           .join(
@@ -979,9 +439,7 @@ function createInteractionHtml(
           )
       : "";
 
-
   return `
-
     <div class="interaction-card">
 
       <div class="interaction-racers">
@@ -993,9 +451,7 @@ function createInteractionHtml(
       </div>
 
     </div>
-
   `;
-
 }
 
 
@@ -1006,52 +462,38 @@ function attachInteractionCharacterEvents() {
       ".interaction-character"
     );
 
+  links.forEach(link => {
 
-  links.forEach(
-    link => {
+    link.addEventListener(
+      "click",
+      event => {
 
-      link.addEventListener(
-        "click",
-        event => {
+        event.stopPropagation();
 
-          event.stopPropagation();
+        const racer =
+          link.dataset.racer;
 
-          const racer =
-            link.dataset.racer;
-
-          openProfile(racer);
-
-        }
-      );
-
-    }
-  );
-
+        openProfile(racer);
+      }
+    );
+  });
 }
 
-
-/* =========================================================
-   PROFILE
-   ========================================================= */
 
 function openProfile(name) {
 
   const athlete =
     findAthlete(name);
 
-
   if (!athlete) {
     return;
   }
 
-
   currentProfileName =
     athlete.name;
 
-
   let navigationList =
     getVisibleAthletes();
-
 
   let index =
     navigationList.findIndex(
@@ -1059,48 +501,29 @@ function openProfile(name) {
         racer.name === athlete.name
     );
 
-
-  /*
-   * If the character was opened from
-   * an interaction while not currently
-   * visible in the filter, use all racers.
-   */
-
   if (index === -1) {
 
     navigationList =
       allAthletes;
-
 
     index =
       navigationList.findIndex(
         racer =>
           racer.name === athlete.name
       );
-
   }
-
 
   currentNavigationList =
     navigationList;
 
-
   currentProfileIndex =
     index;
 
-
   renderProfile(athlete);
-
 }
 
 
-/* =========================================================
-   RENDER PROFILE
-   ========================================================= */
-
-function renderProfile(
-  athlete
-) {
+function renderProfile(athlete) {
 
   profileImage.src =
     athlete.image;
@@ -1108,17 +531,24 @@ function renderProfile(
   profileImage.alt =
     athlete.name;
 
-
   profileName.textContent =
     athlete.name;
-
 
   profileAbilityName.textContent =
     athlete.power;
 
-
-  profileAbilityText.textContent =
-    athlete.ability;
+  /*
+    Render actual line breaks in abilities.
+    This makes Magical Athlete's numbered
+    ability appear one number per line.
+  */
+  profileAbilityText.innerHTML =
+    escapeHtml(
+      athlete.ability
+    ).replace(
+      /\n/g,
+      "<br>"
+    );
 
 
   if (athlete.expansion) {
@@ -1126,9 +556,7 @@ function renderProfile(
     interactionCount.textContent =
       "Coming soon";
 
-
     interactionList.innerHTML = `
-
       <div class="interaction-card">
 
         <div class="interaction-text">
@@ -1136,9 +564,7 @@ function renderProfile(
         </div>
 
       </div>
-
     `;
-
 
     noInteractions.classList.add(
       "hidden"
@@ -1151,14 +577,12 @@ function renderProfile(
         athlete.name
       );
 
-
     interactionCount.textContent =
       `${interactions.length} ${
         interactions.length === 1
           ? "interaction"
           : "interactions"
       }`;
-
 
     if (
       interactions.length === 0
@@ -1176,78 +600,57 @@ function renderProfile(
         "hidden"
       );
 
-
       interactionList.innerHTML =
         interactions
           .map(createInteractionHtml)
           .join("");
 
-
       attachInteractionCharacterEvents();
-
     }
-
   }
 
-
   updateProfileNavigation();
-
 
   profileModal.classList.add(
     "open"
   );
-
 
   profileModal.setAttribute(
     "aria-hidden",
     "false"
   );
 
-
   document.body.classList.add(
     "modal-open"
   );
 
-
   profileModal.scrollTop = 0;
-
 
   const interactionsPanel =
     document.querySelector(
       ".profile-interactions"
     );
 
-
   if (interactionsPanel) {
     interactionsPanel.scrollTop = 0;
   }
-
 }
 
-
-/* =========================================================
-   PROFILE NAVIGATION
-   ========================================================= */
 
 function updateProfileNavigation() {
 
   const hasNavigation =
     currentNavigationList.length > 1;
 
-
   prevProfileButton.disabled =
     !hasNavigation;
 
-
   nextProfileButton.disabled =
     !hasNavigation;
-
 }
 
 
-function showProfileAtIndex(
-  index
-) {
+function showProfileAtIndex(index) {
 
   if (
     currentNavigationList.length === 0
@@ -1255,36 +658,25 @@ function showProfileAtIndex(
     return;
   }
 
-
   const length =
     currentNavigationList.length;
 
-
-  /*
-   * Wrap around at either end.
-   */
-
   currentProfileIndex =
     (index + length) % length;
-
 
   const athlete =
     currentNavigationList[
       currentProfileIndex
     ];
 
-
   if (!athlete) {
     return;
   }
 
-
   currentProfileName =
     athlete.name;
 
-
   renderProfile(athlete);
-
 }
 
 
@@ -1293,7 +685,6 @@ function showPreviousProfile() {
   showProfileAtIndex(
     currentProfileIndex - 1
   );
-
 }
 
 
@@ -1302,13 +693,8 @@ function showNextProfile() {
   showProfileAtIndex(
     currentProfileIndex + 1
   );
-
 }
 
-
-/* =========================================================
-   CLOSE PROFILE
-   ========================================================= */
 
 function closeProfile() {
 
@@ -1316,26 +702,18 @@ function closeProfile() {
     "open"
   );
 
-
   profileModal.setAttribute(
     "aria-hidden",
     "true"
   );
 
-
   document.body.classList.remove(
     "modal-open"
   );
 
-
   currentProfileName = null;
-
 }
 
-
-/* =========================================================
-   VIEW SWITCHING
-   ========================================================= */
 
 function setView(view) {
 
@@ -1344,70 +722,49 @@ function setView(view) {
       ? "grid"
       : "list";
 
-
   listViewButton.classList.toggle(
     "active",
     currentView === "list"
   );
-
 
   gridViewButton.classList.toggle(
     "active",
     currentView === "grid"
   );
 
-
   renderCharacters();
-
 }
 
-
-/* =========================================================
-   FILTER SWITCHING
-   ========================================================= */
 
 function setFilter(filter) {
 
   currentFilter =
     filter;
 
-
   allFilterButton.classList.toggle(
     "active",
     currentFilter === "all"
   );
-
 
   baseFilterButton.classList.toggle(
     "active",
     currentFilter === "base"
   );
 
-
   expansionFilterButton.classList.toggle(
     "active",
     currentFilter === "secondWind"
   );
 
-
   renderCharacters();
-
 }
 
-
-/* =========================================================
-   SEARCH
-   ========================================================= */
 
 searchInput.addEventListener(
   "input",
   renderCharacters
 );
 
-
-/* =========================================================
-   VIEW BUTTONS
-   ========================================================= */
 
 listViewButton.addEventListener(
   "click",
@@ -1420,10 +777,6 @@ gridViewButton.addEventListener(
   () => setView("grid")
 );
 
-
-/* =========================================================
-   FILTER BUTTONS
-   ========================================================= */
 
 allFilterButton.addEventListener(
   "click",
@@ -1443,10 +796,6 @@ expansionFilterButton.addEventListener(
 );
 
 
-/* =========================================================
-   PROFILE BUTTONS
-   ========================================================= */
-
 prevProfileButton.addEventListener(
   "click",
   event => {
@@ -1454,7 +803,6 @@ prevProfileButton.addEventListener(
     event.stopPropagation();
 
     showPreviousProfile();
-
   }
 );
 
@@ -1466,7 +814,6 @@ nextProfileButton.addEventListener(
     event.stopPropagation();
 
     showNextProfile();
-
   }
 );
 
@@ -1483,48 +830,40 @@ modalOverlay.addEventListener(
 );
 
 
-/* =========================================================
-   ESCAPE KEY
-   ========================================================= */
-
 document.addEventListener(
   "keydown",
   event => {
 
     if (
       event.key === "Escape" &&
-      profileModal.classList.contains("open")
+      profileModal.classList.contains(
+        "open"
+      )
     ) {
-
       closeProfile();
-
     }
-
   }
 );
 
-
-/* =========================================================
-   KEYBOARD PROFILE NAVIGATION
-   ========================================================= */
 
 document.addEventListener(
   "keydown",
   event => {
 
     if (
-      !profileModal.classList.contains("open")
+      !profileModal.classList.contains(
+        "open"
+      )
     ) {
       return;
     }
-
 
     if (
-      document.activeElement === searchInput
+      document.activeElement ===
+      searchInput
     ) {
       return;
     }
-
 
     if (
       event.key === "ArrowLeft"
@@ -1533,9 +872,7 @@ document.addEventListener(
       event.preventDefault();
 
       showPreviousProfile();
-
     }
-
 
     if (
       event.key === "ArrowRight"
@@ -1544,16 +881,10 @@ document.addEventListener(
       event.preventDefault();
 
       showNextProfile();
-
     }
-
   }
 );
 
-
-/* =========================================================
-   SWIPE NAVIGATION
-   ========================================================= */
 
 profileModal.addEventListener(
   "touchstart",
@@ -1565,14 +896,11 @@ profileModal.addEventListener(
       return;
     }
 
-
     touchStartX =
       event.touches[0].clientX;
 
-
     touchStartY =
       event.touches[0].clientY;
-
   },
   {
     passive: true
@@ -1590,54 +918,38 @@ profileModal.addEventListener(
       return;
     }
 
-
     const touch =
       event.changedTouches[0];
 
-
     const deltaX =
-      touch.clientX - touchStartX;
-
+      touch.clientX -
+      touchStartX;
 
     const deltaY =
-      touch.clientY - touchStartY;
-
+      touch.clientY -
+      touchStartY;
 
     const horizontalDistance =
       Math.abs(deltaX);
 
-
     const verticalDistance =
       Math.abs(deltaY);
 
-
-    /*
-     * Ignore normal vertical scrolling.
-     */
-
     if (
       horizontalDistance < 60 ||
-      horizontalDistance <= verticalDistance
+      horizontalDistance <=
+        verticalDistance
     ) {
       return;
     }
 
-
-    /*
-     * LEFT = NEXT
-     * RIGHT = PREVIOUS
-     */
-
-    if (deltaX < 0) {
-
+    if (
+      deltaX < 0
+    ) {
       showNextProfile();
-
     } else {
-
       showPreviousProfile();
-
     }
-
   },
   {
     passive: true
@@ -1645,12 +957,7 @@ profileModal.addEventListener(
 );
 
 
-/* =========================================================
-   INITIAL STATE
-   ========================================================= */
-
 currentView = "list";
-
 currentFilter = "all";
 
 listViewButton.classList.add(
@@ -1672,6 +979,5 @@ baseFilterButton.classList.remove(
 expansionFilterButton.classList.remove(
   "active"
 );
-
 
 renderCharacters();
