@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Magical Athlete Character Profiles</title>
   <meta name="description" content="Magical Athlete racer character profiles, abilities, and interactions.">
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 
 <body>
 
   <header class="site-header">
     <div class="header-inner">
+
       <h1>MAGICAL ATHLETE</h1>
       <p>Character Profiles</p>
 
@@ -25,43 +26,56 @@
         >
       </div>
 
-      <div class="controls">
+      <div class="view-controls">
 
-        <div class="filter-controls">
-          <button type="button" class="filter-button active" data-filter="all">
+        <div class="view-toggle">
+          <button
+            id="listViewButton"
+            class="view-button active"
+            type="button"
+          >
+            List View
+          </button>
+
+          <button
+            id="gridViewButton"
+            class="view-button"
+            type="button"
+          >
+            Icon View
+          </button>
+        </div>
+
+        <div class="filter-toggle">
+
+          <button
+            id="allFilterButton"
+            class="filter-button active"
+            type="button"
+          >
             All
           </button>
 
-          <button type="button" class="filter-button" data-filter="base">
+          <button
+            id="baseFilterButton"
+            class="filter-button"
+            type="button"
+          >
             Base Game
           </button>
 
-          <button type="button" class="filter-button" data-filter="expansion">
+          <button
+            id="expansionFilterButton"
+            class="filter-button"
+            type="button"
+          >
             Second Wind
           </button>
-        </div>
 
-        <div class="view-controls">
-          <button
-            type="button"
-            class="view-button active"
-            data-view="cards"
-            aria-label="Card view"
-          >
-            ▦ Cards
-          </button>
-
-          <button
-            type="button"
-            class="view-button"
-            data-view="list"
-            aria-label="List view"
-          >
-            ☰ List
-          </button>
         </div>
 
       </div>
+
     </div>
   </header>
 
@@ -75,11 +89,15 @@
         <span id="characterCount"></span>
       </div>
 
-      <div id="characterGrid" class="character-grid"></div>
+      <div
+        id="characterGrid"
+        class="character-grid list-view"
+      ></div>
 
-      <div id="characterList" class="character-list hidden"></div>
-
-      <div id="noResults" class="no-results hidden">
+      <div
+        id="noResults"
+        class="no-results hidden"
+      >
         No characters found.
       </div>
 
@@ -96,7 +114,11 @@
     aria-hidden="true"
   >
 
-    <div id="modalOverlay" class="modal-overlay"></div>
+    <div
+      id="modalOverlay"
+      class="modal-overlay"
+    ></div>
+
 
     <div
       class="profile-modal"
@@ -115,19 +137,18 @@
       </button>
 
 
-      <!-- PROFILE NAVIGATION -->
-
       <button
-        id="previousRacer"
-        class="profile-nav profile-nav-previous"
+        id="prevProfile"
+        class="profile-nav profile-nav-prev"
         type="button"
         aria-label="Previous racer"
       >
         ‹
       </button>
 
+
       <button
-        id="nextRacer"
+        id="nextProfile"
         class="profile-nav profile-nav-next"
         type="button"
         aria-label="Next racer"
@@ -171,8 +192,11 @@
         <section class="profile-interactions">
 
           <div class="interactions-header">
+
             <h3>Interactions</h3>
+
             <p id="interactionCount"></p>
+
           </div>
 
           <div id="interactionList"></div>
