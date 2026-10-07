@@ -554,3 +554,109 @@ main {
     font-size: 0.76rem;
   }
 }
+/* =========================
+   FOOTER
+========================= */
+.site-footer {
+  margin-top: 60px;
+  padding: 45px 20px 20px;
+  background: #111111;
+  color: #ffffff;
+  border-top: 4px solid var(--accent);
+}
+.footer-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1.4fr;
+  gap: 45px;
+  align-items: start;
+}
+.site-footer h2 {
+  margin: 0 0 14px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.footer-about p {
+  margin: 0 0 10px;
+  line-height: 1.6;
+  color: #dddddd;
+}
+.footer-note {
+  font-size: 0.85rem;
+  color: #999999 !important;
+}
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 210px;
+}
+.footer-button {
+  display: block;
+  padding: 12px 18px;
+  background: var(--accent);
+  color: #ffffff;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 6px;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+.footer-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+.footer-button.secondary {
+  background: #ffffff;
+  color: #111111;
+}
+.footer-credits p {
+  margin: 0 0 7px;
+  color: #cccccc;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.footer-credits strong {
+  color: #ffffff;
+}
+.footer-bottom {
+  max-width: var(--max-width);
+  margin: 35px auto 0;
+  padding-top: 18px;
+  border-top: 1px solid #333333;
+  text-align: center;
+}
+.footer-bottom p {
+  margin: 0;
+  color: #777777;
+  font-size: 0.75rem;
+}
+/* =========================
+   MOBILE FOOTER
+========================= */
+@media (max-width: 700px) {
+  .site-footer {
+    margin-top: 40px;
+    padding: 35px 18px 18px;
+  }
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .footer-links {
+    order: -1;
+    width: 100%;
+  }
+  .footer-button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .footer-credits p {
+    font-size: 0.8rem;
+  }
+}
