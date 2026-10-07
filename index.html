@@ -5,17 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Magical Athlete Character Profiles</title>
   <meta name="description" content="Magical Athlete racer character profiles, abilities, and interactions.">
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=11">
 </head>
-
 <body>
-
   <header class="site-header">
     <div class="header-inner">
-
       <h1>MAGICAL ATHLETE</h1>
       <p>Character Profiles</p>
-
       <div class="search-container">
         <input
           type="search"
@@ -25,199 +21,75 @@
           aria-label="Search characters"
         >
       </div>
-
-      <div class="view-controls">
-
-        <div class="view-toggle">
-          <button
-            id="listViewButton"
-            class="view-button active"
-            type="button"
-          >
-            List View
-          </button>
-
-          <button
-            id="gridViewButton"
-            class="view-button"
-            type="button"
-          >
-            Icon View
-          </button>
-        </div>
-
-        <div class="filter-toggle">
-
-          <button
-            id="allFilterButton"
-            class="filter-button active"
-            type="button"
-          >
-            All
-          </button>
-
-          <button
-            id="baseFilterButton"
-            class="filter-button"
-            type="button"
-          >
-            Base Game
-          </button>
-
-          <button
-            id="expansionFilterButton"
-            class="filter-button"
-            type="button"
-          >
-            Second Wind
-          </button>
-
-        </div>
-
+      <div class="filter-toggle">
+        <button id="allFilterButton" class="filter-button active" type="button">All</button>
+        <button id="baseFilterButton" class="filter-button" type="button">Base Game</button>
+        <button id="expansionFilterButton" class="filter-button" type="button">Second Wind</button>
       </div>
-
     </div>
   </header>
-
-
   <main>
-
     <section class="characters-section">
-
       <div class="section-header">
         <h2>Racers</h2>
         <span id="characterCount"></span>
       </div>
-
-      <div
-        id="characterGrid"
-        class="character-grid list-view"
-      ></div>
-
-      <div
-        id="noResults"
-        class="no-results hidden"
-      >
+      <div id="characterGrid" class="character-grid"></div>
+      <div id="noResults" class="no-results hidden">
         No characters found.
       </div>
-
     </section>
-
   </main>
-
-
-  <!-- PROFILE MODAL -->
-
-  <div
-    id="profileModal"
-    class="modal"
-    aria-hidden="true"
-  >
-
-    <div
-      id="modalOverlay"
-      class="modal-overlay"
-    ></div>
-
-
+  <div id="profileModal" class="modal" aria-hidden="true">
+    <div id="modalOverlay" class="modal-overlay"></div>
     <div
       class="profile-modal"
       role="dialog"
       aria-modal="true"
       aria-labelledby="profileName"
     >
-
       <button
         id="closeModal"
         class="close-button"
         type="button"
         aria-label="Close character profile"
-      >
-        ×
-      </button>
-
-
+      >×</button>
       <button
         id="prevProfile"
         class="profile-nav profile-nav-prev"
         type="button"
         aria-label="Previous racer"
-      >
-        ‹
-      </button>
-
-
+      >‹</button>
       <button
         id="nextProfile"
         class="profile-nav profile-nav-next"
         type="button"
         aria-label="Next racer"
-      >
-        ›
-      </button>
-
-
+      >›</button>
       <div class="profile-layout">
-
         <aside class="profile-sidebar">
-
           <div class="profile-image-container">
-            <img
-              id="profileImage"
-              class="profile-image"
-              src=""
-              alt=""
-            >
+            <img id="profileImage" class="profile-image" src="" alt="">
           </div>
-
           <h2 id="profileName"></h2>
-
           <div class="ability-box">
-
-            <div
-              id="profileAbilityName"
-              class="ability-name"
-            ></div>
-
-            <div
-              id="profileAbilityText"
-              class="ability-text"
-            ></div>
-
+            <div id="profileAbilityName" class="ability-name"></div>
+            <div id="profileAbilityText" class="ability-text"></div>
           </div>
-
         </aside>
-
-
         <section class="profile-interactions">
-
           <div class="interactions-header">
-
             <h3>Interactions</h3>
-
             <p id="interactionCount"></p>
-
           </div>
-
           <div id="interactionList"></div>
-
-          <div
-            id="noInteractions"
-            class="no-interactions hidden"
-          >
+          <div id="noInteractions" class="no-interactions hidden">
             No notable interactions listed.
           </div>
-
         </section>
-
       </div>
-
     </div>
-
   </div>
-
-
-  <script src="./script.js?v=10"></script>
-
+  <script src="./script.js?v=11"></script>
 </body>
 </html>
