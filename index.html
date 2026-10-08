@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Magical Athlete Character Profiles</title>
   <meta name="description" content="Magical Athlete racer character profiles, abilities, and interactions.">
-  <link rel="stylesheet" href="style.css?v=12">
+  <link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
       <h1>MAGICAL ATHLETE</h1>
       <p>Character Profiles</p>
+
       <div class="search-container">
         <input
           type="search"
@@ -21,36 +22,49 @@
           aria-label="Search characters"
         >
       </div>
+
       <div class="filter-toggle">
         <button id="allFilterButton" class="filter-button active" type="button">
           All
         </button>
+
         <button id="baseFilterButton" class="filter-button" type="button">
           Base Game
         </button>
+
         <button id="expansionFilterButton" class="filter-button" type="button">
           Second Wind
+        </button>
+
+        <button id="extraMileFilterButton" class="filter-button" type="button">
+          <span>Extra Mile</span>
+          <small>(unofficial)</small>
         </button>
       </div>
     </div>
   </header>
+
   <main>
     <section class="characters-section">
       <div class="section-header">
         <h2>Racers</h2>
         <span id="characterCount"></span>
       </div>
+
       <div id="characterGrid" class="character-grid"></div>
+
       <div id="noResults" class="no-results hidden">
         No characters found.
       </div>
     </section>
   </main>
+
   <!-- =========================
        PROFILE MODAL
   ========================= -->
   <div id="profileModal" class="modal" aria-hidden="true">
     <div id="modalOverlay" class="modal-overlay"></div>
+
     <div
       class="profile-modal"
       role="dialog"
@@ -63,18 +77,21 @@
         type="button"
         aria-label="Close character profile"
       >×</button>
+
       <button
         id="prevProfile"
         class="profile-nav profile-nav-prev"
         type="button"
         aria-label="Previous racer"
       >‹</button>
+
       <button
         id="nextProfile"
         class="profile-nav profile-nav-next"
         type="button"
         aria-label="Next racer"
       >›</button>
+
       <div class="profile-layout">
         <aside class="profile-sidebar">
           <div class="profile-image-container">
@@ -85,18 +102,23 @@
               alt=""
             >
           </div>
+
           <h2 id="profileName"></h2>
+
           <div class="ability-box">
             <div id="profileAbilityName" class="ability-name"></div>
             <div id="profileAbilityText" class="ability-text"></div>
           </div>
         </aside>
+
         <section class="profile-interactions">
           <div class="interactions-header">
             <h3>Interactions</h3>
             <p id="interactionCount"></p>
           </div>
+
           <div id="interactionList"></div>
+
           <div id="noInteractions" class="no-interactions hidden">
             No notable interactions listed.
           </div>
@@ -104,6 +126,7 @@
       </div>
     </div>
   </div>
+
   <!-- =========================
        FOOTER
   ========================= -->
@@ -116,6 +139,7 @@
           <em>Magical Athlete</em>.
         </p>
       </div>
+
       <div class="footer-links">
         <a
           href="https://www.cmyk.games/products/magical-athlete"
@@ -125,6 +149,7 @@
         >
           Buy Magical Athlete
         </a>
+
         <a
           href="officialrules.pdf"
           target="_blank"
@@ -134,42 +159,80 @@
           View Official Rulebook
         </a>
       </div>
+
       <div class="footer-credits">
         <h2>Credits</h2>
+
         <p>
           <strong>Original Game Design:</strong> Takashi Ishida
         </p>
+
         <p>
           <strong>Updated Game Design:</strong> Richard Garfield
         </p>
+
         <p>
           <strong>Creative Director:</strong> Alex Hague
         </p>
+
         <p>
           <strong>Art:</strong> Angela Kirkwood
         </p>
+
         <p>
           <strong>Graphic Design:</strong> Elizabeth Goodspeed, Janet Delavan
         </p>
+
         <p>
           <strong>Additional Design and Development:</strong><br>
           Skaff Elias, James Nathan Spencer, Justin Vickers
         </p>
+
         <p>
           <strong>Lead Writer:</strong> Sophie Abromowitz
         </p>
+
         <p>
           <strong>Publisher:</strong> CMYK
         </p>
+
         <p>
           <strong>Manufacturer:</strong> Strom MFG
         </p>
+
+        <div class="extra-mile-credit">
+          <h2>Extra Mile</h2>
+
+          <p>
+            This is a fan made, unofficial expansion pack to
+            <em>Magical Athlete</em>.
+          </p>
+
+          <p>
+            <strong>Card Design:</strong> Johnnie Reynolds
+          </p>
+
+          <p>
+            <strong>Artwork:</strong> Dan Reynolds
+          </p>
+
+          <p>
+            To download a printable template for these cards,
+            <a
+              href="ExtraMile.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >click here</a>.
+          </p>
+        </div>
       </div>
     </div>
+
     <div class="footer-bottom">
       <p>Fan-made reference site · Not affiliated with CMYK</p>
     </div>
   </footer>
-  <script src="./script.js?v=12"></script>
+
+  <script src="./script.js?v=13"></script>
 </body>
 </html>
