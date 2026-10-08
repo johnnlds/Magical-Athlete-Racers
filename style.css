@@ -10,12 +10,15 @@
   --accent-dark: #980000;
   --max-width: 1200px;
 }
+
 * {
   box-sizing: border-box;
 }
+
 html {
   scroll-behavior: smooth;
 }
+
 body {
   margin: 0;
   background: var(--background);
@@ -23,26 +26,32 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
 }
+
 body.modal-open {
   overflow: hidden;
 }
+
 button,
 input {
   font: inherit;
 }
+
 /* =========================
    HEADER
 ========================= */
+
 .site-header {
   position: static;
   background: #ffffff;
   border-bottom: 1px solid var(--border);
   padding: 42px 20px 28px;
 }
+
 .header-inner {
   max-width: var(--max-width);
   margin: 0 auto;
 }
+
 .site-header h1 {
   margin: 0;
   color: #111111;
@@ -51,18 +60,22 @@ input {
   line-height: 1;
   letter-spacing: -0.04em;
 }
+
 .site-header p {
   margin: 8px 0 24px;
   color: var(--muted);
   font-size: 1rem;
   font-weight: 600;
 }
+
 /* =========================
    SEARCH
 ========================= */
+
 .search-container {
   width: 100%;
 }
+
 #searchInput {
   width: 100%;
   padding: 14px 16px;
@@ -76,22 +89,27 @@ input {
     border-color 0.2s ease,
     box-shadow 0.2s ease;
 }
+
 #searchInput::placeholder {
   color: #888888;
 }
+
 #searchInput:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(196, 0, 0, 0.1);
 }
+
 /* =========================
    FILTER BUTTONS
 ========================= */
+
 .filter-toggle {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 14px;
 }
+
 .filter-button {
   padding: 8px 13px;
   border: 1px solid #cccccc;
@@ -106,25 +124,40 @@ input {
     color 0.15s ease,
     border-color 0.15s ease;
 }
+
 .filter-button:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
+
 .filter-button.active {
   background: var(--accent);
   border-color: var(--accent);
   color: #ffffff;
 }
+
+.filter-button small {
+  display: block;
+  margin-top: 1px;
+  font-size: 0.62rem;
+  line-height: 1;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
 /* =========================
    MAIN
 ========================= */
+
 main {
   width: min(calc(100% - 32px), var(--max-width));
   margin: 0 auto;
 }
+
 .characters-section {
   padding: 28px 0 60px;
 }
+
 .section-header {
   display: flex;
   align-items: baseline;
@@ -132,25 +165,29 @@ main {
   gap: 12px;
   margin-bottom: 16px;
 }
+
 .section-header h2 {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 900;
 }
+
 #characterCount {
   color: var(--muted);
   font-size: 0.9rem;
   font-weight: 600;
 }
+
 /* =========================
    CHARACTER GRID
-   THIS IS THE ONLY VIEW
 ========================= */
+
 .character-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
 }
+
 .character-card {
   min-width: 0;
   overflow: hidden;
@@ -164,15 +201,18 @@ main {
     border-color 0.15s ease,
     box-shadow 0.15s ease;
 }
+
 .character-card:hover {
   transform: translateY(-2px);
   border-color: #bbbbbb;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
+
 .character-card:focus-visible {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(196, 0, 0, 0.15);
 }
+
 .character-card-image {
   width: 100%;
   height: 205px;
@@ -181,9 +221,11 @@ main {
   display: block;
   background: #eeeeee;
 }
+
 .character-card-content {
   padding: 13px 14px 15px;
 }
+
 .character-card-name {
   margin: 0;
   color: var(--text);
@@ -191,12 +233,14 @@ main {
   font-weight: 900;
   line-height: 1.2;
 }
+
 .character-card-power {
   margin-top: 4px;
   color: var(--accent);
   font-size: 0.88rem;
   font-weight: 800;
 }
+
 .character-card-ability {
   margin-top: 7px;
   color: #555555;
@@ -205,7 +249,9 @@ main {
   line-height: 1.45;
   white-space: pre-line;
 }
-.second-wind-badge {
+
+.second-wind-badge,
+.extra-mile-badge {
   display: inline-block;
   margin-top: 8px;
   padding: 3px 7px;
@@ -217,9 +263,18 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
+
+.extra-mile-badge span {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0;
+}
+
 /* =========================
    GENERAL
 ========================= */
+
 .no-results {
   padding: 50px 20px;
   border: 1px dashed #cccccc;
@@ -227,12 +282,15 @@ main {
   color: var(--muted);
   text-align: center;
 }
+
 .hidden {
   display: none !important;
 }
+
 /* =========================
    MODAL
 ========================= */
+
 .modal {
   position: fixed;
   inset: 0;
@@ -241,16 +299,19 @@ main {
   padding: 20px;
   overflow-y: auto;
 }
+
 .modal.open {
   display: flex;
   align-items: flex-start;
   justify-content: center;
 }
+
 .modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.7);
 }
+
 .profile-modal {
   position: relative;
   z-index: 2;
@@ -262,9 +323,11 @@ main {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   touch-action: pan-y;
 }
+
 /* =========================
    CLOSE BUTTON
 ========================= */
+
 .close-button {
   position: absolute;
   top: 10px;
@@ -280,12 +343,15 @@ main {
   line-height: 1;
   cursor: pointer;
 }
+
 .close-button:hover {
   background: #dddddd;
 }
+
 /* =========================
    PROFILE NAVIGATION
 ========================= */
+
 .profile-nav {
   position: absolute;
   top: 50%;
@@ -304,35 +370,44 @@ main {
     background 0.15s ease,
     color 0.15s ease;
 }
+
 .profile-nav:hover {
   background: var(--accent);
   color: #ffffff;
 }
+
 .profile-nav:disabled {
   opacity: 0.35;
   cursor: default;
 }
+
 .profile-nav:disabled:hover {
   background: #eeeeee;
   color: #222222;
 }
+
 .profile-nav-prev {
   left: -21px;
 }
+
 .profile-nav-next {
   right: -21px;
 }
+
 /* =========================
    PROFILE LAYOUT
 ========================= */
+
 .profile-layout {
   display: grid;
   grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
   gap: 28px;
 }
+
 .profile-sidebar {
   min-width: 0;
 }
+
 .profile-image-container {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -340,6 +415,7 @@ main {
   border-radius: 12px;
   background: #eeeeee;
 }
+
 .profile-image {
   width: 100%;
   height: 100%;
@@ -347,6 +423,7 @@ main {
   object-position: center;
   display: block;
 }
+
 .profile-sidebar h2 {
   margin: 14px 0 12px;
   color: var(--text);
@@ -354,19 +431,23 @@ main {
   font-weight: 900;
   line-height: 1.1;
 }
+
 /* =========================
    ABILITY
 ========================= */
+
 .ability-box {
   border-top: 1px solid var(--border);
   padding-top: 13px;
 }
+
 .ability-name {
   color: var(--accent);
   font-size: 1.05rem;
   font-weight: 900;
   line-height: 1.25;
 }
+
 .ability-text {
   margin-top: 6px;
   color: #333333;
@@ -375,15 +456,18 @@ main {
   line-height: 1.45;
   white-space: pre-line;
 }
+
 /* =========================
    INTERACTIONS
 ========================= */
+
 .profile-interactions {
   min-width: 0;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
   padding-right: 5px;
 }
+
 .interactions-header {
   display: flex;
   align-items: baseline;
@@ -391,18 +475,21 @@ main {
   gap: 12px;
   margin-bottom: 12px;
 }
+
 .interactions-header h3 {
   margin: 0;
   color: var(--text);
   font-size: 1.3rem;
   font-weight: 900;
 }
+
 .interactions-header p {
   margin: 0;
   color: var(--muted);
   font-size: 0.85rem;
   font-weight: 600;
 }
+
 .interaction-card {
   padding: 13px 14px;
   margin-bottom: 9px;
@@ -410,9 +497,11 @@ main {
   border-radius: 9px;
   background: #ffffff;
 }
+
 .interaction-racers {
   margin-bottom: 5px;
 }
+
 .interaction-character {
   display: inline;
   padding: 0;
@@ -424,139 +513,203 @@ main {
   cursor: pointer;
   text-decoration: none;
 }
+
 .interaction-character:hover {
   text-decoration: underline;
 }
+
 .interaction-separator {
   color: #888888;
   margin: 0 5px;
   font-weight: 700;
 }
+
 .interaction-text {
   color: #333333;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.5;
 }
+
 .no-interactions {
   padding: 25px 0;
   color: var(--muted);
   text-align: center;
 }
+
+/* =========================
+   EXTRA MILE FOOTER
+========================= */
+
+.extra-mile-credit {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #333333;
+}
+
+.extra-mile-credit h2 {
+  margin-bottom: 12px;
+}
+
+.extra-mile-credit p {
+  margin-bottom: 7px;
+}
+
+.extra-mile-credit a {
+  color: #ffffff;
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+.extra-mile-credit a:hover {
+  color: #dddddd;
+}
+
 /* =========================
    TABLET
 ========================= */
+
 @media (max-width: 800px) {
   .character-card-image {
     height: 170px;
   }
+
   .profile-layout {
     grid-template-columns: 180px minmax(0, 1fr);
     gap: 18px;
   }
+
   .profile-image-container {
     max-height: 180px;
   }
+
   .profile-sidebar h2 {
     font-size: 1.45rem;
   }
+
   .ability-name {
     font-size: 0.95rem;
   }
+
   .ability-text {
     font-size: 1.15rem;
   }
 }
+
 /* =========================
    MOBILE
 ========================= */
+
 @media (max-width: 650px) {
   .site-header {
     padding: 32px 16px 22px;
   }
+
   main {
     width: calc(100% - 24px);
   }
+
   .filter-toggle {
     width: 100%;
   }
+
   .filter-button {
     flex: 1;
     text-align: center;
   }
+
   .modal {
     padding: 8px;
   }
+
   .profile-modal {
     margin: 8px auto;
     padding: 18px 14px;
   }
+
   .profile-layout {
     display: flex;
     flex-direction: column;
     gap: 18px;
   }
+
   .profile-sidebar {
     flex-shrink: 0;
     text-align: center;
   }
+
   .profile-image-container {
     width: min(180px, 70vw);
     height: 180px;
     margin: 0 auto;
   }
+
   .profile-sidebar h2 {
     margin-top: 10px;
     font-size: 1.45rem;
   }
+
   .ability-box {
     text-align: left;
   }
+
   .ability-text {
     font-size: 1.15rem;
   }
+
   .profile-interactions {
     max-height: none;
     overflow: visible;
     padding-right: 0;
   }
+
   .profile-nav {
     top: 105px;
     width: 36px;
     height: 36px;
     font-size: 1.7rem;
   }
+
   .profile-nav-prev {
     left: 5px;
   }
+
   .profile-nav-next {
     right: 5px;
   }
 }
+
 /* =========================
    SMALL PHONES
 ========================= */
+
 @media (max-width: 500px) {
   .character-card-image {
     height: 170px;
   }
+
   .character-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 9px;
   }
+
   .character-card-content {
     padding: 10px;
   }
+
   .character-card-name {
     font-size: 0.95rem;
   }
+
   .character-card-power {
     font-size: 0.76rem;
   }
 }
+
 /* =========================
    FOOTER
 ========================= */
+
 .site-footer {
   margin-top: 60px;
   padding: 45px 20px 20px;
@@ -564,6 +717,7 @@ main {
   color: #ffffff;
   border-top: 4px solid var(--accent);
 }
+
 .footer-content {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -572,6 +726,7 @@ main {
   gap: 45px;
   align-items: start;
 }
+
 .site-footer h2 {
   margin: 0 0 14px;
   font-size: 1.1rem;
@@ -579,21 +734,25 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
+
 .footer-about p {
   margin: 0 0 10px;
   line-height: 1.6;
   color: #dddddd;
 }
+
 .footer-note {
   font-size: 0.85rem;
   color: #999999 !important;
 }
+
 .footer-links {
   display: flex;
   flex-direction: column;
   gap: 12px;
   min-width: 210px;
 }
+
 .footer-button {
   display: block;
   padding: 12px 18px;
@@ -607,23 +766,28 @@ main {
     opacity 0.2s ease,
     transform 0.2s ease;
 }
+
 .footer-button:hover {
   opacity: 0.9;
   transform: translateY(-1px);
 }
+
 .footer-button.secondary {
   background: #ffffff;
   color: #111111;
 }
+
 .footer-credits p {
   margin: 0 0 7px;
   color: #cccccc;
   font-size: 0.85rem;
   line-height: 1.45;
 }
+
 .footer-credits strong {
   color: #ffffff;
 }
+
 .footer-bottom {
   max-width: var(--max-width);
   margin: 35px auto 0;
@@ -631,31 +795,38 @@ main {
   border-top: 1px solid #333333;
   text-align: center;
 }
+
 .footer-bottom p {
   margin: 0;
   color: #777777;
   font-size: 0.75rem;
 }
+
 /* =========================
    MOBILE FOOTER
 ========================= */
+
 @media (max-width: 700px) {
   .site-footer {
     margin-top: 40px;
     padding: 35px 18px 18px;
   }
+
   .footer-content {
     grid-template-columns: 1fr;
     gap: 30px;
   }
+
   .footer-links {
     order: -1;
     width: 100%;
   }
+
   .footer-button {
     width: 100%;
     box-sizing: border-box;
   }
+
   .footer-credits p {
     font-size: 0.8rem;
   }
