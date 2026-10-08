@@ -510,22 +510,6 @@ const expansionAthletes = [
 
 const extraMileAthletes = [
   {
-    name: "Robin Hood",
-    power: "FOR THE POOR",
-    ability: "If I share a space or pass the person in first, I take 1 point chip from them and give it to the person in last. I then move +2.",
-    image: "images/extra-mile/Robin Hood.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Mr. Fox",
-    power: "OBJECTION!",
-    ability: "3 times per race I can yell \"Objection\". This allows me to block a character's power from happening.",
-    image: "images/extra-mile/Mr. Fox.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
     name: "Box",
     power: "DON'T MISS",
     ability: "All players must roll into the box. If any roll touches outside the box, I move +2.",
@@ -534,10 +518,42 @@ const extraMileAthletes = [
     tags: ["extra mile", "unofficial"]
   },
   {
-    name: "Snake Eyes",
-    power: "ALL IN",
-    ability: "Before my race I bet on a racer to win. If I'm right, 3x my bet. If I'm wrong, I lose the amount I bet.",
-    image: "images/extra-mile/Snake Eyes.png",
+    name: "Broken Clock",
+    power: "TICK TOCK",
+    ability: "I roll 2 dice for my main move and move the lower number. If I roll doubles, I move the total amount of both dice.",
+    image: "images/extra-mile/Broken Clock.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Cletus",
+    power: "BIG GAME",
+    ability: "Instead of my main move, I can choose a racer within 3 spaces of me. We both roll and follow these results: Same number - They are eliminated. My roll is higher - I take my main move. Their roll is higher - They move +1.",
+    image: "images/extra-mile/Cletus.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Doc Paradox",
+    power: "TEMPORAL COLLAPSE",
+    ability: "I start at the finish line and race backwards. If I share a space with another racer, I warp back to the finish line. If that happens, +3 to my main move.",
+    image: "images/extra-mile/Doc Paradox.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Doctor Dice",
+    power: "HOUSE CALL",
+    ability: "I can never trip. Before my main move I can warp to a tripped racer to help them recover immediately. If I warp backwards, +2 to my move.",
+    image: "images/extra-mile/Doctor Dice.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Dom and Gary",
+    power: "CAT AND MOUSE",
+    ability: "Dom: If I pass or share a space with Gary, I eliminate him and get +2 to my main move. Gary: I start on space 4 and always move directly before Dom. If I finish 1st or 2nd, I steal those points.",
+    image: "images/extra-mile/Dom and Gary.png",
     extraMile: true,
     tags: ["extra mile", "unofficial"]
   },
@@ -550,10 +566,186 @@ const extraMileAthletes = [
     tags: ["extra mile", "unofficial"]
   },
   {
+    name: "Gingy",
+    power: "EAT ME",
+    ability: "I have 4 lives. Every time a racer lands on my space, I lose 1 life and gain +1 to my main move. I am eliminated if I run out of lives.",
+    image: "images/extra-mile/Gingy.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Gluebert",
+    power: "STICKY",
+    ability: "Other racers on my space gets -2 to their main move. When a racer passes me, -1 to their current move.",
+    image: "images/extra-mile/Gluebert.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Heads",
+    power: "FLIPPER",
+    ability: "I can flip over my dice and use the face down number.",
+    image: "images/extra-mile/Heads.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Honey Pot",
+    power: "STICKY POT",
+    ability: "Before my race, add 1 point per race to a shared pot. I mark one space with a point chip. If a racer lands on that space, they roll and gain point chips from the pot equal to their roll. I move +1 for each point chip collected.",
+    image: "images/extra-mile/Honey Pot.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "King Pete",
+    power: "PLAYGROUND TAX",
+    ability: "Whenever another racer rolls a 5 or 6, -1 to their move. I move +1.",
+    image: "images/extra-mile/King Pete.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Lazy Bones",
+    power: "RECLINING",
+    ability: "I can't leave start until I roll a 6. When I roll a 6, I warp to the 1st place racer and then immediately take another turn.",
+    image: "images/extra-mile/Lazy Bones.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Marksman",
+    power: "FOWL PLAY",
+    ability: "Before my main move I can target a player more than 3 spaces away from me. I roll the dice and add up the total, trying to equal the number space they are on. If I get it, they are eliminated. If not, they move +1.",
+    image: "images/extra-mile/Marksman.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Moneybags",
+    power: "PAY TO WIN",
+    ability: "I can skip rolling as my main move and pay 1 point chip to move 1-8 instead.",
+    image: "images/extra-mile/Moneybags.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Mr. Fox",
+    power: "OBJECTION!",
+    ability: "3 times per race I can yell \"Objection\". This allows me to block a character's power from happening.",
+    image: "images/extra-mile/Mr. Fox.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Oddball",
+    power: "KNUCKLEBALL",
+    ability: "When I roll an even number, -2 to my move. When I roll an odd number, +3 to my move.",
+    image: "images/extra-mile/Oddball.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
     name: "Pooh",
     power: "SIMPLE BEAR",
     ability: "When multiple abilities happen in the same turn, I move +1. If I am tripped I immediately recover.",
     image: "images/extra-mile/Pooh.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Robin Hood",
+    power: "FOR THE POOR",
+    ability: "If I share a space or pass the person in first, I take 1 point chip from them and give it to the person in last. I then move +2.",
+    image: "images/extra-mile/Robin Hood.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Saint Nick",
+    power: "NAUGHTY OR NICE",
+    ability: "When I land on a space with another racer, I move +1 for each racer. Those players roll and move -1 if they roll 1-3 or +2 if they roll 4-6.",
+    image: "images/extra-mile/Saint Nick.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "School Bully",
+    power: "LUNCH MONEY",
+    ability: "If I roll a 3, all other racers trip. They can avoid missing their turn by rolling a 1-3 to recover. If they do, I move +2.",
+    image: "images/extra-mile/School Bully.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Scout",
+    power: "NEVER LOST",
+    ability: "After I roll but before I move, I can warp to 1 space in front or behind my current space.",
+    image: "images/extra-mile/Scout.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Shuffler",
+    power: "52 PICKUP",
+    ability: "Before the race I shuffle and randomly pass out everyone's character cards. The card you receive is your new power. I can repeat this if I am alone in last place.",
+    image: "images/extra-mile/Shuffler.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Silly Goose",
+    power: "WANDERIN",
+    ability: "I don't follow the dice. When I roll, this is what I move: 6 = 10, 5 = 7, 4 = 5, 3 = 2, 2 = 0, 1 = -3.",
+    image: "images/extra-mile/Silly Goose.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Snake Eyes",
+    power: "ALL IN",
+    ability: "Before my race I bet on a racer to win. If I'm right, 3x my bet. If I'm wrong, I lose the amount I bet.",
+    image: "images/extra-mile/Snake Eyes.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Snub",
+    power: "PICK ME",
+    ability: "I gain +X to my main move where X = the amount of racers chosen before me in this draft round.",
+    image: "images/extra-mile/Snub.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Terrible Toddler",
+    power: "TEMPER TANTRUM",
+    ability: "If I roll a 1 or 2, roll the dice again before I move. Anyone within that number of spaces of me trips.",
+    image: "images/extra-mile/Terrible Toddler.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Thief",
+    power: "HEIST",
+    ability: "Before my race I secretly choose another racer. After the race ends, I reveal who I chose and I steal any points collected by that racer.",
+    image: "images/extra-mile/Thief.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Toll Troll",
+    power: "PAY THE TOLL",
+    ability: "Before my race, I mark a space on the board with a point chip. Whenever a character stops on that space, I gain one point chip.",
+    image: "images/extra-mile/Toll Troll.png",
+    extraMile: true,
+    tags: ["extra mile", "unofficial"]
+  },
+  {
+    name: "Totally Fair Ref",
+    power: "FALSE START",
+    ability: "Whenever another racer enters first place, they trip.",
+    image: "images/extra-mile/Totally Fair Ref.png",
     extraMile: true,
     tags: ["extra mile", "unofficial"]
   },
@@ -570,198 +762,6 @@ const extraMileAthletes = [
     power: "WITCHES BREW",
     ability: "I can split my main move between moving forward and forcing other racers backwards.",
     image: "images/extra-mile/Witch Hazel.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Lazy Bones",
-    power: "RECLINING",
-    ability: "I can't leave start until I roll a 6. When I roll a 6, I warp to the 1st place racer and then immediately take another turn.",
-    image: "images/extra-mile/Lazy Bones.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Shuffler",
-    power: "52 PICKUP",
-    ability: "Before the race I shuffle and randomly pass out everyone's character cards. The card you receive is your new power. I can repeat this if I am alone in last place.",
-    image: "images/extra-mile/Shuffler.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Doctor Dice",
-    power: "HOUSE CALL",
-    ability: "I can never trip. Before my main move I can warp to a tripped racer to help them recover immediately. If I warp backwards, +2 to my move.",
-    image: "images/extra-mile/Doctor Dice.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Toll Troll",
-    power: "PAY THE TOLL",
-    ability: "Before my race, I mark a space on the board with a point chip. Whenever a character stops on that space, I gain one point chip.",
-    image: "images/extra-mile/Toll Troll.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Broken Clock",
-    power: "TICK TOCK",
-    ability: "I roll 2 dice for my main move and move the lower number. If I roll doubles, I move the total amount of both dice.",
-    image: "images/extra-mile/Broken Clock.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Marksman",
-    power: "FOWL PLAY",
-    ability: "Before my main move I can target a player more than 3 spaces away from me. I roll the dice and add up the total, trying to equal the number space they are on. If I get it, they are eliminated. If not, they move +1.",
-    image: "images/extra-mile/Marksman.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Cletus",
-    power: "BIG GAME",
-    ability: "Instead of my main move, I can choose a racer within 3 spaces of me. We both roll and follow these results: Same number - They are eliminated. My roll is higher - I take my main move. Their roll is higher - They move +1.",
-    image: "images/extra-mile/Cletus.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Honey Pot",
-    power: "STICKY POT",
-    ability: "Before my race, add 1 point per race to a shared pot. I mark one space with a point chip. If a racer lands on that space, they roll and gain point chips from the pot equal to their roll. I move +1 for each point chip collected.",
-    image: "images/extra-mile/Honey Pot.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Doc Paradox",
-    power: "TEMPORAL COLLAPSE",
-    ability: "I start at the finish line and race backwards. If I share a space with another racer, I warp back to the finish line. If that happens, +3 to my main move.",
-    image: "images/extra-mile/Doc Paradox.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Heads",
-    power: "FLIPPER",
-    ability: "I can flip over my dice and use the face down number.",
-    image: "images/extra-mile/Heads.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Scout",
-    power: "NEVER LOST",
-    ability: "After I roll but before I move, I can warp to 1 space in front or behind my current space.",
-    image: "images/extra-mile/Scout.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Totally Fair Ref",
-    power: "FALSE START",
-    ability: "Whenever another racer enters first place, they trip.",
-    image: "images/extra-mile/Totally Fair Ref.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Saint Nick",
-    power: "NAUGHTY OR NICE",
-    ability: "When I land on a space with another racer, I move +1 for each racer. Those players roll and move -1 if they roll 1-3 or +2 if they roll 4-6.",
-    image: "images/extra-mile/Saint Nick.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Gingy",
-    power: "EAT ME",
-    ability: "I have 4 lives. Every time a racer lands on my space, I lose 1 life and gain +1 to my main move. I am eliminated if I run out of lives.",
-    image: "images/extra-mile/Gingy.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Dom and Gary",
-    power: "CAT AND MOUSE",
-    ability: "Dom: If I pass or share a space with Gary, I eliminate him and get +2 to my main move. Gary: I start on space 4 and always move directly before Dom. If I finish 1st or 2nd, I steal those points.",
-    image: "images/extra-mile/Dom and Gary.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "King Pete",
-    power: "PLAYGROUND TAX",
-    ability: "Whenever another racer rolls a 5 or 6, -1 to their move. I move +1.",
-    image: "images/extra-mile/King Pete.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Oddball",
-    power: "KNUCKLEBALL",
-    ability: "When I roll an even number, -2 to my move. When I roll an odd number, +3 to my move.",
-    image: "images/extra-mile/Oddball.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Gluebert",
-    power: "STICKY",
-    ability: "Other racers on my space gets -2 to their main move. When a racer passes me, -1 to their current move.",
-    image: "images/extra-mile/Gluebert.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Thief",
-    power: "HEIST",
-    ability: "Before my race I secretly choose another racer. After the race ends, I reveal who I chose and I steal any points collected by that racer.",
-    image: "images/extra-mile/Thief.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Snub",
-    power: "PICK ME",
-    ability: "I gain +X to my main move where X = the amount of racers chosen before me in this draft round.",
-    image: "images/extra-mile/Snub.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Silly Goose",
-    power: "WANDERIN",
-    ability: "I don't follow the dice. When I roll, this is what I move: 6 = 10, 5 = 7, 4 = 5, 3 = 2, 2 = 0, 1 = -3.",
-    image: "images/extra-mile/Silly Goose.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Moneybags",
-    power: "PAY TO WIN",
-    ability: "I can skip rolling as my main move and pay 1 point chip to move 1-8 instead.",
-    image: "images/extra-mile/Moneybags.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "School Bully",
-    power: "LUNCH MONEY",
-    ability: "If I roll a 3, all other racers trip. They can avoid missing their turn by rolling a 1-3 to recover. If they do, I move +2.",
-    image: "images/extra-mile/School Bully.png",
-    extraMile: true,
-    tags: ["extra mile", "unofficial"]
-  },
-  {
-    name: "Terrible Toddler",
-    power: "TEMPER TANTRUM",
-    ability: "If I roll a 1 or 2, roll the dice again before I move. Anyone within that number of spaces of me trips.",
-    image: "images/extra-mile/Terrible Toddler.png",
     extraMile: true,
     tags: ["extra mile", "unofficial"]
   }
