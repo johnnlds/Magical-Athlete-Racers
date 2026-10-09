@@ -860,10 +860,6 @@ const interactionData = [
     racers: ["Duelist", "Huge Baby"],
     text: "Duelist cannot share Huge Baby’s space, so they cannot duel."
   },
-  { 
-    racers:[“Duelist”,“Suckerfish”], 
-    text:“If Duelist wins a duel against Suckerfish, Duelist moves 2 and Suckerfish can follow to Duelist’s new space. Since they share a space again, they can duel again. This can continue as long as Duelist keeps winning and Suckerfish follows.” 
-  },
   {
     racers: ["Duelist", "M.O.U.T.H."],
     text: "If Duelist duels M.O.U.T.H. and M.O.U.T.H. wins, M.O.U.T.H. moves 2. If that movement ends with exactly one other racer on its space, M.O.U.T.H. eliminates that racer. If M.O.U.T.H. lands on Duelist’s space, they do not duel and Duelist is eaten."
