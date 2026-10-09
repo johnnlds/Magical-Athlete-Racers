@@ -862,7 +862,7 @@ const interactionData = [
   },
   {
     racers: ["Duelist", "Suckerfish"],
-    text: "If Duelist wins a duel against Suckerfish, Suckerfish follows Duelist to the new space. If they duel again and Duelist wins, Suckerfish follows again, potentially triggering another duel."
+    text: "If Duelist wins a duel against Suckerfish, Duelist moves 2 and Suckerfish can follow to Duelist’s new space. Since they share a space again, they can duel again. This can continue as long as Duelist keeps winning and Suckerfish follows."
   },
   {
     racers: ["Duelist", "M.O.U.T.H."],
