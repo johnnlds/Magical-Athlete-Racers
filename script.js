@@ -961,10 +961,6 @@ const interactionData = [
     text: "Hare’s +2 can make it overshoot the finish. If Hare would overshoot, Stickler prevents the movement and Hare does not cross."
   },
   {
-    racers: ["Stickler", "Scoocher"],
-    text: "Scoocher’s 1-space movement is also subject to Stickler. If that movement would overshoot the finish, Scoocher does not cross."
-  },
-  {
     racers: ["Third Wheel", "Baba Yaga"],
     text: "If Third Wheel warps onto a space containing Baba Yaga, Baba Yaga’s ability trips Third Wheel."
   }
