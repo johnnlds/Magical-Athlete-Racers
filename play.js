@@ -1,581 +1,655 @@
+
 (() => {
   "use strict";
 
-  const $ = id => document.getElementById(id);
-  const E = {
-    setup: $("setup"), race: $("race"), finish: $("finish"),
-    base: $("base"), second: $("second"), extra: $("extra"),
-    humans: $("humans"), cpus: $("cpus"), slots: $("slots"),
-    error: $("error"), start: $("start"), randomize: $("randomize"),
-    board: $("board"), raceTitle: $("raceTitle"),
-    turnStatus: $("turnStatus"), activeRacer: $("activeRacer"),
-    die: $("die"), rollText: $("rollText"), roll: $("roll"),
-    powerPrompt: $("powerPrompt"), powerName: $("powerName"),
-    powerText: $("powerText"), move: $("move"), cpuNotice: $("cpuNotice"),
-    standings: $("standings"), remaining: $("remaining"),
-    log: $("log"), newRace: $("newRace"), winner: $("winner"),
-    finalStandings: $("finalStandings"), again: $("again"),
-    dataStatus: $("dataStatus")
+  const $ = (selector, root = document) =>
+    root.querySelector(selector);
+
+  const state = {
+    data: null,
+    players: [],
+    current: 0,
+    turn: 1,
+    finished: [],
+    gameStarted: false,
+    busy: false
   };
 
-  const COLORS = [
-    "#c40000", "#1769aa", "#16804a", "#7b3fb0",
-    "#d97706", "#008b8b", "#b32672", "#444444",
-    "#9b8a00", "#5b69b8", "#a34e26", "#007a63"
-  ];
+  const escapeHTML = (value) =>
+    String(value ?? "").replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
 
-  // 32 spaces around the outside of the board.
-  const COORDS = [];
-  for (let c = 1; c <= 10; c++) COORDS.push([1, c]);
-  for (let r = 2; r <= 8; r++) COORDS.push([r, 10]);
-  for (let c = 9; c >= 1; c--) COORDS.push([8, c]);
-  for (let r = 7; r >= 2; r--) COORDS.push([r, 1]);
+  function addStyles() {
+    if ($("#magical-play-styles")) return;
 
-  let allRacers = [];
-  let game = null;
-
-  function slug(text) {
-    return String(text || "")
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "");
+    const style = document.createElement("style");
+    style.id = "magical-play-styles";
+    style.textContent = `
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: #f5f0e8;
+        color: #24211f;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+      .mp-shell { max-width: 1100px; margin: auto; padding: 18px; }
+      .mp-header { text-align: center; margin-bottom: 20px; }
+      .mp-header h1 { margin: 0; font-size: clamp(28px, 5vw, 44px); }
+      .mp-muted { color: #69635e; }
+      .mp-panel {
+        background: white; border: 1px solid #ded7ce;
+        border-radius: 14px; padding: 16px; margin: 14px 0;
+      }
+      .mp-grid { display: grid; gap: 12px; }
+      .mp-cols { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+      .mp-field { display: flex; flex-direction: column; gap: 5px; }
+      .mp-field label { font-weight: 700; }
+      select, input, button {
+        font: inherit; border-radius: 9px; padding: 11px;
+      }
+      select, input { width: 100%; border: 1px solid #c9c1b8; background: white; }
+      button {
+        border: 0; background: #8d2929; color: white;
+        font-weight: 700; cursor: pointer;
+      }
+      button:disabled { opacity: .45; cursor: not-allowed; }
+      .mp-secondary { background: #e9e3db; color: #282421; }
+      .mp-checks { display: flex; flex-wrap: wrap; gap: 14px; }
+      .mp-check { display: flex; align-items: center; gap: 7px; }
+      .mp-check input { width: auto; }
+      .mp-slots { display: grid; gap: 12px; }
+      .mp-player {
+        display: grid; grid-template-columns: 1fr 1fr 1.5fr;
+        gap: 10px; align-items: end;
+      }
+      .mp-board {
+        display: grid; grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 5px; margin: 14px 0;
+      }
+      .mp-space {
+        min-height: 65px; border: 1px solid #d8cec2;
+        border-radius: 8px; background: #fffaf3; padding: 4px;
+        display: flex; flex-direction: column; align-items: center;
+        justify-content: center; text-align: center; font-size: 11px;
+        overflow-wrap: anywhere;
+      }
+      .mp-space.mp-start { background: #e1efdf; }
+      .mp-space.mp-finish { background: #f4d7d7; }
+      .mp-tokens { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; }
+      .mp-token {
+        width: 23px; height: 23px; border-radius: 50%;
+        display: inline-flex; align-items: center; justify-content: center;
+        background: #8d2929; color: white; font-size: 10px; font-weight: 800;
+      }
+      .mp-racers { display: grid; gap: 10px; }
+      .mp-racer {
+        display: grid; grid-template-columns: 60px 1fr auto;
+        gap: 12px; align-items: center; border: 1px solid #ded7ce;
+        padding: 10px; border-radius: 10px; background: white;
+      }
+      .mp-racer img { width: 60px; height: 60px; object-fit: contain; }
+      .mp-racer h3 { margin: 0 0 4px; font-size: 16px; }
+      .mp-racer p { margin: 3px 0; font-size: 13px; }
+      .mp-active { outline: 3px solid #c58c3c; }
+      .mp-message { padding: 12px; background: #fff4d9; border-radius: 9px; }
+      .mp-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+      .mp-actions button { flex: 1 1 150px; }
+      .mp-hidden { display: none !important; }
+      @media (max-width: 560px) {
+        .mp-shell { padding: 10px; }
+        .mp-player { grid-template-columns: 1fr 1fr; }
+        .mp-player .mp-field:last-child { grid-column: 1 / -1; }
+        .mp-board { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .mp-space { min-height: 58px; }
+        .mp-racer { grid-template-columns: 48px 1fr; }
+        .mp-racer img { width: 48px; height: 48px; }
+        .mp-racer .mp-position { grid-column: 2; }
+      }
+    `;
+    document.head.appendChild(style);
   }
 
-  // Read the actual racer data without running the profile page's UI code.
+  function showPage() {
+    document.body.innerHTML = `
+      <main class="mp-shell">
+        <header class="mp-header">
+          <h1>MAGICAL ATHLETE</h1>
+          <p class="mp-muted">Race game prototype</p>
+          <p><a href="./index.html">Back to racer profiles</a></p>
+        </header>
+        <div id="mp-status" class="mp-panel" role="status">
+          Loading racers…
+        </div>
+        <section id="mp-setup" class="mp-panel mp-hidden">
+          <h2>Set up your race</h2>
+          <div class="mp-grid mp-cols">
+            <div class="mp-field">
+              <label for="mp-humans">Human players</label>
+              <select id="mp-humans">
+                ${[1,2,3,4,5,6].map(n =>
+                  `<option value="${n}" ${n === 2 ? "selected" : ""}>${n}</option>`
+                ).join("")}
+              </select>
+            </div>
+            <div class="mp-field">
+              <label for="mp-cpus">CPU racers</label>
+              <select id="mp-cpus">
+                ${[0,1,2,3,4,5,6,7].map(n =>
+                  `<option value="${n}" ${n === 2 ? "selected" : ""}>${n}</option>`
+                ).join("")}
+              </select>
+            </div>
+          </div>
+          <h3>Available racer sets</h3>
+          <div class="mp-checks">
+            <label class="mp-check"><input type="checkbox" id="mp-base" checked> Base Game</label>
+            <label class="mp-check"><input type="checkbox" id="mp-second"> Second Wind</label>
+            <label class="mp-check"><input type="checkbox" id="mp-extra"> Extra Mile (unofficial)</label>
+          </div>
+          <p class="mp-muted">Choose a set for each player, then choose a racer. Each racer can only be selected once.</p>
+          <div id="mp-slots" class="mp-slots"></div>
+          <div class="mp-actions" style="margin-top:16px">
+            <button id="mp-start">Start race</button>
+          </div>
+        </section>
+        <section id="mp-game" class="mp-hidden">
+          <div class="mp-panel">
+            <h2 id="mp-turn-title">Race</h2>
+            <p id="mp-turn-message" class="mp-message"></p>
+            <div class="mp-actions">
+              <button id="mp-roll">Roll die and move</button>
+              <button id="mp-next" class="mp-secondary mp-hidden">Next turn</button>
+              <button id="mp-new" class="mp-secondary">New race</button>
+            </div>
+          </div>
+          <div class="mp-panel">
+            <h2>Race track</h2>
+            <p class="mp-muted">This prototype uses a simplified track and a standard six-sided die.</p>
+            <div id="mp-board" class="mp-board"></div>
+          </div>
+          <div class="mp-panel">
+            <h2>Racers</h2>
+            <div id="mp-racers" class="mp-racers"></div>
+          </div>
+        </section>
+      </main>
+    `;
+  }
+
   async function loadRacers() {
-    try {
-      const response = await fetch("./script.js");
-      if (!response.ok) throw new Error("Could not load script.js.");
+    const response = await fetch("./script.js?v=14", {
+      cache: "no-store"
+    });
 
-      const source = await response.text();
-      const start = source.indexOf("const athletes =");
-      const end = source.indexOf("const allAthletes =", start);
-
-      if (start < 0 || end < 0) {
-        throw new Error("The racer arrays could not be found in script.js.");
-      }
-
-      let dataCode = source.slice(start, end);
-
-      dataCode = dataCode
-        .replace(/\bconst\s+athletes\s*=/, "var athletes =")
-        .replace(/\bconst\s+expansionAthletes\s*=/, "var expansionAthletes =")
-        .replace(/\bconst\s+extraMileAthletes\s*=/, "var extraMileAthletes =")
-        .replace(/\bconst\s+interactionData\s*=/, "var interactionData =");
-
-      const parsed = new Function(
-        dataCode +
-        "\nreturn { athletes, expansionAthletes, extraMileAthletes, interactionData };"
-      )();
-
-      allRacers = [
-        ...(parsed.athletes || []).map(r => ({ ...r, set: "Base Game" })),
-        ...(parsed.expansionAthletes || []).map(r => ({
-          ...r, set: "Second Wind"
-        })),
-        ...(parsed.extraMileAthletes || []).map(r => ({
-          ...r, set: "Extra Mile (unofficial)"
-        }))
-      ].map((r, i) => ({
-        ...r,
-        id: slug(r.name) + "-" + i,
-        power: r.power || "",
-        ability: r.ability || "",
-        image: r.image || ""
-      }));
-
-      if (allRacers.length < 2) {
-        throw new Error("Not enough racers were loaded.");
-      }
-
-      E.dataStatus.classList.add("hidden");
-      buildSlots();
-    } catch (error) {
-      console.error(error);
-      E.dataStatus.textContent =
-        "Racer data could not load. Make sure play.html, play.css, " +
-        "play.js, and script.js are in the repository root. " + error.message;
-      E.dataStatus.classList.add("error");
-      E.start.disabled = true;
+    if (!response.ok) {
+      throw new Error(
+        `Could not fetch script.js (HTTP ${response.status}).`
+      );
     }
+
+    const source = await response.text();
+
+    const startMatch = source.match(/\bconst\s+athletes\s*=/);
+    const endMatch = source.match(/\bconst\s+allAthletes\s*=/);
+
+    if (!startMatch || !endMatch) {
+      throw new Error(
+        "The racer arrays could not be located in script.js. " +
+        "Expected 'const athletes =' and 'const allAthletes ='."
+      );
+    }
+
+    if (endMatch.index <= startMatch.index) {
+      throw new Error("The racer declarations are in an unexpected order.");
+    }
+
+    // Execute only the declarations containing the racer data.
+    const declarations = source.slice(
+      startMatch.index,
+      endMatch.index
+    );
+
+    const getData = new Function(`
+      ${declarations}
+      return {
+        athletes: typeof athletes !== "undefined" ? athletes : [],
+        expansionAthletes:
+          typeof expansionAthletes !== "undefined" ? expansionAthletes : [],
+        extraMileAthletes:
+          typeof extraMileAthletes !== "undefined" ? extraMileAthletes : [],
+        interactionData:
+          typeof interactionData !== "undefined" ? interactionData : []
+      };
+    `);
+
+    const data = getData();
+
+    if (!Array.isArray(data.athletes) || data.athletes.length === 0) {
+      throw new Error("No base-game racers were found.");
+    }
+
+    return data;
   }
 
-  function enabledSets() {
+  function availableSets() {
+    const data = state.data;
     const sets = [];
-    if (E.base.checked) sets.push("Base Game");
-    if (E.second.checked) sets.push("Second Wind");
-    if (E.extra.checked) sets.push("Extra Mile (unofficial)");
+
+    if ($("#mp-base").checked) {
+      sets.push({ key: "base", label: "Base Game", racers: data.athletes });
+    }
+    if ($("#mp-second").checked) {
+      sets.push({
+        key: "second",
+        label: "Second Wind",
+        racers: data.expansionAthletes
+      });
+    }
+    if ($("#mp-extra").checked) {
+      sets.push({
+        key: "extra",
+        label: "Extra Mile",
+        racers: data.extraMileAthletes
+      });
+    }
+
     return sets;
   }
 
-  function availableRacers() {
-    const enabled = enabledSets();
-    return allRacers.filter(r => enabled.includes(r.set));
-  }
+  function buildSlots() {
+    const humans = Number($("#mp-humans").value);
+    const cpus = Number($("#mp-cpus").value);
+    const total = humans + cpus;
+    const sets = availableSets();
+    const container = $("#mp-slots");
 
-  function participantSpecs() {
-    const humans = Number(E.humans.value);
-    const cpus = Number(E.cpus.value);
-
-    return [
-      ...Array.from({ length: humans }, (_, i) => ({
-        type: "human", label: "Player " + (i + 1)
-      })),
-      ...Array.from({ length: cpus }, (_, i) => ({
-        type: "cpu", label: "CPU " + (i + 1)
-      }))
-    ];
-  }
-
-  function buildSlots(randomize = false) {
-    if (!allRacers.length) return;
-
-    const pool = availableRacers();
-    const specs = participantSpecs();
-    const oldSelections = [...E.slots.querySelectorAll("select")]
-      .map(select => select.value);
-    const used = new Set();
-
-    E.slots.innerHTML = "";
-
-    specs.forEach((spec, index) => {
-      const slot = document.createElement("div");
-      slot.className = "slot";
-
-      const number = document.createElement("div");
-      number.className = "slot-number";
-      number.textContent = index + 1;
-
-      const content = document.createElement("div");
-      const type = document.createElement("div");
-      type.className = "slot-type " + spec.type;
-      type.textContent = spec.label + (spec.type === "cpu" ? " · CPU" : " · Human");
-
-      const label = document.createElement("label");
-      label.textContent = "Racer";
-
-      const select = document.createElement("select");
-      select.setAttribute("aria-label", spec.label + " racer");
-
-      let desired = !randomize ? oldSelections[index] : "";
-
-      if (!pool.some(r => r.id === desired) || used.has(desired)) {
-        desired = "";
-      }
-
-      if (!desired) {
-        const available = pool.filter(r => !used.has(r.id));
-        const choice = randomize
-          ? available[Math.floor(Math.random() * available.length)]
-          : available[0];
-        desired = choice ? choice.id : "";
-      }
-
-      pool.forEach(racer => {
-        const option = document.createElement("option");
-        option.value = racer.id;
-        option.textContent = racer.name + " — " + racer.set;
-        option.selected = racer.id === desired;
-        select.appendChild(option);
-      });
-
-      if (desired) used.add(desired);
-
-      select.addEventListener("change", () => {
-        // Rebuild only to validate the selections, preserving valid choices.
-        validateSlots();
-      });
-
-      label.appendChild(select);
-      content.append(type, label);
-      slot.append(number, content);
-      E.slots.appendChild(slot);
-    });
-
-    validateSlots();
-  }
-
-  function validateSlots() {
-    const count = participantSpecs().length;
-    const pool = availableRacers();
-    const selected = [...E.slots.querySelectorAll("select")].map(s => s.value);
-    const duplicate = new Set(selected).size !== selected.length;
-
-    if (!pool.length) {
-      E.error.textContent = "Select at least one racer set.";
-    } else if (pool.length < count) {
-      E.error.textContent =
-        "Only " + pool.length + " racers are available for " + count + " participants.";
-    } else if (duplicate) {
-      E.error.textContent = "Each participant must have a different racer.";
-    } else {
-      E.error.textContent = "";
-    }
-
-    E.start.disabled = !pool.length || pool.length < count || duplicate;
-  }
-
-  function getParticipants() {
-    const specs = participantSpecs();
-    const selections = [...E.slots.querySelectorAll("select")].map(s => s.value);
-
-    if (new Set(selections).size !== selections.length) {
-      throw new Error("Each participant must choose a different racer.");
-    }
-
-    return specs.map((spec, i) => {
-      const racer = allRacers.find(r => r.id === selections[i]);
-      if (!racer) throw new Error("Please select a valid racer for everyone.");
-
-      return {
-        ...spec,
-        racer,
-        position: 0,
-        finished: false,
-        finishPlace: null,
-        color: COLORS[i % COLORS.length],
-        lastRoll: null
-      };
-    });
-  }
-
-  function startGame() {
-    try {
-      const racers = getParticipants();
-
-      game = {
-        racers,
-        current: 0,
-        turn: 1,
-        roll: null,
-        phase: "roll",
-        finishOrder: []
-      };
-
-      E.setup.classList.add("hidden");
-      E.finish.classList.add("hidden");
-      E.race.classList.remove("hidden");
-      E.raceTitle.textContent = racers.length + "-racer race";
-      E.log.innerHTML = "";
-
-      addLog("Race started!");
-      renderBoard();
-      renderTurn();
-      runCPU();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (error) {
-      E.error.textContent = error.message;
-    }
-  }
-
-  function renderBoard() {
-    E.board.innerHTML = "";
-
-    COORDS.forEach(([row, col], index) => {
-      const space = document.createElement("div");
-      space.className = "space";
-      space.style.gridRow = row;
-      space.style.gridColumn = col;
-
-      if (index === 0) space.classList.add("start");
-      if (index === 31) space.classList.add("finish");
-
-      const number = document.createElement("span");
-      number.className = "space-number";
-      number.textContent = index === 0 ? "START" : index;
-      space.appendChild(number);
-
-      if (index === 31) {
-        const label = document.createElement("span");
-        label.className = "space-label";
-        label.textContent = "FINISH";
-        space.appendChild(label);
-      }
-
-      const pawns = document.createElement("div");
-      pawns.className = "pawns";
-
-      game.racers
-        .filter(r => !r.finished && r.position === index)
-        .forEach(r => {
-          const pawn = document.createElement("span");
-          pawn.className = "pawn";
-          pawn.style.setProperty("--pawn", r.color);
-          pawn.textContent = game.racers.indexOf(r) + 1;
-          pawn.title = r.label + ": " + r.racer.name;
-          pawns.appendChild(pawn);
-        });
-
-      space.appendChild(pawns);
-      E.board.appendChild(space);
-    });
-
-    const center = document.createElement("div");
-    center.className = "board-center";
-    center.innerHTML =
-      "<strong>MAGICAL ATHLETE</strong>" +
-      "<p>Roll · check powers · race to the finish</p>" +
-      "<p>32-space prototype track</p>";
-    E.board.appendChild(center);
-  }
-
-  function currentRacer() {
-    return game.racers[game.current];
-  }
-
-  function renderTurn() {
-    if (!game) return;
-
-    const racer = currentRacer();
-    const isCPU = racer.type === "cpu";
-
-    E.turnStatus.textContent =
-      "Turn " + game.turn + " · " + racer.label +
-      (isCPU ? " (CPU)" : "");
-
-    E.activeRacer.innerHTML = "";
-
-    if (racer.racer.image) {
-      const img = document.createElement("img");
-      img.src = racer.racer.image;
-      img.alt = racer.racer.name;
-      img.onerror = () => img.remove();
-      E.activeRacer.appendChild(img);
-    }
-
-    const details = document.createElement("div");
-    const name = document.createElement("strong");
-    name.textContent = racer.racer.name;
-
-    const type = document.createElement("small");
-    type.textContent = racer.label +
-      (isCPU ? " · CPU controlled" : " · Human player");
-
-    details.append(name, type);
-    E.activeRacer.appendChild(details);
-
-    E.roll.classList.toggle("hidden", game.phase !== "roll" || isCPU);
-    E.roll.disabled = game.phase !== "roll";
-    E.powerPrompt.classList.toggle("hidden", game.phase !== "resolve");
-
-    E.cpuNotice.textContent = isCPU
-      ? "The CPU takes its turn automatically."
-      : "Pass the device to this player before rolling.";
-
-    if (game.phase === "roll") {
-      E.die.textContent = "—";
-      E.die.classList.remove("rolled");
-      E.rollText.textContent = "Ready to roll";
-    } else {
-      E.die.textContent = game.roll;
-      E.die.classList.add("rolled");
-      E.rollText.textContent = "Rolled " + game.roll;
-    }
-
-    if (game.phase === "resolve") {
-      E.powerName.textContent = racer.racer.power || "Racer power";
-      E.powerText.textContent =
-        racer.racer.ability || "Check the racer card for its power.";
-      E.move.textContent = "Resolve power & move " + game.roll;
-    }
-
-    renderStandings();
-  }
-
-  function rollDie(isCPU = false) {
-    if (!game || game.phase !== "roll") return;
-
-    const racer = currentRacer();
-    game.roll = Math.floor(Math.random() * 6) + 1;
-    game.phase = "resolve";
-    racer.lastRoll = game.roll;
-
-    addLog(racer.racer.name + " rolled " + game.roll + ".");
-    renderTurn();
-
-    // CPU turns automatically proceed after a short pause.
-    if (isCPU) {
-      window.setTimeout(() => resolveMove(true), 650);
-    }
-  }
-
-  function resolveMove(isCPU = false) {
-    if (!game || game.phase !== "resolve") return;
-
-    const racer = currentRacer();
-    const roll = game.roll;
-    const previous = racer.position;
-
-    racer.position += roll;
-
-    addLog(
-      racer.racer.name + " moved " + roll + " space" +
-      (roll === 1 ? "" : "s") + "."
-    );
-
-    if (racer.position >= 32) {
-      racer.finished = true;
-      racer.finishPlace = game.finishOrder.length + 1;
-      game.finishOrder.push(racer);
-      addLog("🏁 " + racer.racer.name + " finished in place " + racer.finishPlace + "!");
-    }
-
-    game.roll = null;
-
-    if (game.racers.every(r => r.finished)) {
-      finishGame();
+    if (!sets.length) {
+      container.innerHTML =
+        `<p class="mp-message">Select at least one racer set above.</p>`;
+      $("#mp-start").disabled = true;
       return;
     }
 
-    advanceTurn();
+    const allAvailable = sets.flatMap(set => set.racers);
+    if (allAvailable.length < total) {
+      container.innerHTML =
+        `<p class="mp-message">You need ${total} unique racers, but only ${allAvailable.length} are available in the selected sets.</p>`;
+      $("#mp-start").disabled = true;
+      return;
+    }
+
+    $("#mp-start").disabled = false;
+
+    container.innerHTML = Array.from({ length: total }, (_, index) => {
+      const isCPU = index >= humans;
+      const defaultSet = sets[0];
+      return `
+        <div class="mp-player" data-player="${index}">
+          <div class="mp-field">
+            <label>${isCPU ? "CPU" : "Player"} ${isCPU ? index - humans + 1 : index + 1}</label>
+            <select class="mp-player-set" aria-label="Racer set for player ${index + 1}">
+              ${sets.map(set =>
+                `<option value="${escapeHTML(set.key)}">${escapeHTML(set.label)}</option>`
+              ).join("")}
+            </select>
+          </div>
+          <div class="mp-field">
+            <label>Controller</label>
+            <input value="${isCPU ? "CPU-controlled" : "Human"}" disabled>
+          </div>
+          <div class="mp-field">
+            <label>Racer</label>
+            <select class="mp-player-racer" aria-label="Racer for player ${index + 1}"></select>
+          </div>
+        </div>`;
+    }).join("");
+
+    container.querySelectorAll(".mp-player").forEach(slot => {
+      const setSelect = $(".mp-player-set", slot);
+      const racerSelect = $(".mp-player-racer", slot);
+
+      function updateRacers() {
+        const set = sets.find(item => item.key === setSelect.value);
+        const previouslySelected = racerSelect.value;
+        const selectedElsewhere = new Set(
+          [...container.querySelectorAll(".mp-player-racer")]
+            .filter(select => select !== racerSelect)
+            .map(select => select.value)
+        );
+
+        const eligible = set.racers.filter(racer =>
+          !selectedElsewhere.has(racer.name) ||
+          racer.name === previouslySelected
+        );
+
+        racerSelect.innerHTML = eligible.map(racer =>
+          `<option value="${escapeHTML(racer.name)}">${escapeHTML(racer.name)}</option>`
+        ).join("");
+
+        if (eligible.some(racer => racer.name === previouslySelected)) {
+          racerSelect.value = previouslySelected;
+        }
+      }
+
+      setSelect.addEventListener("change", () => {
+        updateRacers();
+        refreshAllRacerOptions();
+      });
+
+      racerSelect.addEventListener("change", refreshAllRacerOptions);
+      updateRacers();
+    });
+
+    function refreshAllRacerOptions() {
+      container.querySelectorAll(".mp-player").forEach(slot => {
+        const setSelect = $(".mp-player-set", slot);
+        const racerSelect = $(".mp-player-racer", slot);
+        const currentName = racerSelect.value;
+        const set = sets.find(item => item.key === setSelect.value);
+        const selectedElsewhere = new Set(
+          [...container.querySelectorAll(".mp-player-racer")]
+            .filter(select => select !== racerSelect)
+            .map(select => select.value)
+        );
+
+        const eligible = set.racers.filter(racer =>
+          !selectedElsewhere.has(racer.name) || racer.name === currentName
+        );
+
+        racerSelect.innerHTML = eligible.map(racer =>
+          `<option value="${escapeHTML(racer.name)}">${escapeHTML(racer.name)}</option>`
+        ).join("");
+
+        if (eligible.some(racer => racer.name === currentName)) {
+          racerSelect.value = currentName;
+        }
+      });
+    }
+
+    container._refresh = refreshAllRacerOptions;
+  }
+
+  function getSelectedRacer(setKey, name) {
+    const sets = {
+      base: state.data.athletes,
+      second: state.data.expansionAthletes,
+      extra: state.data.extraMileAthletes
+    };
+    return sets[setKey]?.find(racer => racer.name === name);
+  }
+
+  function startGame() {
+    const slots = [...$("#mp-slots").querySelectorAll(".mp-player")];
+    const used = new Set();
+    const players = [];
+
+    for (const [index, slot] of slots.entries()) {
+      const setKey = $(".mp-player-set", slot).value;
+      const name = $(".mp-player-racer", slot).value;
+      const racer = getSelectedRacer(setKey, name);
+
+      if (!racer) {
+        alert("One of the selected racers could not be found. Please select it again.");
+        return;
+      }
+
+      if (used.has(racer.name)) {
+        alert("Each racer must be unique. Please choose a different racer.");
+        return;
+      }
+      used.add(racer.name);
+
+      const humans = Number($("#mp-humans").value);
+      players.push({
+        name: racer.name,
+        racer,
+        isCPU: index >= humans,
+        position: 0,
+        finished: false,
+        rank: null
+      });
+    }
+
+    state.players = players;
+    state.current = 0;
+    state.turn = 1;
+    state.finished = [];
+    state.gameStarted = true;
+    state.busy = false;
+
+    $("#mp-setup").classList.add("mp-hidden");
+    $("#mp-game").classList.remove("mp-hidden");
+    renderGame();
+    advanceCPUIfNeeded();
+  }
+
+  function makeTrack() {
+    // A compact 32-space loop for this prototype.
+    const coords = [];
+    for (let c = 0; c < 8; c++) coords.push([0, c]);
+    for (let r = 1; r < 7; r++) coords.push([r, 7]);
+    for (let c = 6; c >= 0; c--) coords.push([6, c]);
+    for (let r = 5; r >= 1; r--) coords.push([r, 0]);
+    return coords;
+  }
+
+  function renderBoard() {
+    const board = $("#mp-board");
+    const track = makeTrack();
+    const spaceCount = track.length;
+    const tokensAt = new Map();
+
+    state.players.forEach((player, index) => {
+      if (player.finished) return;
+      const pos = Math.min(player.position, spaceCount - 1);
+      if (!tokensAt.has(pos)) tokensAt.set(pos, []);
+      tokensAt.get(pos).push({ player, index });
+    });
+
+    board.innerHTML = track.map((_, index) => {
+      const tokens = tokensAt.get(index) || [];
+      const label = index === 0 ? "START" :
+        index === spaceCount - 1 ? "FINISH" : `Space ${index + 1}`;
+
+      return `
+        <div class="mp-space ${index === 0 ? "mp-start" : ""} ${index === spaceCount - 1 ? "mp-finish" : ""}">
+          <strong>${label}</strong>
+          <div class="mp-tokens">
+            ${tokens.map(({ player, index: playerIndex }) =>
+              `<span class="mp-token" title="${escapeHTML(player.name)}">${playerIndex + 1}</span>`
+            ).join("")}
+          </div>
+        </div>`;
+    }).join("");
+  }
+
+  function renderRacers() {
+    $("#mp-racers").innerHTML = state.players.map((player, index) => {
+      const active = index === state.current && !player.finished;
+      const racer = player.racer;
+      const image = racer.image || "";
+      const positionText = player.finished
+        ? `Finished${player.rank ? ` — place ${player.rank}` : ""}`
+        : `Position: ${player.position + 1}`;
+
+      return `
+        <article class="mp-racer ${active ? "mp-active" : ""}">
+          ${image
+            ? `<img src="${escapeHTML(image)}" alt="${escapeHTML(player.name)}" loading="lazy" onerror="this.style.display='none'">`
+            : `<div aria-hidden="true">🏁</div>`}
+          <div>
+            <h3>${escapeHTML(player.name)} ${player.isCPU ? "(CPU)" : ""}</h3>
+            <p>${escapeHTML(positionText)}</p>
+            <p><strong>Power:</strong> ${escapeHTML(racer.power || "See racer profile")}</p>
+            <p><strong>Ability:</strong> ${escapeHTML(racer.ability || "Check the official rules")}</p>
+          </div>
+          <div class="mp-position">${active ? "Current turn" : ""}</div>
+        </article>`;
+    }).join("");
+  }
+
+  function currentPlayer() {
+    return state.players[state.current];
+  }
+
+  function nextActivePlayer() {
+    if (state.players.every(player => player.finished)) return -1;
+
+    for (let count = 0; count < state.players.length; count++) {
+      state.current = (state.current + 1) % state.players.length;
+      if (!state.players[state.current].finished) return state.current;
+    }
+    return -1;
+  }
+
+  function renderGame(message = "") {
+    if (!state.players.length) return;
+
+    const allFinished = state.players.every(player => player.finished);
+    const player = currentPlayer();
+
+    $("#mp-turn-title").textContent = allFinished
+      ? "Race complete!"
+      : `Turn ${state.turn}: ${player.name}${player.isCPU ? " (CPU)" : ""}`;
+
+    $("#mp-turn-message").textContent = message ||
+      (allFinished
+        ? "All racers have finished."
+        : `${player.name} is up. Roll the die to move. Powers are shown as reminders and may require manual resolution.`);
+
+    $("#mp-roll").disabled = allFinished || state.busy;
+    $("#mp-next").classList.add("mp-hidden");
+
     renderBoard();
-    renderTurn();
-    runCPU();
+    renderRacers();
   }
 
-  function advanceTurn() {
-    let checked = 0;
+  function rollAndMove() {
+    if (state.busy || !state.gameStarted) return;
 
-    do {
-      game.current = (game.current + 1) % game.racers.length;
-      checked++;
-    } while (game.racers[game.current].finished && checked <= game.racers.length);
+    const player = currentPlayer();
+    if (!player || player.finished) return;
 
-    game.turn++;
-    game.phase = "roll";
+    const roll = Math.floor(Math.random() * 6) + 1;
+    player.position += roll;
+
+    let message = `${player.name} rolled ${roll} and moved ${roll} space${roll === 1 ? "" : "s"}.`;
+
+    // Simplified finish rule for this prototype.
+    if (player.position >= 32) {
+      player.finished = true;
+      player.rank = state.finished.length + 1;
+      state.finished.push(player.name);
+      message += ` ${player.name} finished in place ${player.rank}!`;
+    }
+
+    $("#mp-turn-message").textContent = message;
+
+    if (state.players.every(item => item.finished)) {
+      renderGame("The race is over!");
+      return;
+    }
+
+    nextActivePlayer();
+    state.turn++;
+    renderGame(message);
+    advanceCPUIfNeeded();
   }
 
-  function runCPU() {
-    if (!game || game.phase !== "roll" || currentRacer().type !== "cpu") return;
+  function advanceCPUIfNeeded() {
+    if (!state.gameStarted || state.busy) return;
 
-    const cpu = currentRacer();
-    E.roll.classList.add("hidden");
-    E.cpuNotice.textContent = "CPU is rolling…";
+    const player = currentPlayer();
+    if (!player || !player.isCPU || player.finished) return;
 
+    state.busy = true;
+    $("#mp-roll").disabled = true;
+
+    // Short delay so players can see whose CPU turn it is.
     window.setTimeout(() => {
-      if (game && game.phase === "roll" && currentRacer() === cpu) {
-        rollDie(true);
-      }
-    }, 500);
+      state.busy = false;
+      rollAndMove();
+    }, 650);
   }
 
-  function renderStandings() {
-    if (!game) return;
+  function bindEvents() {
+    $("#mp-humans").addEventListener("change", buildSlots);
+    $("#mp-cpus").addEventListener("change", buildSlots);
 
-    E.standings.innerHTML = "";
-
-    const sorted = [...game.racers].sort((a, b) => {
-      if (a.finished && b.finished) return a.finishPlace - b.finishPlace;
-      if (a.finished) return -1;
-      if (b.finished) return 1;
-      return b.position - a.position;
+    ["#mp-base", "#mp-second", "#mp-extra"].forEach(selector => {
+      $(selector).addEventListener("change", buildSlots);
     });
 
-    sorted.forEach(r => {
-      const li = document.createElement("li");
-      if (r === currentRacer() && !r.finished) li.classList.add("current");
+    $("#mp-start").addEventListener("click", startGame);
+    $("#mp-roll").addEventListener("click", rollAndMove);
 
-      const row = document.createElement("div");
-      row.className = "standing";
-
-      if (r.racer.image) {
-        const img = document.createElement("img");
-        img.src = r.racer.image;
-        img.alt = "";
-        img.onerror = () => img.remove();
-        row.appendChild(img);
-      }
-
-      const text = document.createElement("span");
-      const strong = document.createElement("strong");
-      strong.textContent = r.racer.name;
-
-      const small = document.createElement("small");
-      small.textContent = r.finished
-        ? "Finished #" + r.finishPlace
-        : r.label + " · position " + r.position;
-
-      text.append(strong, small);
-      row.appendChild(text);
-      li.appendChild(row);
-      E.standings.appendChild(li);
+    $("#mp-next").addEventListener("click", () => {
+      nextActivePlayer();
+      state.turn++;
+      renderGame();
+      advanceCPUIfNeeded();
     });
 
-    E.remaining.textContent =
-      game.racers.filter(r => !r.finished).length + " racing";
+    $("#mp-new").addEventListener("click", () => {
+      state.gameStarted = false;
+      state.players = [];
+      state.finished = [];
+      $("#mp-game").classList.add("mp-hidden");
+      $("#mp-setup").classList.remove("mp-hidden");
+      buildSlots();
+      $("#mp-status").classList.add("mp-hidden");
+    });
   }
 
-  function addLog(message) {
-    const li = document.createElement("li");
-    li.textContent = message;
-    E.log.prepend(li);
+  async function init() {
+    addStyles();
+    showPage();
 
-    while (E.log.children.length > 40) {
-      E.log.lastElementChild.remove();
+    try {
+      $("#mp-status").textContent = "Loading racer data…";
+
+      state.data = await loadRacers();
+
+      const baseCount = state.data.athletes.length;
+      const secondCount = state.data.expansionAthletes.length;
+      const extraCount = state.data.extraMileAthletes.length;
+
+      $("#mp-status").textContent =
+        `Loaded ${baseCount} base-game, ${secondCount} Second Wind, ` +
+        `and ${extraCount} Extra Mile racers.`;
+
+      $("#mp-status").classList.add("mp-hidden");
+      $("#mp-setup").classList.remove("mp-hidden");
+
+      bindEvents();
+      buildSlots();
+    } catch (error) {
+      console.error("Magical Athlete loading error:", error);
+
+      $("#mp-status").innerHTML = `
+        <h2>Couldn't load the racers</h2>
+        <p>${escapeHTML(error.message || "An unknown error occurred.")}</p>
+        <p class="mp-muted">
+          Check that script.js is in the same repository folder as play.html,
+          and that the file still contains the expected racer declarations.
+        </p>
+        <button id="mp-retry">Try again</button>
+      `;
+
+      $("#mp-retry").addEventListener("click", () => {
+        init();
+      });
     }
   }
 
-  function finishGame() {
-    E.race.classList.add("hidden");
-    E.finish.classList.remove("hidden");
-    E.finalStandings.innerHTML = "";
-
-    game.finishOrder.forEach((r, i) => {
-      const li = document.createElement("li");
-      const row = document.createElement("div");
-      row.className = "standing";
-
-      if (r.racer.image) {
-        const img = document.createElement("img");
-        img.src = r.racer.image;
-        img.alt = "";
-        img.onerror = () => img.remove();
-        row.appendChild(img);
-      }
-
-      const text = document.createElement("span");
-      const strong = document.createElement("strong");
-      strong.textContent = (i + 1) + ". " + r.racer.name;
-
-      const small = document.createElement("small");
-      small.textContent = r.label + " · " + r.racer.set;
-
-      text.append(strong, small);
-      row.appendChild(text);
-      li.appendChild(row);
-      E.finalStandings.appendChild(li);
-    });
-
-    E.winner.textContent = game.finishOrder[0]
-      ? game.finishOrder[0].racer.name + " wins!"
-      : "Race complete!";
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
   }
-
-  function showSetup() {
-    game = null;
-    E.race.classList.add("hidden");
-    E.finish.classList.add("hidden");
-    E.setup.classList.remove("hidden");
-    buildSlots();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  [E.base, E.second, E.extra].forEach(el =>
-    el.addEventListener("change", () => buildSlots())
-  );
-
-  [E.humans, E.cpus].forEach(el =>
-    el.addEventListener("change", () => buildSlots())
-  );
-
-  E.randomize.addEventListener("click", () => buildSlots(true));
-  E.start.addEventListener("click", startGame);
-  E.roll.addEventListener("click", () => rollDie(false));
-  E.move.addEventListener("click", () => resolveMove(false));
-  E.newRace.addEventListener("click", showSetup);
-  E.again.addEventListener("click", showSetup);
-
-  loadRacers();
 })();
