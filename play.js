@@ -18,15 +18,23 @@ const state = {
   finished: [],
   history: [],
   snapshots: [],
-  started: false
+  started: false,
+  draggingPlayer: null,
+  dragMoved: false,
+  suppressNextClick: false
 };
+
+let dragStartX = 0;
+let dragStartY = 0;
+let draggedPiece = null;
 
 function racerName(racer) {
   return racer.name || racer.title || racer.athlete || "Unknown racer";
 }
 
 function racerImage(racer) {
-  return racer.image || racer.img || racer.imageUrl || racer.imagePath || "";
+  return racer.image || racer.img || racer.imageUrl ||
+    racer.imagePath || "";
 }
 
 function racerPower(racer) {
@@ -34,12 +42,12 @@ function racerPower(racer) {
 }
 
 function racerAbility(racer) {
-  return racer.ability || racer.description || racer.powerText ||
-    racer.abilityText || "";
+  return racer.ability || racer.description ||
+    racer.powerText || racer.abilityText || "";
 }
 
 function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
@@ -50,7 +58,6 @@ function escapeHtml(value) {
 
 function imageMarkup(racer, className = "") {
   const src = racerImage(racer);
-
   if (!src) return "";
 
   return `<img class="${className}" src="${escapeHtml(src)}"
@@ -58,12 +65,18 @@ function imageMarkup(racer, className = "") {
     onerror="this.style.display='none'">`;
 }
 
+// --------------------------------------------------
+// Load racers from the existing reference-site file.
+// --------------------------------------------------
+
 async function loadRacers() {
   const message = $("#setupMessage");
   message.textContent = "Loading racers…";
 
   try {
-    const response = await fetch("./script.js", { cache: "no-store" });
+    const response = await fetch("./script.js", {
+      cache: "no-store"
+    });
 
     if (!response.ok) {
       throw new Error(`Could not load script.js (${response.status}).`);
@@ -74,9 +87,7 @@ async function loadRacers() {
     const end = source.indexOf("const allAthletes =");
 
     if (start < 0 || end < 0 || end <= start) {
-      throw new Error(
-        "Could not find the racer arrays in script.js. Check the variable names."
-      );
+      throw new Error("Could not find the racer arrays in script.js.");
     }
 
     const dataSource = source.slice(start, end);
@@ -85,12 +96,12 @@ async function loadRacers() {
       ${dataSource}
       return {
         athletes,
-        expansionAthletes: typeof expansionAthletes !== "undefined"
-          ? expansionAthletes : [],
-        extraMileAthletes: typeof extraMileAthletes !== "undefined"
-          ? extraMileAthletes : [],
-        interactionData: typeof interactionData !== "undefined"
-          ? interactionData : []
+        expansionAthletes:
+          typeof expansionAthletes !== "undefined"
+            ? expansionAthletes : [],
+        extraMileAthletes:
+          typeof extraMileAthletes !== "undefined"
+            ? extraMileAthletes : []
       };
     `)();
 
@@ -108,16 +119,17 @@ async function loadRacers() {
     message.textContent = `${state.racers.length} racers loaded.`;
   } catch (error) {
     console.error(error);
-    message.textContent =
-      `Could not load racers: ${error.message} ` +
-      "Check that play.html and play.js are in the repository root.";
+    message.textContent = `Could not load racers: ${error.message}`;
   }
 }
+
+// --------------------------------------------------
+// Setup
+// --------------------------------------------------
 
 function renderRacerChoices() {
   const count = Number($("#playerCount").value);
   const container = $("#racerChoices");
-
   container.innerHTML = "";
 
   for (let i = 0; i < count; i++) {
@@ -127,9 +139,8 @@ function renderRacerChoices() {
 
     const card = document.createElement("div");
     card.className = "racer-choice";
-
     card.innerHTML = `
-      <div class="choice-number">${i + 1}.</div>
+      <div>${i + 1}.</div>
       <div style="flex:1;min-width:0">
         <label for="racer${i}">Racer ${i + 1}</label>
         <select id="racer${i}" class="racer-select">${options}</select>
@@ -174,29 +185,23 @@ function startRace() {
   state.started = true;
 
   $("#dieFace").textContent = "—";
-  $("#setupMessage").textContent = "";
   $("#rollDie").disabled = false;
   $("#undoMove").disabled = true;
+  $("#setupMessage").textContent = "";
   $("#turnMessage").textContent =
-    `${state.players[0].name}'s turn. Roll the die, then move the piece yourself.`;
+    "Roll the die whenever you want. Select or drag any racer to move it.";
 
   render();
 }
+
+// --------------------------------------------------
+// Board layout
+// --------------------------------------------------
 
 function colorForSpace(number) {
   return COLORS[(number - 1) % COLORS.length];
 }
 
-/*
-  Board coordinates:
-  - Spaces 1–12 run across the top.
-  - Spaces 13–15 descend on the right.
-  - Spaces 16–29 run from right to left along the bottom.
-  - START is immediately left of space 1.
-  - Finish places sit above space 29.
-
-  Grid coordinates are 1-based CSS grid coordinates.
-*/
 function trackCoordinates(number) {
   if (number >= 1 && number <= 12) {
     return { col: number + 3, row: 1 };
@@ -215,17 +220,19 @@ function trackCoordinates(number) {
 
 function positionLabel(player) {
   if (player.finished) {
-    return player.place === 1 ? "1st place" :
-      player.place === 2 ? "2nd place" :
-      `${player.place}th place`;
+    if (player.place === 1) return "1st place";
+    if (player.place === 2) return "2nd place";
+    return `Place ${player.place}`;
   }
 
-  return player.position === 0 ? "Start" : `Space ${player.position}`;
+  return player.position === 0
+    ? "START"
+    : `Space ${player.position}`;
 }
 
 function piecesAt(position) {
-  return state.players.filter(
-    player => !player.finished && player.position === position
+  return state.players.filter(player =>
+    !player.finished && player.position === position
   );
 }
 
@@ -235,6 +242,7 @@ function pieceMarkup(player) {
 
   return `
     <button
+      type="button"
       class="piece ${colorClass} ${selected ? "is-selected" : ""}"
       data-player="${player.id}"
       title="${escapeHtml(player.name)} — ${escapeHtml(positionLabel(player))}"
@@ -244,86 +252,71 @@ function pieceMarkup(player) {
   `;
 }
 
-function isLegalDestination(number) {
-  if (state.rolled === null || state.selected === null) return false;
-
-  const player = state.players[state.selected];
-  if (!player || player.finished) return false;
-
-  return player.position + state.rolled === number;
-}
-
-function canFinish(player) {
-  return state.rolled !== null &&
-    state.selected === player.id &&
-    player.position + state.rolled >= 30;
-}
-
 function renderSpace(number) {
   const coord = trackCoordinates(number);
-  const players = piecesAt(number);
-  const legal = isLegalDestination(number);
+  const element = document.createElement("div");
 
-  const button = document.createElement("button");
-  button.className =
-    `space ${colorForSpace(number)} ${[12, 15].includes(number) ? "corner" : ""}` +
-    `${legal ? " legal-target" : ""}`;
-  button.style.gridColumn = coord.col;
-  button.style.gridRow = coord.row;
-  button.dataset.space = number;
-  button.setAttribute("aria-label", `Space ${number}`);
+  element.className =
+    `space ${colorForSpace(number)}` +
+    ([12, 15].includes(number) ? " corner" : "");
 
-  button.innerHTML = `
+  element.style.gridColumn = String(coord.col);
+  element.style.gridRow = String(coord.row);
+  element.dataset.space = String(number);
+  element.setAttribute("role", "button");
+  element.setAttribute("tabindex", "0");
+  element.setAttribute("aria-label", `Space ${number}`);
+
+  element.innerHTML = `
     ${number % 5 === 0
       ? `<span class="space-number">${number}</span>`
       : ""}
-    <span class="pieces">${players.map(pieceMarkup).join("")}</span>
+    <span class="pieces">${piecesAt(number).map(pieceMarkup).join("")}</span>
   `;
 
-  return button;
+  return element;
 }
 
 function renderStartSpace() {
-  const button = document.createElement("button");
-  button.className = "start-space";
-  button.style.gridColumn = "3";
-  button.style.gridRow = "1";
-  button.dataset.start = "true";
-  button.setAttribute("aria-label", "Start space");
+  const element = document.createElement("div");
+  element.className = "start-space";
+  element.style.gridColumn = "3";
+  element.style.gridRow = "1";
+  element.dataset.start = "true";
+  element.setAttribute("role", "button");
+  element.setAttribute("tabindex", "0");
+  element.setAttribute("aria-label", "START");
 
-  button.innerHTML = `
+  element.innerHTML = `
     START
-    <span class="pieces">
-      ${piecesAt(0).map(pieceMarkup).join("")}
-    </span>
+    <span class="pieces">${piecesAt(0).map(pieceMarkup).join("")}</span>
   `;
 
-  return button;
+  return element;
 }
 
 function renderFinishSpace(place, row) {
-  const button = document.createElement("button");
-  const legalPlayers = state.players.filter(canFinish);
-  const legal = legalPlayers.length > 0;
+  const element = document.createElement("div");
+  const players = state.finished.filter(p => p.place === place);
 
-  button.className =
-    `finish-space ${place === 1 ? "first" : "second"}` +
-    `${legal ? " legal-target" : ""}`;
-  button.style.gridColumn = "1";
-  button.style.gridRow = String(row);
-  button.dataset.finish = String(place);
+  element.className =
+    `finish-space ${place === 1 ? "first" : "second"}`;
+  element.style.gridColumn = "1";
+  element.style.gridRow = String(row);
+  element.dataset.finish = String(place);
+  element.setAttribute("role", "button");
+  element.setAttribute("tabindex", "0");
+  element.setAttribute(
+    "aria-label",
+    `Finish position ${place}`
+  );
 
-  const player = state.finished.find(p => p.place === place);
-
-  button.innerHTML = `
+  element.innerHTML = `
     <span>${place === 1 ? "1st" : "2nd"}</span>
-    ${player
-      ? `<span class="finish-piece">${pieceMarkup(player)}</span>`
-      : `<span>${place === 1 ? "Place" : "Place"}</span>`
-    }
+    <span class="finish-piece">${players.map(pieceMarkup).join("")}</span>
   `;
 
-  return button;
+  return element;
 }
 
 function renderBoard() {
@@ -336,7 +329,6 @@ function renderBoard() {
     return;
   }
 
-  // START is separate from numbered space 1.
   board.appendChild(renderStartSpace());
 
   for (let number = 1; number <= 29; number++) {
@@ -353,80 +345,99 @@ function renderBoard() {
   board.appendChild(renderFinishSpace(1, 2));
   board.appendChild(renderFinishSpace(2, 3));
 
-  // Add click controls after rebuilding the board.
+  bindBoardControls();
+}
+
+// --------------------------------------------------
+// Click and drag controls
+// --------------------------------------------------
+
+function bindBoardControls() {
+  const board = $("#board");
+
   board.querySelectorAll("[data-player]").forEach(button => {
+    button.style.touchAction = "none";
+
     button.addEventListener("click", event => {
       event.stopPropagation();
+
+      if (state.suppressNextClick) {
+        state.suppressNextClick = false;
+        return;
+      }
+
       selectPlayer(Number(button.dataset.player));
     });
-  });
 
-  board.querySelectorAll("[data-space]").forEach(button => {
-    button.addEventListener("click", () => {
-      attemptMove(Number(button.dataset.space));
+    button.addEventListener("pointerdown", event => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+
+      state.selected = Number(button.dataset.player);
+      state.draggingPlayer = state.selected;
+      state.dragMoved = false;
+
+      dragStartX = event.clientX;
+      dragStartY = event.clientY;
+      draggedPiece = button;
     });
   });
 
-  board.querySelectorAll("[data-start]").forEach(button => {
-    button.addEventListener("click", () => {
-      if (state.rolled === null) return;
-      attemptMove(0);
+  board.querySelectorAll("[data-space]").forEach(element => {
+    element.addEventListener("click", event => {
+      if (event.target.closest("[data-player]")) return;
+      attemptMove(Number(element.dataset.space));
+    });
+
+    element.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        attemptMove(Number(element.dataset.space));
+      }
     });
   });
 
-  board.querySelectorAll("[data-finish]").forEach(button => {
-    button.addEventListener("click", () => {
-      attemptFinish(Number(button.dataset.finish));
+  board.querySelectorAll("[data-start]").forEach(element => {
+    element.addEventListener("click", event => {
+      if (event.target.closest("[data-player]")) return;
+      attemptMove("start");
+    });
+
+    element.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        attemptMove("start");
+      }
+    });
+  });
+
+  board.querySelectorAll("[data-finish]").forEach(element => {
+    element.addEventListener("click", event => {
+      if (event.target.closest("[data-player]")) return;
+      attemptFinish(Number(element.dataset.finish));
+    });
+
+    element.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        attemptFinish(Number(element.dataset.finish));
+      }
     });
   });
 }
 
 function selectPlayer(id) {
-  if (!state.started) return;
-
-  const player = state.players[id];
-  if (!player || player.finished) return;
+  if (!state.started || !state.players[id]) return;
 
   state.selected = id;
-
-  if (state.rolled !== null && state.current !== id) {
-    $("#turnMessage").textContent =
-      `The die is already rolled for ${state.players[state.current].name}. ` +
-      "Move that racer first.";
-    state.selected = state.current;
-  }
+  $("#turnMessage").textContent =
+    `${state.players[id].name} selected. Click a space or drag the piece.`;
 
   render();
 }
 
-function rollDie() {
-  if (!state.started || state.rolled !== null) return;
-
-  const player = state.players[state.current];
-
-  if (!player || player.finished) {
-    advanceTurn();
-    return;
-  }
-
-  state.selected = state.current;
-  state.rolled = Math.floor(Math.random() * 6) + 1;
-  $("#dieFace").textContent = String(state.rolled);
-
-  const destination = player.position + state.rolled;
-
-  if (destination >= 30) {
-    $("#turnMessage").textContent =
-      `${player.name} rolled ${state.rolled}. Select a finish place to move ` +
-      "the piece manually.";
-  } else {
-    $("#turnMessage").textContent =
-      `${player.name} rolled ${state.rolled}. Select space ${destination} ` +
-      "to move the piece. The die roll did not move it.";
-  }
-
-  render();
-}
+// --------------------------------------------------
+// Free movement
+// --------------------------------------------------
 
 function saveSnapshot() {
   state.snapshots.push(JSON.stringify({
@@ -439,132 +450,143 @@ function saveSnapshot() {
   }));
 }
 
-function attemptMove(destination) {
-  if (state.rolled === null || state.selected === null) {
-    $("#turnMessage").textContent = "Roll the die first.";
-    return;
-  }
-
-  const player = state.players[state.current];
-
-  if (!player || player.id !== state.selected) {
-    $("#turnMessage").textContent =
-      "Move the current racer's piece first.";
-    return;
-  }
-
-  const expected = player.position + state.rolled;
-
-  if (expected >= 30) {
-    $("#turnMessage").textContent =
-      "This roll reaches the finish. Select a finish place.";
-    return;
-  }
-
-  if (destination !== expected) {
-    $("#turnMessage").textContent =
-      `That is not the correct destination. Move ${player.name} to space ${expected}.`;
-    return;
-  }
+function movePlayerFreely(id, destination, place = null) {
+  const player = state.players[id];
+  if (!player) return;
 
   saveSnapshot();
 
-  const previous = positionLabel(player);
-  player.position = destination;
+  const from = positionLabel(player);
 
-  state.history.push(
-    `${player.name}: ${previous} → Space ${destination} (rolled ${state.rolled})`
-  );
+  state.finished = state.finished.filter(p => p.id !== id);
 
-  completeTurn();
+  if (destination === "start") {
+    player.position = 0;
+    player.finished = false;
+    player.place = null;
+  } else if (destination === "finish") {
+    player.position = 30;
+    player.finished = true;
+    player.place = place;
+    state.finished.push(player);
+  } else {
+    const number = Number(destination);
+
+    if (!Number.isInteger(number) || number < 1 || number > 29) {
+      state.snapshots.pop();
+      return;
+    }
+
+    player.position = number;
+    player.finished = false;
+    player.place = null;
+  }
+
+  const to = positionLabel(player);
+  state.selected = id;
+
+  state.history.push(`${player.name}: ${from} → ${to}`);
+
+  $("#turnMessage").textContent =
+    `${player.name} moved to ${to}. The die does not restrict movement.`;
+
+  render();
+}
+
+function attemptMove(destination) {
+  if (state.selected === null) {
+    $("#turnMessage").textContent = "Select a racer piece first.";
+    return;
+  }
+
+  movePlayerFreely(state.selected, destination);
 }
 
 function attemptFinish(place) {
-  if (state.rolled === null || state.selected === null) {
-    $("#turnMessage").textContent = "Roll the die first.";
+  if (state.selected === null) {
+    $("#turnMessage").textContent = "Select a racer piece first.";
     return;
   }
 
-  const player = state.players[state.current];
+  movePlayerFreely(state.selected, "finish", place);
+}
 
-  if (!player || player.id !== state.selected) return;
+// Track pointer movement globally so a dragged piece can be dropped
+// on any valid board destination.
+document.addEventListener("pointermove", event => {
+  if (state.draggingPlayer === null || !draggedPiece) return;
 
-  if (player.position + state.rolled < 30) {
-    $("#turnMessage").textContent =
-      `${player.name} needs to land on space ${player.position + state.rolled} first.`;
-    return;
-  }
-
-  if (state.finished.some(p => p.place === place)) {
-    $("#turnMessage").textContent =
-      "That finish place is occupied. Choose the other place.";
-    return;
-  }
-
-  saveSnapshot();
-
-  player.finished = true;
-  player.place = place;
-  state.finished.push(player);
-
-  state.history.push(
-    `${player.name} finished in ${place === 1 ? "1st" : "2nd"} place.`
+  const distance = Math.hypot(
+    event.clientX - dragStartX,
+    event.clientY - dragStartY
   );
 
-  completeTurn();
-}
+  if (distance > 6) {
+    state.dragMoved = true;
+    draggedPiece.style.opacity = "0.45";
+  }
+});
 
-function completeTurn() {
-  state.rolled = null;
-  advanceTurn();
+document.addEventListener("pointerup", event => {
+  if (state.draggingPlayer === null) return;
+
+  const id = state.draggingPlayer;
+  const wasDragged = state.dragMoved;
+
+  if (draggedPiece) draggedPiece.style.opacity = "";
+
+  state.draggingPlayer = null;
+  state.dragMoved = false;
+  draggedPiece = null;
+
+  if (!wasDragged) return;
+
+  state.suppressNextClick = true;
+
+  const target = document.elementFromPoint(
+    event.clientX,
+    event.clientY
+  );
+
+  const space = target?.closest("[data-space]");
+  const start = target?.closest("[data-start]");
+  const finish = target?.closest("[data-finish]");
+
+  if (space) {
+    movePlayerFreely(id, Number(space.dataset.space));
+  } else if (start) {
+    movePlayerFreely(id, "start");
+  } else if (finish) {
+    movePlayerFreely(id, "finish", Number(finish.dataset.finish));
+  } else {
+    render();
+  }
+
+  setTimeout(() => {
+    state.suppressNextClick = false;
+  }, 150);
+});
+
+// --------------------------------------------------
+// Independent die: roll any time, as often as desired.
+// It never moves a racer or changes the selected racer.
+// --------------------------------------------------
+
+function rollDie() {
+  const result = Math.floor(Math.random() * 6) + 1;
+
+  state.rolled = result;
+  $("#dieFace").textContent = String(result);
+  $("#turnMessage").textContent =
+    `You rolled a ${result}. Move any racer anywhere, or roll again.`;
+
+  // No movement, turn changes, or button disabling.
   render();
 }
 
-function advanceTurn() {
-  if (state.players.every(p => p.finished)) {
-    $("#turnMessage").textContent = "The race is over!";
-    $("#rollDie").disabled = true;
-    return;
-  }
-
-  let next = state.current;
-
-  for (let tries = 0; tries < state.players.length; tries++) {
-    next = (next + 1) % state.players.length;
-    if (!state.players[next].finished) break;
-  }
-
-  state.current = next;
-  state.selected = next;
-  state.rolled = null;
-
-  $("#dieFace").textContent = "—";
-  $("#rollDie").disabled = false;
-  $("#turnMessage").textContent =
-    `${state.players[next].name}'s turn. Roll the die, then select the destination square.`;
-}
-
-function undoMove() {
-  if (!state.snapshots.length) return;
-
-  const snapshot = JSON.parse(state.snapshots.pop());
-
-  state.players = snapshot.players;
-  state.current = snapshot.current;
-  state.selected = snapshot.selected;
-  state.rolled = snapshot.rolled;
-  state.finished = snapshot.finished;
-  state.history = snapshot.history;
-
-  $("#dieFace").textContent =
-    state.rolled === null ? "—" : String(state.rolled);
-
-  $("#rollDie").disabled = state.rolled !== null;
-  $("#turnMessage").textContent =
-    "Last move undone. Continue from the restored position.";
-
-  render();
-}
+// --------------------------------------------------
+// Standings, racer details, history, and undo
+// --------------------------------------------------
 
 function renderStandings() {
   const container = $("#standings");
@@ -576,32 +598,21 @@ function renderStandings() {
         <strong>${escapeHtml(player.name)}</strong>
         <small>${escapeHtml(positionLabel(player))}</small>
       </div>
-      <button class="secondary" data-select-standing="${player.id}">
-        Select
-      </button>
+      <button type="button" class="secondary"
+        data-select-standing="${player.id}">Select</button>
     </div>
   `).join("");
 
   container.querySelectorAll("[data-select-standing]").forEach(button => {
     button.addEventListener("click", () => {
-      const id = Number(button.dataset.selectStanding);
-
-      if (id !== state.current && state.rolled !== null) {
-        $("#turnMessage").textContent =
-          "Finish the current move before selecting another racer.";
-        return;
-      }
-
-      state.current = id;
-      state.selected = id;
-      render();
+      selectPlayer(Number(button.dataset.selectStanding));
     });
   });
 }
 
 function renderDetails() {
-  const player = state.players[state.selected];
   const container = $("#racerDetails");
+  const player = state.players[state.selected];
 
   if (!player) {
     container.textContent = "Select a racer to see their details.";
@@ -639,6 +650,29 @@ function render() {
   renderHistory();
 }
 
+function undoMove() {
+  if (!state.snapshots.length) return;
+
+  const snapshot = JSON.parse(state.snapshots.pop());
+
+  state.players = snapshot.players;
+  state.current = snapshot.current;
+  state.selected = snapshot.selected;
+  state.rolled = snapshot.rolled;
+  state.finished = snapshot.finished;
+  state.history = snapshot.history;
+
+  $("#turnMessage").textContent = "Last move undone.";
+  $("#dieFace").textContent =
+    state.rolled === null ? "—" : String(state.rolled);
+
+  render();
+}
+
+// --------------------------------------------------
+// Buttons and initialization
+// --------------------------------------------------
+
 $("#playerCount").addEventListener("change", renderRacerChoices);
 $("#startRace").addEventListener("click", startRace);
 $("#rollDie").addEventListener("click", rollDie);
@@ -653,12 +687,16 @@ $("#newRace").addEventListener("click", () => {
   state.finished = [];
   state.history = [];
   state.snapshots = [];
+  state.draggingPlayer = null;
+  state.dragMoved = false;
 
   $("#dieFace").textContent = "—";
   $("#rollDie").disabled = true;
-  $("#turnMessage").textContent = "Choose your racers and start the race.";
+  $("#turnMessage").textContent =
+    "Choose your racers and start the race.";
 
   renderBoard();
+
   $("#standings").textContent = "Start a race to see your racers.";
   $("#racerDetails").textContent = "Select a racer to see their details.";
   $("#history").innerHTML = "";
