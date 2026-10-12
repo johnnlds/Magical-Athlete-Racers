@@ -4,102 +4,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f0e8">
   <title>Magical Athlete — Play</title>
-  <link rel="stylesheet" href="./play.css?v=2">
-  <script src="./play.js?v=2" defer></script>
+  <link rel="stylesheet" href="./play.css?v=4">
+  <script src="./play.js?v=4" defer></script>
 </head>
 <body>
+  <header class="topbar">
+    <a class="back-link" href="./index.html">← Racer Reference</a>
+    <h1>Magical Athlete</h1>
+    <p>Mild Mile · Playable Race</p>
+  </header>
+
   <main class="app">
-    <header class="header">
-      <h1>MAGICAL ATHLETE</h1>
-      <p>Choose your racers. Roll the die. Move the pieces yourself.</p>
-      <a href="./index.html">Back to racer profiles</a>
-    </header>
-
-    <div id="status" class="notice" role="status">
-      Loading racers…
-    </div>
-
-    <section id="setup" class="panel" hidden>
+    <section class="panel setup-panel">
       <h2>Set up your race</h2>
 
-      <div class="setup-grid">
-        <label>
-          Human players
-          <select id="humanCount">
-            <option>1</option><option selected>2</option>
-            <option>3</option><option>4</option>
-            <option>5</option><option>6</option>
-          </select>
-        </label>
+      <label for="playerCount">Number of racers</label>
+      <select id="playerCount">
+        <option value="2">2 racers</option>
+        <option value="3">3 racers</option>
+        <option value="4">4 racers</option>
+        <option value="5">5 racers</option>
+        <option value="6">6 racers</option>
+        <option value="7">7 racers</option>
+        <option value="8">8 racers</option>
+      </select>
 
-        <label>
-          CPU opponents
-          <select id="cpuCount">
-            <option>0</option><option>1</option>
-            <option selected>2</option><option>3</option>
-            <option>4</option><option>5</option><option>6</option>
-          </select>
-        </label>
-      </div>
+      <div id="racerChoices" class="racer-choices"></div>
 
-      <h3>Racer sets</h3>
-      <div class="set-options">
-        <label><input type="checkbox" id="useBase" checked> Base Game</label>
-        <label><input type="checkbox" id="useSecond"> Second Wind</label>
-        <label><input type="checkbox" id="useExtra"> Extra Mile (unofficial)</label>
-      </div>
-
-      <p class="muted">Choose each player's racer set and racer. Each racer can only be selected once.</p>
-      <div id="playerSetup" class="player-setup"></div>
       <button id="startRace" class="primary">Start race</button>
+      <p id="setupMessage" class="message" aria-live="polite"></p>
     </section>
 
-    <section id="game" hidden>
-      <div class="panel controls">
+    <section class="panel game-panel">
+      <div class="game-heading">
         <div>
-          <h2 id="turnTitle">Race</h2>
-          <p id="turnMessage" class="notice">Choose a racer to move.</p>
+          <h2>Mild Mile</h2>
+          <p class="muted">Move your pieces yourself after rolling.</p>
         </div>
-        <div class="control-buttons">
-          <button id="rollDie" class="primary">Roll die</button>
-          <button id="undoMove" disabled>Undo last move</button>
-          <button id="newRace">New race</button>
-        </div>
-        <p id="dieResult" class="die-result">Die: —</p>
+        <button id="newRace" class="secondary">New race</button>
       </div>
 
-      <div class="panel">
-        <div class="board-heading">
-          <h2>Race track</h2>
-          <label>
-            Board side
-            <select id="boardSide">
-              <option value="mild">Mild Mile</option>
-              <option value="wild">Wild Wilds</option>
-            </select>
-          </label>
+      <div class="die-controls">
+        <div id="dieFace" class="die-face" aria-live="polite">—</div>
+        <div class="die-actions">
+          <button id="rollDie" class="primary" disabled>Roll die</button>
+          <p id="turnMessage" class="message" aria-live="polite">
+            Choose your racers and start the race.
+          </p>
         </div>
-
-        <p class="muted">
-          Select a racer piece, then tap its destination space. On computers,
-          you can also drag a piece. Movement is manual; the die does not move
-          pieces automatically.
-        </p>
-
-        <div id="board" class="board" aria-label="Race board"></div>
-        <div id="finishArea" class="finish-area" data-finish="true">
-          <strong>FINISH / PODIUM</strong>
-          <span>Drop a racer here when it crosses the finish line.</span>
-        </div>
-        <p class="muted">Wild Wilds special spaces are marked as a visual reminder. Resolve their effects and racer powers manually.</p>
       </div>
 
-      <div class="panel">
-        <h2>Racers and powers</h2>
-        <div id="racerList" class="racer-list"></div>
+      <div class="board-scroll">
+        <div id="board" class="board" aria-label="Mild Mile race board">
+          <div class="board-placeholder">
+            The board will appear when you start the race.
+          </div>
+        </div>
       </div>
+
+      <div class="legend">
+        <span><i class="swatch pink"></i> Pink</span>
+        <span><i class="swatch yellow"></i> Yellow</span>
+        <span><i class="swatch green"></i> Green</span>
+        <span><i class="swatch blue"></i> Blue</span>
+        <span><i class="swatch red"></i> Red</span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Race standings</h2>
+      <div id="standings" class="standings">
+        Start a race to see your racers.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Selected racer</h2>
+      <div id="racerDetails" class="racer-details">
+        Select a racer to see their details.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Move history</h2>
+      <ol id="history" class="history"></ol>
+      <button id="undoMove" class="secondary" disabled>Undo last move</button>
     </section>
   </main>
 </body>
