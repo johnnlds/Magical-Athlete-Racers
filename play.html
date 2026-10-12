@@ -1,131 +1,106 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#c40000">
+  <meta name="theme-color" content="#f5f0e8">
   <title>Magical Athlete — Play</title>
-  <link rel="stylesheet" href="play.css">
+  <link rel="stylesheet" href="./play.css?v=2">
+  <script src="./play.js?v=2" defer></script>
 </head>
 <body>
-  <header class="header">
-    <div>
-      <p class="eyebrow">UNOFFICIAL FAN-MADE GAME</p>
+  <main class="app">
+    <header class="header">
       <h1>MAGICAL ATHLETE</h1>
-      <p class="muted">Race day</p>
+      <p>Choose your racers. Roll the die. Move the pieces yourself.</p>
+      <a href="./index.html">Back to racer profiles</a>
+    </header>
+
+    <div id="status" class="notice" role="status">
+      Loading racers…
     </div>
-    <a href="./index.html">Character profiles ↗</a>
-  </header>
 
-  <main>
-    <section id="setup" class="panel">
-      <p class="eyebrow">01 / SETUP</p>
-      <h2>Build your race</h2>
-      <p class="muted">Choose your racer sets and participants.</p>
+    <section id="setup" class="panel" hidden>
+      <h2>Set up your race</h2>
 
-      <div class="sets">
-        <label><input id="base" type="checkbox" checked>
-          <span><strong>Base Game</strong><small>36 racers</small></span>
+      <div class="setup-grid">
+        <label>
+          Human players
+          <select id="humanCount">
+            <option>1</option><option selected>2</option>
+            <option>3</option><option>4</option>
+            <option>5</option><option>6</option>
+          </select>
         </label>
-        <label><input id="second" type="checkbox">
-          <span><strong>Second Wind</strong><small>Expansion</small></span>
-        </label>
-        <label><input id="extra" type="checkbox">
-          <span><strong>Extra Mile</strong><small>Unofficial expansion</small></span>
-        </label>
-      </div>
 
-      <div class="controls">
-        <label>Human players
-          <select id="humans">
-            <option>1</option><option selected>2</option><option>3</option>
+        <label>
+          CPU opponents
+          <select id="cpuCount">
+            <option>0</option><option>1</option>
+            <option selected>2</option><option>3</option>
             <option>4</option><option>5</option><option>6</option>
           </select>
         </label>
-        <label>CPU racers
-          <select id="cpus">
-            <option>0</option><option>1</option><option selected>2</option>
-            <option>3</option><option>4</option><option>5</option>
-            <option>6</option><option>7</option>
-          </select>
-        </label>
       </div>
 
-      <div class="row">
-        <h3>Choose racers</h3>
-        <button id="randomize" class="button secondary">Randomize</button>
+      <h3>Racer sets</h3>
+      <div class="set-options">
+        <label><input type="checkbox" id="useBase" checked> Base Game</label>
+        <label><input type="checkbox" id="useSecond"> Second Wind</label>
+        <label><input type="checkbox" id="useExtra"> Extra Mile (unofficial)</label>
       </div>
-      <p class="muted small">Each participant gets a different racer. Pass the device between human turns.</p>
-      <div id="slots" class="slots"></div>
-      <p id="error" class="error" role="alert"></p>
-      <button id="start" class="button primary wide">Start race</button>
-      <p class="fine">Powers that require judgment must be resolved using your printed rules. This fan-made game is not affiliated with CMYK.</p>
+
+      <p class="muted">Choose each player's racer set and racer. Each racer can only be selected once.</p>
+      <div id="playerSetup" class="player-setup"></div>
+      <button id="startRace" class="primary">Start race</button>
     </section>
 
-    <section id="race" class="hidden">
-      <div class="row race-heading">
+    <section id="game" hidden>
+      <div class="panel controls">
         <div>
-          <p class="eyebrow">02 / THE RACE</p>
-          <h2 id="raceTitle">Race in progress</h2>
-          <p id="turnStatus" class="muted"></p>
+          <h2 id="turnTitle">Race</h2>
+          <p id="turnMessage" class="notice">Choose a racer to move.</p>
         </div>
-        <button id="newRace" class="button secondary">New race</button>
+        <div class="control-buttons">
+          <button id="rollDie" class="primary">Roll die</button>
+          <button id="undoMove" disabled>Undo last move</button>
+          <button id="newRace">New race</button>
+        </div>
+        <p id="dieResult" class="die-result">Die: —</p>
       </div>
 
-      <div class="race-layout">
-        <section class="panel">
-          <div class="legend">
-            <span><i class="human-dot"></i> Human</span>
-            <span><i class="cpu-dot"></i> CPU</span>
-            <span class="muted small">Pawn numbers match participant numbers.</span>
-          </div>
-          <div id="board" class="board" aria-label="Race track"></div>
-          <p class="muted small">Reach or pass space 32 to finish. This digital board automates ordinary die rolls and movement; it does not automatically apply every racer power.</p>
-        </section>
+      <div class="panel">
+        <div class="board-heading">
+          <h2>Race track</h2>
+          <label>
+            Board side
+            <select id="boardSide">
+              <option value="mild">Mild Mile</option>
+              <option value="wild">Wild Wilds</option>
+            </select>
+          </label>
+        </div>
 
-        <aside class="side">
-          <section class="panel turn-panel">
-            <p class="eyebrow">CURRENT TURN</p>
-            <div id="activeRacer" class="active-racer"></div>
-            <div class="dice">
-              <div id="die" class="die">—</div>
-              <p id="rollText" class="muted">Ready to roll</p>
-            </div>
-            <button id="roll" class="button primary wide">Roll die</button>
+        <p class="muted">
+          Select a racer piece, then tap its destination space. On computers,
+          you can also drag a piece. Movement is manual; the die does not move
+          pieces automatically.
+        </p>
 
-            <div id="powerPrompt" class="power hidden">
-              <p class="eyebrow">POWER CHECK</p>
-              <h3 id="powerName"></h3>
-              <p id="powerText"></p>
-              <p class="muted small">Check the printed rules and resolve any power effects before continuing.</p>
-              <button id="move" class="button primary wide">Resolve power &amp; move</button>
-            </div>
-            <p id="cpuNotice" class="muted small"></p>
-          </section>
+        <div id="board" class="board" aria-label="Race board"></div>
+        <div id="finishArea" class="finish-area" data-finish="true">
+          <strong>FINISH / PODIUM</strong>
+          <span>Drop a racer here when it crosses the finish line.</span>
+        </div>
+        <p class="muted">Wild Wilds special spaces are marked as a visual reminder. Resolve their effects and racer powers manually.</p>
+      </div>
 
-          <section class="panel">
-            <div class="row"><h3>Standings</h3><span id="remaining" class="muted small"></span></div>
-            <ol id="standings" class="standings"></ol>
-          </section>
-
-          <section class="panel">
-            <h3>Race log</h3>
-            <ol id="log" class="log" aria-live="polite"></ol>
-          </section>
-        </aside>
+      <div class="panel">
+        <h2>Racers and powers</h2>
+        <div id="racerList" class="racer-list"></div>
       </div>
     </section>
-
-    <section id="finish" class="panel hidden">
-      <p class="eyebrow">03 / FINISH</p>
-      <h2 id="winner">Race complete!</h2>
-      <p class="muted">Final standings</p>
-      <ol id="finalStandings" class="standings"></ol>
-      <button id="again" class="button primary wide">Set up another race</button>
-    </section>
-
-    <p id="dataStatus" class="status">Loading racers…</p>
   </main>
-  <script src="play.js"></script>
 </body>
 </html>
