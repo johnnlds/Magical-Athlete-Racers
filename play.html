@@ -5,14 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Magical Athlete — Play</title>
-  <link rel="stylesheet" href="./play.css?v=4">
-  <script src="./play.js?v=4" defer></script>
+  <link rel="stylesheet" href="./play.css?v=7">
+  <script src="./play.js?v=7" defer></script>
 </head>
 <body>
   <header class="topbar">
     <a class="back-link" href="./index.html">← Racer Reference</a>
     <h1>Magical Athlete</h1>
-    <p>Mild Mile · Playable Race</p>
   </header>
 
   <main class="app">
@@ -37,43 +36,32 @@
     </section>
 
     <section class="panel game-panel">
-      <div class="game-heading">
-        <div>
-          <h2>Mild Mile</h2>
-          <p class="muted">Move your pieces yourself after rolling.</p>
-        </div>
-        <button id="newRace" class="secondary">New race</button>
-      </div>
-
       <div class="die-controls">
         <div id="dieFace" class="die-face" aria-live="polite">—</div>
+
         <div class="die-actions">
-          <button id="rollDie" class="primary" disabled>Roll die</button>
-          <p id="turnMessage" class="message" aria-live="polite">
-            Choose your racers and start the race.
-          </p>
+          <div class="game-buttons">
+            <button id="rollDie" class="primary" disabled>Roll die</button>
+            <button id="tripPiece" class="secondary" disabled>Trip</button>
+            <button id="undoTrip" class="secondary small-button" disabled>Undo Trip</button>
+            <button id="newRace" class="secondary">New race</button>
+          </div>
+          <p id="turnMessage" class="message" aria-live="polite" hidden></p>
         </div>
       </div>
 
       <div class="board-scroll">
         <div id="board" class="board" aria-label="Mild Mile race board">
           <div class="board-placeholder">
-            The board will appear when you start the race.
+            Start a race to see the board.
           </div>
         </div>
-      </div>
-
-      <div class="legend">
-        <span><i class="swatch pink"></i> Pink</span>
-        <span><i class="swatch yellow"></i> Yellow</span>
-        <span><i class="swatch green"></i> Green</span>
-        <span><i class="swatch blue"></i> Blue</span>
-        <span><i class="swatch red"></i> Red</span>
       </div>
     </section>
 
     <section class="panel">
-      <h2>Race standings</h2>
+      <h2>Turn order</h2>
+      <p class="muted">Drag the handle to reorder racers. Use + and − to change scores.</p>
       <div id="standings" class="standings">
         Start a race to see your racers.
       </div>
@@ -88,8 +76,10 @@
 
     <section class="panel">
       <h2>Move history</h2>
-      <ol id="history" class="history"></ol>
-      <button id="undoMove" class="secondary" disabled>Undo last move</button>
+      <ol id="history" class="history">
+        <li>No moves yet.</li>
+      </ol>
+      <button id="undoMove" class="secondary" disabled>Undo last action</button>
     </section>
   </main>
 </body>
