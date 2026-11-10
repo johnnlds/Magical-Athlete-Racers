@@ -502,6 +502,20 @@ main {
   margin-bottom: 5px;
 }
 
+.interaction-category {
+  display: inline-block;
+  margin-right: 7px;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: var(--surface, #eeeeee);
+  color: var(--muted, #555555);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: 2px;
+}
+
 .interaction-character {
   display: inline;
   padding: 0;
