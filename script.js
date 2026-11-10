@@ -893,6 +893,11 @@ const interactionData = [
     text: "Huge Baby cannot be eaten by M.O.U.T.H."
   },
   {
+    racers: ["M.O.U.T.H."],
+    category: "General",
+    text: "If I am warped to another space with 1 racer, I eliminate them"
+  },
+  {
     racers: ["Huge Baby", "Party Animal"],
     text: "If Huge Baby is moved onto Party Animal’s space by Party Animal’s power, everyone on that space is moved back 1."
   },
@@ -1286,6 +1291,10 @@ function getInteractionsForAthlete(name) {
 function createInteractionHtml(
   interaction
 ) {
+  const categoryLabel = interaction.category
+    ? `<span class="interaction-category">${escapeHtml(interaction.category)}</span>`
+    : "";
+
   const racerButtons =
     interaction.racers
       .map((racer, index) => {
@@ -1311,6 +1320,7 @@ function createInteractionHtml(
   return `
     <article class="interaction-card">
       <div class="interaction-racers">
+        ${categoryLabel}
         ${racerButtons}
       </div>
 
