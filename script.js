@@ -987,10 +987,6 @@ const interactionData = [
     text: "If I force someone to reroll, its like that roll never happened. Other abilities do not happen."
   },
   {
-    racers: ["Hotel", "Baba Yaga"],
-    text: "If a racer stops on Hotel's space, pays the point, and trips, does Baba Yaga also trip them if she shares that space?"
-  },
-  {
     racers: ["M.O.U.T.H.", "Hotel"],
     text: "If M.O.U.T.H. stops on Hotel's space, he eliminates him and does not pay."
   },
@@ -1020,10 +1016,6 @@ const interactionData = [
   {
     racers: ["Nemesis", "Mr. Dice Guy"],
     text: "If Nemesis rolls any number Mr. Dice Guy does, she moves that amount."
-  },
-  {
-    racers: ["Null", "Coach", "Gunk"],
-    text: "If Null is ahead of a racer, does Null suppress Coach's or Gunk's movement modifiers when they would affect that racer?"
   },
   {
     racers: ["Show-Off", "Le Saboteur"],
