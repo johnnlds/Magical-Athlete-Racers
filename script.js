@@ -968,6 +968,84 @@ const interactionData = [
   {
     racers: ["Third Wheel", "Baba Yaga"],
     text: "If Third Wheel warps onto a space containing Baba Yaga, Baba Yaga’s ability trips Third Wheel."
+  },
+  {
+    racers: ["Kraken", "Huge Baby"],
+    text: "Kraken tries to warp everyone onto its space, but Huge Baby prevents racers from sharing its space. Anyone who would land there gets placed behind Huge Baby instead."
+  },
+  {
+    racers: ["Kraken", "Huge Baby"],
+    text: "If Kraken uses his ability with Huge Baby in the game, Huge Baby claims that space and everyone else is moved back 1."
+  },
+  {
+    racers: ["Kraken", "Baba Yaga"],
+    text: "Kraken's mass warp brings racers onto Baba Yaga's space, triggering her trip ability. The gathering can turn into a mass pileup."
+  },
+  {
+    racers: ["Critic"],
+    category: "General",
+    text: "If I force someone to reroll, its like that roll never happened. Other abilities do not happen."
+  },
+  {
+    racers: ["Hotel", "Baba Yaga"],
+    text: "If a racer stops on Hotel's space, pays the point, and trips, does Baba Yaga also trip them if she shares that space?"
+  },
+  {
+    racers: ["M.O.U.T.H.", "Hotel"],
+    text: "If M.O.U.T.H. stops on Hotel's space, he eliminates him and does not pay."
+  },
+  {
+    racers: ["Cheatah"],
+    category: "General",
+    text: "This does not count as a roll for the purposes of triggering powers."
+  },
+  {
+    racers: ["Understudy", "Hog Knight"],
+    text: "If Understudy chooses Hog Knight he should find a suitable Hog piece to ride. Someone could ride 2 hogs in this situation."
+  },
+  {
+    racers: ["Null", "Bite Mark"],
+    text: "When W.E.R.E.M.O.U.T.H. passes Null they immediatley lose their ability and do not eliminate Null."
+  },
+  {
+    racers: ["Mr. Dice Guy"],
+    category: "General",
+    text: "All dice I roll count towards triggering powers, even if I don't use that dice."
+  },
+  {
+    racers: ["Mush"],
+    category: "General",
+    text: "Mush cannot use powers that trigger outside the race (ex: Re-Runner, Twin, Egg)."
+  },
+  {
+    racers: ["Nemesis", "Mr. Dice Guy"],
+    text: "If Nemesis rolls any number Mr. Dice Guy does, she moves that amount."
+  },
+  {
+    racers: ["Null", "Coach", "Gunk"],
+    text: "If Null is ahead of a racer, does Null suppress Coach's or Gunk's movement modifiers when they would affect that racer?"
+  },
+  {
+    racers: ["Show-Off", "Le Saboteur"],
+    text: "If Show-off rolls a 3 at any point, he has to go backwards the entire amount."
+  },
+  {
+    racers: ["Mr. Dice Guy", "Le Saboteur"],
+    text: "If any of Mr. Dice Guy's rolls are a 3, they move backwards regardless of the number they chose."
+  },
+  {
+    racers: ["Party Pooper"],
+    category: "General",
+    text: "6's are rerolled on all moves, not just main moves."
+  },
+  {
+    racers: ["Streaker"],
+    category: "General",
+    text: "Streaker gets 1 total point regardless of the amount of racers they pass."
+  },
+  {
+    racers: ["Show-Off", "Dicemonger"],
+    text: "Show-Off can extend their rolling by using Dicemonger's ability, previous rolls do not get cancelled."
   }
 ];
 
@@ -1334,24 +1412,6 @@ function createInteractionHtml(
 }
 
 function renderInteractions(athlete) {
-  if (
-    athlete.expansion ||
-    athlete.extraMile
-  ) {
-    interactionList.innerHTML = "";
-
-    interactionCount.textContent = "";
-
-    noInteractions.textContent =
-      "Coming soon.";
-
-    noInteractions.classList.remove(
-      "hidden"
-    );
-
-    return;
-  }
-
   const interactions =
     getInteractionsForAthlete(
       athlete.name
