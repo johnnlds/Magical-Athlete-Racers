@@ -1427,6 +1427,11 @@ function renderInteractions(athlete) {
   ) {
     interactionCount.textContent = "";
 
+    if (athlete.expansion || athlete.extraMile) {
+      noInteractions.textContent =
+        "Coming soon.";
+    }
+
     noInteractions.classList.remove(
       "hidden"
     );
